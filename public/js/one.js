@@ -1,5 +1,3 @@
-<script>  
-
   (function(){
   if(window.addEventListener){
     window.addEventListener('load',run,false);
@@ -159,4 +157,3 @@ $(document).ready(function(){
     $('#myTab a[href="' + activeTab + '"]').tab('show');
   }
 });
-</script>

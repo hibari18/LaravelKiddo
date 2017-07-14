@@ -4,7 +4,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="" class="img-circle" alt="User Image">
+              <img src="{{ asset('images/User/user.png') }}" class="img-circle" alt="User Image">
             </div>
 
             <div class="pull-left info" style="margin-top: 3%">
