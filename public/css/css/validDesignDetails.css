@@ -1,0 +1,13 @@
+ #success_message{ display: none;}
+
+#addCUrrDetails .inputGroupContainer .form-control-feedback,
+#addCurrDetails .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdCurrDetails .inputGroupContainer .form-control-feedback,
+#UpdCurrDetails .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}

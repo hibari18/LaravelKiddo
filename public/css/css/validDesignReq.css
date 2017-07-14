@@ -1,0 +1,13 @@
+#success_message{ display: none;}
+
+#addReq .inputGroupContainer .form-control-feedback,
+#addReq .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdReq .inputGroupContainer .form-control-feedback,
+#UpdReq .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}

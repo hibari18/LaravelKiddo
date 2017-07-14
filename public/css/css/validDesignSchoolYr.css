@@ -1,0 +1,14 @@
+#success_message{ display: none;}
+
+#addSchoolYr .inputGroupContainer .form-control-feedback,
+#addSchoolYr .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdSchoolYr .inputGroupContainer .form-control-feedback,
+#UpdSchoolYr .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+

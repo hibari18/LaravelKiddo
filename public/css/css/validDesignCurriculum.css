@@ -1,0 +1,13 @@
+ #success_message{ display: none;}
+
+#addCurriculum .inputGroupContainer .form-control-feedback,
+#addCurriculum .selectContainer .form-control-feedback {
+    top: 0;
+    right: -50px;
+}
+
+#UpdCurriculum .inputGroupContainer .form-control-feedback,
+#UpdCurriculum .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}

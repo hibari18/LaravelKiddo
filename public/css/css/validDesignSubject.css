@@ -1,0 +1,13 @@
+ #success_message{ display: none;}
+
+#addSubject .inputGroupContainer .form-control-feedback,
+#addSubject .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdSubject .inputGroupContainer .form-control-feedback,
+#UpdSubject .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}

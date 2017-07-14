@@ -1,0 +1,13 @@
+ #success_message{ display: none;}
+
+#addLevel .inputGroupContainer .form-control-feedback,
+#addLevel .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdLevel .inputGroupContainer .form-control-feedback,
+#UpdLevel .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}

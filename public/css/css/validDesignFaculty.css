@@ -1,0 +1,7 @@
+#success_message{ display: none;}
+
+#addAdvisory .inputGroupContainer .form-control-feedback,
+#addAdvisory .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
