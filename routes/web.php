@@ -1,7 +1,7 @@
 <?php
 
 Route::get('message', 'AdminController@message');
-//NOT THE HOMEPAGE YET
+
 Route::get('compose', 'AdminController@compose');
 
 Route::get('readmail', 'AdminController@readmail');
@@ -13,3 +13,8 @@ Route::get('diswith', 'AdminController@diswith');
 Route::get('adminaccount', 'AdminController@adminaccount');
 
 Route::resource('curriculum', 'CurriculumController');
+
+Route::resource('schoolyear', 'SchoolyearController');
+
+Route::resource('requirement', 'RequirementController');
+

@@ -21,20 +21,25 @@
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap.css') }}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap3-wysihtml5.min.css') }}">
-
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="{{ asset('css/daterangepicker/daterangepicker.css') }}">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="{{ asset('css/datepicker/datepicker3.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminLTEcss/skins/_all-skins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/css/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/formwizard2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/validDesignReq.css') }}">
   
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
+
     <div class="wrapper">
 
      @include('layouts.header')
 
       <!-- Left side column. contains the logo and sidebar -->
-      @include('layouts.admin-sidebar')
+      @include('layouts.main-sidebar')
 
 
       <!-- Content Wrapper. Contains page content -->
@@ -76,6 +81,53 @@
       });
     </script>
     <script src="{{ asset('js/selectjs/select2.full.min.js') }}"></script>
-    <!-- <script type="text/javascript" src="{{ asset('js/one.js') }}"></script> -->
-  </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+      localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+      if(activeTab){
+        $('#myTab a[href="' + activeTab + '"]').tab('show');
+      }
+    });
+    </script>
+    <!-- DataTables -->
+  <script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('js/datatables/dataTables.bootstrap.min.js') }}"></script>
+  <script>
+  $(function () {
+    $("#datatable").DataTable();
+    $("#datatable1").DataTable();
+    $("#datatable2").DataTable();
+    $("#datatable3").DataTable();
+    $("#tblReq").DataTable();
+  });
+</script>
+    <!-- InputMask -->
+    <script src="{{ asset('js/input-mask/jquery.inputmask.js') }}"></script>
+    <script src="{{ asset('js/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
+    <script src="{{ asset('js/input-mask/jquery.inputmask.extensions.js') }}"></script>
+
+<script>
+  $(function () {
+   //Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Datemask2 mm/dd/yyyy
+    $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+     $("#datemask3").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+    //Money Euro
+    $("[data-mask]").inputmask();
+    $("#datatable").DataTable();
+    $("#datatable1").DataTable();
+    $("#datatable2").DataTable();
+    $("#datatable3").DataTable();
+    $("#datatable4").DataTable();
+  });
+  $(document).ready(function() {
+  $(".choose").select2();
+});
+</script>
+    </body>
 </html>

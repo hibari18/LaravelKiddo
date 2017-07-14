@@ -122,7 +122,7 @@
                 </tr>
                 </thead>
                 <tbody>
-           		@foreach($curriculums as $curriculum)
+           		   @foreach($curriculums as $curriculum)
                 <tr>
                 <td style="width:100px;" hidden>{{ $curriculum->tblCurriculumId }}</td>
                 <td style="width:100px;">{{ $curriculum->tblCurriculumName}}</td>
