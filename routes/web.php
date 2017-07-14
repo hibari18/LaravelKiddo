@@ -11,3 +11,5 @@ Route::get('sectioning', 'AdminController@sectioning');
 Route::get('diswith', 'AdminController@diswith');
 
 Route::get('adminaccount', 'AdminController@adminaccount');
+
+Route::resource('curriculum', 'CurriculumController');

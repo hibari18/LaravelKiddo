@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Curriculum;
+use App\Subject;
+use App\Division;
+use App\Level;
+use App\CurriculumDetail;
 
 class CurriculumController extends Controller
 {
@@ -13,7 +18,14 @@ class CurriculumController extends Controller
      */
     public function index()
     {
-        //
+        $curriculums = Curriculum::where('tblCurriculumFlag', 1)->get();
+        $subjects = Subject::where('tblSubjectFlag', 1)->get();
+        $levels = Level::where('tblLevelFlag', 1)->get();
+        $divisions = Division::where('tblDivisionFlag', 1)->get();
+        $details = CurriculumDetail::where('tblCurriculumFlag', 1)->get();
+
+
+        return view('curriculum.index', compact('curriculums','subjects','levels','divisions','details'));
     }
 
     /**
