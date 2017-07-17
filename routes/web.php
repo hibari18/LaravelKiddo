@@ -12,9 +12,14 @@ Route::get('diswith', 'AdminController@diswith');
 
 Route::get('adminaccount', 'AdminController@adminaccount');
 
+Route::get('advisorylist', 'AdminController@advisorylist');
+
+Route::get('studentlist', 'AdminController@studentlist');
+
 Route::resource('curriculum', 'CurriculumController');
 
 Route::resource('schoolyear', 'SchoolyearController');
 
 Route::resource('requirement', 'RequirementController');
 
+//Route::resource('payment', 'PaymentController');

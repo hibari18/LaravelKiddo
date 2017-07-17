@@ -38,14 +38,9 @@
                                     <div class="input-group" style="width: 100%">
                                       <select class="form-control choose" name="selAddSyCurr" id="selAddSyCurr">
                                         <option disabled="disabled" selected="selected">--SELECT CURRICULUM--</option>
-                                          <?php
-                                          $query = "select tblCurriculumId, tblCurriculumName from tblcurriculum where tblCurriculumFlag=1";
-                                          $result = mysqli_query($con, $query);
-                                          while($row = mysqli_fetch_array($result))
-                                          {
-                                            ?>
-                                        <option value="<?php echo $row['tblCurriculumId'] ?>"><?php echo $row['tblCurriculumName'] ?></option>
-                                        <?php } ?>
+                                          @foreach($curriculums as $curriculum)
+                                            <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
+                                          @endforeach
                                       </select>
                                     </div>
                                   </div>
@@ -68,10 +63,7 @@
 
                           <table id="datatable" name="datatable" class="table table-bordered table-striped">
                             <thead>
-                             <?php
-                                $query = "select s.tblSchoolYrId, s.tblSchoolYrYear, s.tblSchoolYrActive, s.tblSchoolYr_tblCurriculum, s.tblSchoolYrStart, c.tblCurriculumName FROM tblschoolyear s, tblcurriculum c WHERE s.tblSchoolYr_tblCurriculum = c.tblCurriculumId and s.tblSchoolYearFlag=1 group by s.tblSchoolYrYear asc";
-                                $result = mysqli_query($con, $query);
-                                ?>
+                             
                               <tr>
                                 <th hidden></th>
                                 <th hidden>Curriculum Id</th>
@@ -84,22 +76,19 @@
                             </thead>
 
                             <tbody>
-                              <?php
-                                  while($row = mysqli_fetch_array($result))
-                                  {
-                                  ?>
+                              @foreach($schoolyears as $schoolyear)
                               <tr>
-                                <td hidden><?php echo $row['tblSchoolYrId'] ?></td>
-                                <td hidden><?php echo $row['tblSchoolYr_tblCurriculum'] ?></td>
-                                <td style="width: 100px"><?php echo $row['tblSchoolYrStart'] ?></td>
-                                <td style="width: 100px"><?php echo$row['tblSchoolYrYear'] ?></td>
-                                <td style="width: 100px"><?php echo$row['tblCurriculumName'] ?></td>
-                                <td style="width: 100px"><?php echo $row['tblSchoolYrActive'] ?></td>
+                                <td hidden>{{ $schoolyear->tblSchoolYrId}}</td>
+                                <td hidden>{{ $schoolyear->curriculum->tblSchoolYr_tblCurriculum}}</td>
+                                <td style="width: 100px">{{ $schoolyear->tblSchoolYrStart}}</td>
+                                <td style="width: 100px">{{ $schoolyear->tblSchoolYrYear}}</td>
+                                <td style="width: 100px">{{ $schoolyear->curriculum->tblCurriculumName}}</td>
+                                <td style="width: 100px">{{ $schoolyear->tblSchoolYrActive}}</td>
                                 <td style="width: 50px"><input type='button' class='btn   btn-info' value='View Curriculum'>
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
                               </tr>
-                                <?php } ?>
+                                @endforeach
                             </tbody>
                           </table>
                       </div> <!-- box body -->
@@ -139,14 +128,9 @@
                                 <div class="col-sm-7 selectContainer">
                                   <select class="form-control choose" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
                                     <option selected="selected">--SELECT CURRICULUM--</option>
-                                      <?php
-                                      $query = "select tblCurriculumId, tblCurriculumName from tblcurriculum where tblCurriculumFlag=1";
-                                      $result = mysqli_query($con, $query);
-                                      while($row = mysqli_fetch_array($result))
-                                      {
-                                        ?>
-                                    <option value="<?php echo $row['tblCurriculumName'] ?>"><?php echo $row['tblCurriculumName'] ?></option>
-                                      <?php } ?>
+                                      @foreach($curriculums as $curriculum)
+                                        <option value="{{ $curriculum->tblCurriculumName}}">{{ $curriculum->tblCurriculumName}}</option>
+                                      @endforeach
                                   </select>
                                 </div>
                               </div>
@@ -156,13 +140,9 @@
                                 <div class="popup col-sm-7 selectContainer">
                                   <select class="form-control choose" style="width: 100%;" name="selUpdSyAct" id="selUpdSyAct" onmouseover="fn1()">
                                     <option value="selected" selected>--Select--</option>
-                                    <?php
-                                      $query ="select distinct tblSchoolYrActive from tblschoolyear where tblSchoolYearFlag = 1";
-                                      $result = mysqli_query($con, $query);
-                                      while($row = mysqli_fetch_array($result)){
-                                    ?>
-                                    <option value="<?php echo $row['tblSchoolYrActive'] ?>"><?php echo $row['tblSchoolYrActive'] ?></option>
-                                      <?php } ?>
+                                    @foreach($schoolyears as $schoolyear)
+                                      <option value="{{ $schoolyear->tblSchoolYrActive}}">{{ $schoolyear->tblSchoolYrActive}}</option>
+                                     @endforeach
                                   </select>
                                   <span class="popuptext" id="pop">There are no active school year</span>
                                 </div>

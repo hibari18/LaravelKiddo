@@ -8,17 +8,23 @@
                               <table id="datatable1" class="table table-bordered table-striped" style="margin-top: 3%">
                                <thead>
                                 <tr>
+                                  <th hidden></th>
+                                  <th hidden>Schoolyear Id</th>
                                   <th>Grading Period</th>
                                   <th>Date of Start</th>
                                   <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($gradings as $grading)
                                 <tr>
-                                  <td>First Grading</td>
-                                  <td>07/9/2017</td>
+                                  <td>{{ $grading->tblGradingId}}</td>
+                                  <td>{{ $grading->schoolyear->tblGrading_tblSchoolYrId}}</td>
+                                  <td>{{ $grading->tblGradingPeriod}}</td>
+                                  <td>{{ $grading->tblGradingStartDate}}</td>
                                   <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalTwo"><i class="fa fa-edit"></i></button></td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                               </table>
 

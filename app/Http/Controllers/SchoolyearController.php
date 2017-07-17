@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Schoolyear;
+use App\Grading;
+use App\Curriculum;
 
 class SchoolyearController extends Controller
 {
@@ -14,9 +17,10 @@ class SchoolyearController extends Controller
     public function index()
     {
         $schoolyears = Schoolyear::where('tblSchoolYearFlag', 1)->get();
-        $gradings = Grading::where('tblSubjectFlag', 1)->get();
+        $gradings = Grading::where('tblGradingFlag', 1)->get();
+        $curriculums = Curriculum::where('tblCurriculumFlag', 1)->get();
 
-        return view('schoolyear.index', compact('schoolyears','gradings'));
+        return view('schoolyear.index', compact('schoolyears','gradings','curriculums'));
     }
 
     /**

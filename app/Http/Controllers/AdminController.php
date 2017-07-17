@@ -42,4 +42,16 @@ class AdminController extends Controller
 
     	return view('account.adminaccount');
     }
+
+    public function advisorylist()
+    {   
+
+        return view('grades.advisorylist');
+    }
+
+    public function studentlist()
+    {   
+
+        return view('grades.studentlist');
+    }
 }

@@ -11,8 +11,8 @@ class Grading extends Model
  
   	protected $guarded = []; 
 	 
-	protected $primaryKey = 'tblCurriculumId'; 
-	protected $table = 'tblCurriculum'; 
+	protected $primaryKey = 'tblGradingId'; 
+	protected $table = 'tblgradingperiod'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 
