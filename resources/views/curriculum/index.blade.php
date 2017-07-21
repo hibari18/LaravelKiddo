@@ -361,6 +361,50 @@ $(document).ready(function(){
       .on('hidden.bs.modal', function () {
           $('#addCurriculum').bootstrapValidator('resetForm', true);
       });
+
+    $('#UpdCurriculum').bootstrapValidator({
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        txtUpdCurr: {
+          validators: {
+            stringLength: {
+              min: 3,
+              max: 20,
+              message: 'Please enter at least 3 characters.'
+            },
+            regexp: {
+              regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-'\s]+$/,
+              message: 'The first character must be an alphabet and does not allow special character.'
+            },
+            notEmpty: {
+              message: 'Curriculum name is required'
+            }
+          }
+        },
+        selUpdActive: {
+          validators: {
+            notEmpty: {
+              message: 'Status is required.'
+            },
+          }
+        },
+      }
+    })
+      .on('success.form.bv', function (e) {
+        // Prevent form submission
+        // e.preventDefault();
+    });
+    $('#updateModalOne')
+      .on('shown.bs.modal', function () {
+          $('#UpdCurriculum').find().focus();
+      })
+      .on('hidden.bs.modal', function () {
+          $('#UpdCurriculum').bootstrapValidator('resetForm', true);
+      });
   });
 </script>
 @endsection
