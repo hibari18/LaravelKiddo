@@ -1,6 +1,41 @@
 @extends('master')
 
 @section('content')
+<?php
+  if(session('message')){
+    echo "<script>";
+    $message= session('message');
+      if($message == 1) {
+        echo "swal('Data insertion failed!', ' ', 'error'); ";
+      }
+      if($message == 2) {
+        echo "swal('Added succesfully!', ' ', 'success'); ";
+      }
+      if($message == 3) {
+        echo "swal('Data update failed!', ' ', 'error'); ";
+      }
+      if($message == 4) {
+        echo "swal('Updated succesfully!', ' ', 'success'); ";
+      }
+      if($message == 5) {
+        echo "swal('Data deletion failed!', ' ', 'error'); ";
+      }
+      if($message == 6) {
+        echo "swal('Deleted succesfully!', ' ', 'success'); ";
+      }
+      if($message == 7) {
+        echo "swal('Deletion Failed. Curriculum is in use', ' ', 'error'); ";
+      }
+      if($message == 8) {
+        echo "swal('Deletion Failed. Level is in use', ' ', 'error'); ";
+      }
+      if($message == 9) {
+        echo "swal('Deletion Failed. Subject is in use', ' ', 'error'); ";
+      }
+    echo '</script>';
+  }
+?>
+
 <script>
     (function(){
   if(window.addEventListener){
@@ -224,55 +259,108 @@ $(document).ready(function(){
     </section>
     <!-- /.content -->
 
-    <script>
-      function showDetail()
-  {
-    document.getElementById("btnAdd").disabled=false;
-    var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","changeTblCurrDetail.php?selCurrName="+document.getElementById("selCurrName").value,false);
-    xmlhttp.send(null);
     
-    document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
-    var currId = document.getElementById("selCurrName").value;
-    document.getElementById("txtAddDetCurr").value = currId
-  }
-function changeDiv()
-  {
-    document.getElementById('selAddDetLvl').disabled = false;
-    var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","changeDivCurriculumDetail.php?selAddDetDiv="+document.getElementById("selAddDetDiv").value,false);
-    xmlhttp.send(null);
-    
-    document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
 
-  }
-  function changeUpdDiv()
-  {
-    document.getElementById('selUpdDetLvl').disabled = false;
-    var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","changeDivUpdDetail.php?selUpdDetDiv="+document.getElementById("selUpdDetDiv").value,false);
-    xmlhttp.send(null);
-    
-    document.getElementById("selUpdDetLvl").innerHTML=xmlhttp.responseText;
 
-  }
-function passSubjName()
-  {
-    var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","passSubjName.php?selAddDetSubj="+document.getElementById("selAddDetSubj").value,false);
-    xmlhttp.send(null);
-    
-    document.getElementById("txtAddDetSubj").value=xmlhttp.responseText;
 
-  }
-function passSubjNameUpd()
-  {
-    var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","passSubjNameUpdDetail.php?selUpdDetSubj="+document.getElementById("selUpdDetSubj").value,false);
-    xmlhttp.send(null);
-    
-    document.getElementById("txtUpdDetSubj").value=xmlhttp.responseText;
+<script>
+  function showDetail()
+    {
+      document.getElementById("btnAdd").disabled=false;
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","changeTblCurrDetail.php?selCurrName="+document.getElementById("selCurrName").value,false);
+      xmlhttp.send(null);
+      document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
+      var currId = document.getElementById("selCurrName").value;
+      document.getElementById("txtAddDetCurr").value = currId
+    }
+  function changeDiv()
+    {
+      document.getElementById('selAddDetLvl').disabled = false;
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","changeDivCurriculumDetail.php?selAddDetDiv="+document.getElementById("selAddDetDiv").value,false);
+      xmlhttp.send(null);
+      document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
+    }
+    function changeUpdDiv()
+    {
+      document.getElementById('selUpdDetLvl').disabled = false;
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","changeDivUpdDetail.php?selUpdDetDiv="+document.getElementById("selUpdDetDiv").value,false);
+      xmlhttp.send(null);
+      document.getElementById("selUpdDetLvl").innerHTML=xmlhttp.responseText;
+    }
+  function passSubjName()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","passSubjName.php?selAddDetSubj="+document.getElementById("selAddDetSubj").value,false);
+      xmlhttp.send(null);
+      document.getElementById("txtAddDetSubj").value=xmlhttp.responseText;
+    }
+  function passSubjNameUpd()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","passSubjNameUpdDetail.php?selUpdDetSubj="+document.getElementById("selUpdDetSubj").value,false);
+      xmlhttp.send(null);
+      document.getElementById("txtUpdDetSubj").value=xmlhttp.responseText;
+    }
+</script>
 
-  }
-    </script>
+<script>
+  $(function () {
+    $("#datatable").DataTable();
+    $("#datatable1").DataTable();
+    $("#datatable2").DataTable();
+    $("#datatable3").DataTable();
+    $("#datatable4").DataTable();
+    $("#datatable5").DataTable();
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#addCurriculum').bootstrapValidator({
+      feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
+      },
+        fields: {
+          txtAddCurr: {
+            validators: {
+              stringLength: {
+                min: 3,
+                message: 'Please enter at least 3 chracters.'
+              },
+              regexp: {
+                regexp: /^[A-Za-z_][0-9a-zA-Z_][\w-'\s]+$/,
+                message: 'The first character must be an alphabet and does not allow special character.'
+              },
+              notEmpty: {
+                message: 'Curriculum name is required'
+              }
+            }
+          },
+          selAddActive: {
+            validators: {
+              notEmpty: {
+                message: 'Status is required.'
+              },
+            }
+          },
+        }
+    })
+      .on('success.form.bv', function (e) {
+          // Prevent form submission
+          //e.preventDefault();
+      });
+    $('#addModalOne')
+      .on('shown.bs.modal', function () {
+          $('#addCurriculum').find().focus();
+      })
+      .on('hidden.bs.modal', function () {
+          $('#addCurriculum').bootstrapValidator('resetForm', true);
+      });
+  });
+</script>
 @endsection

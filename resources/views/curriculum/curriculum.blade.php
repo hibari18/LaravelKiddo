@@ -17,7 +17,8 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Add Curriculum</h3>
         </div>
-        <form autocomplete="off" data-toggle="validator" role="form" method="post" action="saveCurriculum.php" name="addCurriculum" id="addCurriculum">
+        <form autocomplete="off" data-toggle="validator" role="form" method="post" action="{{ route('curriculum.store') }}" name="addCurriculum" id="addCurriculum">
+        {{ csrf_field() }}
         <div class="modal-body">
          
         <div class="form-group" style="margin-top: 5%">

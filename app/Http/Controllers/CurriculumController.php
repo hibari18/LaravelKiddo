@@ -46,7 +46,14 @@ class CurriculumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $curriculum = Curriculum::create([
+            'tblCurriculumName' => trim($request->txtAddCurr),
+            'tblCurriculumActive' => trim($request->selAddActive),
+        ]);
+        
+        $message = $curriculum ? 2 : 1;
+        
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 
     /**
