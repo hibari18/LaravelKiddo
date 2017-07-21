@@ -16,4 +16,8 @@ class Grading extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 
+
+	public function schoolyear(){
+		return $this->belongsTo('App\SchoolYear', 'tblGrading_tblSchoolYrId', 'tblSchoolYrId');
+	}
 }

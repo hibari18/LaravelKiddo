@@ -19,7 +19,7 @@
                                 @foreach($gradings as $grading)
                                 <tr>
                                   <td>{{ $grading->tblGradingId}}</td>
-                                  <td>{{ $grading->schoolyear->tblGrading_tblSchoolYrId}}</td>
+                                  <td>{{ $grading->tblGrading_tblSchoolYrId}}</td>
                                   <td>{{ $grading->tblGradingPeriod}}</td>
                                   <td>{{ $grading->tblGradingStartDate}}</td>
                                   <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalTwo"><i class="fa fa-edit"></i></button></td>
