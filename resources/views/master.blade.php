@@ -28,8 +28,27 @@
     <link rel="stylesheet" href="{{ asset('css/adminLTEcss/skins/_all-skins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/css/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/formwizard2.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/validDesignReq.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignReq.css') }}">
   
+
+    
+    <!-- jQuery 2.2.3 -->
+    <script src="{{ asset('js/jQuery/jquery-2.2.3.min.js') }}"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="{{ asset('js/js/bootstrap.min.js') }}"></script>
+    <!-- FastClick -->
+    <script src="{{ asset('js/fastclick/fastclick.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('js/distjs/app.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset('js/distjs/demo.js') }}"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="{{ asset('js/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <!-- Sweetalert -->
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <!-- Bootstrap validator -->
+    <script src="{{ asset('js/bootstrapValidator.min.js') }}"></script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -60,18 +79,6 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery 2.2.3 -->
-    <script src="{{ asset('js/jQuery/jquery-2.2.3.min.js') }}"></script>
-    <!-- Bootstrap 3.3.6 -->
-    <script src="{{ asset('js/js/bootstrap.min.js') }}"></script>
-    <!-- FastClick -->
-    <script src="{{ asset('js/fastclick/fastclick.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('js/distjs/app.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('js/distjs/demo.js') }}"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="{{ asset('js/bootstrap3-wysihtml5.all.min.js') }}"></script>
   <!-- DataTables -->
     <script>
       $(function () {
