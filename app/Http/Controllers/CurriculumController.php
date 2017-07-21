@@ -47,10 +47,10 @@ class CurriculumController extends Controller
     public function store(Request $request)
     {
         $curriculum = Curriculum::create([
-            'tblCurriculumName' => trim($request->txtAddCurr),
+            'tblCurriculumName' => strtoupper(trim($request->txtAddCurr)),
             'tblCurriculumActive' => trim($request->selAddActive),
         ]);
-        
+
         $message = $curriculum ? 2 : 1;
         
         return redirect()->route('curriculum.index')->with('message', $message);
@@ -87,7 +87,15 @@ class CurriculumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $curriculum = Curriculum::findOrFail($request->txtUpdCurrId);
+        $curriculum->update([
+            'tblCurriculumName' => strtoupper(trim($request->txtUpdCurr)),
+            'tblCurriculumActive' => trim($request->selUpdActive),
+        ]);
+        
+        $message = $curriculum ? 4 : 3;
+        
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 
     /**
