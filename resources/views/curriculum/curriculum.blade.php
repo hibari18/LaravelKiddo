@@ -97,7 +97,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Delete Curriculum</h3>
         </div>
-        <form method = "post" action = "deleteCurriculum.php">
+        <form method="post" action="{{ route('curriculum.destroy','id') }}">
+        {{ method_field('DELETE') }}
+        {{ csrf_field() }}
         <div class="modal-body">
         <div><input type="hidden" name="txtDelCurrId" id="txtDelCurrId"/></div>
         <div>

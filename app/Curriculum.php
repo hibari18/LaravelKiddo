@@ -16,4 +16,12 @@ class Curriculum extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 
+
+	public function schoolyears(){
+		return $this->hasMany('App\Schoolyear', 'tblSchoolYr_tblCurriculumId', 'tblCurriculumId');
+	}
+
+	public function curriculum_details(){
+		return $this->hasMany('App\CurriculumDetail', 'tblCurriculumDetail_tblCurriculumId', 'tblCurriculumId');
+	}
 }

@@ -88,12 +88,10 @@ class CurriculumController extends Controller
     public function update(Request $request, $id)
     {
         $curriculum = Curriculum::findOrFail($request->txtUpdCurrId);
-        $curriculum->update([
+        $message = $curriculum->update([
             'tblCurriculumName' => strtoupper(trim($request->txtUpdCurr)),
             'tblCurriculumActive' => trim($request->selUpdActive),
-        ]);
-        
-        $message = $curriculum ? 4 : 3;
+        ]) ? 4 : 3;
         
         return redirect()->route('curriculum.index')->with('message', $message);
     }
@@ -101,11 +99,17 @@ class CurriculumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $curriculum = Curriculum::findOrFail($request->txtDelCurrId);
+        if($curriculum->schoolyears->where('tblSchoolYrActive','ACTIVE')->count() > 0 || $curriculum->curriculum_details->count() > 0){
+            return redirect()->route('curriculum.index')->with('message', 7);
+        }
+        $message = $curriculum->update(['tblCurriculumFlag' => 0]) ? 6 : 5;
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 }
