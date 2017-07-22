@@ -16,8 +16,10 @@ class Schoolyear extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 
-
-	public function curriculum(){
-		return $this->belongsTo('App\Curriculum', 'tblSchoolYr_tblCurriculumId', 'tblCurriculumId');
-	}
+	//public $incrementing = false; 
+	
+	public function curriculum()
+	{
+		return $this->belongsTo('App\Curriculum', 'tblSchoolYr_tblCurriculum', 'tblCurriculumId');
+	}	
 }

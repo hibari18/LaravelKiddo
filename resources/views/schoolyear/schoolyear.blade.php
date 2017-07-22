@@ -79,7 +79,7 @@
                               @foreach($schoolyears as $schoolyear)
                               <tr>
                                 <td hidden>{{ $schoolyear->tblSchoolYrId}}</td>
-                                <td hidden>{{ $schoolyear->tblSchoolYr_tblCurriculumId }}</td>
+                                <td hidden>{{ $schoolyear->tblSchoolYr_tblCurriculum}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrStart}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrYear}}</td>
                                 <td style="width: 100px">{{ $schoolyear->curriculum->tblCurriculumName}}</td>

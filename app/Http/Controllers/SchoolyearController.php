@@ -20,7 +20,7 @@ class SchoolyearController extends Controller
         $gradings = Grading::where('tblGradingFlag', 1)->get();
         $curriculums = Curriculum::where('tblCurriculumFlag', 1)->get();
 
-        return view('schoolyear.index', compact('schoolyears','gradings','curriculums'));
+        return view('schoolyear.schoolyear', compact('schoolyears','gradings','curriculums'));
     }
 
     /**
