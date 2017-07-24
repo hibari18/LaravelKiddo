@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Division;
 
 class DivisionController extends Controller
 {
@@ -68,7 +69,14 @@ class DivisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $division = Division::findOrFail($request->txtUpdDivId);
+        $message = $division->update([
+            'tblDivisionId' => trim($request->txtUpdDivId),
+            'tblDivisionName' => strtoupper(trim($request->txtUpdDiv)),
+            'tblDivisionActive' => trim($request->selUpdDivAct),
+        ]) ? 4 : 3;
+        
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 
     /**

@@ -14,7 +14,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Update Division</h3>
         </div>
-        <form autocomplete="off" method="post" action="updateDivision.php" name="UpdDivision" id="UpdDivision"
+        <form autocomplete="off" method="post" action="{{ route('division.update','id') }}" name="UpdDivision" id="UpdDivision">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
         <div class="modal-body">
         <div class="form-group"  style="margin-top: 5%">
              <div><input type="hidden" name="txtUpdDivId" id="txtUpdDivId"></div>
@@ -32,6 +34,7 @@
                 </select>
                 </div>
               
+        </div>
         </div>
         <div class="modal-footer" style="margin-top: 25%">
         <button type="submit" class="btn btn-info" name="btnUpdDiv" id="btnUpdDiv">Save</button>

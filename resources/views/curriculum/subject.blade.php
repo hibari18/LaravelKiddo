@@ -15,7 +15,8 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Add Subject</h3>
         </div>
-        <form autocomplete="off" method="post" action="saveSubject.php" data-toggle="validator" role="form" name="addSubject" id="addSubject">
+        <form autocomplete="off" method="post" action="{{ route('subject.store') }}" data-toggle="validator" role="form" name="addSubject" id="addSubject">
+        {{ csrf_field() }}
         <div class="modal-body">
         
         <div class="form-group" style="margin-top: 5%">
@@ -59,7 +60,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Update Subject</h3>
         </div>
-        <form autocomplete="off" method="post" action="updateSubject.php" name="UpdSubject" id="UpdSubject">
+        <form autocomplete="off" method="post" action="{{ route('subject.update','id') }}" name="UpdSubject" id="UpdSubject">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
         <div class="modal-body">
         <div class="form-group"  style="margin-top: 5%">
              <div><input type="hidden" class="form-control" name="txtUpdSubjId" id="txtUpdSubjId"></div>
@@ -104,7 +107,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Delete Subject</h3>
         </div>
-        <form method="post" action="deleteSubject.php">
+        <form method="post"  action="{{ route('subject.destroy','id') }}">
+        {{ method_field('DELETE') }}
+        {{ csrf_field() }}
         <div class="modal-body">
         <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
         <div><input type="hidden" name="txtDelSubjId" id="txtDelSubjId"/></div>
@@ -128,7 +133,7 @@
                 <tr>
                   <th>Subject Code</th>
                   <th>Subject Name</th>
-                  
+                  <th>Status</th>
                   <th>Action</th>
 
                 </tr>
@@ -138,7 +143,7 @@
                 <tr>
                 <td style="width:100px;">{{ $subject->tblSubjectId}}</td>
                 <td style="width:100px;">{{ $subject->tblSubjectDesc}}</td>
-                
+                <td style="width:100px;">{{ $subject->tblSubjActive}}</td> 
                 <td style="width:100px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalFive"><i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalFive"><i class="fa fa-trash"></i></button></td>
                 </tr>

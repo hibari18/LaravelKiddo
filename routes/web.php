@@ -18,6 +18,12 @@ Route::get('studentlist', 'AdminController@studentlist');
 
 Route::resource('curriculum', 'CurriculumController');
 
+Route::resource('subject', 'SubjectController');
+
+Route::resource('division', 'DivisionController');
+
+Route::resource('level', 'LevelController');
+
 Route::resource('schoolyear', 'SchoolyearController');
 
 Route::resource('requirement', 'RequirementController');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Subject;
+use App\CurriculumDetail;
 
 class SubjectController extends Controller
 {
@@ -34,7 +36,16 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         
+        $subject = Subject::create([
+            'tblSubjectId' => strtoupper(trim($request->txtAddSubjId)),
+            'tblSubjectDesc' => strtoupper(trim($request->txtAddSubj)),
+            'tblSubjActive' => trim($request->selAddSubjId),
+        ]);
+
+        $message = $subject ? 2 : 1;
+        
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 
     /**
@@ -68,7 +79,13 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subject = Subject::findOrFail($request->txtUpdSubjId);
+        $message = $subject->update([
+            'tblSubjectDesc' => strtoupper(trim($request->txtUpdSubj)),
+            'tblSubjActive' => trim($request->selUpdSubjAct),
+        ]) ? 4 : 3;
+        
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 
     /**
@@ -77,8 +94,13 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $subject = Subject::findOrFail($request->txtDelSubjId);
+        if($subject->curriculum_details->count() > 0){
+            return redirect()->route('curriculum.index')->with('message', 9);
+        }
+        $message = $subject->update(['tblSubjectFlag' => 0]) ? 6 : 5;
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 }
