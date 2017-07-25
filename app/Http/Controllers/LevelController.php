@@ -37,10 +37,10 @@ class LevelController extends Controller
     public function store(Request $request)
     {
          $level = Level::create([
-            'tblLevelId' => trim($request->tblLevelId),
             'tblLevelName' => strtoupper(trim($request->txtAddLvl)),
-            'tblDivisionName' => trim($request->selAddLvlDiv),
-            'tblLevelActive' => trim($request->selAddLvlAct),
+            'tblLevel_tblDivisionId' => trim($request->selAddLvlDiv),
+            // 'tblLevelActive' => trim($request->selAddLvlAct),
+            // ui gwen wala to sa database table niya? Or di updated database ko haha
         ]);
 
         $message = $level ? 2 : 1;

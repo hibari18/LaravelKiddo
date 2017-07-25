@@ -15,7 +15,6 @@ class Level extends Model
 	protected $table = 'tbllevel'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
-	public $incrementing = false; 
 
 	public function division(){
 		return $this->belongsTo('App\Division', 'tblLevel_tblDivisionId', 'tblDivisionId');
