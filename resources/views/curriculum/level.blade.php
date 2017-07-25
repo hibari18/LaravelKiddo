@@ -31,7 +31,7 @@
                 <select class="form-control choose" style="width: 100%;" name="selAddLvlDiv" id="selAddLvlDiv">
                 <option selected="selected">--Select Division--</option>
                         @foreach($divisions as $division)
-                        <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName}}</option>
+                        <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName }}</option>
                         @endforeach
                 </select>
                 </div>
@@ -80,7 +80,7 @@
                 <div class="col-sm-7 selectContainer">
                 <select class="form-control choose" style="width: 100%;" name="selUpdLvlDiv" id="selUpdLvlDiv">
                <option selected="selected">--Select Division--</option>
-                @foreach($divisions as $division)
+                        @foreach($divisions as $division)
                         <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName}}</option>
                         @endforeach
                 </select>
@@ -147,7 +147,7 @@
                 </thead>
                 <tbody>
                 @foreach($levels as $level)
-                <tr>
+              <tr>
                 <td hidden>{{ $level->tblLevelId}}</td>
                 <td>{{ $level->tblLevelName}}</td>
                 <td>{{ $level->division->tblDivisionName}}</td>
@@ -155,7 +155,7 @@
                 <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalFour"><i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalFour"><i class="fa fa-trash"></i></button>
                 </td>
-                </tr>
+              </tr>
                 @endforeach
                 </tbody>
               </table>

@@ -37,7 +37,14 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requirement = Requirement::create([
+            'tblReqName' => strtoupper(trim($request->txtAddReqName)),
+            'tblReqDescription' => strtoupper(trim($request->txtAddReqDesc)),
+        ]);
+
+        $message = $requirement ? 2 : 1;
+        
+        return redirect()->route('requirement.index')->with('message', $message);
     }
 
     /**
@@ -71,7 +78,13 @@ class RequirementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $requirement = Requirement::findOrFail($request->txtUpdReqId);
+        $message = $requirement->update([
+            'tblReqName' => strtoupper(trim($request->txtUpdReqName)),
+            'tblReqDescription' => strtoupper(trim($request->txtUpdReqDesc)),
+        ]) ? 4 : 3;
+        
+        return redirect()->route('requirement.index')->with('message', $message);
     }
 
     /**

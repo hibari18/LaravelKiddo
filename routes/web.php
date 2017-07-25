@@ -24,7 +24,11 @@ Route::resource('division', 'DivisionController');
 
 Route::resource('level', 'LevelController');
 
+Route::resource('curriculumdetail', 'CurriculumDetailsController');
+
 Route::resource('schoolyear', 'SchoolyearController');
+
+Route::resource('section', 'SectionController');
 
 Route::resource('requirement', 'RequirementController');
 

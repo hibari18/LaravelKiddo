@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Level;
+use App\Division;
 
 class LevelController extends Controller
 {
@@ -13,7 +15,7 @@ class LevelController extends Controller
      */
     public function index()
     {
-        //
+        $division = Division::where('tblDivisionFlag', 1)->get();
     }
 
     /**
@@ -23,7 +25,7 @@ class LevelController extends Controller
      */
     public function create()
     {
-        //
+       //
     }
 
     /**
@@ -34,7 +36,16 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $level = Level::create([
+            'tblLevelId' => trim($request->tblLevelId),
+            'tblLevelName' => strtoupper(trim($request->txtAddLvl)),
+            'tblDivisionName' => trim($request->selAddLvlDiv),
+            'tblLevelActive' => trim($request->selAddLvlAct),
+        ]);
+
+        $message = $level ? 2 : 1;
+        
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 
     /**

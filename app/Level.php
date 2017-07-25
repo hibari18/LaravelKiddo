@@ -20,5 +20,4 @@ class Level extends Model
 	public function division(){
 		return $this->belongsTo('App\Division', 'tblLevel_tblDivisionId', 'tblDivisionId');
 	}
-
 }
