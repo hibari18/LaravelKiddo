@@ -19,4 +19,8 @@ class Level extends Model
 	public function division(){
 		return $this->belongsTo('App\Division', 'tblLevel_tblDivisionId', 'tblDivisionId');
 	}
+
+	public function curriculum_details(){
+		return $this->hasMany('App\CurriculumDetail', 'tblCurriculumDetail_tblLevelId', 'tblLevelId');
+	}
 }

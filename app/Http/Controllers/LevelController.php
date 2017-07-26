@@ -94,8 +94,23 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $level = Level::findOrFail($request->txtDelLvlId);
+        /* 
+         * [todo] 
+         * SchemeDetail Model
+         * FeeDetail Model
+         * level relationship
+         *
+            if($level->curriculum_details->where('tblCurriculumFlag','0')->count() > 0 || $level->scheme_details->where('tblSchemeDetailFlag','0')->count() > 0 || $level->fee_details->where('tblFeeDetailFlag','0')->count() > 0){
+            return redirect()->route('curriculum.index')->with('message', 7);
+            }
+        */
+        if($level->curriculum_details->where('tblCurriculumFlag','0')->count() > 0){
+            return redirect()->route('curriculum.index')->with('message', 7);
+        }
+        $message = $level->update(['tblLevelFlag' => 0]) ? 6 : 5;
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 }
