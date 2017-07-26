@@ -1,7 +1,85 @@
 @extends('master')
 
 @section('content')
-<script>
+ <?php
+    $message = isset($_GET['message'])?intval($_GET['message']):0;
+
+    if($message == 1) {
+      echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 2) {
+      echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 3) {
+      echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 4) {
+      echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 5) {
+      echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 6) {
+      echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+    }
+  ?>
+ <style>
+  .popup
+  {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .popup .popuptext
+  {
+    visibility: hidden;
+    width: 260px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 35%;
+    margin-left: -80px;
+  }
+  .popup .popuptext::after
+  {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  .popup .show
+  {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+  @-webkit-keyframes fadeIn
+  {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  @keyframes fadeIn
+  {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  </style>
+
+  <script>
   function fn1()
   {
     var stat = document.getElementById("selUpdSyAct").value;
@@ -129,4 +207,94 @@
         <!-- row -->
     </section>
     <!-- /.content -->
+     <script>
+          $(document).ready(function() {
+            $('#addSchoolYr').bootstrapValidator({
+              feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                  txtAddSy: {
+                    validators: {
+                      stringLength: {
+                        min: 4,
+                        max: 4,
+                        message: 'Please enter 4 numeric characters only'
+                      },
+                      regexp: {
+                        regexp: /^[0-9]+$/,
+                        message: 'Please enter numeric characters only.'
+                      },
+                      notEmpty: {
+                        message: 'School year is required'
+                      }
+                    }
+                  },
+                  selAddSyCurr: {
+                    validators: {
+                      notEmpty: {
+                          message: 'Curriculum name is required.'
+                      },
+                    }
+                  },
+                }
+              })
+                  .on('success.form.bv', function (e) {
+                // Prevent form submission
+                  e.preventDefault();
+                  });
+
+            $('#addModalOne')
+               .on('shown.bs.modal', function () {
+                   $('#addSchoolYr').find().focus();
+                })
+                .on('hidden.bs.modal', function () {
+                    $('#addSchoolYr').bootstrapValidator('resetForm', true);
+                });
+          });
+        </script>
+        <!--UPDATE VALIDATOR-->
+          <script>
+          $(document).ready(function() {
+            $('#UpdSchoolYr').bootstrapValidator({
+              feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+              },
+              fields: {
+                txtUpdSyYear: {
+                  validators: {
+                    stringLength: {
+                        min: 4,
+                        max: 4,
+                        message: 'Please enter 4 numeric characters only'
+                    },
+                    regexp: {
+                      regexp: /^[0-9]+$/,
+                      message: 'Please enter numeric characters only.'
+                    },
+                    notEmpty: {
+                      message: 'School year is required'
+                    }
+                  }
+                },
+              }
+            })
+              .on('success.form.bv', function (e) {
+              // Prevent form submission
+              e.preventDefault();
+              });
+
+            $('#updateModalOne')
+               .on('shown.bs.modal', function () {
+                   $('#UpdSchoolYr').find().focus();
+                })
+                .on('hidden.bs.modal', function () {
+                    $('#UpdSchoolYr').bootstrapValidator('resetForm', true);
+                });
+          });
+        </script>
 @endsection

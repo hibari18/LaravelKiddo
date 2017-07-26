@@ -150,7 +150,7 @@
               <tr>
                 <td hidden>{{ $level->tblLevelId}}</td>
                 <td>{{ $level->tblLevelName}}</td>
-                <td>{{ $level->division->tblDivisionName}}</td>
+                <td>{{ $level->tblDivisionName}}</td>
                 <td>{{ $level->tblLevelActive}}</td>
                 <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalFour"><i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalFour"><i class="fa fa-trash"></i></button>

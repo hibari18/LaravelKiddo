@@ -15,7 +15,7 @@ class LevelController extends Controller
      */
     public function index()
     {
-        $division = Division::where('tblDivisionFlag', 1)->get();
+        $divisions = Division::where('tblDivisionFlag', 1)->get();
     }
 
     /**
@@ -39,8 +39,7 @@ class LevelController extends Controller
          $level = Level::create([
             'tblLevelName' => strtoupper(trim($request->txtAddLvl)),
             'tblLevel_tblDivisionId' => trim($request->selAddLvlDiv),
-            // 'tblLevelActive' => trim($request->selAddLvlAct),
-            // ui gwen wala to sa database table niya? Or di updated database ko haha
+            'tblLevelActive' => trim($request->selAddLvlAct),
         ]);
 
         $message = $level ? 2 : 1;
@@ -79,7 +78,14 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $level = Level::findOrFail($request->txtUpdLvlId);
+        $message = $level->update([
+            'tblLevelName' => strtoupper(trim($request->txtUpdLvl)),
+            'tblLevel_tblDivisionId' => trim($request->selUpdLvlDiv),
+            'tblLevelActive' => trim($request->selUpdLvlAct),
+        ]) ? 4 : 3;
+        
+        return redirect()->route('curriculum.index')->with('message', $message);
     }
 
     /**

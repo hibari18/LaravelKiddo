@@ -20,7 +20,7 @@ class CurriculumController extends Controller
     {
         $curriculums = Curriculum::where('tblCurriculumFlag', 1)->get();
         $subjects = Subject::where('tblSubjectFlag', 1)->get();
-        $levels = Level::where('tblLevelFlag', 1)->get();
+        $levels = Level::where('tbllevel.tblLevelFlag', 1)->leftjoin('tbldivision','tbldivision.tblDivisionId','=','tbllevel.tblLevel_tblDivisionId')->get();
         $divisions = Division::where('tblDivisionFlag', 1)->get();
         $details = CurriculumDetail::where('tblCurriculumFlag', 1)->get();
 

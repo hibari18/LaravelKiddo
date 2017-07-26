@@ -29,7 +29,8 @@
                               <h3 class="modal-title" style="font-style: bold">Add Requirement</h3>
                             </div>
 
-                            <form data-toggle="validator" role="form" action="saveRequirement.php" method="post" name="addReq" id="addReq">
+                            <form data-toggle="validator" role="form" action="{{ route('requirement.store') }}" method="post" name="addReq" id="addReq">
+                            {{ csrf_field() }}
                               <div class="modal-body">
                                 <div class="form-group" style="margin-top: 5%">
                                   <label class="col-sm-4" style="text-align: right">Requirement Name</label>
@@ -62,7 +63,9 @@
                               <h3 class="modal-title" style="font-style: bold">Update Requirement</h3>
                             </div>
 
-                            <form data-toggle="validation" role="form" action="updateRequirement.php" method="post" name="UpdReq" id="UpdReq">
+                            <form data-toggle="validation" role="form" action="{{ route('requirement.update','id') }}" method="post" name="UpdReq" id="UpdReq">
+                             {{ method_field('PUT') }}
+                             {{ csrf_field() }}
                               <div class="modal-body">
                                 <div><input type="hidden" name="txtUpdReqId" id="txtUpdReqId"/></div>
                                  <div class="form-group" style="margin-top: 5%">
@@ -96,7 +99,9 @@
                               <h3 class="modal-title" style="font-style: bold">Delete Requirement</h3>
                             </div>
 
-                            <form action="deleteRequirement.php" method="post">
+                            <form method="post" action="{{ route('requirement.destroy','id') }}">
+                              {{ method_field('DELETE') }}
+                              {{ csrf_field() }}
                               <div class="modal-body">
                                 <div class="box-body table-responsive no-padding" style="margin-top: 2%">
                                   <div><input type="hidden" name="txtDelReqId" id="txtDelReqId"/></div>

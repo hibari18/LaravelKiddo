@@ -28,6 +28,8 @@ Route::resource('curriculumdetail', 'CurriculumDetailsController');
 
 Route::resource('schoolyear', 'SchoolyearController');
 
+Route::resource('grading', 'GradingController');
+
 Route::resource('section', 'SectionController');
 
 Route::resource('requirement', 'RequirementController');

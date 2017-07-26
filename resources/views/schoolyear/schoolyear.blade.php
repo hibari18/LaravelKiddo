@@ -21,7 +21,8 @@
                             <h3 class="modal-title" style="font-style: bold">Add School Year</h3>
                           </div>
 
-                          <form data-toggle="validator" role="form" method="post" action="saveSchoolYear.php" name="addSchoolYr" id="addSchoolYr">
+                          <form data-toggle="validator" role="form" method="post" action="{{ route('schoolyear.store') }}" name="addSchoolYr" id="addSchoolYr">
+                          {{ csrf_field() }}
                             <div class="modal-body inline">
                               <div class="form-group" style="margin-top: 5%">
                                   <label class="col-sm-4" style="text-align: right">Start of school year</label>
@@ -103,7 +104,9 @@
                             <h3 class="modal-title" style="font-style: bold">Update School Year</h3>
                           </div>
 
-                          <form data-toggle="validation" role="form" method="post" action="updateSchoolYear.php" name="UpdSchoolYr" id="UpdSchoolYr">
+                          <form data-toggle="validation" role="form" method="post" action="{{ route('schoolyear.update','id') }}" name="UpdSchoolYr" id="UpdSchoolYr">
+                          {{ method_field('PUT') }}
+                          {{ csrf_field() }}
                             <div class="modal-body">
                               <div class="form-group">
                                 <div>
@@ -167,7 +170,9 @@
                             <h3 class="modal-title" style="font-style: bold">Delete School Year</h3>
                           </div>
 
-                          <form action="deleteSchoolYear.php" method="post">
+                          <form action="{{ route('schoolyear.destroy','id') }}" method="post">
+                          {{ method_field('DELETE') }}
+                           {{ csrf_field() }}
                             <div class="modal-body">
                               <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
                                 <div><input type="hidden" name="txtDelSyId" id="txtDelSyId"/></div>
