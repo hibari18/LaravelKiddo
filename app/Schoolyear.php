@@ -20,6 +20,6 @@ class Schoolyear extends Model
 	
 	public function curriculum()
 	{
-		return $this->belongsTo('App\Curriculum', 'tblSchoolYr_tblCurriculum', 'tblCurriculumId');
+		return $this->belongsTo('App\Curriculum', 'tblSchoolYr_tblCurriculumId', 'tblCurriculumId');
 	}	
 }
