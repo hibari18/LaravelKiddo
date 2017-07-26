@@ -268,9 +268,9 @@ $(document).ready(function(){
     {
       document.getElementById("btnAdd").disabled=false;
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","changeTblCurrDetail.php?selCurrName="+document.getElementById("selCurrName").value,false);
+      xmlhttp.open("GET","curriculumdetail/"+document.getElementById("selCurrName").value,false);
       xmlhttp.send(null);
-      document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
+      document.getElementById("datatable1").innerHTML=xmlhttp.responseXML;
       var currId = document.getElementById("selCurrName").value;
       document.getElementById("txtAddDetCurr").value = currId
     }
