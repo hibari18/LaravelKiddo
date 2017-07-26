@@ -28,6 +28,7 @@
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
   ?>
+
 <script>
     (function(){
       if(window.addEventListener){
@@ -57,10 +58,10 @@
         };
   }})();
     </script>
-   
+    
     @include('requirement.requirement')
 
-  <script>
+ <script>
     $(document).ready(function() {
       $('#addReq').bootstrapValidator({
         feedbackIcons: {
