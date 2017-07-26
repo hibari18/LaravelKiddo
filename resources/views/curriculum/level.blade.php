@@ -78,10 +78,10 @@
         <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Division Name</label>
                 <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" style="width: 100%;" name="selUpdLvlDiv" id="selUpdLvlDiv">
-               <option selected="selected">--Select Division--</option>
+                <select class="form-control" style="width: 100%;" name="selUpdLvlDiv" id="selUpdLvlDiv">
+               <option selected="selected" disabled="disabled">--Select Division--</option>
                         @foreach($divisions as $division)
-                        <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName}}</option>
+                        <option value="{{ $division->tblDivisionName}}">{{ $division->tblDivisionName}}</option>
                         @endforeach
                 </select>
                 </div>
