@@ -45,7 +45,7 @@
       
     </div>
   </div>
-              <table id="datatable1" class="table table-bordered table-striped">
+              <table id="datatable2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th hidden></th>

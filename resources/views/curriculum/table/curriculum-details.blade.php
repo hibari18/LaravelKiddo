@@ -1,4 +1,4 @@
-<table id="datatable1" class="table table-bordered table-striped">
+
     <thead>
         <tr>
             <th hidden>Curriculum Id</th>
@@ -28,4 +28,3 @@
         </tr>
     @endforeach
     </tbody>
-</table>

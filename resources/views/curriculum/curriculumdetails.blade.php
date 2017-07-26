@@ -177,7 +177,9 @@
       </div>
     </div>
     <!--modal delete end-->
-    @include('curriculum.table.curriculum-details')
+    <table id="datatable1" class="table table-bordered table-striped">
+      @include('curriculum.table.curriculum-details')
+    </table>
   </div>
 </div>
 <!-- /.box-body -->
