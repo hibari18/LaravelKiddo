@@ -210,7 +210,7 @@
             })
             .on('success.form.bv', function (e) {
               // Prevent form submission
-            e.preventDefault();
+              // e.preventDefault();
             });
 
           $('#addModalFour')
@@ -262,7 +262,7 @@
               })
                 .on('success.form.bv', function (e) {
                  // Prevent form submission
-                e.preventDefault();
+                // e.preventDefault();
           });
 
           $('#updateModalFour')
