@@ -162,3 +162,116 @@
             </div>
           </div>
             <!-- /.box-body -->
+
+
+
+    <script>
+         $(document).ready(function() {
+           $('#addLevel').bootstrapValidator({
+              // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+              feedbackIcons: {
+                  valid: 'glyphicon glyphicon-ok',
+                  invalid: 'glyphicon glyphicon-remove',
+                  validating: 'glyphicon glyphicon-refresh'
+              },
+              fields: {
+                txtAddLvl: {
+                  validators: {
+                    stringLength: {
+                      min: 5,
+                      max: 20,
+                      message: 'Please enter at least 5 characters.'
+                    },
+                    regexp: {
+                      regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-'\s]+$/,
+                      message: 'The first character must be an alphabet and does not allow special character.'
+                    },
+                    notEmpty: {
+                      message: 'Level name is required'
+                    }
+                  }
+                },
+                selAddLvlDiv: {
+                  validators: {
+                    greaterThan: {
+                      value: 1,
+                      message: 'Division is required.'
+                    },
+                  }
+                },
+                selAddLvlAct: {
+                  validators: {
+                    notEmpty: {
+                      message: 'Status is required.'
+                    },
+                  }
+                },
+              }
+            })
+            .on('success.form.bv', function (e) {
+              // Prevent form submission
+            e.preventDefault();
+            });
+
+          $('#addModalFour')
+             .on('shown.bs.modal', function () {
+                 $('#addLevel').find().focus();
+              })
+              .on('hidden.bs.modal', function () {
+                  $('#addLevel').bootstrapValidator('resetForm', true);
+              });
+
+          $('#UpdLevel').bootstrapValidator({
+              feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+              },
+              fields: {
+                txtUpdLvl: {
+                  validators: {
+                    stringLength: {
+                      min: 5,
+                      max: 20,
+                      message: 'Please enter at least 5 characters.'
+                    },
+                    regexp: {
+                      regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-'\s]+$/,
+                      message: 'The first character must be an alphabet and does not allow special character.'
+                    },
+                    notEmpty: {
+                      message: 'Level name is required'
+                    }
+                  }
+                },
+                selUpdLvlDiv: {
+                  validators: {
+                    notEmpty: {
+                      message: 'Division is required.'
+                    },
+                  }
+                },
+                selUpdLvlAct: {
+                  validators: {
+                    notEmpty: {
+                      message: 'Status is required.'
+                    },
+                  }
+                },
+                }
+              })
+                .on('success.form.bv', function (e) {
+                 // Prevent form submission
+                e.preventDefault();
+          });
+
+          $('#updateModalFour')
+             .on('shown.bs.modal', function () {
+                 $('#UpdLevel').find().focus();
+              })
+              .on('hidden.bs.modal', function () {
+                  $('#UpdLevel').bootstrapValidator('resetForm', true);
+              });
+
+      });
+      </script>
