@@ -270,7 +270,7 @@ $(document).ready(function(){
       var xmlhttp =  new XMLHttpRequest();
       xmlhttp.open("GET","curriculumdetail/"+document.getElementById("selCurrName").value,false);
       xmlhttp.send(null);
-      document.getElementById("datatable1").innerHTML=xmlhttp.responseXML;
+      document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
       var currId = document.getElementById("selCurrName").value;
       document.getElementById("txtAddDetCurr").value = currId
     }
