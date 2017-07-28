@@ -100,7 +100,7 @@
                 <div class="col-sm-7 selectContainer">
                 <select class="form-control" name="updLvlName" id="updLvlName" style="width: 100%;">
                 		@foreach($levels as $level)
-                        <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName }}</option>
+                        <option value="{{ $level->tblLevelName}}">{{ $level->tblLevelName }}</option>
                         @endforeach
                 </select>
                 </div>
