@@ -3,27 +3,27 @@
 @section('content')
 <?php
     $message = isset($_GET['message'])?intval($_GET['message']):0;
-
+    
     if($message == 1) {
       echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
     }
-
+    
     if($message == 2) {
       echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
     }
-
+    
     if($message == 3) {
       echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
     }
-
+    
     if($message == 4) {
       echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
     }
-
+    
     if($message == 5) {
       echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
     }
-
+    
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
@@ -58,8 +58,10 @@
         };
   }})();
     </script>
-    
+
+    <div class="container">
     @include('requirement.requirement')
+    </div>
 
  <script>
     $(document).ready(function() {
@@ -73,14 +75,14 @@
           txtAddReqName: {
             validators: {
               stringLength: {
-                min: 5,
+                min: 2,
                 max: 20,
-                message: 'You must input atleast 5 characters'
+                message: 'You must input atleast 2 characters'
               },
-              regexp: {
-                regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
-                message: 'Invalid Input (The first character must be an alphabet)'
-              },
+               regexp: {
+                        regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
+                        message: 'The first letter should be an alphabet (Must not contain special characters.).'
+                    },
               notEmpty: {
                 message: 'Requirement name is required'
               }
@@ -104,10 +106,6 @@
           },
         }
       })
-        .on('success.form.bv', function (e) {
-          // Prevent form submission
-          e.preventDefault();
-        });
 
       $('#addModalOne')
          .on('shown.bs.modal', function () {
@@ -131,9 +129,9 @@
           txtUpdReqName: {
             validators: {
               stringLength: {
-                min: 5,
+                min: 2,
                 max: 20,
-                message: 'You have to input characters between 5 to 20 chracters'
+                message: 'You have to input characters between 2 to 20 chracters'
               },
               regexp: {
                 regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
@@ -162,10 +160,6 @@
           },
         }
       })
-        .on('success.form.bv', function (e) {
-          // Prevent form submission
-          e.preventDefault();
-        });
 
       $('#updateModalOne')
          .on('shown.bs.modal', function () {
@@ -175,6 +169,5 @@
               $('#UpdReq').bootstrapValidator('resetForm', true);
           });
   });
-  </script>
- 
+  </script> 
 @endsection

@@ -31,7 +31,8 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3 class="modal-title" style="font-style: bold">Add Details</h3>
           </div>
-          <form method="post" action="saveCurriculumDetail.php" data-toggle="validator" role="form" name="addCurrDetails" id="addCurrDetails">
+          <form method="post" action="{{ route('curriculumdetail.store') }}" data-toggle="validator" role="form" name="addCurrDetails" id="addCurrDetails">
+          {{ csrf_field() }}
             <div class="modal-body">
 
               <div class="form-group" style="margin-top: 5%">
@@ -93,8 +94,10 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3 class="modal-title" style="font-style: bold">Update Curriculum Details</h3>
           </div>
-          <form autocomplete="off" data-toggle="validator" role="form" method="post" action="updateCurriculumDetail.php" name="UpdCurrDetails"
+          <form autocomplete="off" data-toggle="validator" role="form" method="post" action="{{ route('curriculumdetail.update','id') }}" name="UpdCurrDetails"
             id="UpdCurrDetails">
+            {{ method_field('PUT') }}
+            {{ csrf_field() }}
             <div class="modal-body">
               <div class="form-group" style="margin-top: 5%">
                 <div><input type="hidden" name="txtUpdDetCurrId" id="txtUpdDetCurrId" />
@@ -158,7 +161,9 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3 class="modal-title" style="font-style: bold">Delete Detail</h3>
           </div>
-          <form method="post" action="deleteCurriculumDetail.php">
+          <form method="post" action="{{ route('curriculumdetail.destroy','id') }}">
+        {{ method_field('DELETE') }}
+        {{ csrf_field() }}
             <div class="modal-body">
               <div class="box-body table-responsive no-padding" style="margin-top: 2%">
                 <div><input type="hidden" name="txtDelDetId" id="txtDelDetId" /></div>

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CurriculumDetail;
 
-class CurriculumDetailsController extends Controller
+class SchemeTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,17 +38,14 @@ class CurriculumDetailsController extends Controller
     }
 
     /**
-     * Return resources based on given curriculum id
+     * Display the specified resource.
      *
-     * @param  Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $details = CurriculumDetail::where('tblCurriculumDetail_tblCurriculumId', $id)->where('tblCurriculumFlag', 1)->get();
-
-        return view('curriculum.table.curriculum-details', compact('details'));
+        //
     }
 
     /**

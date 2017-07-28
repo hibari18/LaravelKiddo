@@ -93,14 +93,11 @@ class RequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $requirement = Requirement::findOrFail($request->txtDelReqId);
-        $requirement->delete();
-           
-            return redirect()->route('requirement.index')->with('message', 9);
-        
+       
         $message = $requirement->update(['tblRequirementFlag' => 0]) ? 6 : 5;
-        return redirect()->route('requirement.index')->with('message', $message);
+        return redirect()->route('requirement.index');
     }
 }

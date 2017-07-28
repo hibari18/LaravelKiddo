@@ -1,6 +1,4 @@
-@extends('master')
 
-@section('content')
 <div class="box">
                       <div class="box-header"></div>
                         <div class="box-body">
@@ -21,32 +19,28 @@
                             <h3 class="modal-title" style="font-style: bold">Add School Year</h3>
                           </div>
 
-                          <form data-toggle="validator" role="form" method="post" action="{{ route('schoolyear.store') }}" name="addSchoolYr" id="addSchoolYr">
-                          {{ csrf_field() }}
-                            <div class="modal-body inline">
-                              <div class="form-group" style="margin-top: 5%">
-                                  <label class="col-sm-4" style="text-align: right">Start of school year</label>
+                          <form data-toggle="validator" role="form" method="post" action="{{ route('schoolyear.store') }}" name="addSchoolYr" >
+                            {{csrf_field()}}
+                            <div class="modal-body">
+                              <div class="form-group" style="margin-top: 10%">
+                                  <label class="col-sm-4 control-label" for="textinput" style="text-align: right" >Start of school year</label>
                                   <div class="col-sm-7 selectContainer">
-                                    <div class="input-group" style="width: 100%">
-                                    <input type="text" class="form-control" id="txtAddSy" name="txtAddSy" maxlength="4">
-                                    </div>
+                                    <input type="text" name="txtUpdSyYear" class="form-control" maxlength="4">
                                   </div>
                               </div>
 
-                              <div class="form-group" style="margin-top: 15%">
+                              <div class="form-group" style="margin-top: 20%">
                                 <label class="col-sm-4" style="text-align: right">Curriculum</label>
-                                  <div class="col-sm-7 selectContainer">
-                                    <div class="input-group" style="width: 100%">
-                                      <select class="form-control choose" name="selAddSyCurr" id="selAddSyCurr">
-                                        <option disabled="disabled" selected="selected">--SELECT CURRICULUM--</option>
-                                          @foreach($curriculums as $curriculum)
-                                            <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
-                                          @endforeach
-                                      </select>
-                                    </div>
-                                  </div>
+                                <div class="col-sm-7 selectContainer">
+                                  <select class="form-control choose" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
+                                    <option selected="selected">--SELECT CURRICULUM--</option>
+                                      @foreach($curriculums as $curriculum)
+                                        <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
+                                      @endforeach
+                                  </select>
+                                </div>
                               </div>
-                            </div> <!-- modal-body inline-->
+                          </div> <!-- modal body update modal -->
 
                             <div class="modal-footer" style="margin-top: 10%">
                               <button type="submit" class="btn btn-info" name="btnAddSy" id="btnAddSy">Save</button>
@@ -79,14 +73,14 @@
                             <tbody>
                               @foreach($schoolyears as $schoolyear)
                               <tr>
-                                <td hidden>{{ $schoolyear->tblSchoolYrId}}</td>
+                                <td hidden></td>
                                 <td hidden>{{ $schoolyear->tblSchoolYr_tblCurriculum}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrStart}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrYear}}</td>
-                                <td style="width: 100px">{{ $schoolyear->curriculum->tblCurriculumName}}</td>
+                                <td style="width: 100px">{{ $schoolyear->tblCurriculumName}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrActive}}</td>
                                 <td style="width: 50px"><input type='button' class='btn   btn-info' value='View Curriculum'>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#updateModalOne" data-id="{{ $schoolyear->tblSchoolYrId}}"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
                               </tr>
                                 @endforeach
@@ -105,7 +99,7 @@
                           </div>
 
                           <form data-toggle="validation" role="form" method="post" action="{{ route('schoolyear.update','id') }}" name="UpdSchoolYr" id="UpdSchoolYr">
-                          {{ method_field('PUT') }}
+                          {{ method_field('PATCH') }}
                           {{ csrf_field() }}
                             <div class="modal-body">
                               <div class="form-group">
@@ -132,7 +126,7 @@
                                   <select class="form-control choose" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
                                     <option selected="selected">--SELECT CURRICULUM--</option>
                                       @foreach($curriculums as $curriculum)
-                                        <option value="{{ $curriculum->tblCurriculumName}}">{{ $curriculum->tblCurriculumName}}</option>
+                                        <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
                                       @endforeach
                                   </select>
                                 </div>
@@ -172,7 +166,7 @@
 
                           <form action="{{ route('schoolyear.destroy','id') }}" method="post">
                           {{ method_field('DELETE') }}
-                           {{ csrf_field() }}
+                          {{ csrf_field() }}
                             <div class="modal-body">
                               <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
                                 <div><input type="hidden" name="txtDelSyId" id="txtDelSyId"/></div>
@@ -192,4 +186,3 @@
                       </div> <!-- modal dialog delete modal -->
                     </div> <!-- modal fade delete modal end-->
 
-@endsection

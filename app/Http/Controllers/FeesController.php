@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CurriculumDetail;
+use App\Fees;
+use App\SchemeType;
+use App\Schedule'
+use App\FeeDetails;
 
-class CurriculumDetailsController extends Controller
+class FeesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,12 @@ class CurriculumDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $fees = Fees::where('tblCurriculumFlag', 1)->get();
+        $schemetype = SchemeType::where('tblCurriculumFlag', 1)->get();
+        $schedule = Schedule::where('tblCurriculumFlag', 1)->get();
+        $feedetails = FeeDetails::where('tblCurriculumFlag', 1)->get();
+
+        return view('payment.index', compact('fees','schemetype','schedule','feedetails',));
     }
 
     /**
@@ -39,17 +47,14 @@ class CurriculumDetailsController extends Controller
     }
 
     /**
-     * Return resources based on given curriculum id
+     * Display the specified resource.
      *
-     * @param  Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $details = CurriculumDetail::where('tblCurriculumDetail_tblCurriculumId', $id)->where('tblCurriculumFlag', 1)->get();
-
-        return view('curriculum.table.curriculum-details', compact('details'));
+        //
     }
 
     /**

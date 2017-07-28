@@ -16,11 +16,11 @@ class SchoolyearController extends Controller
      */
     public function index()
     {
-        $schoolyears = Schoolyear::where('tblSchoolYearFlag', 1)->get();
+        $schoolyears = Schoolyear::leftjoin('tblcurriculum','tblcurriculum.tblCurriculumId','=','tblschoolyear.tblSchoolYr_tblCurriculumId')->where('tblschoolyear.tblSchoolYearFlag', 1)->get();
         $gradings = Grading::where('tblGradingFlag', 1)->get();
         $curriculums = Curriculum::where('tblCurriculumFlag', 1)->get();
 
-        return view('schoolyear.schoolyear', compact('schoolyears','gradings','curriculums'));
+        return view('schoolyear.index', compact('schoolyears','gradings','curriculums'));
     }
 
     /**
@@ -41,7 +41,16 @@ class SchoolyearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $yr = $request->txtUpdSyYear;
+        $schyr = "S.Y. ".$yr.'-'.($yr+1) ;
+        $schoolyear = Schoolyear::create([
+            'tblSchoolYrYear' => $schyr,
+            'tblSchoolYrStart' => $yr,
+            'tblSchoolYr_tblCurriculumId' => $request->selUpdSyCurr,
+        ]);
+
+        $message = $schoolyear ? 2 : 1;
+        return redirect()->route('schoolyear.index')->with('message', $message);
     }
 
     /**
@@ -61,9 +70,10 @@ class SchoolyearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $schoolyear = Schoolyear::where('tblSchoolYrId',$request->id)->get();
+        return response()->json($schoolyear);
     }
 
     /**
@@ -73,9 +83,16 @@ class SchoolyearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $schoolyear = Schoolyear::findOrFail($request->txtUpdSyId);
+        $message = $schoolyear->update([
+            'tblSchoolYrStart' => $request->txtUpdSyYear,
+            'tblSchoolYrYear' => 'S.Y. '.$request->txtUpdSyYear.'-'.($request->txtUpdSyYear + 1),
+            // 'tblSchoolYrActive' => ,
+        ]) ? 4 : 3;
+        
+        return redirect()->route('schoolyear.index')->with('message', $message);
     }
 
     /**
@@ -84,8 +101,13 @@ class SchoolyearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $schoolyear = Schoolyear::findOrFail($request->txtDelSyId);
+        // if($schoolyear->schoolyears->where('tblSchoolYrActive','ACTIVE')->count() > 0 || $schoolyear->curriculum_details->count() > 0){
+        //     return redirect()->route('schoolyear.index')->with('message', 7);
+        // }
+        $message = $schoolyear->update(['tblSchoolYearFlag' => 0]) ? 6 : 5;
+        return redirect()->route('schoolyear.index');
     }
 }

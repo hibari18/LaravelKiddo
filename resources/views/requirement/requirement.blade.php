@@ -1,6 +1,3 @@
-@extends('master')
-
-@section('content')
 <!-- Main content -->
     <section class="content" style="margin-top: 4%">
       <div class="row">
@@ -154,4 +151,3 @@
           </div> <!-- row -->
     </section>
     <!-- /.content -->
-@endsection
