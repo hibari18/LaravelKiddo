@@ -98,6 +98,6 @@ class RequirementController extends Controller
         $requirement = Requirement::findOrFail($request->txtDelReqId);
        
         $message = $requirement->update(['tblRequirementFlag' => 0]) ? 6 : 5;
-        return redirect()->route('requirement.index');
+        return redirect()->route('requirement.index')->with('message', $message);
     }
 }
