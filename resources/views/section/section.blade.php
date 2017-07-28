@@ -189,7 +189,7 @@
                 <td style="width:100px;">{{ $section->tblLevelName }}</td>
                 <td style="width:100px;">{{ $section->tblSectionName }}</td>
                 <td style="width:100px;">{{ $section->tblSectionSession }}</td>
-                <td style="width:50px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
+                <td style="width:50px;"><button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
                 </tr>
                 @endforeach

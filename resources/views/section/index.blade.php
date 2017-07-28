@@ -27,7 +27,7 @@ function run(){
     var f6=document.getElementById('updSectName');
     var f7=document.getElementById('txtDelSectId');
     var f8=document.getElementById('updSesSelect');
-    var f9=document.getElementById('updSectName2');
+    //var f9=document.getElementById('updSectName2');
     f1.value=cells[0].innerHTML;
     f2.value=cells[1].innerHTML;
     f3.value=cells[2].innerHTML;
@@ -36,9 +36,19 @@ function run(){
     f6.value=cells[5].innerHTML;
     f7.value=cells[2].innerHTML;
     f8.value=cells[6].innerHTML;
-    f9.value=cells[5].innerHTML;
+    //f9.value=cells[5].innerHTML;
   };
 }})();
+        $(document).on('click', '.edit', function(){
+            var divID = $(this).parent().siblings()[0].innerHTML; // yung hidden division id element 
+            $.ajax({
+                type: 'get',
+                url: '/section1/'+divID,
+                success : function(data){
+                    $('#updLvlName').text('').append(data);
+                }
+            });
+        });
   </script>
 </head>
 <body class="hold-transition skin-green-light sidebar-mini">
@@ -113,7 +123,7 @@ function run(){
   {
     document.getElementById('updLvlName').disabled = false;
     var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","section/"+document.getElementById("updDivSelect").value,false);
+    xmlhttp.open("GET","section/"+$("#updDivSelect").val(),false);
     xmlhttp.send(null);
     
     document.getElementById("updLvlName").innerHTML=xmlhttp.responseText;
