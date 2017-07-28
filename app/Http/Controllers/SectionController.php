@@ -109,7 +109,7 @@ class SectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $section = Section::findOrFail($request->updLvlName);
+        $section = Section::findOrFail($request->updSectId);
         $lvlId = Level::where('tblLevelName', $request->updLvlName)->first()->tblLevelId;
         $message = $section->update([
             'tblSection_tblLevelId' => $lvlId,
