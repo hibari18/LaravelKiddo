@@ -33,6 +33,7 @@ Route::get('/getSchoolYear', 'SchoolyearController@edit');
 Route::resource('grading', 'GradingController');
 
 Route::resource('section', 'SectionController');
+Route::get('section1/{id}', 'SectionController@show1');
 
 Route::resource('requirement', 'RequirementController');
 

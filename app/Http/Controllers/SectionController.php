@@ -69,6 +69,19 @@ class SectionController extends Controller
         return view('section.select.level', compact('levels'));
     }
 
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show1($id)
+    {
+       $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
+        
+        return view('section.select.level2', compact('levels'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
