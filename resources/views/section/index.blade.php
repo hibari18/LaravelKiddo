@@ -113,10 +113,10 @@ function run(){
   {
     document.getElementById('addLvlSelect').disabled = false;
     var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","section/"+document.getElementById("addDivSelect").value,false);
+    xmlhttp.open("GET","/section/"+document.getElementById("addDivSelect").value,false);
     xmlhttp.send(null);
     
-    document.getElementById("addLvlSelect").innerHTML=xmlhttp.responseText;
+    document.getElementById("addLvlSelect").innerHTML = xmlhttp.responseText; 
 
   }
   function changeDivUpd()
