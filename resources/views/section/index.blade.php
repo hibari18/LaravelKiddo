@@ -55,7 +55,7 @@ function run(){
 <body class="hold-transition skin-green-light sidebar-mini">
 
 <?php
-    $message = isset($_GET['message'])?intval($_GET['message']):0;
+   $message = session('message');
     
     if($message == 1) {
       echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";

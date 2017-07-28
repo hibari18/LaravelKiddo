@@ -126,8 +126,11 @@ class SectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $section = Section::findOrFail($request->txtDelSectId);
+       
+        $message = $section->update(['tblSectionFlag' => 0]) ? 6 : 5;
+        return redirect()->route('section.index')->with('message', $message);
     }
 }
