@@ -80,7 +80,7 @@ class SectionController extends Controller
      */
     public function show1($divId, $lvlId)
     {
-        $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
+        $levels = Level::where('tblLevel_tblDivisionId', $divId)->where('tblLevelFlag', 1)->get();
         foreach($levels as $level){
             $selected = $lvlId == $level->tblLevelId ? 'selected':'';
             echo '<option '.$selected.' value="'.$level->tblLevelName.'">'.$level->tblLevelName.'</option>';
