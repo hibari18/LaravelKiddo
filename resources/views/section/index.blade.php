@@ -40,10 +40,11 @@ function run(){
   };
 }})();
         $(document).on('click', '.edit', function(){
-            var divID = $(this).parent().siblings()[0].innerHTML; // yung hidden division id element 
+            var divID = $(this).parent().siblings()[0].innerHTML; 
+            var lvlID = $('#updLvlId').val(); 
             $.ajax({
                 type: 'get',
-                url: '/section1/'+divID,
+                url: '/section1/'+divID+'/'+lvlID,
                 success : function(data){
                     $('#updLvlName').text('').append(data);
                 }

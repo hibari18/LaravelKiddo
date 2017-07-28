@@ -64,9 +64,12 @@ class SectionController extends Controller
      */
     public function show($id)
     {
-       $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
-        
-        return view('section.select.level', compact('levels'));
+        $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
+        echo '<option selected value="0">--Select Level--</option>';
+        foreach($levels as $level){
+            echo '<option value="'.$level->tblLevelId.'">'.$level->tblLevelName.'</option>';
+        }
+        return;
     }
 
      /**
@@ -75,11 +78,14 @@ class SectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show1($id)
+    public function show1($divId, $lvlId)
     {
-       $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
-        
-        return view('section.select.level2', compact('levels'));
+        $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
+        foreach($levels as $level){
+            $selected = $lvlId == $level->tblLevelId ? 'selected':'';
+            echo '<option '.$selected.' value="'.$level->tblLevelName.'">'.$level->tblLevelName.'</option>';
+        }
+        return;
     }
 
     /**
