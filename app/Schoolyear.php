@@ -16,7 +16,7 @@ class Schoolyear extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 
-	//public $incrementing = false; 
+	
 	
 	public function curriculum()
 	{

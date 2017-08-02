@@ -38,5 +38,4 @@ Route::resource('requirement', 'RequirementController');
 
 //Route::resource('payment', 'PaymentController');
 
-
 Route::get('/getSchoolYear', 'SchoolyearController@edit');

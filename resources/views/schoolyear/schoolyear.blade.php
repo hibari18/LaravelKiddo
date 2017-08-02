@@ -32,7 +32,7 @@
                               <div class="form-group" style="margin-top: 20%">
                                 <label class="col-sm-4" style="text-align: right">Curriculum</label>
                                 <div class="col-sm-7 selectContainer">
-                                  <select class="form-control choose" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
+                                  <select class="form-control" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
                                     <option selected="selected">--SELECT CURRICULUM--</option>
                                       @foreach($curriculums as $curriculum)
                                         <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
@@ -123,7 +123,7 @@
                               <div class="form-group" style="margin-top: 20%">
                                 <label class="col-sm-4" style="text-align: right">Curriculum</label>
                                 <div class="col-sm-7 selectContainer">
-                                  <select class="form-control choose" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
+                                  <select class="form-control" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
                                     <option selected="selected">--SELECT CURRICULUM--</option>
                                       @foreach($curriculums as $curriculum)
                                         <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
@@ -135,7 +135,7 @@
                               <div class="form-group" style="margin-top: 30%">
                                 <label class="col-sm-4" style="text-align: right">Status</label>
                                 <div class="popup col-sm-7 selectContainer">
-                                  <select class="form-control choose" style="width: 100%;" name="selUpdSyAct" id="selUpdSyAct" onmouseover="fn1()">
+                                  <select class="form-control" style="width: 100%;" name="selUpdSyAct" id="selUpdSyAct" onmouseover="fn1()">
                                     <option value="selected" selected>--Select--</option>
                                     @foreach($schoolyears as $schoolyear)
                                       <option value="{{ $schoolyear->tblSchoolYrActive}}">{{ $schoolyear->tblSchoolYrActive}}</option>

@@ -24,6 +24,10 @@ $(document).ready(function(){
     });
   });
 
+  $('#datatable .delete').click(function(){
+    $('#txtDelSyId').val($(this).data('id'));
+  });
+
 
 });
 
@@ -158,6 +162,41 @@ $(document).ready(function(){
     </section>
     <!-- /.content -->
 
+
+    <?php
+  if(session('message')){
+    echo "<script>";
+    $message= session('message');
+      if($message == 1) {
+        echo "swal('Data insertion failed!', ' ', 'error'); ";
+      }
+      if($message == 2) {
+        echo "swal('Added succesfully!', ' ', 'success'); ";
+      }
+      if($message == 3) {
+        echo "swal('Data update failed!', ' ', 'error'); ";
+      }
+      if($message == 4) {
+        echo "swal('Updated succesfully!', ' ', 'success'); ";
+      }
+      if($message == 5) {
+        echo "swal('Data deletion failed!', ' ', 'error'); ";
+      }
+      if($message == 6) {
+        echo "swal('Deleted succesfully!', ' ', 'success'); ";
+      }
+      if($message == 7) {
+        echo "swal('Deletion Failed. Curriculum is in use', ' ', 'error'); ";
+      }
+      if($message == 8) {
+        echo "swal('Deletion Failed. Level is in use', ' ', 'error'); ";
+      }
+      if($message == 9) {
+        echo "swal('Deletion Failed. Subject is in use', ' ', 'error'); ";
+      }
+    echo '</script>';
+  }
+?>
      <script>
           $(document).ready(function() {
             $('#addSchoolYr').bootstrapValidator({

@@ -104,10 +104,8 @@ class SchoolyearController extends Controller
     public function destroy(Request $request, $id)
     {
         $schoolyear = Schoolyear::findOrFail($request->txtDelSyId);
-        // if($schoolyear->schoolyears->where('tblSchoolYrActive','ACTIVE')->count() > 0 || $schoolyear->curriculum_details->count() > 0){
-        //     return redirect()->route('schoolyear.index')->with('message', 7);
-        // }
+        
         $message = $schoolyear->update(['tblSchoolYearFlag' => 0]) ? 6 : 5;
-        return redirect()->route('schoolyear.index');
+        return redirect()->route('schoolyear.index')->with('message', $message);
     }
 }
