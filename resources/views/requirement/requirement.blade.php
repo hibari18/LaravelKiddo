@@ -26,7 +26,7 @@
                               <h3 class="modal-title" style="font-style: bold">Add Requirement</h3>
                             </div>
 
-                            <form data-toggle="validator" role="form" action="{{ route('requirement.store') }}" method="post" name="addReq" id="addReq">
+                            <form data-toggle="validator" autocomplete="off" role="form" action="{{ route('requirement.store') }}" method="post" name="addReq" id="addReq">
                             {{ csrf_field() }}
                               <div class="modal-body">
                                 <div class="form-group" style="margin-top: 5%">
@@ -60,7 +60,7 @@
                               <h3 class="modal-title" style="font-style: bold">Update Requirement</h3>
                             </div>
 
-                            <form data-toggle="validation" role="form" action="{{ route('requirement.update','id') }}" method="post" name="UpdReq" id="UpdReq">
+                            <form data-toggle="validation" autocomplete="off" role="form" action="{{ route('requirement.update','id') }}" method="post" name="UpdReq" id="UpdReq">
                              {{ method_field('PUT') }}
                              {{ csrf_field() }}
                               <div class="modal-body">

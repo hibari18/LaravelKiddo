@@ -39,7 +39,7 @@
                 <div><input type="hidden" name="txtAddDetCurr" id="txtAddDetCurr" /></div>
                 <label class="col-sm-4" style="text-align: right">Division</label>
                 <div class="col-sm-7 selectContainer">
-                  <select class="form-control choose" style="width: 100%;" name="selAddDetDiv" id="selAddDetDiv" onchange="changeDiv();">
+                  <select class="form-control" style="width: 100%;" name="selAddDetDiv" id="selAddDetDiv" onchange="changeDiv();">
                   <option disabled="disabled" selected="selected">--SELECT DIVISION--</option>
                   @foreach($divisions as $division)
                         <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName}}</option>
@@ -47,34 +47,23 @@
                 </select>
                 </div>
               </div>
-              <div class="form-group" style="margin-top: 15%">
-                <label class="col-sm-4" style="text-align: right">Level</label>
-                <div class="col-sm-7 selectContainer">
-                  <select class="form-control choose" style="width: 100%;" name="selAddDetLvl" id="selAddDetLvl" disabled>
-                  <option disabled="disabled" selected="selected">--SELECT LEVEL--</option>
-                  @foreach($levels as $level)
-                        <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
-                        @endforeach
-                </select>
-                </div>
-              </div>
+             
+             @include('curriculum.select.leveladd')
+
               <div class="form-group" style="margin-top: 25%">
                 <label class="col-sm-4" style="text-align: right">Subject Code</label>
                 <div class="col-sm-7 selectContainer">
-                  <select class="required form-control choose" style="width: 100%;" name="selAddDetSubj" id="selAddDetSubj" onchange="passSubjName();">
+                  <select class="required form-control" style="width: 100%;" name="selAddDetSubj" id="selAddDetSubj" onchange="passSubjName();">
                   <option disabled="disabled" selected="selected">--SELECT SUBJECT CODE--</option>
-                  @foreach($subjects as $subject)
+                        @foreach($subjects as $subject)
                         <option value="{{ $subject->tblSubjectId}}">{{ $subject->tblSubjectId}}</option>
                         @endforeach
                 </select>
                 </div>
               </div>
-              <div class="form-group" style="margin-top: 35%">
-                <label class="col-sm-4" style="text-align: right">Subject Name</label>
-                <div class="col-sm-7 selectContainer">
-                  <input type="text" class="form-control" name="txtAddDetSubj" id="txtAddDetSubj" disabled/>
-                </div>
-              </div>
+              
+              @include('curriculum.select.subjname')
+
             </div>
             <div class="modal-footer" style="margin-top: 10%">
               <button type="submit" class="btn btn-info" name="btnAddDet" id="btnAddDet">Save</button>
@@ -106,7 +95,7 @@
                   <input type="hidden" name="txtUpdDetLvlId" id="txtUpdDetLvlId" /></div>
                 <label class="col-sm-4" style="text-align: right">Division</label>
                 <div class="col-sm-7" selectContainer>
-                  <select class="form-control choose" style="width: 100%;" name="selUpdDetDiv" id="selUpdDetDiv" onchange="changeUpdDiv();">
+                  <select class="form-control" style="width: 100%;" name="selUpdDetDiv" id="selUpdDetDiv" onchange="changeUpdDiv();">
                   <option selected="selected">--SELECT DIVISION--</option>
                    @foreach($divisions as $division)
                         <option value="{{ $division->tblDivisionName}}">{{ $division->tblDivisionName}}</option>
@@ -117,7 +106,7 @@
               <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Level</label>
                 <div class="col-sm-7 selectContainer">
-                  <select class="form-control choose" style="width: 100%;" name="selUpdDetLvl" id="selUpdDetLvl" disabled>
+                  <select class="form-control" style="width: 100%;" name="selUpdDetLvl" id="selUpdDetLvl" disabled>
                   <option selected="selected">--SELECT LEVEL--</option>
                   @foreach($levels as $level)
                         <option value="{{ $level->tblLevelName}}">{{ $level->tblLevelName}}</option>
@@ -128,7 +117,7 @@
               <div class="form-group" style="margin-top: 25%">
                 <label class="col-sm-4" style="text-align: right">Subject Code</label>
                 <div class="col-sm-7">
-                  <select class="form-control choose" style="width: 100%;" name="selUpdDetSubj" id="selUpdDetSubj" onchange="passSubjNameUpd();">
+                  <select class="form-control" style="width: 100%;" name="selUpdDetSubj" id="selUpdDetSubj" onchange="passSubjNameUpd();">
                   <option selected="selected">--SELECT SUBJECT CODE--</option>
                   @foreach($subjects as $subject)
                         <option value="{{ $subject->tblSubjectId}}">{{ $subject->tblSubjectId}}</option>

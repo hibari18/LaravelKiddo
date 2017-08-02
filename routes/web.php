@@ -25,10 +25,9 @@ Route::resource('division', 'DivisionController');
 Route::resource('level', 'LevelController');
 
 Route::resource('curriculumdetail', 'CurriculumDetailsController');
+Route::get('leveladd', 'CurriculumDetailsController@show2');
 
 Route::resource('schoolyear', 'SchoolyearController');
-
-Route::get('/getSchoolYear', 'SchoolyearController@edit');
 
 Route::resource('grading', 'GradingController');
 
@@ -39,3 +38,5 @@ Route::resource('requirement', 'RequirementController');
 
 //Route::resource('payment', 'PaymentController');
 
+
+Route::get('/getSchoolYear', 'SchoolyearController@edit');

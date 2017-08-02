@@ -278,8 +278,9 @@ $(document).ready(function(){
     {
       document.getElementById('selAddDetLvl').disabled = false;
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","changeDivCurriculumDetail.php?selAddDetDiv="+document.getElementById("selAddDetDiv").value,false);
+      xmlhttp.open("GET","curriculumdetail/"+document.getElementById("selAddDetDiv").value,false);
       xmlhttp.send(null);
+      
       document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
     }
     function changeUpdDiv()

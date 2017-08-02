@@ -78,7 +78,7 @@ class SectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show1($divId, $lvlId)
+    public function show1($id)
     {
         $levels = Level::where('tblLevel_tblDivisionId', $divId)->where('tblLevelFlag', 1)->get();
         foreach($levels as $level){
