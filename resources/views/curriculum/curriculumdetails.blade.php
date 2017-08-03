@@ -6,11 +6,11 @@
     <div class="form-inline">
       <div class="container">
         <form method="get">
-          <label>View by Curriculum: </label>
+          <label>View by Division: </label>
           <select class="form-control" style="width: 30%" name="selCurrName" id="selCurrName" onchange="showDetail(); ">
-                        <option selected>--Select Here--</option>
-                        @foreach($curriculums as $curriculum)
-                        <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
+                        <option selected disabled>--Select Here--</option>
+                        @foreach($divisions as $division)
+                        <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName}}</option>
                         @endforeach
                       </select>
           <div id="detail"></div>

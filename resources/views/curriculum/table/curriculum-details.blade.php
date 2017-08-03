@@ -1,7 +1,6 @@
 
     <thead>
         <tr>
-            <th hidden>Curriculum Id</th>
             <th hidden>Detail Id</th>
             <th hidden>Division Id</th>
             <th hidden>Level Id</th>
@@ -15,7 +14,6 @@
     <tbody>
     @foreach($details as $detail)
         <tr>
-            <td hidden>{{ $detail->curriculum->tblCurriculumId}}</td>
             <td hidden>{{ $detail->tblCurriculumDetailId}}</td>
             <td hidden>{{ $detail->division->tblDivisionId}}</td>
             <td hidden>{{ $detail->level->tblLevelId}}</td>

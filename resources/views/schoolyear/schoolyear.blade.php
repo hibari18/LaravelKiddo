@@ -1,12 +1,19 @@
+<div class="box box-default">
+              <div class="box-header with-border"></div>
+                <div class="box-body">
 
-<div class="box">
-                      <div class="box-header"></div>
+                  <div class="box-header with-border">
+                    <h2 class="box-title" style="font-size:20px;">School Year</h2>
+                      <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
+                  </div>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+        <div class="box">
+                        <div class="box-header"></div>
                         <div class="box-body">
-                          
-
-                          <div class="btn-group" style="margin-bottom: 3%">
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
-                          </div>
+                          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
+                        </div>
+                      </div>
 
 
 
@@ -79,9 +86,9 @@
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrYear}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblCurriculumName}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrActive}}</td>
-                                <td style="width: 50px"><input type='button' class='btn   btn-info' value='View Curriculum'>
+                                <td style="width: 50px"><input type='button' class='btn   btn-info' value='View Grading'>
                                 <button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#updateModalOne" data-id="{{ $schoolyear->tblSchoolYrId}}"><i class="fa fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
+                                <button type="button" class="btn btn-danger delete" data-toggle="modal" data-target="#deleteModalOne" data-id="{{ $schoolyear->tblSchoolYrId}}"><i class="fa fa-trash"></i></button></td>
                               </tr>
                                 @endforeach
                             </tbody>

@@ -1,6 +1,40 @@
 @extends('master')
 
 @section('content')
+<?php
+  if(session('message')){
+    echo "<script>";
+    $message= session('message');
+      if($message == 1) {
+        echo "swal('Data insertion failed!', ' ', 'error'); ";
+      }
+      if($message == 2) {
+        echo "swal('Added succesfully!', ' ', 'success'); ";
+      }
+      if($message == 3) {
+        echo "swal('Data update failed!', ' ', 'error'); ";
+      }
+      if($message == 4) {
+        echo "swal('Updated succesfully!', ' ', 'success'); ";
+      }
+      if($message == 5) {
+        echo "swal('Data deletion failed!', ' ', 'error'); ";
+      }
+      if($message == 6) {
+        echo "swal('Deleted succesfully!', ' ', 'success'); ";
+      }
+      if($message == 7) {
+        echo "swal('Deletion Failed. Curriculum is in use', ' ', 'error'); ";
+      }
+      if($message == 8) {
+        echo "swal('Deletion Failed. Level is in use', ' ', 'error'); ";
+      }
+      if($message == 9) {
+        echo "swal('Deletion Failed. Subject is in use', ' ', 'error'); ";
+      }
+    echo '</script>';
+  }
+?>
 <script>
 $(document).ready(function(){
 
@@ -27,8 +61,6 @@ $(document).ready(function(){
   $('#datatable .delete').click(function(){
     $('#txtDelSyId').val($(this).data('id'));
   });
-
-
 });
 
   function fn1()
@@ -123,38 +155,9 @@ $(document).ready(function(){
     <section class="content" style="margin-top: 3%">
     <div class="row">
         <div class="col-md-12">
-          <div class="box box-default">
-            <div class="box-header with-border">
-            </div>
-            <!-- /.box-header -->
-        <div class="box-body">
-
-        <div class="nav-tabs-custom">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs" id="myTab">
-              <li class="active"><a href="#tab_1" data-toggle="tab">School Year</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Grading</a></li>
-            </ul>
-            <div class="tab-content">
           
-
-          <div class="tab-pane fade in active" id="tab_1">
                 @include('schoolyear.schoolyear')
-          </div>
-          <!-- /.tab-pane -->
-
-          <div class="tab-pane fade" id="tab_2">
-                      @include('schoolyear.grading')
-          </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- nav-tabs-custom -->
-          </div>
-          <!-- box body -->
-         </div>
-         <!-- box box-default -->
+          
         </div>
         <!-- col-md-12 -->
       </div>
@@ -162,41 +165,6 @@ $(document).ready(function(){
     </section>
     <!-- /.content -->
 
-
-    <?php
-  if(session('message')){
-    echo "<script>";
-    $message= session('message');
-      if($message == 1) {
-        echo "swal('Data insertion failed!', ' ', 'error'); ";
-      }
-      if($message == 2) {
-        echo "swal('Added succesfully!', ' ', 'success'); ";
-      }
-      if($message == 3) {
-        echo "swal('Data update failed!', ' ', 'error'); ";
-      }
-      if($message == 4) {
-        echo "swal('Updated succesfully!', ' ', 'success'); ";
-      }
-      if($message == 5) {
-        echo "swal('Data deletion failed!', ' ', 'error'); ";
-      }
-      if($message == 6) {
-        echo "swal('Deleted succesfully!', ' ', 'success'); ";
-      }
-      if($message == 7) {
-        echo "swal('Deletion Failed. Curriculum is in use', ' ', 'error'); ";
-      }
-      if($message == 8) {
-        echo "swal('Deletion Failed. Level is in use', ' ', 'error'); ";
-      }
-      if($message == 9) {
-        echo "swal('Deletion Failed. Subject is in use', ' ', 'error'); ";
-      }
-    echo '</script>';
-  }
-?>
      <script>
           $(document).ready(function() {
             $('#addSchoolYr').bootstrapValidator({

@@ -36,7 +36,7 @@
               
         </div>
         </div>
-        <div class="modal-footer" style="margin-top: 25%">
+        <div class="modal-footer" style="margin-top: 15%">
         <button type="submit" class="btn btn-info" name="btnUpdDiv" id="btnUpdDiv">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
@@ -45,7 +45,7 @@
       
     </div>
   </div>
-              <table id="datatable2" class="table table-bordered table-striped">
+              <table id="datatable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th hidden></th>

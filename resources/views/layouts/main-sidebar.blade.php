@@ -42,7 +42,7 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="curriculum"><i class="fa fa-circle-o"></i>Curriculum</a></li>
+                <li><a href="division"><i class="fa fa-circle-o"></i>Subjects</a></li>
                 <li><a href="schoolyear"><i class="fa fa-circle-o"></i>School Year</a></li>
                 <li><a href="section"><i class="fa fa-circle-o"></i>Section</a></li>
                 <li><a href="requirement"><i class="fa fa-circle-o"></i>Requirement</a></li>

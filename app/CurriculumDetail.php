@@ -17,10 +17,6 @@ class CurriculumDetail extends Model
 	public $timestamps = false;
 	public $incrementing = false; 
 	
-
-	public function curriculum(){
-		return $this->belongsTo('App\Curriculum', 'tblCurriculumDetail_tblCurriculumId', 'tblCurriculumId');
-	}
 	public function division(){
 		return $this->belongsTo('App\Division', 'tblCurriculumDetail_tblDivisionId', 'tblDivisionId');
 	}

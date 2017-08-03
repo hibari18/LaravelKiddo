@@ -16,13 +16,13 @@ Route::get('advisorylist', 'AdminController@advisorylist');
 
 Route::get('studentlist', 'AdminController@studentlist');
 
-Route::resource('curriculum', 'CurriculumController');
-
-Route::resource('subject', 'SubjectController');
+//Route::resource('curriculum', 'CurriculumController');
 
 Route::resource('division', 'DivisionController');
 
 Route::resource('level', 'LevelController');
+
+Route::resource('subject', 'SubjectController');
 
 Route::resource('curriculumdetail', 'CurriculumDetailsController');
 Route::get('leveladd', 'CurriculumDetailsController@show2');

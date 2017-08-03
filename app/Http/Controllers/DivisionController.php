@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Division;
+use App\Level;
+use App\Subject;
+use App\CurriculumDetail;
 
 class DivisionController extends Controller
 {
@@ -14,7 +17,13 @@ class DivisionController extends Controller
      */
     public function index()
     {
-        //
+        $levels = Level::where('tbllevel.tblLevelFlag', 1)->leftjoin('tbldivision','tbldivision.tblDivisionId','=','tbllevel.tblLevel_tblDivisionId')->get();
+        $divisions = Division::where('tblDivisionFlag', 1)->get();
+        $subjects = Subject::where('tblSubjectFlag', 1)->get();
+        $details = CurriculumDetail::where('tblCurriculumFlag', 1)->get();
+
+
+        return view('curriculum.index', compact('curriculums','subjects','levels','divisions','details'));
     }
 
     /**
