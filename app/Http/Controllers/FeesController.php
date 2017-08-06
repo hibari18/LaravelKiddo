@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Fees;
 use App\SchemeType;
-use App\Schedule'
+use App\Schedule;
 use App\FeeDetails;
 
 class FeesController extends Controller
@@ -17,12 +17,12 @@ class FeesController extends Controller
      */
     public function index()
     {
-        $fees = Fees::where('tblCurriculumFlag', 1)->get();
-        $schemetype = SchemeType::where('tblCurriculumFlag', 1)->get();
-        $schedule = Schedule::where('tblCurriculumFlag', 1)->get();
-        $feedetails = FeeDetails::where('tblCurriculumFlag', 1)->get();
+        $fees = Fees::where('tblFeeFlag', 1)->get();
+        $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
+        $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
+        $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
 
-        return view('payment.index', compact('fees','schemetype','schedule','feedetails',));
+        return view('payment.index', compact('fees','schemetypes','schedules','feedetails'));
     }
 
     /**
@@ -90,4 +90,6 @@ class FeesController extends Controller
     {
         //
     }
+}
+   }
 }
