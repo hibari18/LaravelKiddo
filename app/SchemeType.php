@@ -11,7 +11,7 @@ class SchemeType extends Model
   	protected $guarded = []; 
 	 
 	protected $primaryKey = 'tblSchemeId'; 
-	protected $table = 'tblScheme'; 
+	protected $table = 'tblscheme'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 

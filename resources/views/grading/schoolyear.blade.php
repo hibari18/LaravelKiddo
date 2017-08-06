@@ -36,17 +36,6 @@
                                   </div>
                               </div>
 
-                              <div class="form-group" style="margin-top: 20%">
-                                <label class="col-sm-4" style="text-align: right">Curriculum</label>
-                                <div class="col-sm-7 selectContainer">
-                                  <select class="form-control" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
-                                    <option selected="selected">--SELECT CURRICULUM--</option>
-                                      @foreach($curriculums as $curriculum)
-                                        <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
-                                      @endforeach
-                                  </select>
-                                </div>
-                              </div>
                           </div> <!-- modal body update modal -->
 
                             <div class="modal-footer" style="margin-top: 10%">
@@ -68,10 +57,8 @@
                              
                               <tr>
                                 <th hidden></th>
-                                <th hidden>Curriculum Id</th>
                                 <th>Start of Year</th>
                                 <th>School Year</th>
-                                <th>Curriculum Name</th>
                                 <th>Status</th>
                                 <th>Action</th>
                               </tr>
@@ -81,14 +68,13 @@
                               @foreach($schoolyears as $schoolyear)
                               <tr>
                                 <td hidden></td>
-                                <td hidden>{{ $schoolyear->tblSchoolYr_tblCurriculum}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrStart}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrYear}}</td>
-                                <td style="width: 100px">{{ $schoolyear->tblCurriculumName}}</td>
                                 <td style="width: 100px">{{ $schoolyear->tblSchoolYrActive}}</td>
-                                <td style="width: 50px"><input type='button' class='btn   btn-info' value='View Grading'>
+                                <td style="width: 50px"><a href="grading" class="btn btn-info">View Grading</a>
                                 <button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#updateModalOne" data-id="{{ $schoolyear->tblSchoolYrId}}"><i class="fa fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger delete" data-toggle="modal" data-target="#deleteModalOne" data-id="{{ $schoolyear->tblSchoolYrId}}"><i class="fa fa-trash"></i></button></td>
+                                <button type="button" class="btn btn-danger delete" data-toggle="modal" data-target="#deleteModalOne" data-id="{{ $schoolyear->tblSchoolYrId}}"><i class="fa fa-trash"></i></button>
+                                </td>
                               </tr>
                                 @endforeach
                             </tbody>
@@ -128,27 +114,13 @@
                               </div>
 
                               <div class="form-group" style="margin-top: 20%">
-                                <label class="col-sm-4" style="text-align: right">Curriculum</label>
-                                <div class="col-sm-7 selectContainer">
-                                  <select class="form-control" style="width: 100%;" name="selUpdSyCurr" id="selUpdSyCurr">
-                                    <option selected="selected">--SELECT CURRICULUM--</option>
-                                      @foreach($curriculums as $curriculum)
-                                        <option value="{{ $curriculum->tblCurriculumId}}">{{ $curriculum->tblCurriculumName}}</option>
-                                      @endforeach
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div class="form-group" style="margin-top: 30%">
                                 <label class="col-sm-4" style="text-align: right">Status</label>
                                 <div class="popup col-sm-7 selectContainer">
                                   <select class="form-control" style="width: 100%;" name="selUpdSyAct" id="selUpdSyAct" onmouseover="fn1()">
-                                    <option value="selected" selected>--Select--</option>
-                                    @foreach($schoolyears as $schoolyear)
-                                      <option value="{{ $schoolyear->tblSchoolYrActive}}">{{ $schoolyear->tblSchoolYrActive}}</option>
-                                     @endforeach
+                                    <option selected="selected" disabled="disabled">--Select Status--</option>
+                                        <option>ACTIVE</option>
+                                        <option>INACTIVE</option>
                                   </select>
-                                  <span class="popuptext" id="pop">There are no active school year</span>
                                 </div>
                               </div>
                           </div> <!-- modal body update modal -->

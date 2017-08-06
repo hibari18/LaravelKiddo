@@ -42,12 +42,11 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="division"><i class="fa fa-circle-o"></i>Subjects</a></li>
-                <li><a href="schoolyear"><i class="fa fa-circle-o"></i>School Year</a></li>
+                <li><a href="division"><i class="fa fa-circle-o"></i>Level</a></li>
+                <li><a href="grading"><i class="fa fa-circle-o"></i>Grading Period</a></li>
                 <li><a href="section"><i class="fa fa-circle-o"></i>Section</a></li>
                 <li><a href="requirement"><i class="fa fa-circle-o"></i>Requirement</a></li>
                 <li><a href="payment"><i class="fa fa-circle-o"></i>Payment</a></li>
-                <li><a href="profile"><i class="fa fa-circle-o"></i>Profile</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -58,10 +57,13 @@
                 </span>
               </a>
               <ul class="treeview-menu">
+                <li><a href="admission"><i class="fa fa-circle-o"></i>Admission</a></li>
+                <li><a href="enrollment"><i class="fa fa-circle-o"></i>Enrollment</a></li>
                 <li><a href="sectioning"><i class="fa fa-circle-o"></i>Sectioning</a></li>
                 <li><a href="diswith"><i class="fa fa-circle-o"></i>Dismissal/ Withdrawal</a></li>
                 <li><a href="billing"><i class="fa fa-circle-o"></i>Billing</a></li>
                 <li><a href="adminaccount"><i class="fa fa-circle-o"></i>Accounts</a></li>
+                <li><a href="profile"><i class="fa fa-circle-o"></i>Profile</a></li>
                 <li><a href="advisorylist"><i class="fa fa-circle-o"></i>Grades</a></li>
               </ul>
             </li>

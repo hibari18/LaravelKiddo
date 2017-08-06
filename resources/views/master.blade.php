@@ -109,6 +109,7 @@
     $("#datatable2").DataTable();
     $("#datatable3").DataTable();
     $("#tblReq").DataTable();
+    $("#tblGrading").DataTable();
   });
 </script>
     <!-- InputMask -->

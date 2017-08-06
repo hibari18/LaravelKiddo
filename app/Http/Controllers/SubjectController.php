@@ -45,7 +45,7 @@ class SubjectController extends Controller
 
         $message = $subject ? 2 : 1;
         
-        return redirect()->route('curriculum.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);
     }
 
     /**
@@ -85,7 +85,7 @@ class SubjectController extends Controller
             'tblSubjActive' => trim($request->selUpdSubjAct),
         ]) ? 4 : 3;
         
-        return redirect()->route('curriculum.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);
     }
 
     /**
@@ -98,9 +98,9 @@ class SubjectController extends Controller
     {
         $subject = Subject::findOrFail($request->txtDelSubjId);
         if($subject->curriculum_details->count() > 0){
-            return redirect()->route('curriculum.index')->with('message', 9);
+            return redirect()->route('division.index')->with('message', 9);
         }
         $message = $subject->update(['tblSubjectFlag' => 0]) ? 6 : 5;
-        return redirect()->route('curriculum.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);
     }
 }

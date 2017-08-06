@@ -1,10 +1,9 @@
 
     <thead>
         <tr>
-            <th hidden>Detail Id</th>
             <th hidden>Division Id</th>
+            <th hidden>Detail Id</th>
             <th hidden>Level Id</th>
-            <th>Division</th>
             <th>Level</th>
             <th>Subject Code</th>
             <th>Subject Name</th>
@@ -14,10 +13,9 @@
     <tbody>
     @foreach($details as $detail)
         <tr>
+            <td hidden>{{ $detail->tblDivisionId}}</td>
             <td hidden>{{ $detail->tblCurriculumDetailId}}</td>
-            <td hidden>{{ $detail->division->tblDivisionId}}</td>
             <td hidden>{{ $detail->level->tblLevelId}}</td>
-            <td>{{ $detail->division->tblDivisionName}}</td>
             <td>{{ $detail->level->tblLevelName}}</td>
             <td>{{ $detail->subject->tblSubjectId}}</td>
             <td>{{ $detail->subject->tblSubjectDesc}}]</td>

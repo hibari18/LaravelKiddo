@@ -37,33 +37,33 @@
 ?>
 
 <script>
-    (function(){
-  if(window.addEventListener){
-    window.addEventListener('load',run,false);
-  }else if(window.attachEvent){
-    window.attachEvent('onload',run);
-  }
-function run(){
-  var t=document.getElementById('datatable');
-  t.onclick=function(event){
-    event=event || window.event;
-    var target=event.target||event.srcElement;
-    while (target&&target.nodeName!='TR'){
-      target=target.parentElement;
-    }
-    var cells=target.cells;
+//     (function(){
+//   if(window.addEventListener){
+//     window.addEventListener('load',run,false);
+//   }else if(window.attachEvent){
+//     window.attachEvent('onload',run);
+//   }
+// function run(){
+//   var t=document.getElementById('datatable');
+//   t.onclick=function(event){
+//     event=event || window.event;
+//     var target=event.target||event.srcElement;
+//     while (target&&target.nodeName!='TR'){
+//       target=target.parentElement;
+//     }
+//     var cells=target.cells;
     
-    if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
-    var f1=document.getElementById('txtUpdCurrId');
-    var f2=document.getElementById('txtUpdCurr');
-    var f3=document.getElementById('selUpdActive');
-    var f4=document.getElementById('txtDelCurrId');
-    f1.value=cells[0].innerHTML;
-    f2.value=cells[1].innerHTML;
-    f3.value=cells[2].innerHTML;
-    f4.value=cells[0].innerHTML;
-  };
-}})();
+//     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
+//     var f1=document.getElementById('txtUpdCurrId');
+//     var f2=document.getElementById('txtUpdCurr');
+//     var f3=document.getElementById('selUpdActive');
+//     var f4=document.getElementById('txtDelCurrId');
+//     f1.value=cells[0].innerHTML;
+//     f2.value=cells[1].innerHTML;
+//     f3.value=cells[2].innerHTML;
+//     f4.value=cells[0].innerHTML;
+//   };
+// }})();
 (function(){
   if(window.addEventListener){
     window.addEventListener('load',run,false);
@@ -216,7 +216,7 @@ $(document).ready(function(){
             </ul>
             <div class="tab-content">
               
-          <div class="tab-pane fade" id="tab_1">
+          <div class="tab-pane fade in active" id="tab_1">
             @include('curriculum.division')
           </div>
           <!-- /.tab-pane -->
@@ -269,7 +269,7 @@ $(document).ready(function(){
     {
       document.getElementById('selAddDetLvl').disabled = false;
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","curriculumdetail/"+document.getElementById("selAddDetDiv").value,false);
+      xmlhttp.open("GET","leveladd/"+document.getElementById("selAddDetDiv").value,false);
       xmlhttp.send(null);
       
       document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
@@ -285,7 +285,7 @@ $(document).ready(function(){
   function passSubjName()
     {
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","passSubjName.php?selAddDetSubj="+document.getElementById("selAddDetSubj").value,false);
+      xmlhttp.open("GET","subjname/"+document.getElementById("selAddDetSubj").value,false);
       xmlhttp.send(null);
       document.getElementById("txtAddDetSubj").value=xmlhttp.responseText;
     }

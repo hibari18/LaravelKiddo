@@ -44,7 +44,7 @@ class LevelController extends Controller
 
         $message = $level ? 2 : 1;
         
-        return redirect()->route('curriculum.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);
     }
 
     /**
@@ -86,7 +86,7 @@ class LevelController extends Controller
             'tblLevelActive' => trim($request->selUpdLvlAct),
         ]) ? 4 : 3;
         
-        return redirect()->route('curriculum.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);
     }
 
     /**
@@ -112,6 +112,6 @@ class LevelController extends Controller
             return redirect()->route('curriculum.index')->with('message', 7);
         }
         $message = $level->update(['tblLevelFlag' => 0]) ? 6 : 5;
-        return redirect()->route('curriculum.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);
     }
 }

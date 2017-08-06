@@ -28,7 +28,7 @@
         <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Division</label>
                 <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" style="width: 100%;" name="selAddLvlDiv" id="selAddLvlDiv">
+                <select class="form-control" style="width: 100%;" name="selAddLvlDiv" id="selAddLvlDiv">
                 <option selected="selected">--Select Division--</option>
                         @foreach($divisions as $division)
                         <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName }}</option>
@@ -39,7 +39,7 @@
         <div class="form-group" style="margin-top: 25%">
                 <label class="col-sm-4" style="text-align: right">Status</label>
                 <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" style="width: 100%;" name="selAddLvlAct" id="selAddLvlAct">
+                <select class="form-control" style="width: 100%;" name="selAddLvlAct" id="selAddLvlAct">
                   <option selected="selected" disabled="disabled">--Select Status--</option>
                   <option>ACTIVE</option>
                   <option>INACTIVE</option>
@@ -89,7 +89,7 @@
         <div class="form-group" style="margin-top: 25%">
                 <label class="col-sm-4" style="text-align: right">Status</label>
                 <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" style="width: 100%;" name="selUpdLvlAct" id="selUpdLvlAct">
+                <select class="form-control" style="width: 100%;" name="selUpdLvlAct" id="selUpdLvlAct">
                   <option value="ACTIVE" selected="selected">ACTIVE</option>
                   <option value="INACTIVE">INACTIVE</option>
                 </select>

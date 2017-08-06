@@ -11,7 +11,7 @@ class Fees extends Model
   	protected $guarded = []; 
 	 
 	protected $primaryKey = 'tblFeeId'; 
-	protected $table = 'tblFee'; 
+	protected $table = 'tblfee'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 

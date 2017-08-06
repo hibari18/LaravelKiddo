@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Grading;
 
 class GradingController extends Controller
 {
@@ -13,7 +14,9 @@ class GradingController extends Controller
      */
     public function index()
     {
-        //
+        $gradings = Grading::where('tblGradingFlag', 1)->get();
+
+        return view('grading.index', compact('gradings'));
     }
 
     /**
@@ -68,7 +71,13 @@ class GradingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $gradings = Grading::findOrFail($request->updGradingId);
+        $message = $gradings->update([
+            'tblGradingStartDate' => trim($request->updStartDate),
+            'tblGradingEndDate' => trim($request->updEndDate),
+        ]) ? 4 : 3;
+        
+        return redirect()->route('grading.index')->with('message', $message);
     }
 
     /**

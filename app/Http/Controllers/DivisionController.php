@@ -20,10 +20,9 @@ class DivisionController extends Controller
         $levels = Level::where('tbllevel.tblLevelFlag', 1)->leftjoin('tbldivision','tbldivision.tblDivisionId','=','tbllevel.tblLevel_tblDivisionId')->get();
         $divisions = Division::where('tblDivisionFlag', 1)->get();
         $subjects = Subject::where('tblSubjectFlag', 1)->get();
-        $details = CurriculumDetail::where('tblCurriculumFlag', 1)->get();
+        $details = CurriculumDetail::where('tblDetailsFlag', 1)->get();
 
-
-        return view('curriculum.index', compact('curriculums','subjects','levels','divisions','details'));
+        return view('curriculum.index', compact('subjects','levels','divisions','details'));
     }
 
     /**
@@ -85,7 +84,7 @@ class DivisionController extends Controller
             'tblDivisionActive' => trim($request->selUpdDivAct),
         ]) ? 4 : 3;
         
-        return redirect()->route('curriculum.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);
     }
 
     /**

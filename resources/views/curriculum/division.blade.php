@@ -28,7 +28,7 @@
         <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Status</label>
                 <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" style="width: 100%;" name="selUpdDivAct" id="selUpdDivAct">
+                <select class="form-control" style="width: 100%;" name="selUpdDivAct" id="selUpdDivAct">
                   <option selected>ACTIVE</option>
                   <option>INACTIVE</option>
                 </select>
@@ -45,10 +45,10 @@
       
     </div>
   </div>
-              <table id="datatable" class="table table-bordered table-striped">
+              <table id="datatable2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th hidden></th>
+                  <th hidden>Division Id</th>
                   <th>Division Name</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -57,9 +57,9 @@
                 <tbody>
                 @foreach($divisions as $division)
                 <tr>
-                <td style="width:100px;" hidden>{{ $division->tblDivisionId}}</td>
-                <td style="width:100px;">{{ $division->tblDivisionName}}</td>
-                <td style="width:100px;">{{ $division->tblDivisionActive}}</td>
+                <td hidden>{{ $division->tblDivisionId}}</td>
+                <td>{{ $division->tblDivisionName}}</td>
+                <td>{{ $division->tblDivisionActive}}</td>
                 <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalThree"><i class="fa fa-edit"></i></button>
                 </td>
                 </tr>

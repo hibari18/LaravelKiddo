@@ -36,118 +36,33 @@
   }
 ?>
 <script>
-$(document).ready(function(){
-
-  $('#datatable .edit').click(function(){
-    $.ajax
-    ({
-      url: '/getSchoolYear',
-      type:'get',
-      data: {id:$(this).data('id')},
-      dataType : 'json',
-      success:function(response) {
-        response.forEach(function(data) {
-          $('#txtUpdSyId').val(data.tblSchoolYrId);
-          $('#txtUpdSyName').val(data.tblSchoolYrYear);
-          $('#txtUpdSyYear').val(data.tblSchoolYrStart);
-          // console.log(data.tblSchoolYrStart);
-          // $('#txtUpdSyName').val(data.tblSchoolYrYear);
-          // $('#txtUpdSyName').val(data.tblSchoolYrYear);
-        });
+    (function(){
+      if(window.addEventListener){
+        window.addEventListener('load',run,false);
+      }else if(window.attachEvent){
+        window.attachEvent('onload',run);
       }
-    });
-  });
+      function run(){
+        var t=document.getElementById('tblGrading');
+        t.onclick=function(event){
+          event=event || window.event;
+          var target=event.target||event.srcElement;
+          while (target&&target.nodeName!='TR'){
+            target=target.parentElement;
+          }
+          var cells=target.cells;
 
-  $('#datatable .delete').click(function(){
-    $('#txtDelSyId').val($(this).data('id'));
-  });
-});
-
-  function fn1()
-  {
-    var stat = document.getElementById("selUpdSyAct").value;
-    if(stat != "INACTIVE")
-    {
-      var popup = document.getElementById("pop");
-      popup.classList.toggle("show");
-    }
-  }
-
-  // (function(){
-  //   if(window.addEventListener){
-  //     window.addEventListener('load',run,false);
-  //   }else if(window.attachEvent){
-  //     window.attachEvent('onload',run);
-  //   }
-  //   function run(){
-  //     var t=document.getElementById('datatable');
-  //     t.onclick=function(event){
-  //       event=event || window.event;
-  //       var target=event.target||event.srcElement;
-  //       while (target&&target.nodeName!='TR'){
-  //         target=target.parentElement;
-  //       }
-  //       var cells=target.cells;
-
-  //       if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
-  //       var f1=document.getElementById('txtUpdSyId');
-  //       var f2=document.getElementById('txtUpdSyCurrId');
-  //       var f3=document.getElementById('txtUpdSyName');
-  //       var f4=document.getElementById('txtUpdSyYear');
-  //       var f5=document.getElementById('selUpdSyCurr');
-  //       var f6=document.getElementById('selUpdSyAct');
-  //       var f7=document.getElementById('txtDelSyId');
-  //       /*var f8=document.getElementById('temp');*/
-  //       f1.value=cells[0].innerHTML;
-  //       f2.value=cells[1].innerHTML;
-  //       f3.value=cells[3].innerHTML;
-  //       f4.value=cells[2].innerHTML;
-  //       f5.value=cells[4].innerHTML;
-  //       f6.value=cells[5].innerHTML;
-  //       f7.value=cells[0].innerHTML;
-  //       /*f8.value=cells[5].innerHTML;*/
-  //     };
-  //   }})();
-  // (function(){
-  //   if(window.addEventListener){
-  //     window.addEventListener('load',run,false);
-  //   }else if(window.attachEvent){
-  //     window.attachEvent('onload',run);
-  //   }
-  //   function run(){
-  //     var t=document.getElementById('datatable1');
-  //     t.onclick=function(event){
-  //       event=event || window.event;
-  //       var target=event.target||event.srcElement;
-  //       while (target&&target.nodeName!='TR'){
-  //         target=target.parentElement;
-  //       }
-  //       var cells=target.cells;
-
-  //       if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
-  //       var f1=document.getElementById('NumClassId');
-  //       var f2=document.getElementById('updNumMonth');
-  //       var f3=document.getElementById('updNumDay');
-  //       f1.value=cells[0].innerHTML;
-  //       f2.value=cells[1].innerHTML;
-  //       f3.value=cells[2].innerHTML;
-  //     };
-  //   }})();
-
-  //   $(function(){
-  //     $('input[class=form-group]').change(function(){
-  //       $('input[name=updNumMonth]').attr('disabled', 'disabled');
-  //     });
-  //   });
-
-  //   function showTblMonth()
-  //   {
-  //     var xmlhttp =  new XMLHttpRequest();
-  //     xmlhttp.open("GET","showTblMonth.php?getSySelect="+document.getElementById("getSySelect").value,false);
-  //     xmlhttp.send(null);
-
-  //     document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
-  //   }
+          if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
+          var f1=document.getElementById('updGradingId');
+          var f2=document.getElementById('updGradingName');
+          var f3=document.getElementById('updStartDate');
+          var f4=document.getElementById('updEndDate');
+          f1.value=cells[0].innerHTML;
+          f2.value=cells[1].innerHTML;
+          f3.value=cells[2].innerHTML;
+          f4.value=cells[0].innerHTML;
+        };
+  }})();
   </script>
 <!-- Main content -->
  
@@ -156,7 +71,7 @@ $(document).ready(function(){
     <div class="row">
         <div class="col-md-12">
           
-                @include('schoolyear.schoolyear')
+                @include('grading.grading')
           
         </div>
         <!-- col-md-12 -->
@@ -165,7 +80,7 @@ $(document).ready(function(){
     </section>
     <!-- /.content -->
 
-     <script>
+ <!--     <script>
           $(document).ready(function() {
             $('#addSchoolYr').bootstrapValidator({
               feedbackIcons: {
@@ -212,9 +127,9 @@ $(document).ready(function(){
                     $('#addSchoolYr').bootstrapValidator('resetForm', true);
                 });
           });
-        </script>
+        </script> -->
         <!--UPDATE VALIDATOR-->
-          <script>
+<!--           <script>
           $(document).ready(function() {
             $('#UpdSchoolYr').bootstrapValidator({
               feedbackIcons: {
@@ -254,5 +169,5 @@ $(document).ready(function(){
                     $('#UpdSchoolYr').bootstrapValidator('resetForm', true);
                 });
           });
-        </script>
+        </script> -->
 @endsection

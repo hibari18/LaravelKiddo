@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CurriculumDetail;
 use App\Level;
+use App\Subject;
 
 class CurriculumDetailsController extends Controller
 {
@@ -16,8 +17,10 @@ class CurriculumDetailsController extends Controller
     public function index()
     {
         $levels = Level::where('tblLevelFlag', 1)->get();
+        $subjects = Subject::where('tblSubjectFlag', 1)->get();
+        $details = CurriculumDetail::where('tblDetailsFlag', 1)->get();
 
-        return view('curriculum.index', compact('levels'));
+        return view('curriculum.index', compact('levels', 'subjects', 'details'));
     }
 
     /**
@@ -38,7 +41,14 @@ class CurriculumDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $details = CurriculumDetail::create([
+            'tblCurriculumDetail_tblLevelId' => trim($request->selAddDetLvl),
+            'tblCurriculumDetail_tblSubjectId' => trim($request->selAddDetSubj),
+        ]);
+
+        $message = $details ? 2 : 1;
+        
+        return redirect()->route('division.index')->with('message', $message);
     }
 
     /**
@@ -50,7 +60,7 @@ class CurriculumDetailsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $details = CurriculumDetail::where('tblCurriculumDetail_tblCurriculumId', $id)->where('tblCurriculumFlag', 1)->get();
+        $details = CurriculumDetail::where('tblCurriculumDetail_tblCurriculumId', $id)->where('tblDetailsFlag', 1)->get();
         
         return view('curriculum.table.curriculum-details', compact('details'));
     }
@@ -58,11 +68,19 @@ class CurriculumDetailsController extends Controller
     public function show2(Request $request, $id)
     {
        $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
-        echo '<option selected value="0">--Select Level--</option>';
         foreach($levels as $level){
             echo '<option value="'.$level->tblLevelId.'">'.$level->tblLevelName.'</option>';
         }
-        return;
+
+        return view('curriculum.select.leveladd', compact('levels'));
+    }
+
+    public function show3(Request $request, $id)
+    {
+       
+        $subject = Subject::findOrFail($id);     
+        return $subject->tblSubjectDesc;
+        
     }
 
     /**
@@ -94,8 +112,11 @@ class CurriculumDetailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $details = CurriculumDetail::findOrFail($request->txtDelDetId);
+
+        $message = $details->update(['tblDetailsFlag' => 0]) ? 6 : 5;
+        return redirect()->route('division.index')->with('message', $message);
     }
 }

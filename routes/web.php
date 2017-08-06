@@ -16,8 +16,6 @@ Route::get('advisorylist', 'AdminController@advisorylist');
 
 Route::get('studentlist', 'AdminController@studentlist');
 
-//Route::resource('curriculum', 'CurriculumController');
-
 Route::resource('division', 'DivisionController');
 
 Route::resource('level', 'LevelController');
@@ -25,9 +23,8 @@ Route::resource('level', 'LevelController');
 Route::resource('subject', 'SubjectController');
 
 Route::resource('curriculumdetail', 'CurriculumDetailsController');
-Route::get('leveladd', 'CurriculumDetailsController@show2');
-
-Route::resource('schoolyear', 'SchoolyearController');
+Route::get('leveladd/{id}', 'CurriculumDetailsController@show2');
+Route::get('subjname/{id}', 'CurriculumDetailsController@show3');
 
 Route::resource('grading', 'GradingController');
 
@@ -36,6 +33,5 @@ Route::get('section1/{divId}/{lvlId}', 'SectionController@show1');
 
 Route::resource('requirement', 'RequirementController');
 
-//Route::resource('payment', 'PaymentController');
+Route::resource('payment', 'FeesController');
 
-Route::get('/getSchoolYear', 'SchoolyearController@edit');
