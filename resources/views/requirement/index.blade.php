@@ -50,11 +50,13 @@
           var f1=document.getElementById('txtUpdReqId');
           var f2=document.getElementById('txtUpdReqName');
           var f3=document.getElementById('txtUpdReqDesc');
-          var f4=document.getElementById('txtDelReqId');
+          var f4=document.getElementById('selUpdReqStatus');
+          var f5=document.getElementById('txtDelReqId');
           f1.value=cells[0].innerHTML;
           f2.value=cells[1].innerHTML;
           f3.value=cells[2].innerHTML;
-          f4.value=cells[0].innerHTML;
+          f4.value=cells[3].innerHTML;
+          f5.value=cells[0].innerHTML;
         };
   }})();
     </script>

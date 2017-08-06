@@ -42,6 +42,17 @@
                                       <input type="text" style="text-transform: uppercase;" class="form-control" name="txtAddReqDesc" id="txtAddReqDesc">
                                   </div>
                                 </div>
+
+                                <div class="form-group" style="margin-top: 25%">
+                                      <label class="col-sm-4" style="text-align: right">Status</label>
+                                      <div class="col-sm-7 selectContainer">
+                                      <select class="form-control" style="width: 100%;" name="selAddReqStatus" id="selAddReqStatus">
+                                        <option selected="selected" disabled="disabled">--Select Status--</option>
+                                        <option value="MANDATORY">MANDATORY</option>
+                                        <option value="TO FOLLOW">TO FOLLOW</option>
+                                      </select>
+                                      </div>       
+                              </div>
                               </div>
                               <div class="modal-footer" style="margin-top: 10%">
                                 <button type="submit" class="btn btn-info" name="btnAddReq" id="btnAddReq">Save</button>
@@ -78,6 +89,17 @@
                                     <input type="text" style="text-transform: uppercase;" class="form-control" name="txtUpdReqDesc" id="txtUpdReqDesc">
                                   </div>
                                 </div>
+
+                                <div class="form-group" style="margin-top: 25%">
+                                      <label class="col-sm-4" style="text-align: right">Status</label>
+                                      <div class="col-sm-7 selectContainer">
+                                    <select class="form-control" style="width: 100%;" name="selUpdReqStatus" id="selUpdReqStatus">
+                                        <option selected="selected" disabled="disabled">--Select Status--</option>
+                                        <option value="MANDATORY">MANDATORY</option>
+                                        <option value="TO FOLLOW">TO FOLLOW</option>
+                                      </select>
+                                      </div>       
+                              </div>
                               </div>
                               <div class="modal-footer" style="margin-top: 10%">
                                 <button type="submit" class="btn btn-info" name="btnUpdReq" id="btnUpdReq">Save</button>
@@ -125,6 +147,7 @@
                                   <th hidden></th>
                                   <th>Requirement Name</th>
                                   <th>Requirement Description</th>
+                                  <th>Status</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -135,6 +158,7 @@
                                   <td style="width:100px;" hidden>{{ $requirement->tblReqId }}</td>
                                 <td style="width:100px;">{{ $requirement->tblReqName }}</td>
                                 <td style="width:100px;">{{ $requirement->tblReqDescription }}</td>
+                                <td style="width:100px;">{{ $requirement->tblReqStatus }}</td>
                                 <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
                                 </tr>

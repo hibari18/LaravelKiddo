@@ -40,6 +40,7 @@ class RequirementController extends Controller
         $requirement = Requirement::create([
             'tblReqName' => strtoupper(trim($request->txtAddReqName)),
             'tblReqDescription' => strtoupper(trim($request->txtAddReqDesc)),
+            'tblReqStatus' => trim($request->selAddReqStatus),
         ]);
 
         $message = $requirement ? 2 : 1;
@@ -82,6 +83,8 @@ class RequirementController extends Controller
         $message = $requirement->update([
             'tblReqName' => strtoupper(trim($request->txtUpdReqName)),
             'tblReqDescription' => strtoupper(trim($request->txtUpdReqDesc)),
+            'tblReqStatus' => trim($request->selUpdReqStatus),
+
         ]) ? 4 : 3;
         
         return redirect()->route('requirement.index')->with('message', $message);
