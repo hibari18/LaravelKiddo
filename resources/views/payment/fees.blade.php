@@ -8,14 +8,9 @@
                           <label class="col-sm-1">Level: </label>
                           <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selFeeLvl" id="selFeeLvl" onchange = "changeTblFee();">
                             <option>--Select Here--</option>
-                            <?php
-                              $query = "select tblLevelId, tblLevelName from tbllevel where tblLevelFlag = 1";
-                              $result = mysqli_query($con, $query);
-                              while($row = mysqli_fetch_array($result))
-                              {
-                            ?>
-                            <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName'] ?></option>
-                              <?php } ?>
+                            @foreach($levels as $level)
+                              <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
+                              @endforeach
                           </select>
                         </div>
                         <div class="btn-group" style="margin-bottom: 3%">
@@ -31,15 +26,35 @@
                                 <h3 class="modal-title" style="font-style: bold">Add Fee</h3>
                               </div>
 
-                              <form method="post" action="saveFee.php">
+                              <form autocomplete="off" method="post" action="{{ route('fees.store') }}" data-toggle="validator" role="form" name="addFee" id="addFee">
+                              {{ csrf_field() }}
                                 <div class="modal-body">
                                   <input name="txtAddFeeLvlId" id="txtAddFeeLvlId" hidden/>
+
                                   <div class="form-group" style="margin-top: 5%">
+                                    <label class="col-sm-4" style="text-align: right">Fee Code</label>
+                                    <div class="col-sm-7">
+                                      <input type="text" class="form-control" name="txtAddFeeCode" id="txtAddFeeCode" style="text-transform:uppercase ;">
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group" style="margin-top: 10%">
                                     <label class="col-sm-4" style="text-align: right">Fee Name</label>
                                     <div class="col-sm-7">
                                       <input type="text" class="form-control" name="txtAddFeeName" id="txtAddFeeName" style="text-transform:uppercase ;">
                                     </div>
                                   </div>
+
+                                  <div class="form-group" style="margin-top: 25%">
+                                    <label class="col-sm-4" style="text-align: right">Status</label>
+                                      <div class="col-sm-7 selectContainer">
+                                        <select class="form-control" style="width: 100%;" name="selAddFeeStatus" id="selAddFeeStatus">
+                                          <option selected="selected" disabled="disabled">--SELECT STATUS--</option>
+                                          <option value="MANDATORY">MANDATORY</option>
+                                          <option value="OPTIONAL">OPTIONAL</option>
+                                        </select>
+                                      </div>       
+                                </div>
                                 </div>
 
                                 <div class="modal-footer" style="margin-top: 10%">
@@ -58,14 +73,35 @@
                             <div class="modal-header">
                               <h3 class="modal-title" style="font-style: bold" id="feename">Update Fee Name</h3>
                             </div>
-                            <form method="post" action="updateFee.php">
+                            <form autocomplete="off" data-toggle="validator" role="form" action="{{ route('fees.update','id') }}" method="post" name="UpdFee" id="UpdFee">
+                            {{ method_field('PUT') }}
+                            {{ csrf_field() }}
                               <div class="modal-body">
+                                
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label class="col-sm-4" style="text-align: right">Fee Code</label>
+                                    <div class="col-sm-7">
+                                      <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;">
+                                    </div>
+                                  </div>
+
                                 <div class="form-group"  style="margin-top: 3%">
                                   <input type="hidden" class="form-control" name="txtUpdFeeId" id="txtUpdFeeId">
                                     <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Fee Name</label>
                                     <div class="col-sm-7">
                                       <input type="text" class="form-control" name="txtUpdFee" id="txtUpdFee" style="text-transform:uppercase ;">
                                     </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 25%">
+                                    <label class="col-sm-4" style="text-align: right">Status</label>
+                                      <div class="col-sm-7 selectContainer">
+                                        <select class="form-control" style="width: 100%;" name="selUpdFeeStatus" id="selUpdFeeStatus">
+                                          <option selected="selected" disabled="disabled">--SELECT STATUS--</option>
+                                          <option value="MANDATORY">MANDATORY</option>
+                                          <option value="OPTIONAL">OPTIONAL</option>
+                                        </select>
+                                      </div>       
                                 </div>
                               </div>
 
@@ -86,7 +122,9 @@
                               <h3 class="modal-title" style="font-style: bold">Delete Fee</h3>
                             </div>
 
-                            <form method="post" action="deleteFee.php">
+                            <form action="{{ route('fees.destroy','id') }}" method="post">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
                               <div class="modal-body">
                                 <input type="text" name="txtDelFee" id="txtDelFee" hidden/>
                                 <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
@@ -104,24 +142,7 @@
                       </div> <!--modal fade delete fee -->
 
                         <table id="datatable" class="table table-bordered table-striped">
-                          <thead>
-                            <tr>
-                              <th>Fee Name</th>
-                              <th>Amount</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                          <!-- <tr>
-                            <td>Tuition Fee</td>
-                            <td>12,000</td>
-                             <td>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>
-                               </td>
-                          </tr> -->
-                          </tbody>
+                          @include('payment.table.fees')
                         </table>
                       </div> <!-- box body -->
                     </div> <!-- box -->
