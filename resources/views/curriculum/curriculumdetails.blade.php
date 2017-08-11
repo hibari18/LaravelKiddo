@@ -33,6 +33,7 @@
           </div>
           <form method="post" action="{{ route('curriculumdetail.store') }}" data-toggle="validator" role="form" name="addCurrDetails" id="addCurrDetails">
           {{ csrf_field() }}
+            <input type="hidden" name="selAddDetDiv" id="selAddDetDiv">
             <div class="modal-body">
              
              @include('curriculum.select.leveladd')

@@ -262,8 +262,8 @@ $(document).ready(function(){
       xmlhttp.open("GET","curriculumdetail/"+document.getElementById("selDivName").value,false);
       xmlhttp.send(null);
       document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
-      // var currId = document.getElementById("selDivName").value;
-      // document.getElementById("txtAddDetCurr").value = currId;
+      var divId = document.getElementById("selDivName").value;
+      document.getElementById("selAddDetDiv").value = divId;
 
       var xmlhttp =  new XMLHttpRequest();
       xmlhttp.open("GET","leveladd/"+document.getElementById("selDivName").value,false);

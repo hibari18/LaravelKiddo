@@ -44,6 +44,7 @@ class CurriculumDetailsController extends Controller
     public function store(Request $request)
     {
         $details = CurriculumDetail::create([
+            'tblCurriculumDetail_tblDivisionId' => trim($request->selAddDetDiv),
             'tblCurriculumDetail_tblLevelId' => trim($request->selAddDetLvl),
             'tblCurriculumDetail_tblSubjectId' => trim($request->selAddDetSubj),
         ]);
