@@ -67,7 +67,7 @@
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Main content -->
-        <div class="container">
+        <div class="container" style="width: 100%">
         
           @yield('content')
 

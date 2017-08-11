@@ -18,7 +18,7 @@
             <td hidden>{{ $detail->level->tblLevelId}}</td>
             <td>{{ $detail->level->tblLevelName}}</td>
             <td>{{ $detail->subject->tblSubjectId}}</td>
-            <td>{{ $detail->subject->tblSubjectDesc}}]</td>
+            <td>{{ $detail->subject->tblSubjectDesc}}</td>
             <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalTwo"><i class="fa fa-edit"></i></button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalTwo"><i class="fa fa-trash"></i></button></td>
         </tr>
