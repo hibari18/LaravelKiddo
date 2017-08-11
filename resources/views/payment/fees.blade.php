@@ -1,20 +1,19 @@
-@extends('master')
 
-@section('content')
 <div class="box">
                     <div class="box-header"></div>
                       <div class="box-body">
                         <div class="container">
                           <label class="col-sm-1">Level: </label>
                           <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selFeeLvl" id="selFeeLvl" onchange = "changeTblFee();">
-                            <option>--Select Here--</option>
-                            @foreach($levels as $level)
+                            <option selected disabled>--Select Here--</option>
+                              @foreach($levels as $level)
                               <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
                               @endforeach
                           </select>
                         </div>
+                        
                         <div class="btn-group" style="margin-bottom: 3%">
-                          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
+                          <button type="button" class="btn btn-info" id="btnAddFee" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
                         </div>
 
                         <!-- Modal starts here-->
@@ -38,7 +37,7 @@
                                     </div>
                                   </div>
 
-                                  <div class="form-group" style="margin-top: 10%">
+                                  <div class="form-group" style="margin-top: 15%">
                                     <label class="col-sm-4" style="text-align: right">Fee Name</label>
                                     <div class="col-sm-7">
                                       <input type="text" class="form-control" name="txtAddFeeName" id="txtAddFeeName" style="text-transform:uppercase ;">
@@ -79,14 +78,14 @@
                               <div class="modal-body">
                                 
                                 <div class="form-group" style="margin-top: 5%">
+                                <input type="hidden" class="form-control" name="txtUpdFeeId" id="txtUpdFeeId">
                                     <label class="col-sm-4" style="text-align: right">Fee Code</label>
                                     <div class="col-sm-7">
                                       <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;">
                                     </div>
                                   </div>
 
-                                <div class="form-group"  style="margin-top: 3%">
-                                  <input type="hidden" class="form-control" name="txtUpdFeeId" id="txtUpdFeeId">
+                                <div class="form-group"  style="margin-top: 15%">
                                     <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Fee Name</label>
                                     <div class="col-sm-7">
                                       <input type="text" class="form-control" name="txtUpdFee" id="txtUpdFee" style="text-transform:uppercase ;">
@@ -146,4 +145,3 @@
                         </table>
                       </div> <!-- box body -->
                     </div> <!-- box -->
-@endsection

@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Division;
-use App\Level;
-use App\Subject;
-use App\CurriculumDetail;
 
-class DivisionController extends Controller
+class AdmissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +13,7 @@ class DivisionController extends Controller
      */
     public function index()
     {
-        $levels = Level::where('tbllevel.tblLevelFlag', 1)->leftjoin('tbldivision','tbldivision.tblDivisionId','=','tbllevel.tblLevel_tblDivisionId')->get();
-        $divisions = Division::where('tblDivisionFlag', 1)->get();
-        $subjects = Subject::where('tblSubjectFlag', 1)->get();
-        //$details = CurriculumDetail::where('tblDetailsFlag', 1)->get();
-        $details = [];
-        return view('curriculum.index', compact('subjects','levels','divisions','details'));
+        //
     }
 
     /**
@@ -77,14 +68,7 @@ class DivisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $division = Division::findOrFail($request->txtUpdDivId);
-        $message = $division->update([
-            'tblDivisionId' => trim($request->txtUpdDivId),
-            'tblDivisionName' => strtoupper(trim($request->txtUpdDiv)),
-            'tblDivisionActive' => trim($request->selUpdDivAct),
-        ]) ? 4 : 3;
-        
-        return redirect()->route('division.index')->with('message', $message);
+        //
     }
 
     /**

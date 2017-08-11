@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CurriculumDetail;
 use App\Level;
 use App\Subject;
+use App\Division;
 
 class CurriculumDetailsController extends Controller
 {
@@ -18,7 +19,8 @@ class CurriculumDetailsController extends Controller
     {
         $levels = Level::where('tblLevelFlag', 1)->get();
         $subjects = Subject::where('tblSubjectFlag', 1)->get();
-        $details = CurriculumDetail::where('tblDetailsFlag', 1)->get();
+        //$details = CurriculumDetail::where('tblDetailsFlag', 1)->get();
+        $details = null;
 
         return view('curriculum.index', compact('levels', 'subjects', 'details'));
     }
@@ -60,7 +62,7 @@ class CurriculumDetailsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $details = CurriculumDetail::where('tblCurriculumDetail_tblCurriculumId', $id)->where('tblDetailsFlag', 1)->get();
+        $details = Division::where('tblDivisionId', $id)->first()->curriculum_details;
         
         return view('curriculum.table.curriculum-details', compact('details'));
     }
@@ -68,11 +70,12 @@ class CurriculumDetailsController extends Controller
     public function show2(Request $request, $id)
     {
        $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
+       echo '<option selected>--SELECT LEVEL--</option>';
         foreach($levels as $level){
             echo '<option value="'.$level->tblLevelId.'">'.$level->tblLevelName.'</option>';
         }
 
-        return view('curriculum.select.leveladd', compact('levels'));
+        return;
     }
 
     public function show3(Request $request, $id)

@@ -55,4 +55,16 @@ class AdminController extends Controller
         return view('grades.studentlist');
     }
 
+    public function viewgrade()
+    {   
+
+        return view('grades.viewgrade');
+    }
+
+    public function dashboard()
+    {   
+
+        return view('dashboard.dashboard');
+    }
+
 }

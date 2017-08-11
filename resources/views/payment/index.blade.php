@@ -33,10 +33,11 @@
       {
         var lvl = document.getElementById("selFeeLvl").value;
         var xmlhttp =  new XMLHttpRequest();
-        xmlhttp.open("GET","changeTblFee.php?selFeeLvl="+document.getElementById("selFeeLvl").value,false);
+        xmlhttp.open("GET","payment/"+document.getElementById("selFeeLvl").value,false);
         xmlhttp.send(null);
 
         document.getElementById("datatable").innerHTML=xmlhttp.responseText;
+        
       }
 
       function changeSchedSchemeLvl()
@@ -97,11 +98,13 @@
 
             if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
             var f1=document.getElementById('txtUpdFeeId');
-            var f2=document.getElementById('txtUpdFee');
-            var f3=document.getElementById('txtDelFee');
+            var f2=document.getElementById('txtUpdFeeCode');
+            var f3=document.getElementById('txtUpdFee');
+            var f4=document.getElementById('txtDelFee');
             f1.value=cells[2].innerHTML;
             f2.value=cells[2].innerHTML;
             f3.value=cells[2].innerHTML;
+            f4.value=cells[2].innerHTML;
           };
       }})();
 

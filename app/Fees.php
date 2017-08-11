@@ -16,4 +16,8 @@ class Fees extends Model
 	public $timestamps = false;
 	public $incrementing = false; 
 
+
+	public function level(){
+		return $this->belongsTo('App\Level', 'tblCurriculumDetail_tblLevelId', 'tblLevelId');
+	}
 }

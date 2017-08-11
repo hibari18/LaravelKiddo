@@ -1,6 +1,4 @@
-@extends('master')
 
-@section('content')
 <div class="box">
                       <div class="box-header"></div>
                         <div class="box-body">
@@ -23,14 +21,9 @@
                                       <div class="col-sm-7">
                                         <select class="form-control choose" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
                                           <option selected="selected">--Select Fee--</option>
-                                            <?php
-                                              $query = "select distinct tblFeeName from tblfee where tblFeeFlag = 1";
-                                              $result = mysqli_query($con, $query);
-                                              while($row = mysqli_fetch_array($result))
-                                              {
-                                            ?>
-                                          <option value="<?php echo $row['tblFeeName'] ?>"><?php echo $row['tblFeeName'] ?></option>
-                                            <?php } ?>
+                                            @foreach($fees as $fee)
+                                            <option value="{{ $fee->tblFeeName}}">{{ $fee->tblFeeName}}</option>
+                                            @endforeach
                                         </select>
                                       </div>
                                   </div>
@@ -136,25 +129,19 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <?php
-                              $query = "select s.tblSchemeId, f.tblFeeName, s.tblSchemeType, s.tblSchemeNoOfPayment from tblscheme s, tblfee f where s.tblScheme_tblFeeId = f.tblFeeId and f.tblFeeFlag = 1 and s.tblSchemeFlag=1";
-                              $result = mysqli_query($con, $query);
-                              while($row = mysqli_fetch_array($result))
-                              {
-                            ?>
+                            @foreach($fees as $fee)
                             <tr>
-                              <td hidden><?php echo $row['tblSchemeId'] ?></td>
-                              <td><?php echo $row['tblFeeName'] ?></td>
-                              <td><?php echo $row['tblSchemeType'] ?></td>
-                              <td><?php echo $row['tblSchemeNoOfPayment'] ?></td>
+                              <td hidden>{{ $fee->tblSchemeId}}</td>
+                              <td>{{ $fee->tblFeeName}}</td>
+                              <td>{{ $fee->tblSchemeType}}</td>
+                              <td>{{ $fee->tblSchemeNoOfPayment}}</td>
                                <td>
                                   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalTwo"><i class="fa fa-edit"></i></button>
                                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalTwo"><i class="fa fa-trash"></i></button>
                                </td>
                             </tr>
-                            <?php } ?>
+                            @endforeach
                           </tbody>
                         </table>
                       </div> <!-- box body -->
                     </div><!-- box -->
-@endsection

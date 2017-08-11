@@ -7,7 +7,7 @@
       <div class="container">
         <form method="get">
           <label>View by Division: </label>
-          <select class="form-control" style="width: 30%" name="selCurrName" id="selCurrName" onchange="showDetail(); ">
+          <select class="form-control" style="width: 30%" name="selDivName" id="selDivName" onchange="showDetail(); ">
                         <option selected disabled>--Select Here--</option>
                         @foreach($divisions as $division)
                         <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName}}</option>
@@ -34,19 +34,6 @@
           <form method="post" action="{{ route('curriculumdetail.store') }}" data-toggle="validator" role="form" name="addCurrDetails" id="addCurrDetails">
           {{ csrf_field() }}
             <div class="modal-body">
-
-              <div class="form-group" style="margin-top: 5%">
-                <div><input type="hidden" name="txtAddDetCurr" id="txtAddDetCurr" /></div>
-                <label class="col-sm-4" style="text-align: right">Division</label>
-                <div class="col-sm-7 selectContainer">
-                  <select class="form-control" style="width: 100%;" name="selAddDetDiv" id="selAddDetDiv" onchange="changeDiv();">
-                  <option disabled="disabled" selected="selected">--SELECT DIVISION--</option>
-                  @foreach($divisions as $division)
-                        <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName}}</option>
-                        @endforeach
-                </select>
-                </div>
-              </div>
              
              @include('curriculum.select.leveladd')
 
@@ -91,17 +78,9 @@
               <div class="form-group" style="margin-top: 5%">
                 <div><input type="hidden" name="txtUpdDetCurrId" id="txtUpdDetCurrId" />
                   <input type="hidden" name="txtUpdDetId" id="txtUpdDetId" />
-                  <input type="hidden" name="txtUpdDetDivId" id="txtUpdDetDivId" />
                   <input type="hidden" name="txtUpdDetLvlId" id="txtUpdDetLvlId" /></div>
                 <label class="col-sm-4" style="text-align: right">Division</label>
-                <div class="col-sm-7" selectContainer>
-                  <select class="form-control" style="width: 100%;" name="selUpdDetDiv" id="selUpdDetDiv" onchange="changeUpdDiv();">
-                  <option selected="selected">--SELECT DIVISION--</option>
-                   @foreach($divisions as $division)
-                        <option value="{{ $division->tblDivisionName}}">{{ $division->tblDivisionName}}</option>
-                        @endforeach
-                </select>
-                </div>
+
               </div>
               <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Level</label>

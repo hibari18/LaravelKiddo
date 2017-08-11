@@ -1,6 +1,4 @@
-@extends('master')
 
-@section('content')
 <div class="box">
                         <div class="box-header"></div>
                           <div class="box-body">
@@ -9,14 +7,9 @@
                                 <label class="col-sm-1">Fee: </label>
                                 <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selFee" id="selFee" onchange="changeTblFeeDetail()">
                                   <option>--Select Here--</option>
-                                  <?php
-                                    $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag=1";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result))
-                                    {
-                                  ?>
-                                  <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeName'] ?></option>
-                                  <?php } ?>
+                                  @foreach($fees as $fee)
+                                  <option value="{{ $fee->tblFeeId}}">{{ $fee->tblFeeName}}</option>
+                                  @endforeach
                                 </select>
                               </div>
                             </div>
@@ -64,19 +57,14 @@
                                         <input type="hidden" name="txtFeeDet" id="txtFeeDet"/>
                                         <input type="hidden" name="txtFeeDetFee" id="txtFeeDetFee"/>
                                       </div>
-                                      <?php
-                                        $query = "select tblLevelName, tblLevelId from tbllevel where tblLevelFlag = 1";
-                                        $result = mysqli_query($con, $query);
-                                        while($row = mysqli_fetch_array($result))
-                                        {
-                                      ?>
+                                      @foreach($levels as $level)
                                       <div class="form-group">
-                                        <label class="col-sm-4" style="text-align: right; margin-top: 5%"><?php echo $row['tblLevelName'] ?></label>
+                                        <label class="col-sm-4" style="text-align: right; margin-top: 5%">{{ $level->tblLevelName}}</label>
                                         <div class="col-sm-7" style="margin-top: 5%">
                                           <input type="text" class="form-control" name="txtName[]">
                                         </div>
                                       </div>
-                                      <?php } ?>
+                                      @endforeach
                                     </div>
 
                                     <div class="modal-footer" style="margin-top: 70%">
@@ -173,4 +161,3 @@
                             </table>
                         </div> <!-- box body tab_4-->
                       </div> <!-- /.box tab_4 -->
-@endsection

@@ -1,5 +1,7 @@
 <?php
 
+Route::get('dashboard', 'AdminController@dashboard');
+
 Route::get('message', 'AdminController@message');
 
 Route::get('compose', 'AdminController@compose');
@@ -14,6 +16,7 @@ Route::get('adminaccount', 'AdminController@adminaccount');
 
 Route::get('advisorylist', 'AdminController@advisorylist');
 Route::get('studentlist', 'AdminController@studentlist');
+Route::get('viewgrade', 'AdminController@viewgrade');
 
 Route::resource('division', 'DivisionController');
 
@@ -32,5 +35,7 @@ Route::get('section1/{divId}/{lvlId}', 'SectionController@show1');
 
 Route::resource('requirement', 'RequirementController');
 
-Route::resource('payment', 'FeesController');
+Route::resource('fees', 'FeesController');
+
+Route::resource('admission', 'AdmissionCOntroller');
 

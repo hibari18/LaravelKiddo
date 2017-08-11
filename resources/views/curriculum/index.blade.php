@@ -259,21 +259,28 @@ $(document).ready(function(){
     {
       document.getElementById("btnAdd").disabled=false;
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","curriculumdetail/"+document.getElementById("selCurrName").value,false);
+      xmlhttp.open("GET","curriculumdetail/"+document.getElementById("selDivName").value,false);
       xmlhttp.send(null);
       document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
-      var currId = document.getElementById("selCurrName").value;
-      document.getElementById("txtAddDetCurr").value = currId
-    }
-  function changeDiv()
-    {
-      document.getElementById('selAddDetLvl').disabled = false;
+      // var currId = document.getElementById("selDivName").value;
+      // document.getElementById("txtAddDetCurr").value = currId;
+
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","leveladd/"+document.getElementById("selAddDetDiv").value,false);
+      xmlhttp.open("GET","leveladd/"+document.getElementById("selDivName").value,false);
       xmlhttp.send(null);
       
       document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
+
     }
+  // function changeDiv()
+  //   {
+  //     document.getElementById('selAddDetLvl').disabled = false;
+  //     var xmlhttp =  new XMLHttpRequest();
+  //     xmlhttp.open("GET","leveladd/"+document.getElementById("selAddDetDiv").value,false);
+  //     xmlhttp.send(null);
+      
+  //     document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
+  //   }
     function changeUpdDiv()
     {
       document.getElementById('selUpdDetLvl').disabled = false;

@@ -25,7 +25,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
             <li class="treeview">
-              <a href="dashboard.php">
+              <a href="dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
@@ -46,7 +46,7 @@
                 <li><a href="grading"><i class="fa fa-circle-o"></i>Grading Period</a></li>
                 <li><a href="section"><i class="fa fa-circle-o"></i>Section</a></li>
                 <li><a href="requirement"><i class="fa fa-circle-o"></i>Requirement</a></li>
-                <li><a href="payment"><i class="fa fa-circle-o"></i>Payment</a></li>
+                <li><a href="fees"><i class="fa fa-circle-o"></i>Payment</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -64,7 +64,8 @@
                 <li><a href="billing"><i class="fa fa-circle-o"></i>Billing</a></li>
                 <li><a href="adminaccount"><i class="fa fa-circle-o"></i>Accounts</a></li>
                 <li><a href="profile"><i class="fa fa-circle-o"></i>Profile</a></li>
-                <li><a href="advisorylist"><i class="fa fa-circle-o"></i>Grades</a></li>
+                <li><a href="advisorylist"><i class="fa fa-circle-o"></i>Grades (Faculty)</a></li>
+                <li><a href="viewgrade"><i class="fa fa-circle-o"></i>Grades (Parent)</a></li>
               </ul>
             </li>
           </ul>

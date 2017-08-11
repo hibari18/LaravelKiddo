@@ -1,6 +1,4 @@
-@extends('master')
 
-@section('section')
 <div class="box">
                       <div class="box-header"></div>
                         <div class="box-body">
@@ -9,14 +7,9 @@
                             <label class="col-sm-1">Level: </label>
                             <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()">
                               <option>--Select Here--</option>
-                              <?php
-                                $query="select * from tbllevel where tblLevelFlag=1";
-                                $result=mysqli_query($con, $query);
-                                while($row=mysqli_fetch_array($result))
-                                {
-                                  ?>
-                              <option value="<?php echo $row['tblLevelId']; ?>"><?php echo $row['tblLevelName'] ?></option>
-                                <?php } ?>
+                              @foreach($levels as $level)
+                              <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
+                              @endforeach
                                 </select>
                             </div> <!-- container -->
                           </div>
@@ -26,14 +19,9 @@
                               <label class="col-sm-1">Fee: </label>
                               <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedFee" id="selSchedFee" onchange="changeFee()" disabled>
                                 <option>--Select Here--</option>
-                                  <?php
-                                    $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1";
-                                    $result = mysqli_query($con, $query);
-                                    while($row = mysqli_fetch_array($result))
-                                    {
-                                      ?>
-                                        <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeName'] ?></option>
-                                      <?php } ?>
+                                  @foreach($fees as $fee)
+                                  <option value="{{ $fee->tblFeeId}}">{{ $fee->tblFeeName}}</option>
+                                  @endforeach
                               </select>
                             </div>
                           </div>
@@ -127,4 +115,3 @@
                         </table>
                       </div> <!-- box body reset sched -->
                     </div><!-- box reset sched -->
-@endsection

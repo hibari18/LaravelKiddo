@@ -7,6 +7,7 @@ use App\Fees;
 use App\SchemeType;
 use App\Schedule;
 use App\FeeDetails;
+use App\Level;
 
 class FeesController extends Controller
 {
@@ -21,8 +22,9 @@ class FeesController extends Controller
         $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
         $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
         $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
+        $levels = Level::where('tblLevelFlag', 1)->get();
 
-        return view('payment.index', compact('fees','schemetypes','schedules','feedetails'));
+        return view('payment.index', compact('fees','schemetypes','schedules','feedetails','levels'));
     }
 
     /**
@@ -52,9 +54,11 @@ class FeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $fees = Fee::where('tblFeeAmount_tblLevelId', $id)->where('tblFeeFlag', 1)->get();
+        
+        return view('payment.table.fees', compact('fees'));
     }
 
     /**
@@ -91,5 +95,4 @@ class FeesController extends Controller
         //
     }
 }
-   }
-}
+

@@ -16,4 +16,8 @@ class Division extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false; 
+
+	public function curriculum_details(){
+		return $this->hasMany('App\CurriculumDetail', 'tblCurriculumDetail_tblDivisionId', 'tblDivisionId');
+	}
 }
