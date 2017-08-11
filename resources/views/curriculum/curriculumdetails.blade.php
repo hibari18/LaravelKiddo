@@ -135,7 +135,7 @@
         {{ csrf_field() }}
             <div class="modal-body">
               <div class="box-body table-responsive no-padding" style="margin-top: 2%">
-                <div><input type="hidden" name="txtDelDetId" id="txtDelDetId" /></div>
+                <div><input type="hidden" name="txtDelDetId" id="txtDelDetId"/></div>
                 <div>
                   <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
                 </div>

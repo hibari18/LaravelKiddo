@@ -63,7 +63,8 @@ class CurriculumDetailsController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $details = Division::where('tblDivisionId', $id)->first()->curriculum_details;
+        $details = Division::where('tblDivisionId', $id)->first()
+            ->curriculum_details()->where('tblCurriculumFlag', 1)->get();
         
         return view('curriculum.table.curriculum-details', compact('details'));
     }
@@ -120,7 +121,7 @@ class CurriculumDetailsController extends Controller
     {
         $details = CurriculumDetail::findOrFail($request->txtDelDetId);
 
-        $message = $details->update(['tblDetailsFlag' => 0]) ? 6 : 5;
+        $message = $details->update(['tblCurriculumFlag' => 0]) ? 6 : 5;
         return redirect()->route('division.index')->with('message', $message);
     }
 }
