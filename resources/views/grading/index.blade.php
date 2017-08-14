@@ -60,7 +60,7 @@
           f1.value=cells[0].innerHTML;
           f2.value=cells[1].innerHTML;
           f3.value=cells[2].innerHTML;
-          f4.value=cells[0].innerHTML;
+          f4.value=cells[3].innerHTML;
         };
   }})();
   </script>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Schedule;
+use App\Fees;
+use App\SchemeType;
 
 class ScheduleController extends Controller
 {
@@ -13,7 +16,12 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
+        $fees = Fees::where('tblFeeFlag', 1)->get();
+        $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
+         
+        return view('payment.index', compact('fees','schemetypes','schedules'));
+
     }
 
     /**

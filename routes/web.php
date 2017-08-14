@@ -36,6 +36,9 @@ Route::get('section1/{divId}/{lvlId}', 'SectionController@show1');
 Route::resource('requirement', 'RequirementController');
 
 Route::resource('fees', 'FeesController');
+Route::resource('schemetype', 'SchemeTypeController');
+Route::resource('schedule', 'ScheduleController');
+Route::resource('feedetails', 'FeeDetailsController');
 
-Route::resource('admission', 'AdmissionCOntroller');
+Route::resource('admission', 'CheckRequirementController');
 

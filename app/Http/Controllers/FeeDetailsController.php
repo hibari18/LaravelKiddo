@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\FeeDetails;
+use App\Amount;
+use App\Level;
+
 
 class FeeDetailsController extends Controller
 {
@@ -13,7 +17,12 @@ class FeeDetailsController extends Controller
      */
     public function index()
     {
-        //
+        // $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
+        $feedetails = null;
+        $levels = Level::where('tblLevelFlag', 1)->get();
+        $amounts = Amount::where('tblFeeAmountFlag')->get();
+
+        return view('payment.index', compact('feedetails','levels','amounts'));
     }
 
     /**
@@ -43,9 +52,12 @@ class FeeDetailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $feedetails = Fees::where('tblFeeId', $id)->first()
+            ->feedetails()->where('tblFeeDetailFlag', 1)->get();
+        
+        return view('payment.table.feedetail', compact('feedetails'));
     }
 
     /**

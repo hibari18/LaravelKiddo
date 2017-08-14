@@ -90,6 +90,8 @@
       $(".choose").select2();
       });
     </script>
+
+    <script type="text/javascript" src="{{ asset('js/formwizard.js') }}"></script>
     <script src="{{ asset('js/selectjs/select2.full.min.js') }}"></script>
     <script>
     $(document).ready(function(){

@@ -26,4 +26,7 @@ class CurriculumDetail extends Model
 	public function subject(){
 		return $this->belongsTo('App\Subject', 'tblCurriculumDetail_tblSubjectId', 'tblSubjectId');
 	}
+	public function curriculum_details(){
+		return $this->hasMany('App\CurriculumDetail', 'tblCurriculumDetail_tblCurriculumDetailId', 'tblCurriculumDetailId');
+	}
 }

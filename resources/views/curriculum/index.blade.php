@@ -82,23 +82,23 @@ function run(){
     
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     //var f1=document.getElementById('txtUpdDetCurrId');
-    var f2=document.getElementById('txtUpdDetId');
+    var f1=document.getElementById('txtUpdDetId');
     //var f3=document.getElementById('txtUpdDetDivId');
-    var f4=document.getElementById('txtUpdDetLvlId');
+    var f2=document.getElementById('txtUpdDetLvlId');
     //var f5=document.getElementById('selUpdDetDiv');
-    var f6=document.getElementById('selUpdDetLvl');
-    var f7=document.getElementById('selUpdDetSubj');
-    var f8=document.getElementById('txtUpdDetSubj');
-    var f9=document.getElementById('txtDelDetId');
+    var f3=document.getElementById('selUpdDetLvl');
+    var f4=document.getElementById('selUpdDetSubj');
+    var f5=document.getElementById('txtUpdDetSubj');
+    var f6=document.getElementById('txtDelDetId');
     //f1.value=cells[0].innerHTML;
-    f2.value=cells[1].innerHTML;
+    f1.value=cells[1].innerHTML;
     //f3.value=cells[2].innerHTML;
-    f4.value=cells[2].innerHTML;
+    f2.value=cells[2].innerHTML;
     //f5.value=cells[0].innerHTML;
-    f6.value=cells[2].innerHTML;
-    f7.value=cells[5].innerHTML;
-    f8.value=cells[6].innerHTML;
-    f9.value=cells[1].innerHTML;
+    f3.value=cells[2].innerHTML;
+    f4.value=cells[4].innerHTML;
+    f5.value=cells[5].innerHTML;
+    f6.value=cells[1].innerHTML;
   };
 }})();
 
@@ -285,7 +285,7 @@ $(document).ready(function(){
     {
       document.getElementById('selUpdDetLvl').disabled = false;
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","changeDivUpdDetail.php?selUpdDetDiv="+document.getElementById("selUpdDetDiv").value,false);
+      xmlhttp.open("GET","levelupd"+document.getElementById("selUpdDetDiv").value,false);
       xmlhttp.send(null);
       document.getElementById("selUpdDetLvl").innerHTML=xmlhttp.responseText;
     }
@@ -299,7 +299,7 @@ $(document).ready(function(){
   function passSubjNameUpd()
     {
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","passSubjNameUpdDetail.php?selUpdDetSubj="+document.getElementById("selUpdDetSubj").value,false);
+      xmlhttp.open("GET","subjname/"+document.getElementById("selUpdDetSubj").value,false);
       xmlhttp.send(null);
       document.getElementById("txtUpdDetSubj").value=xmlhttp.responseText;
     }

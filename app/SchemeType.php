@@ -16,4 +16,8 @@ class SchemeType extends Model
 	public $timestamps = false;
 	public $incrementing = false; 
 
+	public function fees(){
+		return $this->belongsTo('App\Fees', 'tblScheme_tblFeeId', 'tblFeeId');
+	}
+
 }

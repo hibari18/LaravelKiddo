@@ -20,4 +20,8 @@ class Fees extends Model
 	public function level(){
 		return $this->belongsTo('App\Level', 'tblCurriculumDetail_tblLevelId', 'tblLevelId');
 	}
+
+	public function fees(){
+		return $this->belongsTo('App\Fees', 'tblFees_tblFeeId', 'tblFeeId');
+	}
 }

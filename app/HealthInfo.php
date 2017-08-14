@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Admission extends Model
+class HealthInfo extends Model
 {
     protected $guarded = []; 
 	 
-	protected $primaryKey = 'tblStudInfoId'; 
-	protected $table = 'tblstudentinfo'; 
+	protected $primaryKey = 'tblStudHealthId'; 
+	protected $table = 'tblstudhealth'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false;

@@ -14,13 +14,14 @@
                                 <h3 class="modal-title" style="font-style: bold">Add Payment Scheme</h3>
                               </div>
 
-                              <form method="post" action="saveScheme.php">
+                              <form method="post" data-toggle="validator" autocomplete="off" role="form" action="{{ route('schemetype.store') }}">
+                              {{ csrf_field() }}
                                 <div class="modal-body">
                                   <div class="form-group" style="margin-top: 5%">
                                     <label class="col-sm-4" style="text-align: right">Fee</label>
                                       <div class="col-sm-7">
-                                        <select class="form-control choose" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
-                                          <option selected="selected">--Select Fee--</option>
+                                        <select class="form-control" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
+                                          <option selected="selected" disabled>--Select Fee--</option>
                                             @foreach($fees as $fee)
                                             <option value="{{ $fee->tblFeeName}}">{{ $fee->tblFeeName}}</option>
                                             @endforeach
@@ -60,7 +61,9 @@
                               <h3 class="modal-title" style="font-style: bold">Update Payment Scheme</h3>
                             </div>
 
-                            <form method="post" action="updateScheme.php">
+                            <form method="post" action="{{ route('schemetype.update','id') }}" data-toggle="validation" autocomplete="off" role="form">
+                            {{ method_field('PUT') }}
+                             {{ csrf_field() }}
                               <div class="modal-body">
                                 <input type="text" name="txtUpdSchemeId" id="txtUpdSchemeId" hidden/>
                                 <div class="form-group"  style="margin-top: 5%">
@@ -73,7 +76,7 @@
                                 <div class="form-group"  style="margin-top: 15%">
                                   <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Scheme Name</label>
                                   <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="txtUpdScheme" id="txtUpdScheme">
+                                    <input type="text" class="form-control" name="txtUpdScheme" id="txtUpdScheme" style="text-transform: uppercase;">
                                   </div>
                                 </div>
 
@@ -102,7 +105,9 @@
                               <h3 class="modal-title" style="font-style: bold">Delete Payment Scheme</h3>
                             </div>
 
-                            <form method="post" action="deleteScheme.php">
+                            <form method="post" action="{{ route('schemetype.destroy','id') }}">
+                              {{ method_field('DELETE') }}
+                              {{ csrf_field() }}
                               <div class="modal-body">
                                 <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
                                   <input type="text" name="txtDelScheme" id="txtDelScheme" hidden/>

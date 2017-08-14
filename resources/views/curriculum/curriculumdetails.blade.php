@@ -80,16 +80,15 @@
                 <div><input type="hidden" name="txtUpdDetCurrId" id="txtUpdDetCurrId" />
                   <input type="hidden" name="txtUpdDetId" id="txtUpdDetId" />
                   <input type="hidden" name="txtUpdDetLvlId" id="txtUpdDetLvlId" /></div>
-                <label class="col-sm-4" style="text-align: right">Division</label>
-
+                
               </div>
               <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Level</label>
                 <div class="col-sm-7 selectContainer">
-                  <select class="form-control" style="width: 100%;" name="selUpdDetLvl" id="selUpdDetLvl" disabled>
-                  <option selected="selected">--SELECT LEVEL--</option>
-                  @foreach($levels as $level)
-                        <option value="{{ $level->tblLevelName}}">{{ $level->tblLevelName}}</option>
+                  <select class="form-control" style="width: 100%;" name="selUpdDetLvl" id="selUpdDetLvl">
+                  <option disabled>--SELECT LEVEL--</option>
+                        @foreach($levels as $level)
+                        <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
                         @endforeach
                 </select>
                 </div>
@@ -98,19 +97,14 @@
                 <label class="col-sm-4" style="text-align: right">Subject Code</label>
                 <div class="col-sm-7">
                   <select class="form-control" style="width: 100%;" name="selUpdDetSubj" id="selUpdDetSubj" onchange="passSubjNameUpd();">
-                  <option selected="selected">--SELECT SUBJECT CODE--</option>
-                  @foreach($subjects as $subject)
+                  <option disabled>--SELECT SUBJECT CODE--</option>
+                        @foreach($subjects as $subject)
                         <option value="{{ $subject->tblSubjectId}}">{{ $subject->tblSubjectId}}</option>
                         @endforeach
                 </select>
                 </div>
               </div>
-              <div class="form-group" style="margin-top: 35%">
-                <label class="col-sm-4" style="text-align: right">Subject Name</label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" name="txtUpdDetSubj" id="txtUpdDetSubj" disabled/>
-                </div>
-              </div>
+              @include('curriculum.select.subjname2')
             </div>
             <div class="modal-footer" style="margin-top: 10%">
               <button type="submit" class="btn btn-info" name="btnUpdDet" id="btnUpdDet">Save</button>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Fees;
+use App\SchemeType;
 
 class SchemeTypeController extends Controller
 {
@@ -13,7 +15,11 @@ class SchemeTypeController extends Controller
      */
     public function index()
     {
-        //
+        $fees = Fees::where('tblFeeFlag', 1)->get();
+        $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
+
+        return view('payment.index', compact('fees','schemetypes'));
+
     }
 
     /**
@@ -34,7 +40,15 @@ class SchemeTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $schemetype = SchemeType::create([
+            'tblScheme_tblFeeId' => trim($request->selAddSchemeFee),
+            'tblSchemeType' => strtoupper(trim($request->txtAddScheme)),
+            'tblSchemeNoOfPayment' => trim($request->txtAddSchemeNo),
+        ]);
+
+        $message = $schemetype ? 2 : 1;
+        
+        return redirect()->route('fees.index')->with('message', $message);
     }
 
     /**
@@ -68,7 +82,14 @@ class SchemeTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $schemetype = SchemeType::findOrFail($request->txtUpdSchemeId);
+        $message = $schemetype->update([
+            'tblSchemeType' => strtoupper(trim($request->txtUpdScheme)),
+            'tblSchemeNoOfPayment' => strtoupper(trim($request->txtUpdSchemeNo)),
+
+        ]) ? 4 : 3;
+        
+        return redirect()->route('fees.index')->with('message', $message);
     }
 
     /**
@@ -77,8 +98,11 @@ class SchemeTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $schemetype = SchemeType::findOrFail($request->txtDelScheme);
+       
+        $message = $schemetype->update(['tblSchemeFlag' => 0]) ? 6 : 5;
+        return redirect()->route('payment.index')->with('message', $message);
     }
 }

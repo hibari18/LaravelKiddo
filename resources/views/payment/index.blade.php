@@ -33,7 +33,7 @@
       {
         var lvl = document.getElementById("selFeeLvl").value;
         var xmlhttp =  new XMLHttpRequest();
-        xmlhttp.open("GET","payment/"+document.getElementById("selFeeLvl").value,false);
+        xmlhttp.open("GET","fees/"+document.getElementById("selFeeLvl").value,false);
         xmlhttp.send(null);
 
         document.getElementById("datatable").innerHTML=xmlhttp.responseText;
@@ -74,7 +74,7 @@
         var feeId2 = document.getElementById("selFee").value;
         document.getElementById("txtUpdDetFeeId").value = feeId2;
         var xmlhttp =  new XMLHttpRequest();
-        xmlhttp.open("GET","changeTblFeeDetail.php?selFee="+document.getElementById("selFee").value,false);
+        xmlhttp.open("GET","feedetails"+document.getElementById("selFee").value,false);
         xmlhttp.send(null);
 
         document.getElementById("datatable4").innerHTML=xmlhttp.responseText;
@@ -100,11 +100,13 @@
             var f1=document.getElementById('txtUpdFeeId');
             var f2=document.getElementById('txtUpdFeeCode');
             var f3=document.getElementById('txtUpdFee');
-            var f4=document.getElementById('txtDelFee');
-            f1.value=cells[2].innerHTML;
+            var f4=document.getElementById('selUpdFeeStatus');
+            var f5=document.getElementById('txtDelFee');
+            f1.value=cells[0].innerHTML;
             f2.value=cells[2].innerHTML;
-            f3.value=cells[2].innerHTML;
-            f4.value=cells[2].innerHTML;
+            f3.value=cells[3].innerHTML;
+            f4.value=cells[5].innerHTML;
+            f5.value=cells[0].innerHTML;
           };
       }})();
 
@@ -210,15 +212,7 @@
         document.getElementById("txtFeeDetFee").value = feeId;
       }
 
-      $(document).ready(function(){
-        $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-          localStorage.setItem('activeTab', $(e.target).attr('href'));
-        });
-        var activeTab = localStorage.getItem('activeTab');
-        if(activeTab){
-          $('#myTab a[href="' + activeTab + '"]').tab('show');
-        }
-      });
+      
     </script>
 <!-- Main content -->
     <section class="content" style="margin-top: 3%">
@@ -228,26 +222,26 @@
             <div class="box-header with-border"></div>
             <div class="box-body">
               <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs" id="myTab">
                   <li class="active"><a href="#tab_1" data-toggle="tab">Fees</a></li>
                   <li><a href="#tab_2" data-toggle="tab">Payment Scheme Type</a></li>
                   <li><a href="#tab_3" data-toggle="tab">Payment Schedule</a></li>
                   <li><a href="#tab_4" data-toggle="tab">Fee Details</a></li>
                 </ul>
                 <div class="tab-content">
-                  <div class="tab-pane active" id="tab_1">
+                  <div class="tab-pane fade in active" id="tab_1">
                     @include('payment.fees')
                   </div><!-- /.tab-pane tab_1 -->
 
-                  <div class="tab-pane" id="tab_2">
+                  <div class="tab-pane fade" id="tab_2">
                     @include('payment.schemetype')
                   </div> <!-- tab-pane tab_2 -->
 
-                  <div class="tab-pane" id="tab_3">
+                  <div class="tab-pane fade" id="tab_3">
                     @include('payment.schedule')
                   </div> <!-- /.tab-pane -->
 
-                  <div class="tab-pane" id="tab_4">
+                  <div class="tab-pane fade" id="tab_4">
                       @include('payment.feedetails')
                     </div> <!-- /.tab-pane tab_4-->
                 </div> <!-- /.tab-content before tab_1-->

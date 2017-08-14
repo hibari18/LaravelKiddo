@@ -67,7 +67,7 @@
                                       @endforeach
                                     </div>
 
-                                    <div class="modal-footer" style="margin-top: 70%">
+                                    <div class="modal-footer" style="margin-top: 100%">
                                       <button type="submit" class="btn btn-info">Save</button>
                                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                     </div>
@@ -150,14 +150,7 @@
                             </div> <!--modal delete end-->
 
                             <table id="datatable4" class="table table-bordered table-striped">
-                              <thead>
-                              <tr>
-                                <th>Level</th>
-                                <th>Detail Name</th>
-                                <th>Amount</th>
-                                <th>Action</th>
-                              </tr>
-                              </thead>
+                              @include('payment.table.feedetail')
                             </table>
                         </div> <!-- box body tab_4-->
                       </div> <!-- /.box tab_4 -->
