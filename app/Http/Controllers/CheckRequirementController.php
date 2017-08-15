@@ -9,6 +9,8 @@ use App\FamilyInfo;
 use App\HealthInfo;
 use App\Level;
 use App\Requirement;
+use App\SchoolYear;
+use App\Student;
 
 class CheckRequirementController extends Controller
 {
@@ -25,9 +27,11 @@ class CheckRequirementController extends Controller
         $stepfour = HealthInfo::where('tblStudHealthFlag', 1)->get();
         $levels = Level::where('tblLevelFlag', 1)->get();
         $requirements = Requirement::where('tblRequirementFlag', 1)->get();
+        $schoolyear = SchoolYear::where('tblSchoolYearFlag', 1)->get();
+        $student = Student::where('tblStudentFlag', 1)->get();
 
 
-        return view('admission.index', compact('stepone', 'steptwo', 'stepthree','stepfour','levels','requirements'));
+        return view('admission.index', compact('stepone', 'steptwo', 'stepthree','stepfour','levels','requirements','schoolyear','student'));
     }
 
     /**
@@ -48,7 +52,33 @@ class CheckRequirementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $stepone = CheckRequirement::create([
+
+        //student id
+        $sy = substr(SchoolYear::select('tblSchoolYrStart')-> where('tblSchoolYrActive', 'Active')->first()->tblSchoolYrStart, 2);
+        $studId = substr(Student::select('tblStudentId')->whereRaw('left(tblStudentId, 2) ='.$sy)->groupBy('tblStudentId')->orderBy('tblStudentId', 'desc')->first()->tblStudentID, 3);    
+        if(empty($studId)) { 
+            $studId='001';
+             } else { 
+            $studId++;
+             } 
+        $id = sprintf('%03d', $studId); 
+        $studentid=$sy.$id;
+
+        //student requirement (conversion attempt)
+
+        $arreq = array(Requirement::where('tblRequirementFlag', 1));
+        while($row = mysqli_fetch_array($result))
+            {
+                $reqid=$row['tblReqId'];
+                array_push($arrreq, $reqid);
+                
+            }
+
+
+        ]);//end
+        
+        return;
     }
 
     /**

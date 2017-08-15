@@ -20,4 +20,7 @@ class CheckRequirement extends Model
 	public function requirement(){
 		return $this->belongsTo('App\Requirement', 'tblStudentInfo_tblReqId', 'tblReqId');
 	}
+	public function schoolyear(){
+		return $this->belongsTo('App\SchoolYear', 'tblStudentInfo_tblSchoolYrId', 'tblSchoolYrId');
+	}
 }

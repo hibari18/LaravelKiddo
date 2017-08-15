@@ -34,7 +34,49 @@ class FamilyInfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $stepthree = FamilyInfo::create([
+            //'tblParentRelation' => 'FATHER',
+            'tblParentFname' => trim($request->txtFatherFname),
+            'tblParentLname' => trim($request->txtFatherLname),
+            'tblParentMname' => trim($request->txtFatherMname),
+            'tblParentCpNo' => trim($request->txtFatherNum),
+            'tblParentEmail' => trim($request->txtFatherEmail),
+            'tblParentAddBldg' => trim($request->txtFatherAddBldg),
+            'tblParentAddSt' => trim($request->txtFatherAddSt),
+            'tblParentAddBrgy' => trim($request->txtFatherAddBrgy),
+            'tblParentAddCity' => trim($request->txtFatherAddCity),
+            'tblParentAddCountry' => trim($request->txtFatherAddCountry),
+            'tblParentTelNo' => trim($request->txtFatherTelnum),
+            'tblParentOccupation' => trim($request->txtFatherJob),
+            'tblParentCompany' => trim($request->txtFatherCompany),
+            'tblParentComAddBldg' => trim($request->txtFatherComAddBldg),
+            'tblParentComAddSt' => trim($request->txtFatherComAddSt),
+            'tblParentComAddBrgy' => trim($request->txtFatherComAddBrgy),
+            'tblParentComAddCity' => trim($request->txtFatherComAddCity),
+            'tblParentComAddCountry' => trim($request->txtFatherComAddCountry),
+            'tblParentWorkNo' => trim($request->txtFatherComNum),
+
+            'tblParentFname' => trim($request->txtMotherFname),
+            'tblParentLname' => trim($request->txtMotherLname),
+            'tblParentMname' => trim($request->txtMotherMname),
+            'tblParentCpNo' => trim($request->txtMotherNum),
+            'tblParentEmail' => trim($request->txtMotherEmail),
+            'tblParentAddBldg' => trim($request->txtMotherAddBldg),
+            'tblParentAddSt' => trim($request->txtMotherAddSt),
+            'tblParentAddBrgy' => trim($request->txtMotherAddBrgy),
+            'tblParentAddCity' => trim($request->txtMotherAddCity),
+            'tblParentAddCountry' => trim($request->txtMotherAddCountry),
+            'tblParentTelNo' => trim($request->txtMotherTelnum),
+            'tblParentOccupation' => trim($request->txtMotherJob),
+            'tblParentCompany' => trim($request->txtMotherCompany),
+            'tblParentComAddBldg' => trim($request->txtMotherComAddBldg),
+            'tblParentComAddSt' => trim($request->txtMotherComAddSt),
+            'tblParentComAddBrgy' => trim($request->txtMotherComAddBrgy),
+            'tblParentComAddCity' => trim($request->txtMotherComAddCity),
+            'tblParentComAddCountry' => trim($request->txtMotherComAddCountry),
+            'tblParentWorkNo' => trim($request->txtMotherComNum),
+
+        ]);
     }
 
     /**

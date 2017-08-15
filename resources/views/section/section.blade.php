@@ -32,7 +32,7 @@
             <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Division Name</label>
             <div class="col-sm-7 selectContainer">
            <select class="form-control" name="addDivSelect" id="addDivSelect" style="width: 100%;" onchange="changeDiv();">
-           <option selected value = '0'>--Select Division--</option>
+           <option selected value = '0' disabled>--Select Division--</option>
                 		@foreach($divisions as $division)
                         <option value="{{ $division->tblDivisionId}}">{{ $division->tblDivisionName }}</option>
                         @endforeach
@@ -46,7 +46,7 @@
           <label class="col-sm-4" style="text-align: right">Level Name</label>
           <div class="col-sm-7 selectContainer">
             <select class="form-control" name="addLvlSelect" id="addLvlSelect" disabled style="width: 100%;">
-              <option selected value = '0'>--Select Level--</option>
+              <option selected value = '0' disabled>--Select Level--</option>
             </select>
           </div>
         </div> 
@@ -61,7 +61,7 @@
                 <label class="col-sm-4" style="text-align: right">Session</label>
                 <div class="col-sm-7 selectContainer">
                 <select class="form-control" style="width: 100%" name="addSesSelect" id="addSesSelect">
-                <option selected>--Select Session--</option>
+                <option selected disabled>--Select Session--</option>
                 <option value="MORNING">MORNING</option>
                 <option value="AFTERNOON">AFTERNOON</option>
                 </select>
@@ -123,7 +123,7 @@
                 <label class="col-sm-4" style="text-align: right">Session</label>
                 <div class="col-sm-7 selectContainer">
                 <select class="form-control" style="width: 100%" name="updSesSelect" id="updSesSelect">
-                <option selected>--Select Session--</option>
+                <option selected disabled>--Select Session--</option>
                 <option value="MORNING">MORNING</option>
                 <option value="AFTERNOON">AFTERNOON</option>
                 </select>

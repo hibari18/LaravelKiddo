@@ -77,8 +77,6 @@
 
       @include('layouts.footer')
 
-      @include('layouts.sidebar')
-
     </div>
     <!-- ./wrapper -->
 

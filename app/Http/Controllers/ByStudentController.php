@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PersonalInfoController extends Controller
+class ByStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,25 +34,7 @@ class PersonalInfoController extends Controller
      */
     public function store(Request $request)
     {
-        $steptwo = PersonalInfo::create([
-            // tblStudInfo_tblStudentId - what do i do with this
-            'tblStudInfoFname' => trim($request->txtStudFname),
-            'tblStudInfoLname' => trim($request->txtStudLname),
-            'tblStudInfoMname' => trim($request->txtStudMname),
-            'tblStudInfoBday' => trim($request->txtStudBday),
-            'tblStudInfoBplace' => trim($request->txtStudBplace),
-            'tblStudInfoNationality' => trim($request->txtStudNat),
-            'tblStudInfoReligion' => trim($request->txtStudReligion),
-            'tblStudInfoAddBldg' => trim($request->txtStudAddBldg),
-            'tblStudInfoAddSt' => trim($request->txtStudAddSt),
-            'tblStudInfoAddBrgy' => trim($request->txtStudAddBrgy),
-            'tblStudInfoAddCity' => trim($request->txtStudAddCity),
-            'tblStudInfoAddCountry' => trim($request->txtStudAddCountry),
-            'tblStudInfoLang1' => trim($request->txtStudLang1),
-            'tblStudInfoLang2' => trim($request->txtStudLang2),
-        ]);
-
-        return;
+        //
     }
 
     /**

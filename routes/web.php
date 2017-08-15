@@ -42,3 +42,5 @@ Route::resource('feedetails', 'FeeDetailsController');
 
 Route::resource('admission', 'CheckRequirementController');
 
+Route::resource('sectioning', 'BySectionController');
+

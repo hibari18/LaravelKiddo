@@ -4,14 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FamilyInfo extends Model
+class BySection extends Model
 {
     protected $guarded = []; 
 	 
-	protected $primaryKey = 'tblParentId'; 
-	protected $table = 'tblparent'; 
+	protected $primaryKey = 'tblSectStudId'; 
+	protected $table = 'tblsectionstud'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false;
-
 }

@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Admission;
-use App\CheckRequirement;
-use App\PersonalInfo;
-use App\FamilyInfo;
-use App\HealthInfo;
+use App\BySection;
+// use App\ByStudent;
 
-class AdmissionController extends Controller
+class BySectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +15,10 @@ class AdmissionController extends Controller
      */
     public function index()
     {
-        $stepone = CheckRequirement::where('tblStudReqFlag', 1)->get();
-        $steptwo = PersonalInfo::where('tblStudInfoFlag', 1)->get();
-        $stepthree = FamilyInfo::where('tblParentFlag', 1)->get();
-        $stepfour = HealthInfo::where('tblStudHealthFlag', 1)->get();
+        $bysections = BySection::where('tblSectStudFlag', 1)->get();
+        $bystudents = BySection::where('tblSectStudFlag', 1)->get();
 
-        return view('admission.index', compact('stepone', 'steptwo', 'stepthree','stepfour'));
-
+        return view('sectioning.index', compact('bysection', 'bystudent'));
     }
 
     /**

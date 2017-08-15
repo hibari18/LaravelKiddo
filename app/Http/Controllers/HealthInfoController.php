@@ -34,7 +34,24 @@ class HealthInfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $stepfour = HealthInfo::create([
+            // tblStudHealth_tblStudentId ????
+            'tblStudHealthAllergies' => trim($request->txtHealthAllergies),
+            'tblStudHealthIllness' => trim($request->txtHealthIllness),
+            'tblStudHealthMedication' => trim($request->txtHealthMeds),
+            'tblStudHealthBloodType' => trim($request->txtHealthBtype),
+            //radiobutton h2 what do i do
+            'tblStudHealthReason' => trim($request->txtHealthReason),
+            //radiobutton r1 what do i do
+            'tblStudHealthDoctor' => trim($request->txtHealthDoctor),
+            'tblStudHealthHospital' => trim($request->txtHealthHospital),
+            'tblStudHealthHospitalNo' => trim($request->txtHealthHosNum),
+            'tblStudHealthHospAddBldg' => trim($request->txtHealthAddBldg),
+            'tblStudHealthHospAddSt' => trim($request->txtHealthAddSt),
+            'tblStudHealthHospAddBrgy' => trim($request->txtHealthAddBrgy),
+            'tblStudHealthHospAddCity' => trim($request->txtHealthAddCity),
+            'tblStudHealthHospAddCountry' => trim($request->txtHealthAddCountry),
+        ]);
     }
 
     /**
