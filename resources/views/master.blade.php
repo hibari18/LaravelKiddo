@@ -33,9 +33,19 @@
     <!-- fullCalendar 2.2.5-->
     <link rel="stylesheet" href="{{ asset('css/fullcalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fullcalendar.print.css') }}" media="print">
-  
 
-    
+    <!-- Maintenance validDesign -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignDivision.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignLevel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSubject.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignDetails.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSection.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignReq.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignFee.css') }}">
+
+    <!-- Transaction validDesign -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignStepTwo.css') }}">
+
     <!-- jQuery 2.2.3 -->
     <script src="{{ asset('js/jQuery/jquery-2.2.3.min.js') }}"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -68,7 +78,7 @@
       <div class="content-wrapper">
         <!-- Main content -->
         <div class="container" style="width: 100%">
-        
+
           @yield('content')
 
         </div>

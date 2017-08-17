@@ -52,7 +52,7 @@
 //       target=target.parentElement;
 //     }
 //     var cells=target.cells;
-    
+
 //     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
 //     var f1=document.getElementById('txtUpdCurrId');
 //     var f2=document.getElementById('txtUpdCurr');
@@ -79,7 +79,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     //var f1=document.getElementById('txtUpdDetCurrId');
     var f1=document.getElementById('txtUpdDetId');
@@ -117,7 +117,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     var f1=document.getElementById('txtUpdDivId');
     var f2=document.getElementById('txtUpdDiv');
@@ -142,7 +142,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     var f1=document.getElementById('txtUpdLvlId');
     var f2=document.getElementById('txtUpdLvl');
@@ -172,7 +172,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     var f1=document.getElementById('txtUpdSubjId');
     var f2=document.getElementById('txtUpdSubjId2');
@@ -215,7 +215,7 @@ $(document).ready(function(){
               <li><a href="#tab_4" data-toggle="tab">Details</a></li>
             </ul>
             <div class="tab-content">
-              
+
           <div class="tab-pane fade in active" id="tab_1">
             @include('curriculum.division')
           </div>
@@ -246,11 +246,11 @@ $(document).ready(function(){
         </div>
         <!-- col-md-12 -->
       </div>
-      <!-- row -->  
+      <!-- row -->
     </section>
     <!-- /.content -->
 
-    
+
 
 
 
@@ -268,7 +268,7 @@ $(document).ready(function(){
       var xmlhttp =  new XMLHttpRequest();
       xmlhttp.open("GET","leveladd/"+document.getElementById("selDivName").value,false);
       xmlhttp.send(null);
-      
+
       document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
 
     }
@@ -278,7 +278,7 @@ $(document).ready(function(){
   //     var xmlhttp =  new XMLHttpRequest();
   //     xmlhttp.open("GET","leveladd/"+document.getElementById("selAddDetDiv").value,false);
   //     xmlhttp.send(null);
-      
+
   //     document.getElementById("selAddDetLvl").innerHTML=xmlhttp.responseText;
   //   }
     function changeUpdDiv()
@@ -316,94 +316,53 @@ $(document).ready(function(){
   });
 </script>
 
+<!-- Division Validatins -->
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('#addCurriculum').bootstrapValidator({
-      feedbackIcons: {
-          valid: 'glyphicon glyphicon-ok',
-          invalid: 'glyphicon glyphicon-remove',
-          validating: 'glyphicon glyphicon-refresh'
-      },
-        fields: {
-          txtAddCurr: {
-            validators: {
-              stringLength: {
-                min: 3,
-                message: 'Please enter at least 3 chracters.'
-              },
-              regexp: {
-                regexp: /^[A-Za-z_][0-9a-zA-Z_][\w-'\s]+$/,
-                message: 'The first character must be an alphabet and does not allow special character.'
-              },
-              notEmpty: {
-                message: 'Curriculum name is required'
-              }
-            }
+ $(document).ready(function() {
+  $('#UpdDivision').bootstrapValidator({
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      txtUpdDiv: {
+        validators: {
+          stringLength: {
+            min: 5,
+            max: 20,
+            message: 'Please enter at least 5 characters'
           },
-          selAddActive: {
-            validators: {
-              notEmpty: {
-                message: 'Status is required.'
-              },
-            }
+          regexp: {
+            regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
+              message: 'The first character must be an alphabet or does not allow special character'
           },
+          notEmpty: {
+            message: 'Division name is required'
+          }
         }
-    })
-      .on('success.form.bv', function (e) {
-          // Prevent form submission
-          //e.preventDefault();
-      });
-    $('#addModalOne')
-      .on('shown.bs.modal', function () {
-          $('#addCurriculum').find().focus();
-      })
-      .on('hidden.bs.modal', function () {
-          $('#addCurriculum').bootstrapValidator('resetForm', true);
-      });
-
-    $('#UpdCurriculum').bootstrapValidator({
-      feedbackIcons: {
-        valid: 'glyphicon glyphicon-ok',
-        invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
       },
-      fields: {
-        txtUpdCurr: {
-          validators: {
-            stringLength: {
-              min: 3,
-              max: 20,
-              message: 'Please enter at least 3 characters.'
-            },
-            regexp: {
-              regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-'\s]+$/,
-              message: 'The first character must be an alphabet and does not allow special character.'
-            },
-            notEmpty: {
-              message: 'Curriculum name is required'
-            }
+      selUpdDivAct: {
+        validators:{
+          notEmpty:{
+            message: 'Status is required'
           }
-        },
-        selUpdActive: {
-          validators: {
-            notEmpty: {
-              message: 'Status is required.'
-            },
-          }
-        },
+        }
+      }
       }
     })
-      .on('success.form.bv', function (e) {
-        // Prevent form submission
-        // e.preventDefault();
+    .on('success.form.bv', function (e) {
+      // Prevent form submission
+      //e.preventDefault();
     });
-    $('#updateModalOne')
-      .on('shown.bs.modal', function () {
-          $('#UpdCurriculum').find().focus();
-      })
-      .on('hidden.bs.modal', function () {
-          $('#UpdCurriculum').bootstrapValidator('resetForm', true);
-      });
+
+    $('#updateModalThree')
+       .on('shown.bs.modal', function () {
+           $('#UpdDivision').find().focus();
+        })
+        .on('hide.bs.modal', function () {
+            $('#UpdDivision').bootstrapValidator('resetForm', true);
+        });
   });
 </script>
 @endsection
