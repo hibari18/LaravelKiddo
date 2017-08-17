@@ -7,11 +7,10 @@
   <!-- Modal starts here-->
   <div class="modal fade" id="updateModalThree" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Update Division</h3>
         </div>
         <form autocomplete="off" method="post" action="{{ route('division.update','id') }}" name="UpdDivision" id="UpdDivision">
@@ -24,7 +23,7 @@
             <div class="col-sm-7 selectContainer">
               <input type="text" class="form-control" name="txtUpdDiv" id="txtUpdDiv" style="text-transform:uppercase ;">
             </div>
-        </div> 
+        </div>
         <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Status</label>
                 <div class="col-sm-7 selectContainer">
@@ -33,7 +32,7 @@
                   <option>INACTIVE</option>
                 </select>
                 </div>
-              
+
         </div>
         </div>
         <div class="modal-footer" style="margin-top: 15%">
@@ -42,7 +41,7 @@
         </div>
         </form>
       </div>
-      
+
     </div>
   </div>
               <table id="datatable2" class="table table-bordered table-striped">

@@ -316,53 +316,356 @@ $(document).ready(function(){
   });
 </script>
 
-<!-- Division Validatins -->
-<script type="text/javascript">
- $(document).ready(function() {
-  $('#UpdDivision').bootstrapValidator({
-    feedbackIcons: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-      txtUpdDiv: {
-        validators: {
-          stringLength: {
-            min: 5,
-            max: 20,
-            message: 'Please enter at least 5 characters'
-          },
-          regexp: {
-            regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
-              message: 'The first character must be an alphabet or does not allow special character'
-          },
-          notEmpty: {
-            message: 'Division name is required'
-          }
-        }
+  <!-- Division Validatins -->
+  <script type="text/javascript">
+   $(document).ready(function() {
+    $('#UpdDivision').bootstrapValidator({
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
       },
-      selUpdDivAct: {
-        validators:{
-          notEmpty:{
-            message: 'Status is required'
+      fields: {
+        txtUpdDiv: {
+          validators: {
+            stringLength: {
+              min: 5,
+              max: 20,
+              message: 'Please enter at least 5 characters'
+            },
+            regexp: {
+              regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
+                message: 'The first character must be an alphabet or does not allow special character'
+            },
+            notEmpty: {
+              message: 'Division name is required'
+            }
+          }
+        },
+        selUpdDivAct: {
+          validators:{
+            notEmpty:{
+              message: 'Status is required'
+            }
           }
         }
-      }
+        }
+      })
+      .on('success.form.bv', function (e) {
+        // Prevent form submission
+        //e.preventDefault();
+      });
+
+      $('#updateModalThree')
+         .on('shown.bs.modal', function () {
+             $('#UpdDivision').find().focus();
+          })
+          .on('hide.bs.modal', function () {
+              $('#UpdDivision').bootstrapValidator('resetForm', true);
+          });
+    });
+  </script>
+
+  <!-- level Validations -->
+  <script>
+    $(document).ready(function() {
+      $('#addLevel').bootstrapValidator({
+        feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+          txtAddLvl: {
+            validators: {
+              stringLength: {
+                min: 5,
+                max: 20,
+                message: 'Please enter at least 5 characters.'
+              },
+              regexp: {
+                regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-'\s]+$/,
+                message: 'The first character must be an alphabet or does not allow special character'
+              },
+              notEmpty: {
+                message: 'Level name is required'
+              }
+            }
+          },
+          selAddLvlDiv: {
+            validators: {
+              notEmpty: {
+                message: 'Status is required'
+              },
+            }
+          },
+          selAddLvlAct: {
+            validators: {
+              notEmpty: {
+                message: 'Status is required'
+              },
+            }
+          },
+        }
+      })
+      .on('success.form.bv', function (e) {
+        // Prevent form submission
+        // e.preventDefault();
+      });
+
+      $('#addModalFour')
+          .on('shown.bs.modal', function () {
+             $('#addLevel').find().focus();
+          })
+          .on('hide.bs.modal', function () {
+              $('#addLevel').bootstrapValidator('resetForm', true);
+          });
+
+        $('#UpdLevel').bootstrapValidator({
+            feedbackIcons: {
+              valid: 'glyphicon glyphicon-ok',
+              invalid: 'glyphicon glyphicon-remove',
+              validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+              txtUpdLvl: {
+                validators: {
+                  stringLength: {
+                    min: 5,
+                    max: 20,
+                    message: 'Please enter at least 5 characters.'
+                  },
+                  regexp: {
+                    regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-'\s]+$/,
+                    message: 'The first character must be an alphabet or does not allow special character'
+                  },
+                  notEmpty: {
+                    message: 'Level name is required'
+                  }
+                }
+              },
+              selUpdLvlDiv: {
+                validators: {
+                  notEmpty: {
+                    message: 'Division is required.'
+                  },
+                }
+              },
+              selUpdLvlAct: {
+                validators: {
+                  notEmpty: {
+                    message: 'Status is required.'
+                  },
+                }
+              },
+              }
+            })
+              .on('success.form.bv', function (e) {
+               // Prevent form submission
+              // e.preventDefault();
+        });
+
+        $('#updateModalFour')
+           .on('shown.bs.modal', function () {
+               $('#UpdLevel').find().focus();
+            })
+            .on('hide.bs.modal', function () {
+                $('#UpdLevel').bootstrapValidator('resetForm', true);
+            });
+
+    });
+  </script>
+
+  <!-- Subject Validations -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+     $('#addSubject').bootstrapValidator({
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        txtAddSubjId: {
+          validators: {
+            stringLength: {
+              min: 5,
+              max: 20,
+              message: 'Please enter at least 5 characters'
+            },
+            regexp: {
+             regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
+             message: 'The first character must be an alphabet or does not allow special character'
+            },
+            notEmpty: {
+             message: 'Subject code is required'
+            }
+          }
+        },
+        txtAddSubj: {
+          validators: {
+            stringLength: {
+              min: 3,
+              max: 30,
+              message: 'Please enter at least 3 characters'
+            },
+            regexp: {
+              regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
+              message: 'The first character must be an alphabet or does not allow special character'
+            },
+            notEmpty: {
+              message: 'Subject name is required'
+            }
+          }
+        },
+        selAddSubjId: {
+          validators: {
+            notEmpty: {
+              message: 'Status is required'
+            },
+          }
+        },
       }
     })
+
+    .on('success.form.bv', function (e) {
+         // Prevent form submission
+         //e.preventDefault();
+    });
+
+    $('#addModalFive')
+      .on('shown.bs.modal', function () {
+        $('#addSubject').find().focus();
+      })
+      .on('hide.bs.modal', function () {
+        $('#addSubject').bootstrapValidator('resetForm', true);
+      });
+
+     $('#UpdSubject').bootstrapValidator({
+         feedbackIcons: {
+           valid: 'glyphicon glyphicon-ok',
+           invalid: 'glyphicon glyphicon-remove',
+           validating: 'glyphicon glyphicon-refresh'
+         },
+         fields: {
+           txtUpdSubj: {
+             validators: {
+               stringLength: {
+                 min: 5,
+                 max: 20,
+                 message: 'Please enter at least 5 characters'
+               },
+               regexp: {
+                 regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-'\s]+$/,
+                 message: 'The first character must be an alphabet or does not allow special character'
+               },
+               notEmpty: {
+                 message: 'Subject name is required'
+               }
+             }
+           },
+           selUpdSubjAct: {
+             validators: {
+               notEmpty: {
+                 message: 'Status is required.'
+               },
+             }
+           },
+         }
+       })
+
+      .on('success.form.bv', function (e) {
+         // Prevent form submission
+       //e.preventDefault();
+     });
+
+     $('#updateModalFive')
+        .on('shown.bs.modal', function () {
+            $('#UpdSubject').find().focus();
+         })
+         .on('hide.bs.modal', function () {
+             $('#UpdSubject').bootstrapValidator('resetForm', true);
+         });
+    });
+  </script>
+
+  <!-- Details Validation -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#addCurrDetails').bootstrapValidator({
+        feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+          selAddDetLvl: {
+            validators: {
+              notEmpty: {
+                message: 'Level is required.'
+              },
+            }
+          },
+          selAddDetSubj: {
+            validators: {
+             notEmpty: {
+               message: 'Subject Code is required.'
+             },
+            }
+          },
+        }
+      })
+
     .on('success.form.bv', function (e) {
       // Prevent form submission
       //e.preventDefault();
     });
 
-    $('#updateModalThree')
-       .on('shown.bs.modal', function () {
-           $('#UpdDivision').find().focus();
-        })
-        .on('hide.bs.modal', function () {
-            $('#UpdDivision').bootstrapValidator('resetForm', true);
-        });
-  });
-</script>
+    $('#addModalTwo')
+      .on('shown.bs.modal', function () {
+        $('#addCurrDetails').find().focus();
+      })
+      .on('hide.bs.modal', function () {
+        $('#addCurrDetails').bootstrapValidator('resetForm', true);
+      });
+
+      $('#UpdCurrDetails').bootstrapValidator({
+        feedbackIcons: {
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+          selUpdDetLvl: {
+            validators: {
+              notEmpty: {
+                message: 'Level is required.'
+              },
+            }
+          },
+          selUpdDetSubj: {
+            validators: {
+             notEmpty: {
+               message: 'Subject Code is required.'
+             },
+            }
+          },
+        }
+      })
+
+    .on('success.form.bv', function (e) {
+      // Prevent form submission
+      //e.preventDefault();
+    });
+
+    $('#updateModalTwo')
+      .on('shown.bs.modal', function () {
+        $('#UpdCurrDetails').find().focus();
+      })
+      .on('hide.bs.modal', function () {
+        $('#UpdCurrDetails').bootstrapValidator('resetForm', true);
+      });
+    });
+  </script>
+
 @endsection

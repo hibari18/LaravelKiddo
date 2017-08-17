@@ -28,28 +28,27 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3 class="modal-title" style="font-style: bold">Add Details</h3>
           </div>
           <form method="post" action="{{ route('curriculumdetail.store') }}" data-toggle="validator" role="form" name="addCurrDetails" id="addCurrDetails">
           {{ csrf_field() }}
             <input type="hidden" name="selAddDetDiv" id="selAddDetDiv">
             <div class="modal-body">
-             
+
              @include('curriculum.select.leveladd')
 
-              <div class="form-group" style="margin-top: 25%">
+              <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Subject Code</label>
                 <div class="col-sm-7 selectContainer">
                   <select class="required form-control" style="width: 100%;" name="selAddDetSubj" id="selAddDetSubj" onchange="passSubjName();">
-                  <option disabled="disabled" selected="selected">--SELECT SUBJECT CODE--</option>
+                  <option disabled="disabled" selected="selected" value="">--Select Subject Code--</option>
                         @foreach($subjects as $subject)
                         <option value="{{ $subject->tblSubjectId}}">{{ $subject->tblSubjectId}}</option>
                         @endforeach
                 </select>
                 </div>
               </div>
-              
+
               @include('curriculum.select.subjname')
 
             </div>
@@ -68,7 +67,6 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3 class="modal-title" style="font-style: bold">Update Curriculum Details</h3>
           </div>
           <form autocomplete="off" data-toggle="validator" role="form" method="post" action="{{ route('curriculumdetail.update','id') }}" name="UpdCurrDetails"
@@ -80,9 +78,9 @@
                 <div><input type="hidden" name="txtUpdDetCurrId" id="txtUpdDetCurrId" />
                   <input type="hidden" name="txtUpdDetId" id="txtUpdDetId" />
                   <input type="hidden" name="txtUpdDetLvlId" id="txtUpdDetLvlId" /></div>
-                
+
               </div>
-              <div class="form-group" style="margin-top: 15%">
+              <div class="form-group" style="margin-top: 5%">
                 <label class="col-sm-4" style="text-align: right">Level</label>
                 <div class="col-sm-7 selectContainer">
                   <select class="form-control" style="width: 100%;" name="selUpdDetLvl" id="selUpdDetLvl">
@@ -93,9 +91,9 @@
                 </select>
                 </div>
               </div>
-              <div class="form-group" style="margin-top: 25%">
+              <div class="form-group" style="margin-top: 15%">
                 <label class="col-sm-4" style="text-align: right">Subject Code</label>
-                <div class="col-sm-7">
+                <div class="col-sm-7 selectContainer">
                   <select class="form-control" style="width: 100%;" name="selUpdDetSubj" id="selUpdDetSubj" onchange="passSubjNameUpd();">
                   <option disabled>--SELECT SUBJECT CODE--</option>
                         @foreach($subjects as $subject)
@@ -121,7 +119,6 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h3 class="modal-title" style="font-style: bold">Delete Detail</h3>
           </div>
           <form method="post" action="{{ route('curriculumdetail.destroy','id') }}">

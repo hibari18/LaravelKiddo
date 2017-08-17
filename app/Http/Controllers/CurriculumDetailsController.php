@@ -50,7 +50,7 @@ class CurriculumDetailsController extends Controller
         ]);
 
         $message = $details ? 2 : 1;
-        
+
         return redirect()->route('division.index')->with('message', $message);
     }
 
@@ -65,14 +65,14 @@ class CurriculumDetailsController extends Controller
     {
         $details = Division::where('tblDivisionId', $id)->first()
             ->curriculum_details()->where('tblDetailsFlag', 1)->get();
-        
+
         return view('curriculum.table.curriculum-details', compact('details'));
     }
 
     public function show2(Request $request, $id)
     {
        $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
-       echo '<option selected>--SELECT LEVEL--</option>';
+       echo '<option selected value="">--Select Level--</option>';
         foreach($levels as $level){
             echo '<option value="'.$level->tblLevelId.'">'.$level->tblLevelName.'</option>';
         }
@@ -82,10 +82,10 @@ class CurriculumDetailsController extends Controller
 
     public function show3(Request $request, $id)
     {
-       
-        $subject = Subject::findOrFail($id);     
+
+        $subject = Subject::findOrFail($id);
         return $subject->tblSubjectDesc;
-        
+
     }
 
     /**
@@ -113,7 +113,7 @@ class CurriculumDetailsController extends Controller
             'tblCurriculumDetail_tblLevelId' => trim($request->selUpdDetLvl),
             'tblCurriculumDetail_tblSubjectId' => trim($request->selUpdDetSubj),
         ]) ? 4 : 3;
-        
+
         return redirect()->route('division.index')->with('message', $message);
     }
 
