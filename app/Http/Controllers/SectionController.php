@@ -52,7 +52,7 @@ class SectionController extends Controller
         ]);
 
         $message = $section ? 2 : 1;
-        
+
         return redirect()->route('section.index')->with('message', $message);
     }
 
@@ -65,7 +65,7 @@ class SectionController extends Controller
     public function show($id)
     {
         $levels = Level::where('tblLevel_tblDivisionId', $id)->where('tblLevelFlag', 1)->get();
-        echo '<option selected value="0">--Select Level--</option>';
+        echo '<option selected value="">--Select Level--</option>';
         foreach($levels as $level){
             echo '<option value="'.$level->tblLevelId.'">'.$level->tblLevelName.'</option>';
         }
@@ -94,7 +94,7 @@ class SectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function edit($id)
     {
         //
@@ -116,7 +116,7 @@ class SectionController extends Controller
             'tblSectionName' => strtoupper(trim($request->updSectName)),
             'tblSectionSession' => trim($request->updSesSelect),
         ]) ? 4 : 3;
-        
+
         return redirect()->route('section.index')->with('message', $message);
     }
 
@@ -129,7 +129,7 @@ class SectionController extends Controller
     public function destroy(Request $request, $id)
     {
         $section = Section::findOrFail($request->txtDelSectId);
-       
+
         $message = $section->update(['tblSectionFlag' => 0]) ? 6 : 5;
         return redirect()->route('section.index')->with('message', $message);
     }

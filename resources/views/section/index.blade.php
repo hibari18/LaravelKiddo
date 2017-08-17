@@ -17,7 +17,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     var f1=document.getElementById('updDivId');
     var f2=document.getElementById('updLvlId');
@@ -40,8 +40,8 @@ function run(){
   };
 }})();
         $(document).on('click', '.edit', function(){
-            var divID = $(this).parent().siblings()[0].innerHTML; 
-            var lvlID = $('#updLvlId').val(); 
+            var divID = $(this).parent().siblings()[0].innerHTML;
+            var lvlID = $('#updLvlId').val();
             $.ajax({
                 type: 'get',
                 url: '/section1/'+divID+'/'+lvlID,
@@ -56,27 +56,27 @@ function run(){
 
 <?php
    $message = session('message');
-    
+
     if($message == 1) {
       echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 2) {
       echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 3) {
       echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 4) {
       echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 5) {
       echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
@@ -87,7 +87,7 @@ function run(){
       <div class="row">
         <div class="col-md-12">
           <!-- Custom Tabs -->
-          
+
           @include('section.section')
         </div>
   		</div>
@@ -103,8 +103,8 @@ function run(){
     {
     echo '<script>alert("Success"); </script>';
     }
-  } 
-?> 
+  }
+?>
     </section>
     <!-- /.content -->
 
@@ -116,8 +116,8 @@ function run(){
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","/section/"+document.getElementById("addDivSelect").value,false);
     xmlhttp.send(null);
-    
-    document.getElementById("addLvlSelect").innerHTML = xmlhttp.responseText; 
+
+    document.getElementById("addLvlSelect").innerHTML = xmlhttp.responseText;
 
   }
   function changeDivUpd()
@@ -126,106 +126,117 @@ function run(){
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","section/"+$("#updDivSelect").val(),false);
     xmlhttp.send(null);
-    
+
     document.getElementById("updLvlName").innerHTML=xmlhttp.responseText;
 
   }
 </script>
 
-<script>
+  <script>
    $(document).ready(function() {
     $('#formAdd').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
         feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            addDivSelect: {
-                validators: {
-                  greaterThan: {
-                      value: 1,
-                      message: 'Division name is required.'
-                  },
-                }
-            },
-             addLvlSelect: {
-                validators: {
-                  greaterThan: {
-                      value: 1,
-                      message: 'Level name is required.'
-                  },
-                }
-            },
-            addSectTxt: {
-                validators: {
-                    stringLength: {   
-                        min: 4,
-                        max: 20,
-                        message: 'You have to input between 4 to 20 characters.'
-                    },
-
-                    regexp: {
-                        regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
-                        message: 'The first letter should be an alphabet (Must not contain special characters.).'
-                    },
-                        notEmpty: {
-                        message: 'Section name is required'
-                    }
-                }
-            },
+          addDivSelect: {
+            validators: {
+              notEmpty: {
+                message: 'Division name is required.'
+              },
             }
+          },
+          addLvlSelect: {
+            validators: {
+              notEmpty: {
+                message: 'Level Name is required.'
+              },
+            }
+          },
+          addSectTxt: {
+            validators: {
+              stringLength: {
+                min: 3,
+                max: 20,
+                message: 'Please enter at least 3 chracters'
+              },
+              regexp: {
+                regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-\s]+$/,
+                message: 'The first character must be an alphabet or does not allow special character'
+              },
+              notEmpty: {
+                message: 'Section name is required'
+              }
+            }
+          },
+          addSesSelect:{
+            validators: {
+              notEmpty: {
+                  message: 'Session is required'
+              },
+            }
+          },
+        }
         })
 
-    $('#addModalOne')
-       .on('shown.bs.modal', function () {
-           $('#formAdd').find().focus();
-        })
-        .on('hidden.bs.modal', function () {
-            $('#formAdd').bootstrapValidator('resetForm', true);
-        });
-});
-</script>
+      $('#addModalOne')
+         .on('shown.bs.modal', function () {
+             $('#formAdd').find().focus();
+          })
+          .on('hide.bs.modal', function () {
+              $('#formAdd').bootstrapValidator('resetForm', true);
+          });
 
-<script>
-   $(document).ready(function() {
-    $('#updSection').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+      $('#updSection').bootstrapValidator({
         feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            updSectName: {
-                validators: {
-                    stringLength: {  
-                        min: 3,
-                        max: 20,
-                        message: 'You have to input least input 3 characters'
-                    },
-
-                    regexp: {
-                        regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
-                        message: 'The first letter should be an alphabet (Must not contain special characters.).'
-                    },
-                        notEmpty: {
-                        message: 'Section name is required'
-                    }
-                }
-            },
+          updLvlName: {
+            validators: {
+              notEmpty: {
+                message: 'Level name is required.'
+              },
             }
-        })
-    
-    $('#updateModalOne')
-       .on('shown.bs.modal', function () {
-           $('#updSection').find().focus();
-        })
-        .on('hidden.bs.modal', function () {
-            $('#updSection').bootstrapValidator('resetForm', true);
-        });
-});
-</script>
+          },
+          updSectName: {
+            validators: {
+              stringLength: {
+                min: 3,
+                max: 20,
+                message: 'Please enter at least 3 chracters'
+              },
+              regexp: {
+                regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-\s]+$/,
+                  message: 'The first character must be an alphabet or does not allow special character'
+              },
+              notEmpty: {
+                message: 'Section name is required'
+              }
+            }
+          },
+          updSesSelect:{
+            validators: {
+              notEmpty: {
+                  message: 'Session is required'
+              },
+            }
+          },
+        }
+      })
+
+      $('#updateModalOne')
+         .on('shown.bs.modal', function () {
+             $('#updSection').find().focus();
+          })
+          .on('hide.bs.modal', function () {
+              $('#updSection').bootstrapValidator('resetForm', true);
+          });
+  });
+  </script>
 
 @endsection
