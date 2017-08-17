@@ -3,27 +3,27 @@
 @section('content')
 <?php
     $message = session('message');
-    
+
     if($message == 1) {
       echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 2) {
       echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 3) {
       echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 4) {
       echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 5) {
       echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
@@ -61,115 +61,124 @@
   }})();
     </script>
 
-    <div class="container">
     @include('requirement.requirement')
-    </div>
 
- <script>
-    $(document).ready(function() {
-      $('#addReq').bootstrapValidator({
-        feedbackIcons: {
-          valid: 'glyphicon glyphicon-ok',
-          invalid: 'glyphicon glyphicon-remove',
-          validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-          txtAddReqName: {
-            validators: {
-              stringLength: {
-                min: 2,
-                max: 20,
-                message: 'You must input atleast 2 characters'
-              },
-               regexp: {
-                        regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
-                        message: 'The first letter should be an alphabet (Must not contain special characters.).'
-                    },
-              notEmpty: {
-                message: 'Requirement name is required'
-              }
-            }
-          },
-          txtAddReqDesc: {
-            validators: {
-              stringLength: {
-                min: 5,
-                max: 100,
-                message: 'You must input atleast 5 characters'
-              },
-              notEmpty: {
-                message: 'Requirement description is required'
-              },
-              regexp: {
-                regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
-                message: 'The first letter should be an alphabet (Must not contain special characters.).'
-              },
-            }
-          },
-        }
-      })
 
-      $('#addModalOne')
-         .on('shown.bs.modal', function () {
-             $('#addReq').find().focus();
-          })
-          .on('hidden.bs.modal', function () {
-              $('#addReq').bootstrapValidator('resetForm', true);
-          });
-  });
-  </script>
+    <script>
+       $(document).ready(function() {
+         $('#addReq').bootstrapValidator({
+           feedbackIcons: {
+             valid: 'glyphicon glyphicon-ok',
+             invalid: 'glyphicon glyphicon-remove',
+             validating: 'glyphicon glyphicon-refresh'
+           },
+           fields: {
+             txtAddReqName: {
+               validators: {
+                 stringLength: {
+                   min: 3,
+                   max: 20,
+                   message: 'Please enter at least 3 chracters'
+                 },
+                  regexp: {
+                           regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-\s]+$/,
+                           message: 'The first character must be an alphabet or does not allow special character'
+                       },
+                 notEmpty: {
+                   message: 'Requirement name is required'
+                 }
+               }
+             },
+             txtAddReqDesc: {
+               validators: {
+                 stringLength: {
+                   min: 5,
+                   max: 100,
+                   message: 'You must input atleast 5 characters'
+                 },
+                 regexp: {
+                   regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-\s]+$/,
+                   message: 'The first character must be an alphabet or does not allow special character'
+                 },
+                 notEmpty: {
+                   message: 'Requirement description is required'
+                 },
+               }
+             },
+             selAddReqStatus:{
+               validators: {
+                 notEmpty: {
+                     message: 'Status is required'
+                 },
+               }
+             },
+           }
+         })
 
-  <script>
-    $(document).ready(function() {
-      $('#UpdReq').bootstrapValidator({
-        feedbackIcons: {
-          valid: 'glyphicon glyphicon-ok',
-          invalid: 'glyphicon glyphicon-remove',
-          validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-          txtUpdReqName: {
-            validators: {
-              stringLength: {
-                min: 2,
-                max: 20,
-                message: 'You have to input characters between 2 to 20 chracters'
-              },
-              regexp: {
-                regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
-                message: 'The first letter should be an alphabet (Must not contain special characters.).'
-              },
-              notEmpty: {
-                message: 'Requirement name is required'
-              }
-            }
-          },
-          txtUpdReqDesc: {
-            validators: {
-              stringLength: {
-                min: 5,
-                max: 20,
-                message: 'You have to input characters between 5 to 20 chracters'
-              },
-              regexp: {
-                regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
-                message: 'The first letter should be an alphabet (Must not contain special characters.).'
-              },
-              notEmpty: {
-                message: 'Requirement description is required'
-              }
-            }
-          },
-        }
-      })
+         $('#addModalOne')
+            .on('shown.bs.modal', function () {
+                $('#addReq').find().focus();
+             })
+             .on('hide.bs.modal', function () {
+                 $('#addReq').bootstrapValidator('resetForm', true);
+             });
 
-      $('#updateModalOne')
-         .on('shown.bs.modal', function () {
-             $('#UpdReq').find().focus();
-          })
-          .on('hidden.bs.modal', function () {
-              $('#UpdReq').bootstrapValidator('resetForm', true);
-          });
-  });
-  </script> 
+         $('#UpdReq').bootstrapValidator({
+           feedbackIcons: {
+             valid: 'glyphicon glyphicon-ok',
+             invalid: 'glyphicon glyphicon-remove',
+             validating: 'glyphicon glyphicon-refresh'
+           },
+           fields: {
+             txtUpdReqName: {
+               validators: {
+                 stringLength: {
+                   min: 3,
+                   max: 20,
+                   message: 'Please enter at least 3 chracters'
+                 },
+                 regexp: {
+                   regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
+                   message: 'The first character must be an alphabet or does not allow special character'
+                 },
+                 notEmpty: {
+                   message: 'Requirement name is required'
+                 }
+               }
+             },
+             txtUpdReqDesc: {
+               validators: {
+                 stringLength: {
+                   min: 5,
+                   max: 100,
+                   message: 'Please enter at least 5 chracters'
+                 },
+                 regexp: {
+                   regexp: /^[a-zA-Z_][0-9a-zA-Z_][\w-\s]+$/,
+                   message: 'The first character must be an alphabet or does not allow special character'
+                 },
+                 notEmpty: {
+                   message: 'Requirement description is required'
+                 }
+               }
+             },
+             selUpdReqStatus:{
+               validators: {
+                 notEmpty: {
+                     message: 'Status is required'
+                 },
+               }
+             },
+           }
+         })
+
+         $('#updateModalOne')
+            .on('shown.bs.modal', function () {
+                $('#UpdReq').find().focus();
+             })
+             .on('hide.bs.modal', function () {
+                 $('#UpdReq').bootstrapValidator('resetForm', true);
+             });
+     });
+     </script>
 @endsection

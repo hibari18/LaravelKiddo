@@ -47,14 +47,14 @@
                                       <label class="col-sm-4" style="text-align: right">Status</label>
                                       <div class="col-sm-7 selectContainer">
                                       <select class="form-control" style="width: 100%;" name="selAddReqStatus" id="selAddReqStatus">
-                                        <option selected="selected" disabled="disabled">--Select Status--</option>
+                                        <option selected="selected" disabled="disabled" value="">--Select Status--</option>
                                         <option value="MANDATORY">MANDATORY</option>
                                         <option value="TO FOLLOW">TO FOLLOW</option>
                                       </select>
-                                      </div>       
+                                      </div>
                               </div>
                               </div>
-                              <div class="modal-footer" style="margin-top: 10%">
+                              <div class="modal-footer" style="margin-top: 15%">
                                 <button type="submit" class="btn btn-info" name="btnAddReq" id="btnAddReq">Save</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                               </div>
@@ -98,10 +98,10 @@
                                         <option value="MANDATORY">MANDATORY</option>
                                         <option value="TO FOLLOW">TO FOLLOW</option>
                                       </select>
-                                      </div>       
+                                      </div>
                               </div>
                               </div>
-                              <div class="modal-footer" style="margin-top: 10%">
+                              <div class="modal-footer" style="margin-top: 15%">
                                 <button type="submit" class="btn btn-info" name="btnUpdReq" id="btnUpdReq">Save</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                               </div>

@@ -3,27 +3,27 @@
 @section('content')
 <?php
     $message = session('message');
-    
+
     if($message == 1) {
       echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 2) {
       echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 3) {
       echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 4) {
       echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 5) {
       echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
@@ -37,7 +37,7 @@
         xmlhttp.send(null);
 
         document.getElementById("datatable").innerHTML=xmlhttp.responseText;
-        
+
       }
 
       function changeSchedSchemeLvl()
@@ -212,7 +212,7 @@
         document.getElementById("txtFeeDetFee").value = feeId;
       }
 
-      
+
     </script>
 <!-- Main content -->
     <section class="content" style="margin-top: 3%">
@@ -251,5 +251,199 @@
         </div> <!-- col-md-12 -->
       </div> <!-- row -->
     </section> <!-- /.content -->
+
+    <!-- Fee Validations -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#addFee').bootstrapValidator({
+          feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+          },
+          fields: {
+            txtAddFeeCode: {
+              validators: {
+                stringLength: {
+                  min: 5,
+                  max: 20,
+                  message: 'Please enter at least 5 chracters'
+                },
+                regexp: {
+                  regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
+                  message: 'The first character must be an alphabet or does not allow special character'
+                },
+                notEmpty: {
+                  message: 'Fee Code is required'
+                }
+              }
+            },
+            txtAddFeeName: {
+              validators: {
+                stringLength: {
+                  min: 5,
+                  max: 20,
+                  message: 'Please enter at least 5 chracters'
+                },
+                regexp: {
+                  regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
+                  message: 'The first character must be an alphabet or does not allow special character'
+                },
+                notEmpty: {
+                  message: 'Fee Name is required'
+                }
+              }
+            },
+            selAddFeeStatus: {
+              validators: {
+                notEmpty: {
+                  message: 'Status is required.'
+                },
+              }
+            },
+          }
+          })
+        .on('success.form.bv', function (e) {
+          // Prevent form submission
+        e.preventDefault();
+        });
+
+        $('#addModalOne')
+          .on('shown.bs.modal', function () {
+             $('#addFee').find().focus();
+          })
+          .on('hide.bs.modal', function () {
+            $('#addFee').bootstrapValidator('resetForm', true);
+          });
+
+        $('#UpdFee').bootstrapValidator({
+          feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+          },
+          fields: {
+            txtUpdFeeCode: {
+              validators: {
+                stringLength: {
+                  min: 5,
+                  max: 20,
+                  message: 'Please enter at least 5 chracters'
+                },
+                regexp: {
+                  regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
+                  message: 'The first character must be an alphabet or does not allow special character'
+                },
+                notEmpty: {
+                  message: 'Fee Code is required'
+                }
+              }
+            },
+            txtUpdFee: {
+              validators: {
+                stringLength: {
+                  min: 5,
+                  max: 50,
+                  message: 'Please enter at least 5 chracters'
+                },
+                regexp: {
+                  regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
+                  message: 'The first character must be an alphabet or does not allow special character'
+                },
+                notEmpty: {
+                  message: 'Fee Name is required'
+                }
+              }
+            },
+            selUpdFeeStatus: {
+              validators: {
+                notEmpty: {
+                  message: 'Status is required.'
+                },
+              }
+            },
+          }
+          })
+        .on('success.form.bv', function (e) {
+          // Prevent form submission
+        e.preventDefault();
+        });
+
+        $('#updateModalOne')
+          .on('shown.bs.modal', function () {
+             $('#UpdFee').find().focus();
+          })
+          .on('hide.bs.modal', function () {
+            $('#UpdFee').bootstrapValidator('resetForm', true);
+          });
+
+    });
+    </script>
+
+    <!-- Payment Scheme Validations -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#addScheme').bootstrapValidator({
+          feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+          },
+          fields: {
+            selAddSchemeFee: {
+              validators: {
+                notEmpty: {
+                  message: 'Status is required.'
+                },
+              }
+            },
+            txtAddScheme: {
+              validators: {
+                stringLength: {
+                  min: 5,
+                  max: 20,
+                  message: 'Please enter at least 5 chracters'
+                },
+                regexp: {
+                  regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
+                  message: 'The first character must be an alphabet or does not allow special character'
+                },
+                notEmpty: {
+                  message: 'Fee Code is required'
+                }
+              }
+            },
+            txtAddSchemeNo:{
+              validators:{
+                stringLength:{
+                  min:1,
+                  maxx: 20,
+                  message: 'Please enter at least 1 number'
+                },
+                regexp:{
+                  regexp:/^[0-9]+$/,
+                  message:'Invalid input. You can only input number/s'
+                },
+                notEmpty:{
+                  message: 'No. of payments is required'
+                }
+              }
+            },
+          }
+          })
+        .on('success.form.bv', function (e) {
+          // Prevent form submission
+        e.preventDefault();
+        });
+
+        $('#addModalTwo')
+          .on('shown.bs.modal', function () {
+             $('#addScheme').find().focus();
+          })
+          .on('hide.bs.modal', function () {
+            $('#addScheme').bootstrapValidator('resetForm', true);
+          });
+    });
+    </script>
 
 @endsection

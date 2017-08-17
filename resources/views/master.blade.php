@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSection.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignReq.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignFee.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSchemeType.css') }}">
 
     <!-- Transaction validDesign -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignStepTwo.css') }}">

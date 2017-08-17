@@ -11,7 +11,7 @@
                               @endforeach
                           </select>
                         </div>
-                        
+
                         <div class="btn-group" style="margin-bottom: 3%">
                           <button type="button" class="btn btn-info" id="btnAddFee" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
                         </div>
@@ -32,14 +32,14 @@
 
                                   <div class="form-group" style="margin-top: 5%">
                                     <label class="col-sm-4" style="text-align: right">Fee Code</label>
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-7 selectContainer">
                                       <input type="text" class="form-control" name="txtAddFeeCode" id="txtAddFeeCode" style="text-transform:uppercase ;">
                                     </div>
                                   </div>
 
                                   <div class="form-group" style="margin-top: 15%">
                                     <label class="col-sm-4" style="text-align: right">Fee Name</label>
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-7 selectContainer">
                                       <input type="text" class="form-control" name="txtAddFeeName" id="txtAddFeeName" style="text-transform:uppercase ;">
                                     </div>
                                   </div>
@@ -48,15 +48,15 @@
                                     <label class="col-sm-4" style="text-align: right">Status</label>
                                       <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selAddFeeStatus" id="selAddFeeStatus">
-                                          <option selected="selected" disabled="disabled">--SELECT STATUS--</option>
+                                          <option selected="selected" disabled="disabled" value="">--Select Status--</option>
                                           <option value="MANDATORY">MANDATORY</option>
                                           <option value="OPTIONAL">OPTIONAL</option>
                                         </select>
-                                      </div>       
+                                      </div>
                                 </div>
                                 </div>
 
-                                <div class="modal-footer" style="margin-top: 10%">
+                                <div class="modal-footer" style="margin-top: 15%">
                                   <button type="submit" class="btn btn-info">Save</button>
                                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
@@ -76,18 +76,18 @@
                             {{ method_field('PUT') }}
                             {{ csrf_field() }}
                               <div class="modal-body">
-                                
+
                                 <div class="form-group" style="margin-top: 5%">
                                 <input type="hidden" class="form-control" name="txtUpdFeeId" id="txtUpdFeeId">
                                     <label class="col-sm-4" style="text-align: right">Fee Code</label>
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-7 selectContainer">
                                       <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;">
                                     </div>
                                   </div>
 
                                 <div class="form-group"  style="margin-top: 15%">
                                     <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Fee Name</label>
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-7 selectContainer">
                                       <input type="text" class="form-control" name="txtUpdFee" id="txtUpdFee" style="text-transform:uppercase ;">
                                     </div>
                                 </div>
@@ -96,15 +96,15 @@
                                     <label class="col-sm-4" style="text-align: right">Status</label>
                                       <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selUpdFeeStatus" id="selUpdFeeStatus">
-                                          <option selected="selected" disabled="disabled">--SELECT STATUS--</option>
+                                          <option selected="selected" disabled="disabled">--Select Status--</option>
                                           <option value="MANDATORY">MANDATORY</option>
                                           <option value="OPTIONAL">OPTIONAL</option>
                                         </select>
-                                      </div>       
+                                      </div>
                                 </div>
                               </div>
 
-                              <div class="modal-footer" style="margin-top: 10%">
+                              <div class="modal-footer" style="margin-top: 15%">
                                 <button type="submit" class="btn btn-info" name="btnUpdFee" id="btnUpdFee">Save</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                               </div>
