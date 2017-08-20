@@ -55,25 +55,25 @@ class CheckRequirementController extends Controller
         $stepone = CheckRequirement::create([
 
         //student id
-        $sy = substr(SchoolYear::select('tblSchoolYrStart')-> where('tblSchoolYrActive', 'Active')->first()->tblSchoolYrStart, 2);
+        $sy = substr(SchoolYear::select('tblSchoolYrStart')->where('tblSchoolYrActive', 'Active')->first()->tblSchoolYrStart, 2);
         $studId = substr(Student::select('tblStudentId')->whereRaw('left(tblStudentId, 2) ='.$sy)->groupBy('tblStudentId')->orderBy('tblStudentId', 'desc')->first()->tblStudentID, 3);    
-        if(empty($studId)) { 
-            $studId='001';
-             } else { 
-            $studId++;
-             } 
+            if(empty($studId)) { 
+                $studId='001';
+                 } 
+            else { 
+                $studId++;
+                 } 
         $id = sprintf('%03d', $studId); 
         $studentid=$sy.$id;
 
-        //student requirement (conversion attempt)
+        
 
-        $arreq = array(Requirement::where('tblRequirementFlag', 1));
-        while($row = mysqli_fetch_array($result))
-            {
-                $reqid=$row['tblReqId'];
-                array_push($arrreq, $reqid);
-                
-            }
+        'tblStudentId' => $studentid,
+        'tblStudentType' => 'OFFICIAL',
+        'tblStudent_tblLevelId' => trim($request->selLevel),
+        'tblStudentTransferee' => trim($request->r3),
+        //automatic ba na magwa1 na yung flag nito????
+
 
 
         ]);//end

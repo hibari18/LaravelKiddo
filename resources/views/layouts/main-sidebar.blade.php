@@ -64,8 +64,7 @@
                 <li><a href="billing"><i class="fa fa-circle-o"></i>Billing</a></li>
                 <li><a href="adminaccount"><i class="fa fa-circle-o"></i>Accounts</a></li>
                 <li><a href="profile"><i class="fa fa-circle-o"></i>Profile</a></li>
-                <li><a href="advisorylist"><i class="fa fa-circle-o"></i>Grades (Faculty)</a></li>
-                <li><a href="viewgrade"><i class="fa fa-circle-o"></i>Grades (Parent)</a></li>
+                <li><a href="advisorylist"><i class="fa fa-circle-o"></i>Grades</a></li>
               </ul>
             </li>
           </ul>

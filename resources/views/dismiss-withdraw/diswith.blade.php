@@ -1,7 +1,31 @@
 @extends('master')
 
 @section('content')
-
+<script>
+      (function(){
+  if(window.addEventListener){
+    window.addEventListener('load',run,false);
+  }else if(window.attachEvent){
+    window.attachEvent('onload',run);
+  }
+function run(){
+  var t=document.getElementById('datatable1');
+  t.onclick=function(event){
+    event=event || window.event;
+    var target=event.target||event.srcElement;
+    while (target&&target.nodeName!='TR'){
+      target=target.parentElement;
+    }
+    var cells=target.cells;
+    
+    if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
+    var f1=document.getElementById('txtStudId');
+    var f2=document.getElementById('txtStudName');
+    f1.value=cells[0].innerHTML;
+    f2.value=cells[1].innerHTML;
+  };
+}})();
+  </script>
 <!-- Main content -->
       <section class="content" style="margin-top: 4%">
         <div class="row">
@@ -18,85 +42,93 @@
                   <div class="tab-pane active" id="tab_1">
                     <div class="box">
                       <div class="box-header"></div>
-                      <!-- form start -->
-                      <form role="form">
-                        <div class="box-body">
-                          <table id="datatable1" class="table table-bordered table-striped">
-                            <thead>
-                              <tr>
-                                <th>Student ID</th>
-                                <th>Student Name</th>
-                                <th>Level</th>
-                                <th>Action</th>
-                              </tr>
-                            </thead>
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+           
+              
+               <table id="datatable1" class="table table-bordered table-striped">
+               <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Student Name</th>
+                  <th>Level</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($diswiths as $diswith)
+                <tr>
+                  <td>{{ $division->tblStudentId}}</td>
+                  <td>{{ $division->name}}</td>
+                  <td>{{ $division->tblLevelName}}</td>
+                  <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalOne"><i class="fa fa-edit"></i></button></td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>    
+            </div>
 
-                            <tbody>
-                              <tr>
-                                <td>1234-5678</td>
-                                <td>Last, First</td>
-                                <td>Nursery</td>
-                                <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalOne"><i class="fa fa-edit"></i></button></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div> <!--box body -->
-                      </form>
-                    </div>
+            
+            </form>
 
-                    <div class="modal fade" id="ModalOne" role="dialog">
-                      <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h3 class="modal-title" style="font-style: bold">Student Status</h3>
-                          </div>
-
-                          <form autocomplete="off" method="post" action="updateDivision.php" name="UpdDivision" id="UpdDivision">
-                            <div class="modal-body">
-                              <div class="form-group"  style="margin-top: 5%">
-                                <div><input type="hidden" name="txtUpdDivId" id="txtUpdDivId"></div>
-                                <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Student Name</label>
-                                  <div class="col-sm-7 selectContainer">
-                                    <input type="text" class="form-control" style="text-transform:uppercase ;" disabled="disabled">
-                                  </div>
-                              </div>
-
-                              <div class="form-group" style="margin-top: 15%">
-                                <label class="col-sm-4" style="text-align: right">Action</label>
-                                <div class="col-sm-7 selectContainer">
-                                  <select class="form-control choose" style="width: 100%;" name="selUpdDivAct" id="selUpdDivAct">
-                                    <option selected>WITHDRAW</option>
-                                    <option>DISMISS</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div class="form-group" style="margin-top: 25%">
-                                <label class="col-sm-4" style="text-align: right">Reason</label>
-                                <div class="col-sm-7 selectContainer">
-                                  <div class="form-group">
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="modal-footer" style="margin-top: 50%">
-                                <button type="submit" class="btn btn-info" name="btnUpdDiv" id="btnUpdDiv">Save</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                              </div>
-                            </div> <!-- modal body -->
-                          </form>
-                        </div> <!-- modal content -->
-                      </div> <!-- modal dialog -->
-                    </div> <!-- modal fade tab_! -->
-                  </div> <!-- tab pane tab_1 -->
-                </div> <!-- tab content -->
-              </div> <!-- box body -->
-            </div> <!-- box box default -- >
-          </div><!-- col md-12 -->
-        </div> <!-- row -->
-
-      </section>
-
+  <div class="modal fade" id="ModalOne" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title" style="font-style: bold">Student Status</h3>
+        </div>
+        <form autocomplete="off" method="post" action="dismissWithdrawStudent.php">
+        <div class="modal-body">
+        <div class="form-group"  style="margin-top: 5%">
+            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Student Id</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" style="text-transform:uppercase ;" name="txtStudId" id="txtStudId" readonly>
+            </div>
+        </div> 
+        <div class="form-group"  style="margin-top: 15%">
+            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Student Name</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" style="text-transform:uppercase ;" name="txtStudName" id="txtStudName" disabled="disabled">
+            </div>
+        </div> 
+        <div class="form-group" style="margin-top: 25%">
+                <label class="col-sm-4" style="text-align: right">Action</label>
+                <div class="col-sm-7 selectContainer">
+                <select class="form-control" style="width: 100%;" name="selChoose" id="selChoose">
+                  <option selected disabled>--Select--</option>
+                  <option>DISMISS</option>
+                  <option>WITHDRAW</option>
+                </select>
+                </div>
+              
+        </div>
+        <div class="form-group" style="margin-top: 35%">
+                <label class="col-sm-4" style="text-align: right">Reason</label>
+                <div class="col-sm-7 selectContainer">
+                <div class="form-group">
+                  
+                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="taReason" id="taReason" ></textarea>
+                </div>
+                </div>
+              
+        </div>
+        <div class="modal-footer" style="margin-top: 40%">
+        <button type="submit" class="btn btn-info" name="btnDismiss" id="btnDismiss">Save</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+          </div>
+          
+        </div>
+      <!-- /.row -->
+    </section>
 @endsection
