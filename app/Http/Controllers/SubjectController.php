@@ -36,14 +36,23 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-         
+        $subject = Subject::where('tblSubjectId', $request->txtAddSubjId)->first();
+        
+        if($subject==null){
         $subject = Subject::create([
+            
             'tblSubjectId' => strtoupper(trim($request->txtAddSubjId)),
             'tblSubjectDesc' => strtoupper(trim($request->txtAddSubj)),
             'tblSubjActive' => trim($request->selAddSubjId),
-        ]);
+            ]);
+        } 
+        else {
+            
+            $subject->tblSubjectFlag = 1;
+            $subject->save();
+        }
 
-        $message = $subject ? 2 : 1;
+         $message = $subject ? 2 : 1;
         
         return redirect()->route('division.index')->with('message', $message);
     }

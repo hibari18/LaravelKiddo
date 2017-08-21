@@ -37,13 +37,31 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
+        $requirement = Requirement::where('tblReqName', $request->txtAddReqName)->first();
+        
+        if($requirement==null){
         $requirement = Requirement::create([
+            
             'tblReqName' => strtoupper(trim($request->txtAddReqName)),
             'tblReqDescription' => strtoupper(trim($request->txtAddReqDesc)),
             'tblReqStatus' => trim($request->selAddReqStatus),
-        ]);
+            ]);
+        } 
+        else {
+            
+            $requirement->tblRequirementFlag = 1;
+            $requirement->save();
+        }
 
-        $message = $requirement ? 2 : 1;
+         $message = $requirement ? 2 : 1;
+
+        // $requirement = Requirement::create([
+        //     'tblReqName' => strtoupper(trim($request->txtAddReqName)),
+        //     'tblReqDescription' => strtoupper(trim($request->txtAddReqDesc)),
+        //     'tblReqStatus' => trim($request->selAddReqStatus),
+        // ]);
+
+        // $message = $requirement ? 2 : 1;
         
         return redirect()->route('requirement.index')->with('message', $message);
     }

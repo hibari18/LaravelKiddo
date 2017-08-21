@@ -43,13 +43,23 @@ class CurriculumDetailsController extends Controller
      */
     public function store(Request $request)
     {
+        $details = CurriculumDetail::where('tblCurriculumDetail_tblLevelId', $request->selAddDetLvl)->first();
+        
+        if($details==null){
         $details = CurriculumDetail::create([
+            
             'tblCurriculumDetail_tblDivisionId' => trim($request->selAddDetDiv),
             'tblCurriculumDetail_tblLevelId' => trim($request->selAddDetLvl),
             'tblCurriculumDetail_tblSubjectId' => trim($request->selAddDetSubj),
-        ]);
+            ]);
+        } 
+        else {
+            
+            $details->tblDetailsFlag = 1;
+            $details->save();
+        }
 
-        $message = $details ? 2 : 1;
+         $message = $details ? 2 : 1;
 
         return redirect()->route('division.index')->with('message', $message);
     }
@@ -108,6 +118,7 @@ class CurriculumDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $details = CurriculumDetail::findOrFail($request->txtUpdDetId);
         $message = $details->update([
             'tblCurriculumDetail_tblLevelId' => trim($request->selUpdDetLvl),

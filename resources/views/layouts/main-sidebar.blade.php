@@ -60,11 +60,11 @@
                 <li><a href="admission"><i class="fa fa-circle-o"></i>Admission</a></li>
                 <li><a href="enrollment"><i class="fa fa-circle-o"></i>Enrollment</a></li>
                 <li><a href="sectioning"><i class="fa fa-circle-o"></i>Sectioning</a></li>
+                <li><a href="advisorylist"><i class="fa fa-circle-o"></i>Grades</a></li>
                 <li><a href="diswith"><i class="fa fa-circle-o"></i>Dismissal/ Withdrawal</a></li>
                 <li><a href="billing"><i class="fa fa-circle-o"></i>Billing</a></li>
                 <li><a href="adminaccount"><i class="fa fa-circle-o"></i>Accounts</a></li>
                 <li><a href="profile"><i class="fa fa-circle-o"></i>Profile</a></li>
-                <li><a href="advisorylist"><i class="fa fa-circle-o"></i>Grades</a></li>
               </ul>
             </li>
           </ul>

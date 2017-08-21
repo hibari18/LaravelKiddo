@@ -45,13 +45,32 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
+
+        $section = Section::where('tblSectionName', $request->addSectTxt)->where('tblSection_tblLevelId', $request->addLvlSelect)->first();
+        
+        if($section==null){
         $section = Section::create([
+            
             'tblSection_tblLevelId' => trim($request->addLvlSelect),
             'tblSectionName' => strtoupper(trim($request->addSectTxt)),
             'tblSectionSession' => trim($request->addSesSelect),
         ]);
+        } 
+        else {
+            
+            $section->tblSectionFlag = 1;
+            $section->save();
+        }
 
-        $message = $section ? 2 : 1;
+         $message = $section ? 2 : 1;
+
+        // $section = Section::create([
+        //     'tblSection_tblLevelId' => trim($request->addLvlSelect),
+        //     'tblSectionName' => strtoupper(trim($request->addSectTxt)),
+        //     'tblSectionSession' => trim($request->addSesSelect),
+        // ]);
+
+        // $message = $section ? 2 : 1;
 
         return redirect()->route('section.index')->with('message', $message);
     }

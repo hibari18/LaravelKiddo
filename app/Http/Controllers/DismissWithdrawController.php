@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DismissWithdraw;
 
 class DismissWithdrawController extends Controller
 {
@@ -13,7 +14,8 @@ class DismissWithdrawController extends Controller
      */
     public function index()
     {
-        //
+        $diswiths = DismissWithdraw::where('tblStudDismissFlag', 1)->get();
+        
     }
 
     /**
@@ -68,7 +70,13 @@ class DismissWithdrawController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $details = CurriculumDetail::findOrFail($request->txtUpdDetId);
+        $message = $details->update([
+            'tblCurriculumDetail_tblLevelId' => trim($request->selUpdDetLvl),
+            'tblCurriculumDetail_tblSubjectId' => trim($request->selUpdDetSubj),
+        ]) ? 4 : 3;
+
+        return redirect()->route('division.index')->with('message', $message);
     }
 
     /**
