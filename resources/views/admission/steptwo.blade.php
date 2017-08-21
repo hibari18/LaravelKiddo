@@ -1,94 +1,169 @@
 
 <div class="row">
-      <!-- left column -->
-      <div class="col-md-3">
-        <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-          <h6>Upload a different photo...</h6>
-          
-          <input type="file" class="form-control">
-        </div>
-      </div>
-      
       <!-- edit form column -->
-      <div class="col-md-9 personal-info">
-        <h3>Personal info</h3>
-        
-        
+      <div class="col-sm-12 personal-info">
+        <center><h3>Personal info</h3></center>
+
           <div class="form-group" style="margin-bottom:7%;">
-            <label class="col-lg-2 control-label left">First name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtStudFname" id="txtStudFname">
+            <div class="form-group">
+              <center><label class="col-lg-3 control-label"> First Name: </label></center>
+              <div class="col-lg-8">
+                <div class="input-group" style="width:60%;">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </div>
+                  <input type="text" class="form-control" name="txtStudFname" placeholder="Student's First Name" >
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group" style="margin-bottom:13%;">
-            <label class="col-lg-2 control-label left">Middle name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtStudMname" id="txtStudMname">
+
+          <div class="form-group" style="margin-bottom:12%;">
+            <div class="form-group">
+              <center><label class="col-lg-3 control-label"> Middle Name: </label></center>
+              <div class="col-lg-8">
+                <div class="input-group" style="width:60%;">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </div>
+                  <input type="text" class="form-control" name="txtStudMname" placeholder="Student's Middle Name" >
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group" style="margin-bottom:19%;">
-            <label class="col-lg-2 control-label left">Last name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtStudLname" id="txtStudLname">
+
+          <div class="form-group" style="margin-bottom:17%;">
+            <div class="form-group">
+              <center><label class="col-lg-3 control-label"> Last Name: </label></center>
+              <div class="col-lg-8">
+                <div class="input-group" style="width:60%;">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </div>
+                  <input type="text" class="form-control" name="txtStudLname" placeholder="Student's Last Name" >
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group" style="margin-bottom:25%;">
-            <label class="col-lg-2 control-label left">Birthday:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="date" name="txtStudBday" id="txtStudBday">
+
+          <div class="form-group" style="margin-bottom:22%;">
+            <div class="form-group">
+              <center><label class="col-lg-3 control-label"> Birthdate </label></center>
+              <div class="col-lg-8">
+                <div class="input-group" style="width:36%">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </div>
+                  <input type="date" class="form-control" name="txtStudBday" placeholder="Student's Birthdate" >
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group" style="margin-bottom:31%;">
-            <label class="col-lg-2 control-label left">Birthplace:</label>
-            <div class="col-lg-7">
-              <input class="form-control" type="text" name="txtStudBplace" id="txtStudBplace">            </div>
+
+          <div class="form-group" style="margin-bottom:27%;">
+            <center><label class="col-lg-3 control-label left">Birthplace:</label></center>
+            <div class="col-lg-8">
+              <div class="input-group" style="width:60%;">
+                <div class="input-group-addon">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control" name="txtStudBplace" id="txtStudBplace" placeholder="Student's Birthplace" >
+              </div>
+            </div>
           </div>
+
+          <div class="form-group" style="margin-bottom:32%;">
+            <center><label class="col-lg-3 control-label left">Nationality:</label></center>
+            <div class="col-lg-8">
+              <div class="input-group" style="width:36%;">
+                <div class="input-group-addon">
+                  <i class="fa fa-flag" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control" name="txtStudNat" id="txtStudNat" placeholder="Student's Nationality" >
+              </div>
+            </div>
+          </div>
+
           <div class="form-group" style="margin-bottom:37%;">
-            <label class="col-lg-2 control-label left">Nationality:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtStudNat" id="txtStudNat">
+            <div class="form-group">
+              <center><label class="col-lg-3 control-label left">Religion:</label></center>
+              <div class="col-lg-8">
+                <div class="input-group" style="width:36%;">
+                  <div class="input-group-addon">
+                    <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+                  </div>
+                  <input type="text" class="form-control" name="txtStudReligion" id="txtStudReligion" placeholder="Student's Religion" >
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group" style="margin-bottom:43%;">
-            <label class="col-lg-2 control-label left">Religion:</label>
-            <div class="col-lg-7">
-              <input class="form-control" type="text" name="txtStudReligion" id="txtStudReligion">
+
+          <div class="form-group" style="margin-bottom:42%;">
+            <div class="form-group">
+              <div class="form-group">
+                <center><label class="col-lg-3 control-label"> Home Address: </label></center>
+                <div class="col-lg-6">
+                  <div class="input-group" style="width:37%">
+                    <div class="input-group-addon">
+                      <i class="fa fa-home" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" class="form-control" name="txtStudAddBldg" id="txtStudAddBldg" placeholder="Unit/Bldg. No." >
+                  </div>
+                </div>
+                <div class="col-lg-6" style="width:20%; margin-left:-353px;">
+                  <input class="form-control" type="text" placeholder="Street Name/No." name="txtStudAddSt" id="txtStudAddSt">
+                </div>
+                <div class="col-lg-6" style="width:20%; margin-left:-102px;">
+                  <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtStudAddBrgy" id="txtStudAddBrgy">
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group" style="margin-bottom:49%;">
-            <label class="col-lg-2 control-label left">Home Address:</label>
-            <div class="col-lg-2">
-              <input class="form-control" type="text" placeholder="Unit/Bldg. No." name="txtStudAddBldg" id="txtStudAddBldg">
-            </div>
-            <div class="col-lg-3">
-              <input class="form-control" type="text" placeholder="Street Name/No." name="txtStudAddSt" id="txtStudAddSt">
-            </div>
-            <div class="col-lg-3">
-              <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtStudAddBrgy" id="txtStudAddBrgy">
-            </div>
-          </div>
-          <div class="form-group" style="margin-bottom:55%;">
-            <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-6">
+
+          <div class="form-group" style="margin-bottom:47%;">
+            <label class="col-lg-3 control-label left"></label>
+            <div class="col-lg-6" style="width:33%">
               <input class="form-control" type="text" placeholder="City/Municipality" name="txtStudAddCity" id="txtStudAddCity">
             </div>
-            <div class="col-lg-2">
+
+            <div class="col-lg-3" style="margin-left:-15px;">
               <input class="form-control" type="text" value="Philippines" name="txtStudAddCountry" id="txtStudAddCountry">
             </div>
           </div>
-          <div class="form-group" style="margin-bottom:61%;">
-          <label class="col-lg-3 control-label">First Language:</label>
-          <div class="col-lg-7">
-          <input class="form-control" type="text" name="txtStudLang1" id="txtStudLang1">
+
+          <div class="form-group" style="margin-bottom:52%;">
+            <div class="form-group">
+            <center><label class="col-lg-3 control-label">First Language:</label></center>
+            <div class="col-lg-8" style="width:27%;">
+              <div class="input-group" >
+                <div class="input-group-addon">
+                  <i class="fa fa-language" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control" name="txtStudLang1" id="txtStudLang1" placeholder="First Language" >
+              </div>
+            </div>
           </div>
+        </div>
+
+          <div class="form-group" style="margin-bottom:58%;">
+            <center><label class="col-lg-3 control-label">Second Language:</label></center>
+            <div class="col-lg-8" style="width:27%;">
+              <div class="input-group" >
+                <div class="input-group-addon">
+                  <i class="fa fa-language" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control" name="txtStudLang2" id="txtStudLang2" placeholder="Second Language" >
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-          <label class="col-lg-3 control-label">Second Language:</label>
-          <div class="col-lg-7">
-          <input class="form-control" type="text" name="txtStudLang2" id="txtStudLang2">
+
+          <div class="form-group" style="margin-bottom:65%;">
+            <center><label class="col-lg-3 control-label">Student's Photo</label></center>
+            <div class="col-lg-8" style="width:60%;">
+              <div class="input-group">
+                <input type="file" class="form-control">
+              </div>
+            </div>
           </div>
-          </div>
-        
-      </div>
+    </div>
   </div>
