@@ -1,5 +1,5 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
-    
+
       <!-- radio -->
       <div class="form-group" style="margin-top: 3%">
         <div class="radio">
@@ -28,7 +28,7 @@
       </div>
 
       <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
-        
+
           <fieldset style="margin-top: 2%; margin-left: 2%">
             <h3>REQUIREMENTS</h3>
               @foreach($requirements as $requirement)
@@ -39,6 +39,6 @@
               </div>
               @endforeach
           </fieldset>
-        
+
       </div> <!-- fieldser -->
     </div> <!-- col -->

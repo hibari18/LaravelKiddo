@@ -14,14 +14,14 @@
                                 <h3 class="modal-title" style="font-style: bold">Add Payment Scheme</h3>
                               </div>
 
-                              <form method="post" data-toggle="validator" autocomplete="off" role="form" action="{{ route('schemetype.store') }}">
+                              <form method="post" data-toggle="validator" autocomplete="off" role="form" action="{{ route('schemetype.store') }}" name="addScheme" id="addScheme">
                               {{ csrf_field() }}
                                 <div class="modal-body">
                                   <div class="form-group" style="margin-top: 5%">
                                     <label class="col-sm-4" style="text-align: right">Fee</label>
-                                      <div class="col-sm-7">
+                                      <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
-                                          <option selected="selected" disabled>--Select Fee--</option>
+                                          <option selected="selected" disabled value="">--Select Fee--</option>
                                             @foreach($fees as $fee)
                                             <option value="{{ $fee->tblFeeName}}">{{ $fee->tblFeeName}}</option>
                                             @endforeach
@@ -31,15 +31,15 @@
 
                                   <div class="form-group"  style="margin-top: 15%">
                                     <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Scheme Name</label>
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-7 selectContainer">
                                       <input type="text" class="form-control" name="txtAddScheme" id="txtAddScheme" style="text-transform:uppercase;">
                                     </div>
                                   </div>
 
                                   <div class="form-group" style="margin-top: 25%">
                                     <label class="col-sm-4" style="text-align: right">No. of Payments</label>
-                                    <div class="col-sm-7">
-                                      <input class="rem" type="number" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
+                                    <div class="col-sm-7 selectContainer">
+                                      <input type="text" name="txtAddSchemeNo" id="txtAddSchemeNo">
                                     </div>
                                   </div>
                                 </div>
