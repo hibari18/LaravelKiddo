@@ -1,6 +1,8 @@
-<div class="form-group" style="margin-top: 25%">
-                <label class="col-sm-4" style="text-align: right">Subject Name</label>
-                <div class="col-sm-7 selectContainer">
-                  <input type="text" class="form-control" name="txtAddDetSubj" id="txtAddDetSubj" disabled/>
-                </div>
-              </div>
+<div class="form-group">
+ <b><label class="col-sm-4 control-label"> Subject Name </label></b>
+ <div class="col-sm-6 selectContainer">
+   <div class="input-group" style="width:100%;">
+     <input type="text" class="form-control" name="txtAddDetSubj" id="txtAddDetSubj" disabled/>
+   </div>
+ </div>
+</div>
