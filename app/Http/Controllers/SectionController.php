@@ -97,7 +97,7 @@ class SectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show1($id)
+    public function show1($divId, $lvlId)
     {
         $levels = Level::where('tblLevel_tblDivisionId', $divId)->where('tblLevelFlag', 1)->get();
         foreach($levels as $level){
@@ -150,15 +150,6 @@ class SectionController extends Controller
         }
         return redirect()->route('section.index')->with('message', $message);
 
-        // $section = Section::findOrFail($request->updSectId);
-        // $lvlId = Level::where('tblLevelName', $request->updLvlName)->first()->tblLevelId;
-        // $message = $section->update([
-        //     'tblSection_tblLevelId' => $lvlId,
-        //     'tblSectionName' => strtoupper(trim($request->updSectName)),
-        //     'tblSectionSession' => trim($request->updSesSelect),
-        // ]) ? 4 : 3;
-
-        // return redirect()->route('section.index')->with('message', $message);
     }
 
     /**

@@ -70,13 +70,13 @@ class DismissWithdrawController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $details = CurriculumDetail::findOrFail($request->txtUpdDetId);
-        $message = $details->update([
-            'tblCurriculumDetail_tblLevelId' => trim($request->selUpdDetLvl),
-            'tblCurriculumDetail_tblSubjectId' => trim($request->selUpdDetSubj),
-        ]) ? 4 : 3;
+        // $diswiths = CurriculumDetail::findOrFail($request->txtUpdDetId);
+        // $message = $details->update([
+        //     'tblCurriculumDetail_tblLevelId' => trim($request->selUpdDetLvl),
+        //     'tblCurriculumDetail_tblSubjectId' => trim($request->selUpdDetSubj),
+        // ]) ? 4 : 3;
 
-        return redirect()->route('division.index')->with('message', $message);
+        // return redirect()->route('division.index')->with('message', $message);
     }
 
     /**
