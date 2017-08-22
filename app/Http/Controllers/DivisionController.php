@@ -77,14 +77,34 @@ class DivisionController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $division = Division::findOrFail($request->txtUpdDivId);
+        
+        if(Division::where('tblDivisionName', $request->txtUpdDiv)->where('tblDivisionId','!=', $division->tblDivisionId)->first() == null){
+
         $message = $division->update([
             'tblDivisionId' => trim($request->txtUpdDivId),
             'tblDivisionName' => strtoupper(trim($request->txtUpdDiv)),
             'tblDivisionActive' => trim($request->selUpdDivAct),
         ]) ? 4 : 3;
         
+        }
+
+        else {
+        $message = 3;
         return redirect()->route('division.index')->with('message', $message);
+        
+        }
+        return redirect()->route('division.index')->with('message', $message);
+
+        // $division = Division::findOrFail($request->txtUpdDivId);
+        // $message = $division->update([
+        //     'tblDivisionId' => trim($request->txtUpdDivId),
+        //     'tblDivisionName' => strtoupper(trim($request->txtUpdDiv)),
+        //     'tblDivisionActive' => trim($request->selUpdDivAct),
+        // ]) ? 4 : 3;
+        
+        // return redirect()->route('division.index')->with('message', $message);
     }
 
     /**

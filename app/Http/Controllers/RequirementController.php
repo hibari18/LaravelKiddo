@@ -97,15 +97,36 @@ class RequirementController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $requirement = Requirement::findOrFail($request->txtUpdReqId);
-        $message = $requirement->update([
+        
+        if(Requirement::where('tblReqName', $request->txtUpdReqName)->where('tblReqId','!=', $requirement->tblReqId)->where('tblRequirementFlag', 1) ->first() == null){
+
+         $message = $requirement->update([
             'tblReqName' => strtoupper(trim($request->txtUpdReqName)),
             'tblReqDescription' => strtoupper(trim($request->txtUpdReqDesc)),
             'tblReqStatus' => trim($request->selUpdReqStatus),
 
         ]) ? 4 : 3;
         
+        }
+
+        else {
+        $message = 3;
         return redirect()->route('requirement.index')->with('message', $message);
+        
+        }
+        return redirect()->route('requirement.index')->with('message', $message);
+
+        // $requirement = Requirement::findOrFail($request->txtUpdReqId);
+        // $message = $requirement->update([
+        //     'tblReqName' => strtoupper(trim($request->txtUpdReqName)),
+        //     'tblReqDescription' => strtoupper(trim($request->txtUpdReqDesc)),
+        //     'tblReqStatus' => trim($request->selUpdReqStatus),
+
+        // ]) ? 4 : 3;
+        
+        // return redirect()->route('requirement.index')->with('message', $message);
     }
 
     /**

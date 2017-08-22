@@ -128,15 +128,37 @@ class SectionController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $section = Section::findOrFail($request->updSectId);
         $lvlId = Level::where('tblLevelName', $request->updLvlName)->first()->tblLevelId;
-        $message = $section->update([
+        
+        if(Section::where('tblSectionName', $request->updSectName)->where('tblSectionId','!=', $section->tblSectionId)->where('tblSectionFlag', 1) ->where('tblSection_tblLevelId', $request->updLvlId)->first() == null)
+        {
+
+       $message = $section->update([
             'tblSection_tblLevelId' => $lvlId,
             'tblSectionName' => strtoupper(trim($request->updSectName)),
             'tblSectionSession' => trim($request->updSesSelect),
         ]) ? 4 : 3;
+        
+        }
 
+        else {
+        $message = 3;
         return redirect()->route('section.index')->with('message', $message);
+        
+        }
+        return redirect()->route('section.index')->with('message', $message);
+
+        // $section = Section::findOrFail($request->updSectId);
+        // $lvlId = Level::where('tblLevelName', $request->updLvlName)->first()->tblLevelId;
+        // $message = $section->update([
+        //     'tblSection_tblLevelId' => $lvlId,
+        //     'tblSectionName' => strtoupper(trim($request->updSectName)),
+        //     'tblSectionSession' => trim($request->updSesSelect),
+        // ]) ? 4 : 3;
+
+        // return redirect()->route('section.index')->with('message', $message);
     }
 
     /**

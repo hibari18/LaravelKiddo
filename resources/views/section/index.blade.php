@@ -24,9 +24,9 @@ function run(){
     var f3=document.getElementById('updSectId');
     var f4=document.getElementById('updDivName');
     var f5=document.getElementById('updLvlName');
-    var f6=document.getElementById('updSectName');
-    var f7=document.getElementById('txtDelSectId');
-    var f8=document.getElementById('updSesSelect');
+    var f6=document.getElementById('updSectName');  
+    var f7=document.getElementById('updSesSelect');
+    var f8=document.getElementById('txtDelSectId');
     //var f9=document.getElementById('updSectName2');
     f1.value=cells[0].innerHTML;
     f2.value=cells[1].innerHTML;
@@ -34,8 +34,8 @@ function run(){
     f4.value=cells[3].innerHTML;
     f5.value=cells[4].innerHTML;
     f6.value=cells[5].innerHTML;
-    f7.value=cells[2].innerHTML;
-    f8.value=cells[6].innerHTML;
+    f7.value=cells[6].innerHTML;
+    f8.value=cells[2].innerHTML;
     //f9.value=cells[5].innerHTML;
   };
 }})();

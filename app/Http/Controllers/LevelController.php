@@ -52,7 +52,7 @@ class LevelController extends Controller
             $level->save();
         }
 
-         $message = $level ? 2 : 1;
+        $message = $level ? 2 : 1;
         
         
        
@@ -91,34 +91,27 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $level = Level::where('tblLevelName', $request->txtUpdLvlId)->first();
+       
+        $level = Level::findOrFail($request->txtUpdLvlId);
         $divID = Division::where('tblDivisionName', $request->selUpdLvlDiv)->first()->tblDivisionId;
         
-        if($level==null){
+        if(Level::where('tblLevelName', $request->txtUpdLvl)->where('tblLevelId','!=', $level->tblLevelId)->where('tblLevelFlag', 1) ->first() == null){
+
         $message = $level->update([
             'tblLevelName' => strtoupper(trim($request->txtUpdLvl)),
             'tblLevel_tblDivisionId' => $divID,
             'tblLevelActive' => trim($request->selUpdLvlAct),
         ]) ? 4 : 3;
-        } 
-        else {
-            
-            $level->tblLevelFlag = 1;
-            $level->save();
+        
         }
 
-        //  $message = $level ? 2 : 1;
-
-        // $level = Level::findOrFail($request->txtUpdLvlId);
-        // $divID = Division::where('tblDivisionName', $request->selUpdLvlDiv)->first()->tblDivisionId;
-        // $message = $level->update([
-        //     'tblLevelName' => strtoupper(trim($request->txtUpdLvl)),
-        //     'tblLevel_tblDivisionId' => $divID,
-        //     'tblLevelActive' => trim($request->selUpdLvlAct),
-        // ]) ? 4 : 3;
-        
+        else {
+        $message = 3;
         return redirect()->route('division.index')->with('message', $message);
+        
+        }
+        return redirect()->route('division.index')->with('message', $message);
+        
     }
 
     /**
