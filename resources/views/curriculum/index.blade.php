@@ -613,6 +613,13 @@ $(document).ready(function(){
              },
             }
           },
+          txtAddDetSubj: {
+            validators: {
+             notEmpty: {
+               message: 'Subject Code is required.'
+             },
+            }
+          },
         }
       })
 

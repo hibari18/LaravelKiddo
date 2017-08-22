@@ -20,7 +20,7 @@
                   <h4 class="modal-title" id="addModalFour"> ADD LEVEL </h4>
                 </div>
 
-                  <div class="form-group" style="margin-top:5%">
+                  <div class="form-group" style="margin-top:7%">
                     <b><label class="col-sm-4 control-label"> Level Name </label></b>
                     <div class="col-sm-6 selectContainer">
                       <div class="input-group" style="width:100%;">
@@ -62,7 +62,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="modal-footer" style="margin-top:5%;">
+                  <div class="modal-footer" style="margin-top:7%;">
                     <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                   </div>
@@ -81,7 +81,7 @@
           {{ method_field('PUT') }}
           {{ csrf_field() }}
           <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel"> UPDATE Level </h4>
+              <h4 class="modal-title" id="myModalLabel"> UPDATE LEVEL </h4>
           </div>
 
           <div class="modal-body">
@@ -96,7 +96,7 @@
               </div>
             </div>
 
-            <div class="form-group" style="margin-top: 5%;">
+            <div class="form-group" style="margin-top: 7%;">
               <label class="col-sm-4 control-label">Level Name</label>
               <div class="col-sm-6 selectContainer">
                 <div class = "input-group" style="width:100%;">
@@ -138,7 +138,7 @@
               </div>
             </div>
 
-            <div class="modal-footer" style="margin-top: 5%">
+            <div class="modal-footer" style="margin-top: 7%">
               <button type="submit" class="btn btn-info" name="btnUpdLvl" id="btnUpdLvl">Save</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
