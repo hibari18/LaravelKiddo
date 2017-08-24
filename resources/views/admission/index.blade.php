@@ -1,6 +1,33 @@
 @extends('master')
 
 @section('content')
+<?php
+    $message = session('message');
+
+    if($message == 1) {
+      echo "<script> swal('Failed to add Applicant!', ' ', 'error'); </script>";
+    }
+
+    if($message == 2) {
+      echo "<script> swal('Applicant added succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 3) {
+      echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 4) {
+      echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 5) {
+      echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 6) {
+      echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+    }
+  ?>
 <script>
     function disabledReason() {
     var txtHealthReason = document.getElementById('txtHealthReason');
@@ -145,8 +172,24 @@
 
               <ul class="list-inline pull-right" style="margin-top: 5%">
                   <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                  <li><button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save Applicant</button></li>
+                  <li><button type="button" class="btn btn-info" name="btnSave" id="btnSave" data-toggle="modal" data-target="#ProceedOrSave">Save Applicant</button></li>
               </ul>
+
+              <div class="modal-dialog">
+              <div class="modal-content col-sm-12">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="ProceedOrSave"> ADMISSION </h4>
+                </div>
+                <div>
+                   <button type="submit" class="btn btn-info" name="btnSaveApplicant" id="btnSaveApplicant">Save Applicant</button>
+                   <a href="enrollment" class="btn btn-success" role="button" name="btnProceed" id="btnProceed">Proceed Enrollment</a>
+                </div>
+                  
+                  <div class="modal-footer" style="margin-top:7%;">
+                   
+                  </div>
+                </div>
+              </div>
 
             </div> <!-- tab pane step4 -->
             <div class="clearfix"></div>

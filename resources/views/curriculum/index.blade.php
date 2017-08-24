@@ -32,6 +32,9 @@
       if($message == 9) {
         echo "swal('Deletion Failed. Subject is in use', ' ', 'error'); ";
       }
+      if($message == 10) {
+        echo "swal('Level already exists!', ' ', 'error'); ";
+      }
     echo '</script>';
   }
 ?>

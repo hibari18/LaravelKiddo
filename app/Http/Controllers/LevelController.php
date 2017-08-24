@@ -16,6 +16,7 @@ class LevelController extends Controller
     public function index()
     {
         $divisions = Division::where('tblDivisionFlag', 1)->get();
+        $level = Level::where('tblLevelFlag', 1)->get();
     }
 
     /**
@@ -36,26 +37,21 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {   
-        $level = Level::where('tblLevelName', $request->txtAddLvl)->first();
-        
-        if($level==null){
+        $duplicate = Level::where('tblLevelName', $request->txtAddLvl)->first();
+        if($duplicate){
+            if($duplicate->tblLevelFlag==1)
+                return redirect()->route('division.index')->with('message', 10);
+            $duplicate->tblLevelFlag = 1;
+            $duplicate->save();
+            return redirect()->route('division.index')->with('message', 2);
+        }
+
         $level = Level::create([
-            
             'tblLevelName' => strtoupper(trim($request->txtAddLvl)),
             'tblLevel_tblDivisionId' => trim($request->selAddLvlDiv),
             'tblLevelActive' => trim($request->selAddLvlAct),
             ]);
-        } 
-        else {
-            
-            $level->tblLevelFlag = 1;
-            $level->save();
-        }
-
         $message = $level ? 2 : 1;
-        
-        
-       
 
         return redirect()->route('division.index')->with('message', $message);
     }

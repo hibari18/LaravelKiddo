@@ -120,14 +120,21 @@ for($i=0; $i<$x; $i++)
 	$sage=$sibAge[$i];
 	$sgrd=$sibGrd[$i];
 	$sschool=$sibSchool[$i];
-	$query="select * from tblstudsiblings order by tblStudSibId desc limit 0, 1";
-	$result=mysqli_query($con, $query);
-	$row=mysqli_fetch_array($result);
-	$siblingid=$row['tblStudSibId'];
+	// $query="select * from tblstudsiblings order by tblStudSibId desc limit 0, 1";
+	// $result=mysqli_query($con, $query);
+	// $row=mysqli_fetch_array($result);
+	$siblingid= StudSibling::select('tblStudSibId')->orderby('tblStudSibId', 'desc');
 	$siblingid++;
-	$query="insert into tblstudsiblings(tblStudSibId, tblStudSibName, tblStudSibAge, tblStudSibGrade, tblStudSibSchool, tblStudSib_tblStudId) values ('$siblingid','$sname', '$sage', '$sgrd', '$sschool', '$studentid')";
-	if (!$query = mysqli_query($con, $query)) {
-	   exit(mysqli_error($con));
+	// $query="insert into tblstudsiblings(tblStudSibId, tblStudSibName, tblStudSibAge, tblStudSibGrade, tblStudSibSchool, tblStudSib_tblStudId) values ('$siblingid','$sname', '$sage', '$sgrd', '$sschool', '$studentid')";
+	// if (!$query = mysqli_query($con, $query)) {
+	//    exit(mysqli_error($con));
+        'tblStudSibId' => $siblingid,
+        'tblStudSibName' => strtoupper(trim($request->txtSiblName)),
+        'tblStudSibAge' => trim($txtSiblAge),
+        'tblStudSibGrade' => trim($txtSiblGrd),
+        'tblStudentSchool' => strtoupper(trim($txtSiblSchool)),
+        'tblStudSib_tblStudId' => $studentid,
+
 	}
 	
 }
@@ -148,15 +155,18 @@ for($j=0; $j<$y; $j++)
 	   exit(mysqli_error($con));
 	}
 }
+
 $query = "select * from tblstudentinfo order by tblStudInfoId desc limit 0, 1";
 $result = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($result);
-$infoid = $row['tblStudInfoId'];
+$infoid = PersonalInfo::select('tblStudInfoId')->orderby('tblStudInfoId', 'desc');
 $infoid ++;
 $query="insert into tblstudentinfo(tblStudInfoId, tblStudInfoFname, tblStudInfoLname, tblStudInfoMname, tblStudInfoBday, tblStudInfoBplace, tblStudInfoNationality, tblStudInfoReligion, tblStudInfoLang1, tblStudInfoLang2, tblStudInfo_tblStudentId, tblStudInfoAddBldg, tblStudInfoAddSt, tblStudInfoAddBrgy, tblStudInfoAddCity, tblStudInfoAddCountry) values ('$infoid', '$fname', '$lname', '$mname', '$bday', '$bplace', '$nat', '$religion', '$lang1', '$lang2', '$studentid', '$addBldg', '$addSt', '$addBrgy', '$addCity', '$addCountry')";
 if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 	}
+
+
 
 $query = "select * from tblparent where left(tblParentId, 2)='$sy' group by tblParentId desc limit 0, 1";
 $result=mysqli_query($con, $query);
