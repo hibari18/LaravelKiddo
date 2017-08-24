@@ -5,7 +5,7 @@
         <button type="button" class="btn btn-info" data-toggle="modal"  onclick="myFunction()" value="Reset form" data-target="#addModalFour"><i class="fa fa-plus"></i>Add</button>
       </div>
 
-   <!-- Modal starts here-->
+  <!-- Add Modal -->
   <div class="modal fade" id="addModalFour" role="dialog" tabindex="-1" aria-labelledby="addModalFour" aria-hidden="true">
     <div class="modal-dialog">
 
@@ -34,7 +34,7 @@
                     <div class="col-sm-6 selectContainer">
                       <div class="input-group">
                         <div class="input-group-addon">
-                          <i class="fa fa-clone" aria-hidden="true"></i>
+                          <i class="fa fa-users" aria-hidden="true"></i>
                         </div>
 
                         <select class="form-control" name="selAddLvlDiv" id="selAddLvlDiv">
@@ -110,7 +110,7 @@
               <div class="col-sm-6 selectContainer">
                 <div class="input-group">
                   <div class="input-group-addon">
-                    <i class="fa fa-clone" aria-hidden="true"></i>
+                    <i class="fa fa-users" aria-hidden="true"></i>
                   </div>
 
                   <select class="form-control" style="width: 100%;" name="selUpdLvlDiv" id="selUpdLvlDiv">
@@ -185,7 +185,7 @@
       </div>
     </div>
   </div>
-  <!--modal delete end-->
+
               <table id="datatable3" class="table table-bordered table-striped">
                 <thead>
                 <tr>

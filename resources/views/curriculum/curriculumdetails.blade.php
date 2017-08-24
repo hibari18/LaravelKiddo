@@ -53,7 +53,7 @@
                  <div class="col-sm-6 selectContainer">
                    <div class="input-group">
                      <div class="input-group-addon">
-                       <i class="fa fa-clone" aria-hidden="true"></i>
+                       <i class="fa fa-file-o" aria-hidden="true"></i>
                      </div>
 
                      <select class="required form-control" style="width: 100%;" name="selAddDetSubj" id="selAddDetSubj" onchange="passSubjName();">
@@ -109,7 +109,7 @@
                 <div class="col-sm-6 selectContainer">
                   <div class="input-group">
                     <div class="input-group-addon">
-                      <i class="fa fa-clone" aria-hidden="true"></i>
+                      <i class="fa fa-files-o" aria-hidden="true"></i>
                     </div>
                     <select class="form-control" style="width: 100%;" name="selUpdDetLvl" id="selUpdDetLvl">
                       <option disabled>--SELECT LEVEL--</option>
@@ -126,7 +126,7 @@
                 <div class="col-sm-6 selectContainer">
                   <div class="input-group">
                     <div class="input-group-addon">
-                      <i class="fa fa-clone" aria-hidden="true"></i>
+                      <i class="fa fa-file-o" aria-hidden="true"></i>
                     </div>
                     <select class="form-control" style="width: 100%;" name="selUpdDetSubj" id="selUpdDetSubj" onchange="passSubjNameUpd();">
                       <option disabled>--SELECT SUBJECT CODE--</option>

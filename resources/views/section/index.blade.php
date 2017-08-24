@@ -134,7 +134,7 @@ function run(){
 
   <script>
    $(document).ready(function() {
-    $('#formAdd').bootstrapValidator({
+    $('#addSection').bootstrapValidator({
         feedbackIcons: {
           valid: 'glyphicon glyphicon-ok',
           invalid: 'glyphicon glyphicon-remove',
@@ -183,10 +183,10 @@ function run(){
 
       $('#addModalOne')
          .on('shown.bs.modal', function () {
-             $('#formAdd').find().focus();
+             $('#addSection').find().focus();
           })
           .on('hide.bs.modal', function () {
-              $('#formAdd').bootstrapValidator('resetForm', true);
+              $('#addSection').bootstrapValidator('resetForm', true);
           });
 
       $('#updSection').bootstrapValidator({

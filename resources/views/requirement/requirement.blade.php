@@ -18,97 +18,138 @@
                         </div>
                       </div>
 
-                      <div class="modal fade" id="addModalOne" role="dialog">
-                        <div class="modal-dialog">
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h3 class="modal-title" style="font-style: bold">Add Requirement</h3>
-                            </div>
+                      <!-- Add Modal -->
+                      <div class="modal fade" id="addModalOne" role="dialog" tabindex="-1" aria-labelledby="addModalOne" aria-hidden="true">
+                       <div class="modal-dialog">
 
-                            <form data-toggle="validator" autocomplete="off" role="form" action="{{ route('requirement.store') }}" method="post" name="addReq" id="addReq">
-                            {{ csrf_field() }}
-                              <div class="modal-body">
-                                <div class="form-group" style="margin-top: 5%">
-                                  <label class="col-sm-4" style="text-align: right">Requirement Name</label>
-                                  <div class="col-sm-7 selectContainer">
-                                    <input type="text" style="text-transform: uppercase;" class="form-control" name="txtAddReqName" id="txtAddReqName">
+                         <!-- Modal content-->
+                         <div class="modal-content">
+
+                           <form autocomplete="off" data-toggle="validation" id="addReq" name="addReq" role="form" method="POST" action="{{ route('requirement.store') }}" class="form-horizontal">
+                             {{ csrf_field() }}
+                             <div class="modal-dialog">
+                                <div class="modal-content col-sm-12">
+                                  <div class="modal-header">
+                                   <h4 class="modal-title" id="addModalOne"> ADD REQUIREMENT </h4>
                                   </div>
-                                </div>
 
-                                <div class="form-group" style="margin-top: 15%">
-                                  <label class="col-sm-4" style="text-align: right">Requirement Description</label>
-                                  <div class="col-sm-7 selectContainer">
-                                      <input type="text" style="text-transform: uppercase;" class="form-control" name="txtAddReqDesc" id="txtAddReqDesc">
+                                  <div class="form-group" style="margin-top:7%">
+                                   <label class="col-sm-4 control-label"> Requirement Name </label>
+                                   <div class="col-sm-6 selectContainer">
+                                     <div class="input-group" style="width:100%;">
+                                      <input type="text" style="text-transform: uppercase;" class="form-control" name="txtAddReqName" id="txtAddReqName">
+                                     </div>
+                                   </div>
+                                 </div>
+
+                                 <div class="form-group">
+                                  <b><label class="col-sm-4 control-label"> Requirement Description </label></b>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group" style="width:100%;">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-align-justify" aria-hidden="true"></i>
+                                      </div>
+                                      <textarea type="text" style="text-transform: uppercase;" class="form-control" name="txtAddReqDesc" id="txtAddReqDesc"></textarea>
+                                    </div>
                                   </div>
-                                </div>
+                                 </div>
 
-                                <div class="form-group" style="margin-top: 25%">
-                                      <label class="col-sm-4" style="text-align: right">Status</label>
-                                      <div class="col-sm-7 selectContainer">
+                                 <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Status </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+
                                       <select class="form-control" style="width: 100%;" name="selAddReqStatus" id="selAddReqStatus">
                                         <option selected="selected" disabled="disabled" value="">--Select Status--</option>
                                         <option value="MANDATORY">MANDATORY</option>
                                         <option value="TO FOLLOW">TO FOLLOW</option>
                                       </select>
-                                      </div>
-                              </div>
-                              </div>
-                              <div class="modal-footer" style="margin-top: 15%">
-                                <button type="submit" class="btn btn-info" name="btnAddReq" id="btnAddReq">Save</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                              </div>
-                            </form>
-                          </div> <!-- modal content add requirement -->
-                        </div> <!-- modal dialog add requirement -->
-                      </div> <!-- modal fade add requirement -->
-
-                      <div class="modal fade" id="updateModalOne" role="dialog">
-                        <div class="modal-dialog">
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h3 class="modal-title" style="font-style: bold">Update Requirement</h3>
-                            </div>
-
-                            <form data-toggle="validation" autocomplete="off" role="form" action="{{ route('requirement.update','id') }}" method="post" name="UpdReq" id="UpdReq">
-                             {{ method_field('PUT') }}
-                             {{ csrf_field() }}
-                              <div class="modal-body">
-                                <div><input type="hidden" name="txtUpdReqId" id="txtUpdReqId"/></div>
-                                 <div class="form-group" style="margin-top: 5%">
-                                    <label class="col-sm-4" style="text-align: right">Requirement Name</label>
-                                    <div class="col-sm-7 selectContainer">
-                                      <input type="text" style="text-transform: uppercase;" class="form-control" name="txtUpdReqName" id="txtUpdReqName">
                                     </div>
-                                </div>
-
-                                <div class="form-group" style="margin-top: 15%">
-                                  <label class="col-sm-4" style="text-align: right" >Requirement Description</label>
-                                  <div class="col-sm-7 selectContainer">
-                                    <input type="text" style="text-transform: uppercase;" class="form-control" name="txtUpdReqDesc" id="txtUpdReqDesc">
                                   </div>
                                 </div>
 
-                                <div class="form-group" style="margin-top: 25%">
-                                      <label class="col-sm-4" style="text-align: right">Status</label>
-                                      <div class="col-sm-7 selectContainer">
-                                    <select class="form-control" style="width: 100%;" name="selUpdReqStatus" id="selUpdReqStatus">
-                                        <option selected="selected" disabled="disabled">--Select Status--</option>
-                                        <option value="MANDATORY">MANDATORY</option>
-                                        <option value="TO FOLLOW">TO FOLLOW</option>
-                                      </select>
-                                      </div>
-                              </div>
-                              </div>
-                              <div class="modal-footer" style="margin-top: 15%">
-                                <button type="submit" class="btn btn-info" name="btnUpdReq" id="btnUpdReq">Save</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <div class="modal-footer" style="margin-top: 7%">
+                                 <button type="submit" class="btn btn-info" name="btnAddReq" id="btnAddReq">Save</button>
+                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
                               </div>
                             </form>
-                          </div> <!-- modal content update requirement -->
-                        </div> <!-- modal dialog update requirement -->
-                      </div> <!-- modal fade update requirement -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Update Modal -->
+                      <div class="modal fade" id="updateModalOne" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <form autocomplete="off" id = "UpdReq" name="UpdReq" role="form" method="POST" action="{{ route('requirement.update','id') }}" class="form-horizontal">
+                              {{ method_field('PUT') }}
+                              {{ csrf_field() }}
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="updateModalOne"> UPDATE REQUIREMENT </h4>
+                              </div>
+
+                              <div class="modal-body">
+                                <div class="form-group" style="display: none;">
+                                  <label class="col-sm-4 control-label">Requirement ID</label>
+                                  <div class="col-sm-6">
+                                    <div class = "input-group">
+                                      <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                      <input type="hidden" name="txtUpdReqId" id="txtUpdReqId"/>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top:7%">
+                                  <b><label class="col-sm-4 control-label"> Requirement Name </label></b>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group" style="width:100%;">
+                                      <input type="text" style="text-transform: uppercase;" class="form-control" name="txtUpdReqName" id="txtUpdReqName">
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Requirement Description </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-align-justify" aria-hidden="true"></i>
+                                      </div>
+                                      <textarea type="text" style="text-transform: uppercase;" class="form-control" name="txtUpdReqDesc" id="txtUpdReqDesc"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Status </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+                                      <select class="form-control" style="width: 100%;" name="selUpdReqStatus" id="selUpdReqStatus">
+                                          <option selected="selected" disabled="disabled">--Select Status--</option>
+                                          <option value="MANDATORY">MANDATORY</option>
+                                          <option value="TO FOLLOW">TO FOLLOW</option>
+                                        </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="modal-footer" style="margin-top: 10%">
+                                  <button type="submit" class="btn btn-info" name="btnUpdReq" id="btnUpdReq">Save</button>
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
 
                       <div class="modal fade" id="deleteModalOne" role="dialog">
                         <div class="modal-dialog">

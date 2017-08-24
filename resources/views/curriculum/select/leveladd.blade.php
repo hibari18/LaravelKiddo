@@ -1,9 +1,9 @@
 <div class="form-group" style="margin-top:7%;">
-  <label class="col-sm-4 control-label"> Level </label>
+  <label class="col-sm-4 control-label"> Level Name </label>
   <div class="col-sm-6 selectContainer">
     <div class="input-group">
       <div class="input-group-addon">
-        <i class="fa fa-clone" aria-hidden="true"></i>
+        <i class="fa fa-files-o" aria-hidden="true"></i>
       </div>
 
       <select class="form-control" style="width: 100%;" name="selAddDetLvl" id="selAddDetLvl">
