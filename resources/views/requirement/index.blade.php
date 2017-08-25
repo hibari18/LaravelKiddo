@@ -27,6 +27,9 @@
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
+    if($message == 7) {
+      echo "<script> swal('Requirement already exists!', ' ', 'error'); </script>";
+    }
   ?>
 
 <script>

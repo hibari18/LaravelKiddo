@@ -36,25 +36,24 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $subject = Subject::where('tblSubjectId', $request->txtAddSubjId)->first();
-        
-        if($subject==null){
+
+        $duplicate = Subject::where('tblSubjectId', $request->txtAddSubjId)->first();
+        if($duplicate){
+            if($duplicate->tblSubjectFlag==1)
+                return redirect()->route('division.index')->with('message', 11);
+            $duplicate->tblSubjectFlag = 1;
+            $duplicate->save();
+            return redirect()->route('division.index')->with('message', 2);
+        }
+
         $subject = Subject::create([
-            
             'tblSubjectId' => strtoupper(trim($request->txtAddSubjId)),
             'tblSubjectDesc' => strtoupper(trim($request->txtAddSubj)),
             'tblSubjActive' => trim($request->selAddSubjId),
             ]);
-        } 
-        else {
-            
-            $subject->tblSubjectFlag = 1;
-            $subject->save();
-        }
+        $message = $subject ? 2 : 1;
 
-         $message = $subject ? 2 : 1;
-        
-        return redirect()->route('division.index')->with('message', $message);
+        return redirect()->route('division.index')->with('message', $message);    
     }
 
     /**

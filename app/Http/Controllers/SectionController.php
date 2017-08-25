@@ -46,33 +46,26 @@ class SectionController extends Controller
     public function store(Request $request)
     {
 
-        $section = Section::where('tblSectionName', $request->addSectTxt)->where('tblSection_tblLevelId', $request->addLvlSelect)->first();
-        
-        if($section==null){
+
+
+        $duplicate = Section::where('tblSectionName', $request->addSectTxt)->where('tblSection_tblLevelId', $request->addLvlSelect)->where('tblSectionSession', $request->addSesSelect)->first();
+        if($duplicate){
+            if($duplicate->tblSectionFlag==1)
+                return redirect()->route('section.index')->with('message', 7);
+            $duplicate->tblSectionFlag = 1;
+            $duplicate->save();
+            return redirect()->route('section.index')->with('message', 2);
+        }
+
         $section = Section::create([
-            
             'tblSection_tblLevelId' => trim($request->addLvlSelect),
             'tblSectionName' => strtoupper(trim($request->addSectTxt)),
             'tblSectionSession' => trim($request->addSesSelect),
-        ]);
-        } 
-        else {
-            
-            $section->tblSectionFlag = 1;
-            $section->save();
-        }
-
-         $message = $section ? 2 : 1;
-
-        // $section = Section::create([
-        //     'tblSection_tblLevelId' => trim($request->addLvlSelect),
-        //     'tblSectionName' => strtoupper(trim($request->addSectTxt)),
-        //     'tblSectionSession' => trim($request->addSesSelect),
-        // ]);
-
-        // $message = $section ? 2 : 1;
+            ]);
+        $message = $section ? 2 : 1;
 
         return redirect()->route('section.index')->with('message', $message);
+
     }
 
     /**

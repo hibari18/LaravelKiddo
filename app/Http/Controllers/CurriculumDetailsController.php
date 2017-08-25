@@ -43,25 +43,25 @@ class CurriculumDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        $details = CurriculumDetail::where('tblCurriculumDetail_tblLevelId', $request->selAddDetLvl)->first();
         
-        if($details==null){
+        $duplicate = CurriculumDetail::where('tblCurriculumDetail_tblLevelId', $request->selAddDetLvl)->first();
+        if($duplicate){
+            if($duplicate->tblDetailsFlag==1)
+                return redirect()->route('division.index')->with('message', 1);
+            $duplicate->tblDetailsFlag = 1;
+            $duplicate->save();
+            return redirect()->route('division.index')->with('message', 2);
+        }
+
         $details = CurriculumDetail::create([
-            
             'tblCurriculumDetail_tblDivisionId' => trim($request->selAddDetDiv),
             'tblCurriculumDetail_tblLevelId' => trim($request->selAddDetLvl),
             'tblCurriculumDetail_tblSubjectId' => trim($request->selAddDetSubj),
             ]);
-        } 
-        else {
-            
-            $details->tblDetailsFlag = 1;
-            $details->save();
-        }
-
-         $message = $details ? 2 : 1;
+        $message = $details ? 2 : 1;
 
         return redirect()->route('division.index')->with('message', $message);
+
     }
 
     /**

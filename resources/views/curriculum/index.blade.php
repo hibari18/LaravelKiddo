@@ -35,6 +35,9 @@
       if($message == 10) {
         echo "swal('Level already exists!', ' ', 'error'); ";
       }
+      if($message == 11) {
+        echo "swal('Subject already exists!', ' ', 'error'); ";
+      }
     echo '</script>';
   }
 ?>

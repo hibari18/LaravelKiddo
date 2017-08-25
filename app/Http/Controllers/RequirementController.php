@@ -37,32 +37,23 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
-        $requirement = Requirement::where('tblReqName', $request->txtAddReqName)->first();
-        
-        if($requirement==null){
+
+        $duplicate = Requirement::where('tblReqName', $request->txtAddReqName)->first();
+        if($duplicate){
+            if($duplicate->tblRequirementFlag==1)
+                return redirect()->route('requirement.index')->with('message', 7);
+            $duplicate->tblRequirementFlag = 1;
+            $duplicate->save();
+            return redirect()->route('requirement.index')->with('message', 2);
+        }
+
         $requirement = Requirement::create([
-            
             'tblReqName' => strtoupper(trim($request->txtAddReqName)),
             'tblReqDescription' => strtoupper(trim($request->txtAddReqDesc)),
             'tblReqStatus' => trim($request->selAddReqStatus),
             ]);
-        } 
-        else {
-            
-            $requirement->tblRequirementFlag = 1;
-            $requirement->save();
-        }
+        $message = $requirement ? 2 : 1;
 
-         $message = $requirement ? 2 : 1;
-
-        // $requirement = Requirement::create([
-        //     'tblReqName' => strtoupper(trim($request->txtAddReqName)),
-        //     'tblReqDescription' => strtoupper(trim($request->txtAddReqDesc)),
-        //     'tblReqStatus' => trim($request->selAddReqStatus),
-        // ]);
-
-        // $message = $requirement ? 2 : 1;
-        
         return redirect()->route('requirement.index')->with('message', $message);
     }
 

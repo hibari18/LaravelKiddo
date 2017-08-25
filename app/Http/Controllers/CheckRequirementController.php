@@ -179,7 +179,8 @@ class CheckRequirementController extends Controller
             if(empty($parent))
             {
                 $parent='001';
-            }else
+            }
+            else
             {
                 $parent++;
             }
@@ -193,14 +194,16 @@ class CheckRequirementController extends Controller
             if(empty($parent))
             {
                 $parent='001';
-            }else
+            }
+            else
             {
                 $parent++;
             }
             $id2 = sprintf('%03d', $parent);
             $parentid=$sy.$id2;
 
-           
+            $parentStat = $_POST['chkParentStat'];
+            $liveswith = $_POST['chkLivesWith'];
 
             foreach($parentStat as $val1)
             {
