@@ -56,25 +56,6 @@ class CheckRequirementController extends Controller
      */
     public function store(Request $request)
     {
-        $infoid = PersonalInfo::orderBy('tblStudInfoId', 'desc')->pluck('tblStudInfoId')->first();
-        $infoid ++;
-
-        $arrreq = Requirement::where('tblRequirementFlag', 1)->pluck('tblReqId');
-        
-        foreach($arrreq as $value){
-            $studreqid = CheckRequirement::orderBy('tblStudReqID', 'desc')->pluck('tblStudReqID')->first();
-            $studreqid++;
-        }
-        
-        $req = $request->chkReq;
-        foreach($req as $val){
-            CheckRequirement::where(['tblStudReq_tblStudentId', $studentid, 'tblStudReq_tblReqId', $val])->update(['tblStudReqStatus', 'Y']);
-        }
-
-        $healthid = HealthInfo::orderBy('tblStudHealthId', 'desc')->first()->pluck('tblStudHealthId');
-        $healthid ++;
-
-        
         $sy = substr(SchoolYear::select('tblSchoolYrStart')->where('tblSchoolYrActive', 'Active')->first()->tblSchoolYrStart, 2);
         $studId = substr(Student::select('tblStudentId')->whereRaw('left(tblStudentId, 2) ='.$sy)->groupBy('tblStudentId')->orderBy('tblStudentId', 'desc')->first()->tblStudentID, 3);    
             if(empty($studId)) { 
@@ -85,8 +66,30 @@ class CheckRequirementController extends Controller
                  } 
         $id = sprintf('%03d', $studId); 
         $studentid=$sy.$id;
+
+        $infoid = PersonalInfo::orderBy('tblStudInfoId', 'desc')->pluck('tblStudInfoId')->first();
+        $infoid ++;
+
+        $arrreq = Requirement::where('tblRequirementFlag', 1)->pluck('tblReqId');
+        foreach($arrreq as $r)
+        {
+            $reqid = $r->tblReqId;
+            array_push($arrreq, $reqid);
+            
+        }
+        foreach($arrreq as $value){
+            $studreqid = CheckRequirement::orderBy('tblStudReqID', 'desc')->pluck('tblStudReqID')->first();
+            $studreqid++;
+        }
         
-       
+        $req = $request->chkReq;
+        foreach($req as $val){
+        CheckRequirement::where(['tblStudReq_tblStudentId', $studentid, 'tblStudReq_tblReqId', $val])->update(['tblStudReqStatus', 'Y']);
+        }
+
+        $healthid = HealthInfo::orderBy('tblStudHealthId', 'desc')->first()->pluck('tblStudHealthId');
+        $healthid ++;
+        
 
         $stepone = CheckRequirement::create([
             
@@ -209,20 +212,24 @@ class CheckRequirementController extends Controller
             {
             $parentstatid = ParentStatus::select('tblParentStatId')->orderBy('tblParentStatId','desc')->first()->tblParentStatId;
             $parentstatid ++;
+            $parentStat = ParentStatus::create([
                 
                                 'tblParentStatId' => $parentstatid,
                                 'tblParentStatus' => $val1,
                                 'tblParentStat_tblStudentId' => $studentid,
+                                ]);
+            
             }
 
             foreach($liveswith as $val2)
             {
             $liveswithid = StudLivesWith::select('tblLivesWithId')->orderBy('tblLivesWithId','desc')->first()->tblLivesWithId;
             $liveswithid ++;
-               
+             $liveswith = StudLivesWith::create([   
                                 'tblLivesWithId' => $liveswithid,
                                 'tblLivesWithPerson' => $val2,
                                 'tblLivesWith_tblStudentId' => $studentid,
+           ]);
             }
 
             
@@ -244,6 +251,7 @@ class CheckRequirementController extends Controller
         
                 $siblingid = StudSibling::select('tblStudSibId')->orderBy('tblStudSibId', 'desc')->first()->tblStudSibId;
                 $siblingid++;
+             $siblingid = StudSibling::create([   
 
                 'tblStudSibId' => $siblingid,
                 'tblStudSibName' => strtoupper(trim($request->$sname)),
@@ -251,6 +259,7 @@ class CheckRequirementController extends Controller
                 'tblStudSibGrade' => trim($sgrd),
                 'tblStudentSchool' => strtoupper(trim($sschool)),
                 'tblStudSib_tblStudId' => $studentid,
+                ]);
             }
 
 
@@ -268,20 +277,18 @@ class CheckRequirementController extends Controller
                 $rage=$relAge[$j];
                 $rrelation=$relRelation[$j];
 
-            $relativeid= StudRelative::('tblStudRelId')->orderby('tblStudRelId', 'desc')->first()->tblStudRelId;
+            $relativeid= StudRelative::select('tblStudRelId')->orderby('tblStudRelId', 'desc')->first()->tblStudRelId;
             $relativeid++;
-
-            'tblStudRelId' => $relativeid,
-            'tblStudRelName' => strtoupper(trim($rname)),
-            'tblStudRelAge' => $rage,
-            'tblStudRelRelation' => strtoupper(trim($rrelation)),
-            'tblStudRel_tblStudentId' => $studentid,
             
+            $relativeid = StudRelative::create([   
+
+                'tblStudRelId' => $relativeid,
+                'tblStudRelName' => strtoupper(trim($rname)),
+                'tblStudRelAge' => $rage,
+                'tblStudRelRelation' => strtoupper(trim($rrelation)),
+                'tblStudRel_tblStudentId' => $studentid,
+             ]);
             }
-
-
-
-        ]);
 
          $stepfour = HealthInfo::create([
 

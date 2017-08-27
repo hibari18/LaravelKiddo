@@ -19,7 +19,6 @@ class FeesController extends Controller
     public function index()
     {
         $fees = Fees::where('tblFeeFlag', 1)->get();
-        // $fees = null;
         $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
         $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
         $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
@@ -46,14 +45,29 @@ class FeesController extends Controller
      */
     public function store(Request $request)
     {
-        $fees = Fees::create([
-            'tblFeeCode' => strtoupper(trim($request->txtAddFeeCode)),
-            'tblFeeName' => strtoupper(trim($request->txtAddFeeName)),
-            'tblFeeStatus' => trim($request->selAddFeeStatus),
-        ]);
+        $id = Fees::orderBy('tblFeeId', 'desc')->pluck('tblFeeId')->first();
+        $id ++;
 
-        $message = $fees ? 2 : 1;
-        
+        $duplicate = Fees::where('tblFeeCode', $request->txtAddFeeCode)->where('tblFeeName', $request->txtAddFeeName)->first();
+        if($duplicate){
+            if($duplicate->tblFeeFlag==1)
+                return redirect()->route('fees.index')->with('message', 7);
+            $duplicate->tblFeeFlag = 1;
+            $duplicate->save();
+            return redirect()->route('fees.index')->with('message', 2);
+        }
+
+        $fees = Fees::create([
+    
+            'tblFeeId' => $id,
+            'tblFeeCode' => strtoupper(trim($request->txtAddFeeCode)),
+            'tblFeeName' => strtoupper(trim($request->txtAddFeeName)),            
+            'tblFeeStatus' => trim($request->selAddFeeStatus),
+
+        ]);
+    
+        $message = $fees ? 2 : 1;    
+
         return redirect()->route('fees.index')->with('message', $message);
     }
 
@@ -65,14 +79,7 @@ class FeesController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // $fees = Fee::where('tblFeeAmount_tblLevelId', $id)->where('tblFeeFlag', 1)->get();
-        
-        // return view('payment.table.fees', compact('fees'));
-
-        $fees = Level::where('tblLevelId', $id)->first()
-            ->fees()->where('tblFeeFlag', 1)->get();
-        
-        return view('payment.table.fees', compact('fees'));
+        //
     }
 
     /**

@@ -27,6 +27,9 @@
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
+    if($message == 7) {
+      echo "<script> swal('Fee already exists!', ' ', 'error'); </script>";
+    }
   ?>
 <script>
       function changeTblFee()
@@ -366,7 +369,7 @@
           })
         .on('success.form.bv', function (e) {
           // Prevent form submission
-        e.preventDefault();
+        //e.preventDefault();
         });
 
         $('#updateModalOne')
@@ -433,7 +436,7 @@
           })
         .on('success.form.bv', function (e) {
           // Prevent form submission
-        e.preventDefault();
+        //e.preventDefault();
         });
 
         $('#addModalTwo')

@@ -3,13 +3,7 @@
                     <div class="box-header"></div>
                       <div class="box-body">
                         <div class="container">
-                          <label class="col-sm-1">Level: </label>
-                          <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selFeeLvl" id="selFeeLvl" onchange = "changeTblFee();">
-                            <option selected disabled>--Select Here--</option>
-                              @foreach($levels as $level)
-                              <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
-                              @endforeach
-                          </select>
+                          
                         </div>
 
                         <div class="btn-group" style="margin-bottom: 3%">

@@ -44,3 +44,9 @@ Route::resource('admission', 'CheckRequirementController');
 
 Route::resource('sectioning', 'BySectionController');
 
+Route::resource('profile', 'StudentProfileController');
+
+Route::resource('studentprofile', 'StudProfileEditController');
+
+
+

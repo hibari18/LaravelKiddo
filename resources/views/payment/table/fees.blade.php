@@ -1,10 +1,8 @@
 <thead>
     <tr>
       <th hidden>Fee Id</th>
-      <th hidden>Level Id</th>
       <th>Fee Code</th>
       <th>Fee Name</th>
-      <th>Amount</th>
       <th>Status</th>
       <th>Action</th>
     </tr>
@@ -14,10 +12,8 @@
   <tr>
   @foreach($fees as $fee)
     <td hidden>{{ $fee->tblFeeId}}</td>
-    <td hidden>{{ $fee->tblFeeAmount_tblLevelId}}</td>
     <td>{{ $fee->tblFeeCode}}</td>
     <td>{{ $fee->tblFeeName}}</td>
-    <td>{{ $fee->tblFeeAmountAmount}}</td>
     <td>{{ $fee->tblFeeStatus}}</td>
      <td>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>

@@ -169,27 +169,34 @@
             <div class="tab-pane" role="tabpanel" id="step4">
 
                   @include('admission.stepfour')
+              <button type="button" class="btn btn-info" data-toggle="modal" style="margin-top: 10%; float: right; margin-left: 2%"  data-target="#ProceedOrSave">Save Applicant</button>
+              <button type="button" class="btn btn-default prev-step" style="margin-top: 10%; float: right;">Previous</button>
 
-              <ul class="list-inline pull-right" style="margin-top: 5%">
-                  <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                  <li><button type="button" class="btn btn-info" name="btnSave" id="btnSave" data-toggle="modal" data-target="#ProceedOrSave">Save Applicant</button></li>
-              </ul>
 
-              <div class="modal-dialog">
+
+  <div class="modal fade" id="ProceedOrSave" role="dialog" tabindex="-1" aria-labelledby="ProceedOrSave" aria-hidden="true">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-dialog">
               <div class="modal-content col-sm-12">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="ProceedOrSave"> ADMISSION </h4>
+                  <h4 class="modal-title" id="addModalFour"> ADMISSION </h4>
                 </div>
-                <div>
-                   <button type="submit" class="btn btn-info" name="btnSaveApplicant" id="btnSaveApplicant">Save Applicant</button>
-                   <a href="enrollment" class="btn btn-success" role="button" name="btnProceed" id="btnProceed">Proceed Enrollment</a>
+                 <div style="margin-top: 20%; margin-bottom: 20%; margin-left: 2%">
+                  <button type="submit" class="btn btn-app bg-green" name="btnSaveApplicant" id="btnSaveApplicant" style="width: 47%"><i class="fa fa-save"></i> Save Applicant</button>
+                  <a class="btn btn-app bg-blue" href="enrollment" name="btnProceed" id="btnProceed" style="width: 47%">
+                    <i class="fa fa-arrow-circle-right"></i> Proceed Enrollment</a>
                 </div>
+                
                   
-                  <div class="modal-footer" style="margin-top:7%;">
-                   
-                  </div>
                 </div>
               </div>
+      </div>
+    </div>
+  </div>
+             
 
             </div> <!-- tab pane step4 -->
             <div class="clearfix"></div>

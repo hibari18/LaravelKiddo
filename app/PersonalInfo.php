@@ -13,4 +13,8 @@ class PersonalInfo extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false;
+
+	public function student(){
+		return $this->hasMany('App\Student', 'tblstudent_tblStudInfoId', 'tblStudInfoId');
+	}
 }
