@@ -40,8 +40,8 @@
             <label class="control-label" style="margin-left: 10%">Hospitalized?
             
               <label style="margin-left: 5%">
-                <input type="radio" name="h2" class="minimal" checked>Yes
-                <input type="radio" name="h2" class="minimal" onchange="disabledReason()">No
+                <input type="radio" name="h2" class="minimal" checked value="1">Yes
+                <input type="radio" name="h2" class="minimal"  value="0"onchange="disabledReason()">No
               </label>
               
            
@@ -61,8 +61,8 @@
             <div class="form-group" style="margin-left: 20%">
               <label class="control-label">In case of emergency, can we call your family doctor/pediatrician?
                 <label style="margin-left: 3%">
-                  <input type="radio" name="r1" class="minimal" checked>Yes
-                  <input type="radio" name="r1" class="minimal" onchange="disabledEmergency()">No
+                  <input type="radio" name="r1" class="minimal" checked value="1">Yes
+                  <input type="radio" name="r1"  value="0" class="minimal" onchange="disabledEmergency()">No
                 </label>
                
               </label>

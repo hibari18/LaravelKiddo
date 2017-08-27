@@ -57,7 +57,7 @@ class CheckRequirementController extends Controller
     public function store(Request $request)
     {
         $sy = substr(SchoolYear::select('tblSchoolYrStart')->where('tblSchoolYrActive', 'Active')->first()->tblSchoolYrStart, 2);
-        $studId = substr(Student::select('tblStudentId')->whereRaw('left(tblStudentId, 2) ='.$sy)->groupBy('tblStudentId')->orderBy('tblStudentId', 'desc')->first()->tblStudentID, 3);    
+        $studId = substr(Student::whereRaw('left(tblStudentId, 2) ='.$sy)->orderBy('tblStudentId', 'desc')->pluck('tblStudentId')->first(), 3);    
             if(empty($studId)) { 
                 $studId='001';
                  } 
@@ -70,28 +70,28 @@ class CheckRequirementController extends Controller
         $infoid = PersonalInfo::orderBy('tblStudInfoId', 'desc')->pluck('tblStudInfoId')->first();
         $infoid ++;
 
-        $arrreq = Requirement::where('tblRequirementFlag', 1)->pluck('tblReqId');
+        $arrreq = Requirement::where('tblRequirementFlag', 1)->pluck('tblReqId')->all();
         foreach($arrreq as $r)
         {
-            $reqid = $r->tblReqId;
+            $reqid = $r;
             array_push($arrreq, $reqid);
             
         }
         foreach($arrreq as $value){
-            $studreqid = CheckRequirement::orderBy('tblStudReqID', 'desc')->pluck('tblStudReqID')->first();
+            $studreqid = CheckRequirement::orderBy('tblStudReq_tblStudentId', 'desc')->pluck('tblStudReq_tblStudentId')->first();
             $studreqid++;
         }
         
         $req = $request->chkReq;
         foreach($req as $val){
-        CheckRequirement::where(['tblStudReq_tblStudentId', $studentid, 'tblStudReq_tblReqId', $val])->update(['tblStudReqStatus', 'Y']);
+        CheckRequirement::where('tblStudReq_tblStudentId', $studentid)->where( 'tblStudReq_tblReqId', $val)->update(['tblStudReqStatus'=> 'Y']);
         }
 
         $healthid = HealthInfo::orderBy('tblStudHealthId', 'desc')->first()->pluck('tblStudHealthId');
         $healthid ++;
         
 
-        $stepone = CheckRequirement::create([
+        $stepone = Student::create([
             
             'tblStudentId' => $studentid,
             'tblStudentType' => 'APPLICANT',
@@ -104,7 +104,7 @@ class CheckRequirementController extends Controller
         
         $steptwo = PersonalInfo::create([
             
-            'tblStudInfo_tblStudentId' => $infoid,
+            'tblStudInfo_tblStudentId' => $studentid,
             'tblStudInfoFname' => trim($request->txtStudFname),
             'tblStudInfoLname' => trim($request->txtStudLname),
             'tblStudInfoMname' => trim($request->txtStudMname),
@@ -123,7 +123,7 @@ class CheckRequirementController extends Controller
 
         $stepthree = FamilyInfo::create([
 
-            'tblParentId' => $parentid,
+            'tblParentId' => FamilyInfo::next_parent_id($sy),
             'tblParentRelation' => 'FATHER',
             'tblParentFname' => trim($request->txtFatherFname),
             'tblParentLname' => trim($request->txtFatherLname),
@@ -148,7 +148,7 @@ class CheckRequirementController extends Controller
         
         $stepthree = FamilyInfo::create([
 
-            'tblParentId' => $parentid,
+            'tblParentId' => FamilyInfo::next_parent_id($sy),
             'tblParentRelation' => 'MOTHER',
             'tblParentFname' => trim($request->txtMotherFname),
             'tblParentLname' => trim($request->txtMotherLname),
@@ -174,70 +174,44 @@ class CheckRequirementController extends Controller
         
         ///////////////////////////////////////////////////////////////////////////////
         
-        
-        
-            $parent = Parent::whereRaw("left(tblParentId, 2) = '$sy'")->groupBy('tblParentId')->first()->tblParentId;
 
-            $parent = substr($parent, 3);
-            if(empty($parent))
-            {
-                $parent='001';
-            }
-            else
-            {
-                $parent++;
-            }
-            $id2 = sprintf('%03d', $parent);
-            $parentid=$sy.$id2;
+            $parentStat = $request->chkParentStat;
 
-
-            $parent = Parent::whereRaw("left(tblParentID, 2) = '$sy'")->groupBy('tblParentID')->first()->tblParentID;
-
-            $parent = substr($parent, 3);
-            if(empty($parent))
-            {
-                $parent='001';
-            }
-            else
-            {
-                $parent++;
-            }
-            $id2 = sprintf('%03d', $parent);
-            $parentid=$sy.$id2;
-
-            $parentStat = $_POST['chkParentStat'];
-            $liveswith = $_POST['chkLivesWith'];
-
-            foreach($parentStat as $val1)
-            {
-            $parentstatid = ParentStatus::select('tblParentStatId')->orderBy('tblParentStatId','desc')->first()->tblParentStatId;
-            $parentstatid ++;
-            $parentStat = ParentStatus::create([
+            if($parentStat != null){
+                foreach($parentStat as $val1)
+                {
+                    $parentstatid = ParentStatus::select('tblParentStatId')->orderBy('tblParentStatId','desc')->first()->tblParentStatId;
+                    $parentstatid ++;
+                    $parentStat = ParentStatus::create([
+                        'tblParentStatId' => $parentstatid,
+                        'tblParentStatus' => $val1,
+                        'tblParentStat_tblStudentId' => $studentid,
+                    ]);
                 
-                                'tblParentStatId' => $parentstatid,
-                                'tblParentStatus' => $val1,
-                                'tblParentStat_tblStudentId' => $studentid,
-                                ]);
-            
-            }
-
-            foreach($liveswith as $val2)
-            {
-            $liveswithid = StudLivesWith::select('tblLivesWithId')->orderBy('tblLivesWithId','desc')->first()->tblLivesWithId;
-            $liveswithid ++;
-             $liveswith = StudLivesWith::create([   
-                                'tblLivesWithId' => $liveswithid,
-                                'tblLivesWithPerson' => $val2,
-                                'tblLivesWith_tblStudentId' => $studentid,
-           ]);
+                }
             }
 
             
+            $liveswith = $request->chkLivesWith;
+            if($liveswith != null){
+                foreach($liveswith as $val2)
+                {
+                    $liveswithid = StudLivesWith::select('tblLivesWithId')->orderBy('tblLivesWithId','desc')->first()->tblLivesWithId;
+                    $liveswithid ++;
+                    $liveswith = StudLivesWith::create([   
+                        'tblLivesWithId' => $liveswithid,
+                        'tblLivesWithPerson' => $val2,
+                        'tblLivesWith_tblStudentId' => $studentid,
+                    ]);
+                }
+            }
 
-            $sibName=$_POST['txtSiblName'];
-            $sibAge=$_POST['txtSiblAge'];
-            $sibGrd=$_POST['txtSiblGrd'];
-            $sibSchool=$_POST['txtSiblSchool'];
+            
+
+            $sibName=$request->txtSiblName;
+            $sibAge=$request->txtSiblAge;
+            $sibGrd=$request->txtSiblGrd;
+            $sibSchool=$request->txtSiblSchool;
             
             
 
@@ -249,15 +223,12 @@ class CheckRequirementController extends Controller
                 $sgrd=$sibGrd[$i];
                 $sschool=$sibSchool[$i];
         
-                $siblingid = StudSibling::select('tblStudSibId')->orderBy('tblStudSibId', 'desc')->first()->tblStudSibId;
-                $siblingid++;
-             $siblingid = StudSibling::create([   
+             $siblingid = StudSiblings::create([   
 
-                'tblStudSibId' => $siblingid,
                 'tblStudSibName' => strtoupper(trim($request->$sname)),
                 'tblStudSibAge' => trim($sage),
                 'tblStudSibGrade' => trim($sgrd),
-                'tblStudentSchool' => strtoupper(trim($sschool)),
+                'tblStudSibSchool' => strtoupper(trim($sschool)),
                 'tblStudSib_tblStudId' => $studentid,
                 ]);
             }
@@ -265,9 +236,9 @@ class CheckRequirementController extends Controller
 
             
 
-            $relName=$_POST['txtRelName'];
-            $relAge=$_POST['txtRelAge'];
-            $relRelation=$_POST['txtRelRelation'];
+            $relName=$request->txtRelName;
+            $relAge=$request->txtRelAge;
+            $relRelation=$request->txtRelRelation;
 
             $y=count($relName);
             for($j=0; $j<$y; $j++)
@@ -292,7 +263,7 @@ class CheckRequirementController extends Controller
 
          $stepfour = HealthInfo::create([
 
-            'tblStudHealth_tblStudentId' => $healthid,
+            'tblStudHealth_tblStudentId' => $studentid,
             'tblStudHealthAllergies' => trim($request->txtHealthAllergies),
             'tblStudHealthIllness' => trim($request->txtHealthIllness),
             'tblStudHealthMedication' => trim($request->txtHealthMeds),
