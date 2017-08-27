@@ -23,7 +23,7 @@
                                         <select class="form-control" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
                                           <option selected="selected" disabled value="">--Select Fee--</option>
                                             @foreach($fees as $fee)
-                                            <option value="{{ $fee->tblFeeName}}">{{ $fee->tblFeeName}}</option>
+                                            <option value="{{ $fee->tblFeeId}}">{{ $fee->tblFeeName}}</option>
                                             @endforeach
                                         </select>
                                       </div>
@@ -39,7 +39,7 @@
                                   <div class="form-group" style="margin-top: 25%">
                                     <label class="col-sm-4" style="text-align: right">No. of Payments</label>
                                     <div class="col-sm-7 selectContainer">
-                                      <input type="text" name="txtAddSchemeNo" id="txtAddSchemeNo">
+                                      <input class="rem" type="number" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
                                     </div>
                                   </div>
                                 </div>
@@ -134,12 +134,12 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($fees as $fee)
+                            @foreach($schemetypes as $scheme)
                             <tr>
-                              <td hidden>{{ $fee->tblSchemeId}}</td>
-                              <td>{{ $fee->tblFeeName}}</td>
-                              <td>{{ $fee->tblSchemeType}}</td>
-                              <td>{{ $fee->tblSchemeNoOfPayment}}</td>
+                              <td hidden>{{ $scheme->tblSchemeId}}</td>
+                              <td>{{ $scheme->fees->tblFeeName}}</td>
+                              <td>{{ $scheme->tblSchemeType}}</td>
+                              <td>{{ $scheme->tblSchemeNoOfPayment}}</td>
                                <td>
                                   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalTwo"><i class="fa fa-edit"></i></button>
                                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalTwo"><i class="fa fa-trash"></i></button>
