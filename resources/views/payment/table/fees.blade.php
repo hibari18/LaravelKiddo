@@ -1,6 +1,6 @@
 <thead>
     <tr>
-      <th hidden>Fee Id</th>
+      <th class="hidden">Fee Id</th>
       <th>Fee Code</th>
       <th>Fee Name</th>
       <th>Status</th>
@@ -9,9 +9,9 @@
   </thead>
 
   <tbody>
-  <tr>
   @foreach($fees as $fee)
-    <td hidden>{{ $fee->tblFeeId}}</td>
+  <tr>
+    <td class="hidden">{{ $fee->tblFeeId}}</td>
     <td>{{ $fee->tblFeeCode}}</td>
     <td>{{ $fee->tblFeeName}}</td>
     <td>{{ $fee->tblFeeStatus}}</td>
