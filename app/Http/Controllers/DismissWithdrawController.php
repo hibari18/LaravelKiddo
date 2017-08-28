@@ -26,7 +26,7 @@ class DismissWithdrawController extends Controller
 
         $dwname = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudent_tblLevelId=l.tblLevelId and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentFlag=1 and s.tblStudentType != 'DISMISS' and s.tblStudentType != 'WITHDRAW' group by s.tblStudentId"));
 
-        return view('dismiss-withdraw.diswith', compact('diswiths','dwname','studprofile', 'studinfo','level'));
+        return view('dismisswithdraw.diswith', compact('diswiths','dwname','studprofile', 'studinfo','level'));
 
         
     }
@@ -86,7 +86,7 @@ class DismissWithdrawController extends Controller
 
         $studid = $_POST['txtStudId'];
         $action = $_POST['selChoose'];
-        $reason = $_POST['taReason'];
+        //$reason = $_POST['taReason'];
 
         Student::where('tblStudentId', $studid)->update(['tblStudentType'=> $action]);
 
@@ -95,14 +95,14 @@ class DismissWithdrawController extends Controller
         
         $dwid = DismissWithdraw::create([ 
             'tblStudDismissId' => $dwid,
-            'tblStudDismissAction' => trim($request->$action),
-            'tblStudDismissReason' => trim($request->$reason),
+            'tblStudDismissAction' => $action,
+            'tblStudDismissReason' => trim($request->taReason),
             'tblStudDismiss_tblStudentId' => $studid,
         ]);
 
         $message = 4;
 
-        return redirect()->route('dismiss-withdraw.diswith')->with('message', $message);
+        return redirect()->route('dismisswithdraw.index')->with('message', $message);
     }
 
     /**

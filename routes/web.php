@@ -49,7 +49,6 @@ Route::resource('studentprofile', 'StudProfileEditController');
 Route::resource('facultyprofile', 'FacultyProfileController');
 
 Route::resource('dismisswithdraw', 'DismissWithdrawController');
-Route::get('dismisswithdraw/diswith', 'DismissWithdrawController@update')->name('diswith');
 
 
 
