@@ -8,6 +8,7 @@ use App\SchemeType;
 use App\Schedule;
 use App\FeeDetails;
 use App\Level;
+use App\FeeAmount;
 
 class FeesController extends Controller
 {
@@ -23,8 +24,9 @@ class FeesController extends Controller
         $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
         $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
         $levels = Level::where('tblLevelFlag', 1)->get();
+        $amount = FeeAmount::where('tblFeeAmountFlag', 1)->get();
 
-        return view('payment.index', compact('fees','schemetypes','schedules','feedetails','levels'));
+        return view('payment.index', compact('fees','schemetypes','schedules','feedetails','levels','amount'));
     }
 
     /**
@@ -56,6 +58,7 @@ class FeesController extends Controller
             $duplicate->save();
             return redirect()->route('fees.index')->with('message', 2);
         }
+        
 
         $fees = Fees::create([
     
@@ -65,7 +68,20 @@ class FeesController extends Controller
             'tblFeeStatus' => trim($request->selAddFeeStatus),
 
         ]);
-    
+        
+        $num = Level::select('tblLevelId','tblLevelName')->where('tblLevelFlag', 1)->first();
+        
+        for($i = 1; $i<=$num->tblLevelId; $i++)
+        {
+            $amntId= FeeAmount::orderBy('tblFeeAmountId', 'desc')->pluck('tblFeeAmountId')->first();
+            $amntId++;
+            $amntId = FeeAmount::select([
+                    'tblFeeAmountId' => $amntId,
+                    'tblFeeAmount_tblFeeId' => $id,
+                    'tblFeeAmount_tblLevelId' => $i,
+            ]);
+        }
+
         $message = $fees ? 2 : 1;    
 
         return redirect()->route('fees.index')->with('message', $message);
@@ -79,7 +95,10 @@ class FeesController extends Controller
      */
     public function show(Request $request, $id)
     {
-        //
+        $fees = Level::where('tblLevelId', $id)->first()
+            ->level()->where('tblFeeFlag', 1)->get();
+
+        return view('payment.table.fees', compact('details'));
     }
 
     /**

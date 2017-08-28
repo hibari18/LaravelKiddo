@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DismissWithdraw;
+use DB;
+use App\Student;
+use App\PersonalInfo;
+use App\Level;
 
 class DismissWithdrawController extends Controller
 {
@@ -15,6 +19,15 @@ class DismissWithdrawController extends Controller
     public function index()
     {
         $diswiths = DismissWithdraw::where('tblStudDismissFlag', 1)->get();
+        $studprofile = Student::where('tblStudentFlag', 1)->get();
+        $studinfo = PersonalInfo::where('tblStudInfoFlag', 1)->get();
+        $level = Level::where('tblLevelFlag', 1)->get();
+
+
+        $dwname = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudent_tblLevelId=l.tblLevelId and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentFlag=1 and s.tblStudentType != 'DISMISS' and s.tblStudentType != 'WITHDRAW' group by s.tblStudentId"));
+
+        return view('dismiss-withdraw.diswith', compact('diswiths','dwname','studprofile', 'studinfo','level'));
+
         
     }
 
@@ -70,13 +83,26 @@ class DismissWithdrawController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $diswiths = CurriculumDetail::findOrFail($request->txtUpdDetId);
-        // $message = $details->update([
-        //     'tblCurriculumDetail_tblLevelId' => trim($request->selUpdDetLvl),
-        //     'tblCurriculumDetail_tblSubjectId' => trim($request->selUpdDetSubj),
-        // ]) ? 4 : 3;
 
-        // return redirect()->route('division.index')->with('message', $message);
+        $studid = $_POST['txtStudId'];
+        $action = $_POST['selChoose'];
+        $reason = $_POST['taReason'];
+
+        Student::where('tblStudentId', $studid)->update(['tblStudentType'=> $action]);
+
+        $dwid = DismissWithdraw::orderBy('tblStudDismissId', 'desc')->pluck('tblStudDismissId')->first();
+        $dwid ++;
+        
+        $dwid = DismissWithdraw::create([ 
+            'tblStudDismissId' => $dwid,
+            'tblStudDismissAction' => trim($request->$action),
+            'tblStudDismissReason' => trim($request->$reason),
+            'tblStudDismiss_tblStudentId' => $studid,
+        ]);
+
+        $message = 4;
+
+        return redirect()->route('dismiss-withdraw.diswith')->with('message', $message);
     }
 
     /**

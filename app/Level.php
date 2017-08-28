@@ -23,4 +23,7 @@ class Level extends Model
 	public function curriculum_details(){
 		return $this->hasMany('App\CurriculumDetail', 'tblCurriculumDetail_tblLevelId', 'tblLevelId');
 	}
+	public function feeamount(){
+		return $this->belongsTo('App\FeeAmount', 'tblFeeAmount_tblLevelId', 'tblFeeAmountId');
+	}
 }

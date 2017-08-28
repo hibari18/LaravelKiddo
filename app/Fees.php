@@ -24,7 +24,7 @@ class Fees extends Model
 	public function fees(){
 		return $this->belongsTo('App\Fees', 'tblFees_tblFeeId', 'tblFeeId');
 	}
-	public function amount(){
-		return $this->belongsTo('App\FeeAmount', 'tblFeeAmount_tblFeeId', 'tblFeeId');
+	public function feeamount(){
+		return $this->belongsTo('App\FeeAmount', 'tblFeeAmount_tblFeeId', 'tblFeeAmountId');
 	}
 }

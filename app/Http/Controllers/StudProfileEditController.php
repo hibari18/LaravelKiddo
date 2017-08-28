@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Student;
 use App\PersonalInfo;
+use App\FamilyInfo;
+use App\HealthInfo;
 
 class StudProfileEditController extends Controller
 {
@@ -15,10 +17,12 @@ class StudProfileEditController extends Controller
      */
     public function index()
     {
-        $studprofile = Student::where('tblStudentFlag', 1)->get();
-        $studinfo = PersonalInfo::where('tblStudInfoFlag', 1)->get();
+        $pinfo = PersonalInfo::where('tblStudInfoFlag', 1)->get();
+        $finfo = FamilyInfo::where('tblParentFlag', 1)->get();
+        $hinfo = HealthInfo::where('tblStudHealthFlag', 1)->get();
+        $student = Student::where('tblStudentFlag', 1)->get();
 
-        return view('profile.index', compact('studprofile', '$studinfo'));
+        return view('profile.studentprofile', compact('pinfo', '$finfo','hinfo','student'));
 
     }
 

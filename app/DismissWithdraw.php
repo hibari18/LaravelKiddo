@@ -13,4 +13,5 @@ class DismissWithdraw extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false;
+
 }

@@ -12,18 +12,18 @@
             </ul>
             <div class="tab-content">
               
-		  <div class="tab-pane active" id="tab_1">
-		    @include('profile.personalinfo')
-	      </div>
+    		    <div class="tab-pane active" id="tab_1">
+    		    @include('profile.personalinfo')
+    	      </div>
 	        <!-- /.tab-pane -->
-	      <div class="tab-pane" id="tab_2">
-	          @include('profile.familyinfo')
-	      </div>
+    	      <div class="tab-pane" id="tab_2">
+    	          @include('profile.familyinfo')
+    	      </div>
               <!-- /.tab-pane -->
        
-<div class="tab-pane" id="tab_3">
-            @include('profile.healthinfo')
-          </div>
+            <div class="tab-pane" id="tab_3">
+              @include('profile.healthinfo')
+            </div>
           </div>
 
           </div>

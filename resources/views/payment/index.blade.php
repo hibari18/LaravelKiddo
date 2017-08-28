@@ -30,6 +30,9 @@
     if($message == 7) {
       echo "<script> swal('Fee already exists!', ' ', 'error'); </script>";
     }
+    if($message == 7) {
+      echo "<script> swal('Scheme already exists!', ' ', 'error'); </script>";
+    }
   ?>
 <script>
       function changeTblFee()
@@ -77,7 +80,7 @@
         var feeId2 = document.getElementById("selFee").value;
         document.getElementById("txtUpdDetFeeId").value = feeId2;
         var xmlhttp =  new XMLHttpRequest();
-        xmlhttp.open("GET","feedetails"+document.getElementById("selFee").value,false);
+        xmlhttp.open("GET","feedetails/"+document.getElementById("selFee").value,false);
         xmlhttp.send(null);
 
         document.getElementById("datatable4").innerHTML=xmlhttp.responseText;

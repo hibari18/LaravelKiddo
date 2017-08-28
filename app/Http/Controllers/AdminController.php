@@ -31,12 +31,6 @@ class AdminController extends Controller
     }
 
 
-     public function diswith()
-    {	
-
-    	return view('dismiss-withdraw.diswith');
-    }
-
     public function adminaccount()
     {	
 

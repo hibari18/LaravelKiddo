@@ -76,19 +76,19 @@ function run(){
               
                <table id="datatable1" class="table table-bordered table-striped">
                <thead>
-                <tr>
-                  <th>Student ID</th>
-                  <th>Student Name</th>
-                  <th>Level</th>
-                  <th>Action</th>
-                </tr>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Level</th>
+                    <th>Action</th>
+                  </tr>
                 </thead>
                 <tbody>
-                @foreach($diswiths as $diswith)
+                @foreach($dwname as $dw)
                 <tr>
-                  <td>{{ $diswith->tblStudentId}}</td>
-                  <td>{{ $diswith->name}}</td>
-                  <td>{{ $diswith->tblLevelName}}</td>
+                  <td>{{ $dw->tblStudentId}}</td>
+                  <td>{{ $dw->name}}</td>
+                  <td>{{ $dw->tblLevelName}}</td>
                   <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalOne"><i class="fa fa-edit"></i></button></td>
                   </tr>
                 @endforeach
@@ -109,7 +109,7 @@ function run(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Student Status</h3>
         </div>
-        <form autocomplete="off" method="post" action="{{ route('diswith.update','id') }}">
+        <form autocomplete="off" id ="dw" name="dw" role="form" method="POST" action="{{ route('dismisswithdraw.update','id') }}">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
         <div class="modal-body">
@@ -146,7 +146,7 @@ function run(){
                 </div>
               
         </div>
-        <div class="modal-footer" style="margin-top: 40%">
+        <div class="modal-footer" style="margin-top: 60%">
         <button type="submit" class="btn btn-info" name="btnDismiss" id="btnDismiss">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>

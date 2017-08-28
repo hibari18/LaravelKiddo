@@ -18,7 +18,7 @@ class Student extends Model
 		return $this->hasMany('App\PersonalInfo', 'tblstudentinfo_tblStudentId', 'tblStudentId');
 	}
 
-	public function student(){
-		return $this->hasMany('App\Student', 'tblstudent_tblStudInfoId', 'tblStudInfoId');
+	public function studentdw(){
+		return $this->hasMany('App\Student', 'tblStudDismiss_tblStudentId', 'tblStudentId');
 	}
 }

@@ -1,6 +1,8 @@
 <div class="box">
       <div class="box-body">  
-
+        <form autocomplete="off" id = "UpdPersonalInfo" name="UpdPersonalInfo" role="form" method="POST" action="{{ route('studentprofile.update','id') }}" class="form-horizontal">
+                  {{ method_field('PUT') }}
+                  {{ csrf_field() }}
   <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
@@ -93,6 +95,7 @@
        <div class="btn-group" style="margin-top: 5%; float: right">
                       <button type="button" class="btn btn-info">Save</button>
                     </div>
+  </form>
       </div>
       </div>
       <!-- /.box-body -->

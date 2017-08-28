@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\FeeDetails;
 use App\Amount;
 use App\Level;
+use App\Fees;
 
 
 class FeeDetailsController extends Controller
@@ -53,9 +54,9 @@ class FeeDetailsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $id)
-    {
-        $feedetails = Fees::where('tblFeeId', $id)->first()
-            ->feedetails()->where('tblFeeDetailFlag', 1)->get();
+     {
+    //     $feedetails = Fees::where('tblFeeId', $id)->first()
+    //         ->feedetails()->where('tblFeeDetailFlag', 1)->get();
         
         return view('payment.table.feedetail', compact('feedetails'));
     }

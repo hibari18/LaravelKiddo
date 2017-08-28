@@ -40,12 +40,22 @@ class SchemeTypeController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $duplicate = SchemeType::where('tblSchemeType', $request->txtAddScheme)->first();
+        if($duplicate){
+            if($duplicate->tblSchemeFlag==1)
+                return redirect()->route('fees.index')->with('message', 7);
+            $duplicate->tblSchemeFlag = 1;
+            $duplicate->save();
+            return redirect()->route('fees.index')->with('message', 2);
+        }
+
         $schemetype = SchemeType::create([
             'tblScheme_tblFeeId' => trim($request->selAddSchemeFee),
             'tblSchemeType' => strtoupper(trim($request->txtAddScheme)),
             'tblSchemeNoOfPayment' => trim($request->txtAddSchemeNo),
-        ]);
-
+            ]);
         $message = $schemetype ? 2 : 1;
         
         return redirect()->route('fees.index')->with('message', $message);
@@ -83,13 +93,23 @@ class SchemeTypeController extends Controller
     public function update(Request $request, $id)
     {
         $schemetype = SchemeType::findOrFail($request->txtUpdSchemeId);
+        
+        if(SchemeType::where('tblSchemeType', $request->txtUpdScheme)->where('tblSchemeNoOfPayment', $request->txtUpdSchemeNo)->first() == null){
+
         $message = $schemetype->update([
             'tblSchemeType' => strtoupper(trim($request->txtUpdScheme)),
             'tblSchemeNoOfPayment' => strtoupper(trim($request->txtUpdSchemeNo)),
-
         ]) ? 4 : 3;
         
+        }
+
+        else {
+        $message = 3;
         return redirect()->route('fees.index')->with('message', $message);
+        
+        }
+        return redirect()->route('fees.index')->with('message', $message);
+        
     }
 
     /**
@@ -103,6 +123,6 @@ class SchemeTypeController extends Controller
         $schemetype = SchemeType::findOrFail($request->txtDelScheme);
        
         $message = $schemetype->update(['tblSchemeFlag' => 0]) ? 6 : 5;
-        return redirect()->route('payment.index')->with('message', $message);
+        return redirect()->route('fees.index')->with('message', $message);
     }
 }

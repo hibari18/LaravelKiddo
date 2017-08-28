@@ -10,8 +10,6 @@ Route::get('readmail', 'AdminController@readmail');
 
 Route::get('sectioning', 'AdminController@sectioning');
 
-Route::get('diswith', 'AdminController@diswith');
-
 Route::get('adminaccount', 'AdminController@adminaccount');
 
 Route::get('advisorylist', 'AdminController@advisorylist');
@@ -47,6 +45,15 @@ Route::resource('sectioning', 'BySectionController');
 Route::resource('profile', 'StudentProfileController');
 
 Route::resource('studentprofile', 'StudProfileEditController');
+
+Route::resource('facultyprofile', 'FacultyProfileController');
+
+Route::resource('dismisswithdraw', 'DismissWithdrawController');
+Route::get('dismisswithdraw/diswith', 'DismissWithdrawController@update')->name('diswith');
+
+
+
+
 
 
 

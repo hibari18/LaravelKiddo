@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Faculty;
 
 class FacultyProfileController extends Controller
 {
@@ -15,7 +16,7 @@ class FacultyProfileController extends Controller
     {
         $facprofile = Faculty::where('tblFacultyFlag', 1)->get();
 
-        return view('profile.index', compact('facprofile'));
+        return view('profile.facultyprofile', compact('facprofile'));
     }
 
     /**
@@ -36,7 +37,23 @@ class FacultyProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $facprofile = Faculty::create([
+            
+            //'tblFacultyId' => $studentid,
+            'tblFacultyFname' => trim($request->txtFname),
+            'tblFacultyLname' => trim($request->txtLname),
+            'tblFacultyMname' => trim($request->txtMname),
+            'tblFacultyBplace' => trim($request->txtBplace),
+            'tblFacultyBday' => trim($request->txtBday),
+            'tblFacultyGender' => trim($request->optradio),
+            'tblFacultyAddress' => trim($request->txtAdd),
+            //'tblFaculty_tblUserId' => trim($request->txtStudNat),
+            'tblFacultyContact' => trim($request->txtNo),
+            'tblFacultyEmail' => trim($request->txtEmail),
+            'tblFacultyPosition' => trim($request->selPosition),
+            
+        
+        ]);
     }
 
     /**
