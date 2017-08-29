@@ -6,6 +6,7 @@
       <th>Fee Name</th>
        <th>Amount</th> 
       <th>Status</th>
+      <th>Type</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
     <td>{{ $fee->tblFeeName}}</td>
      <td>{{ $fee->tblFeeAmountAmount}}</td>
     <td>{{ $fee->tblFeeStatus}}</td>
+    <td>{{ $fee->tblFeeType}}</td>
      <td>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>

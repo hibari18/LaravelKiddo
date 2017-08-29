@@ -34,7 +34,18 @@
       echo "<script> swal('Scheme already exists!', ' ', 'error'); </script>";
     }
   ?>
+  <script type="text/javascript">
+    $('input:radio[name="typefee"]').change(function() {
+    if ($(this).val()=='diff') {
+        $('#selSchedLvl').attr('disabled', false);
+    } 
+    else if ($(this).val()=='mass') {
+        $('#selSchedLvl').attr('disabled', true);
+    }
+});
+  </script>
 <script>
+
       function changeTblFee()
       {
         var lvl = document.getElementById("selFeeLvl").value;
@@ -50,7 +61,7 @@
       {
         document.getElementById("selSchedFee").disabled = false;
         var xmlhttp =  new XMLHttpRequest();
-        xmlhttp.open("GET","changeSchedSchemeLvl.php?selSchedLvl="+document.getElementById("selSchedLvl").value,false);
+        xmlhttp.open("GET","fees/"+document.getElementById("selSchedLvl").value,false);
         xmlhttp.send(null);
       }
 

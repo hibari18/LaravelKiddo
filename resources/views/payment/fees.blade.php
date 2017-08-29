@@ -54,6 +54,17 @@
                                         </select>
                                       </div>
                                 </div>
+
+                                <div class="form-group" style="margin-top: 35%">
+                                    <label class="col-sm-4" style="text-align: right">Type</label>
+                                      <div class="col-sm-7 selectContainer">
+                                        <select class="form-control" style="width: 100%;" name="selAddFeeType" id="selAddFeeType">
+                                          <option selected="selected" disabled="disabled" value="">--Select Type--</option>
+                                          <option value="DIFFERENT PER LEVEL">DIFFERENT PER LEVEL</option>
+                                          <option value="MASS FEE">MASS FEE</option>
+                                        </select>
+                                      </div>
+                                </div>
                                 </div>
 
                                 <div class="modal-footer" style="margin-top: 15%">
@@ -99,6 +110,17 @@
                                           <option selected="selected" disabled="disabled">--Select Status--</option>
                                           <option value="MANDATORY">MANDATORY</option>
                                           <option value="OPTIONAL">OPTIONAL</option>
+                                        </select>
+                                      </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 35%">
+                                    <label class="col-sm-4" style="text-align: right">Type</label>
+                                      <div class="col-sm-7 selectContainer">
+                                        <select class="form-control" style="width: 100%;" name="selUpdFeeType" id="selUpdFeeType">
+                                          <option selected="selected" disabled="disabled" value="">--Select Type--</option>
+                                          <option value="DIFFERENT PER LEVEL">DIFFERENT PER LEVEL</option>
+                                          <option value="MASS FEE">MASS FEE</option>
                                         </select>
                                       </div>
                                 </div>
