@@ -38,23 +38,6 @@
              </div>
             </div>
 
-            <div class="form-group">
-             <label class="col-sm-4 control-label"> Status </label>
-             <div class="col-sm-6 selectContainer">
-               <div class="input-group">
-                 <div class="input-group-addon">
-                   <i class="fa fa-clone" aria-hidden="true"></i>
-                 </div>
-
-                 <select class="form-control" style="width: 100%;" name="selAddSubjId" id="selAddSubjId">
-                   <option selected="selected" disabled="disabled" value="">--Select Status--</option>
-                   <option>ACTIVE</option>
-                   <option>INACTIVE</option>
-                 </select>
-               </div>
-             </div>
-           </div>
-
            <div class="modal-footer" style="margin-top: 5%">
              <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -102,21 +85,6 @@
               <div class="col-sm-6 selectContainer">
                 <div class = "input-group" style="width:100%;">
                   <input type="text" class="form-control" name="txtUpdSubj" id="txtUpdSubj" style="text-transform:uppercase;">
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-4 control-label"> Status </label>
-              <div class="col-sm-6 selectContainer">
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-clone" aria-hidden="true"></i>
-                  </div>
-                  <select class="form-control" style="width: 100%;" name="selUpdSubjAct" id="selUpdSubjAct">
-                    <option selected>ACTIVE</option>
-                    <option>INACTIVE</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -172,7 +140,6 @@
                 <tr>
                   <th>Subject Code</th>
                   <th>Subject Name</th>
-                  <th>Status</th>
                   <th>Action</th>
 
                 </tr>
@@ -182,7 +149,6 @@
                 <tr>
                 <td style="width:100px;">{{ $subject->tblSubjectId}}</td>
                 <td style="width:100px;">{{ $subject->tblSubjectDesc}}</td>
-                <td style="width:100px;">{{ $subject->tblSubjActive}}</td>
                 <td style="width:100px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalFive"><i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalFive"><i class="fa fa-trash"></i></button></td>
                 </tr>

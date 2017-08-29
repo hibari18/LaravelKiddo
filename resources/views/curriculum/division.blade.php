@@ -36,21 +36,6 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label class="col-sm-4 control-label"> Status </label>
-              <div class="col-sm-6 selectContainer">
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-clone" aria-hidden="true"></i>
-                  </div>
-                  <select class="form-control" style="width: 100%;" name="selUpdDivAct" id="selUpdDivAct">
-                    <option selected>ACTIVE</option>
-                    <option>INACTIVE</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
             <div class="modal-footer" style="margin-top: 7%">
               <button type="submit" class="btn btn-info" name="btnUpdDiv" id="btnUpdDiv">Save</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -66,7 +51,6 @@
                 <tr>
                   <th hidden>Division Id</th>
                   <th>Division Name</th>
-                  <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -75,7 +59,6 @@
                 <tr>
                 <td hidden>{{ $division->tblDivisionId}}</td>
                 <td>{{ $division->tblDivisionName}}</td>
-                <td>{{ $division->tblDivisionActive}}</td>
                 <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalThree"><i class="fa fa-edit"></i></button>
                 </td>
                 </tr>

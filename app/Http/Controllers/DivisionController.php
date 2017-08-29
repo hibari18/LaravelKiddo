@@ -85,7 +85,7 @@ class DivisionController extends Controller
         $message = $division->update([
             'tblDivisionId' => trim($request->txtUpdDivId),
             'tblDivisionName' => strtoupper(trim($request->txtUpdDiv)),
-            'tblDivisionActive' => trim($request->selUpdDivAct),
+            
         ]) ? 4 : 3;
         
         }

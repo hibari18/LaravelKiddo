@@ -49,7 +49,6 @@ class SubjectController extends Controller
         $subject = Subject::create([
             'tblSubjectId' => strtoupper(trim($request->txtAddSubjId)),
             'tblSubjectDesc' => strtoupper(trim($request->txtAddSubj)),
-            'tblSubjActive' => trim($request->selAddSubjId),
             ]);
         $message = $subject ? 2 : 1;
 
@@ -90,7 +89,6 @@ class SubjectController extends Controller
         $subject = Subject::findOrFail($request->txtUpdSubjId);
         $message = $subject->update([
             'tblSubjectDesc' => strtoupper(trim($request->txtUpdSubj)),
-            'tblSubjActive' => trim($request->selUpdSubjAct),
         ]) ? 4 : 3;
         
         return redirect()->route('division.index')->with('message', $message);

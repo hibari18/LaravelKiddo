@@ -34,16 +34,20 @@
       echo "<script> swal('Scheme already exists!', ' ', 'error'); </script>";
     }
   ?>
-  <script type="text/javascript">
+ 
+
+ <script>
     $('input:radio[name="typefee"]').change(function() {
-    if ($(this).val()=='diff') {
-        $('#selSchedLvl').attr('disabled', false);
-    } 
-    else if ($(this).val()=='mass') {
-        $('#selSchedLvl').attr('disabled', true);
-    }
-});
+        if ($(this).val()=='diff') {
+            $('#selSchedLvl').attr('disabled', false);
+        } 
+        else if ($(this).val()=='mass') {
+            $('#selSchedLvl').attr('disabled', true);
+        }
+    });
   </script>
+
+
 <script>
 
       function changeTblFee()

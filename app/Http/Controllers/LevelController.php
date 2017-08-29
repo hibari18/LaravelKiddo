@@ -49,7 +49,6 @@ class LevelController extends Controller
         $level = Level::create([
             'tblLevelName' => strtoupper(trim($request->txtAddLvl)),
             'tblLevel_tblDivisionId' => trim($request->selAddLvlDiv),
-            'tblLevelActive' => trim($request->selAddLvlAct),
             ]);
         $message = $level ? 2 : 1;
 
@@ -96,7 +95,6 @@ class LevelController extends Controller
         $message = $level->update([
             'tblLevelName' => strtoupper(trim($request->txtUpdLvl)),
             'tblLevel_tblDivisionId' => $divID,
-            'tblLevelActive' => trim($request->selUpdLvlAct),
         ]) ? 4 : 3;
         
         }

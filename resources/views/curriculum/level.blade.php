@@ -47,21 +47,6 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label class="col-sm-4 control-label"> Status </label>
-                    <div class="col-sm-6 selectContainer">
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                          <i class="fa fa-clone" aria-hidden="true"></i>
-                        </div>
-                        <select class="form-control" name="selAddLvlAct" id="selAddLvlAct">
-                          <option selected disabled value=""> --Select Status-- </option>
-                          <option>ACTIVE</option>
-                          <option>INACTIVE</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
                   <div class="modal-footer" style="margin-top:7%;">
                     <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -123,21 +108,6 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label class="col-sm-4 control-label"> Status </label>
-              <div class="col-sm-6 selectContainer">
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-clone" aria-hidden="true"></i>
-                  </div>
-                  <select class="form-control" style="width: 100%;" name="selUpdLvlAct" id="selUpdLvlAct">
-                    <option value="ACTIVE" selected="selected" value="">ACTIVE</option>
-                    <option value="INACTIVE">INACTIVE</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
             <div class="modal-footer" style="margin-top: 7%">
               <button type="submit" class="btn btn-info" name="btnUpdLvl" id="btnUpdLvl">Save</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -192,7 +162,6 @@
                   <th hidden></th>
                   <th>Level Name</th>
                   <th>Division</th>
-                  <th>Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -202,7 +171,6 @@
                 <td hidden>{{ $level->tblLevelId}}</td>
                 <td>{{ $level->tblLevelName}}</td>
                 <td>{{ $level->tblDivisionName}}</td>
-                <td>{{ $level->tblLevelActive}}</td>
                 <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalFour"><i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalFour"><i class="fa fa-trash"></i></button>
                 </td>

@@ -96,10 +96,7 @@ class FeesController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $fees = Level::where('tblLevelId', $id)->first()
-            ->level()->where('tblFeeFlag', 1)->get();
-
-        return view('payment.table.fees', compact('details'));
+        //
     }
 
     /**
