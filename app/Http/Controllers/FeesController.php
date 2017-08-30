@@ -19,7 +19,7 @@ class FeesController extends Controller
      */
     public function index()
     {
-        $fees = Fees::where('tblFeeFlag', 1)->get();
+        $fees = [];
         $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
         $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
         $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
@@ -47,9 +47,6 @@ class FeesController extends Controller
      */
     public function store(Request $request)
     {
-        $id = Fees::orderBy('tblFeeId', 'desc')->pluck('tblFeeId')->first();
-        $id ++;
-
         $duplicate = Fees::where('tblFeeCode', $request->txtAddFeeCode)->where('tblFeeName', $request->txtAddFeeName)->first();
         if($duplicate){
             if($duplicate->tblFeeFlag==1)
@@ -59,27 +56,19 @@ class FeesController extends Controller
             return redirect()->route('fees.index')->with('message', 2);
         }
         
-
         $fees = Fees::create([
-    
-            'tblFeeId' => $id,
             'tblFeeCode' => strtoupper(trim($request->txtAddFeeCode)),
             'tblFeeName' => strtoupper(trim($request->txtAddFeeName)),            
             'tblFeeStatus' => trim($request->selAddFeeStatus),
             'tblFeeType' => trim($request->selAddFeeType),
-
         ]);
         
-        $num = Level::select('tblLevelId','tblLevelName')->where('tblLevelFlag', 1)->first();
-        
-        for($i = 1; $i<=$num->tblLevelId; $i++)
+        $levels = Level::where('tblLevelFlag', 1)->get();
+        foreach($levels as $level)
         {
-            $amntId= FeeAmount::orderBy('tblFeeAmountId', 'desc')->pluck('tblFeeAmountId')->first();
-            $amntId++;
-            $amntId = FeeAmount::select([
-                    'tblFeeAmountId' => $amntId,
-                    'tblFeeAmount_tblFeeId' => $id,
-                    'tblFeeAmount_tblLevelId' => $i,
+            FeeAmount::create([
+                'tblFeeAmount_tblFeeId' => $fees->tblFeeId,
+                'tblFeeAmount_tblLevelId' => $level->tblLevelId,
             ]);
         }
 
@@ -96,7 +85,9 @@ class FeesController extends Controller
      */
     public function show(Request $request, $id)
     {
-        //
+        $fees = FeeAmount::with('fees')->where('tblFeeAmount_tblLevelId', $id)->get();
+        //dd($fees); 
+        return view('payment.table.fees', compact('fees'));
     }
 
     /**
