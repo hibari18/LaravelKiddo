@@ -72,7 +72,7 @@ class FeesController extends Controller
                 'tblFeeAmount_tblLevelId' => $level->tblLevelId,
             ]);
         }
-        if($request->tblFeeType == 'DIFFERENT PER LEVEL'){
+        if($request->selAddFeeType == 'DIFFERENT PER LEVEL'){
             foreach($levels as $level){
                 Schedule::firstOrCreate([
                     'tblSchemeDetail_tblFee' =>$fees->tblFeeId,
