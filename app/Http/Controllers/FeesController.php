@@ -22,7 +22,7 @@ class FeesController extends Controller
         $fees = [];
         $fees_select = Fees::where('tblFeeFlag', 1)->get();
         $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
-        $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
+        $schedules = [];
         $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
         $levels = Level::where('tblLevelFlag', 1)->get();
         $amount = FeeAmount::where('tblFeeAmountFlag', 1)->get();
@@ -70,6 +70,20 @@ class FeesController extends Controller
             FeeAmount::create([
                 'tblFeeAmount_tblFeeId' => $fees->tblFeeId,
                 'tblFeeAmount_tblLevelId' => $level->tblLevelId,
+            ]);
+        }
+        if($request->tblFeeType == 'DIFFERENT PER LEVEL'){
+            foreach($levels as $level){
+                Schedule::firstOrCreate([
+                    'tblSchemeDetail_tblFee' =>$fees->tblFeeId,
+                    'tblSchemeDetail_tblLevel' =>$level->tblLevelId,
+                    'tblSchedDetailCtr' => 1
+                ]);
+            }
+        } else {
+            Schedule::firstOrCreate([
+                'tblSchemeDetail_tblFee' =>$fees->tblFeeId,
+                'tblSchedDetailCtr' => 1
             ]);
         }
 

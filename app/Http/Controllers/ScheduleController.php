@@ -19,20 +19,23 @@ class ScheduleController extends Controller
         if($request->has('mass')){
 
             $schedules = 
-                Schedule::join('tblscheme', 'tblSchemeDetail.tblSchemeDetail_tblScheme', '=', 'tblScheme.tblSchemeId')
-                ->join('tblFee', 'tblscheme.tblScheme_tblFeeId', '=', 'tblFee.tblFeeId')
+                Schedule::leftjoin('tblscheme', 'tblSchemeDetail.tblSchemeDetail_tblScheme', '=', 'tblScheme.tblSchemeId')
+                ->leftjoin('tblFee', 'tblSchemeDetail.tblSchemeDetail_tblFee', '=', 'tblFee.tblFeeId')
                 ->where('tblFee.tblFeeFlag', 1)
                 ->where('tblFee.tblFeeType', 'MASS FEE')
                 ->get();
             return view('payment.table.schedule', compact('schedules'));
         } else {
             $schedules = 
-                Schedule::join('tblscheme', 'tblSchemeDetail.tblSchemeDetail_tblScheme', '=', 'tblScheme.tblSchemeId')
+                \DB::table('tblSchemeDetail')
+                ->select('*')
+                ->leftjoin('tblscheme', 'tblSchemeDetail.tblSchemeDetail_tblScheme', '=', 'tblScheme.tblSchemeId')
                 ->where('tblSchemeDetail.tblSchemeDetail_tblLevel',$request->level)
-                ->join('tblFee', 'tblscheme.tblScheme_tblFeeId', '=', 'tblFee.tblFeeId')
+                ->leftjoin('tblFee', 'tblSchemeDetail.tblSchemeDetail_tblFee', '=', 'tblFee.tblFeeId')
                 ->where('tblFee.tblFeeFlag', 1)
                 ->where('tblFee.tblFeeType', 'DIFFERENT PER LEVEL')
                 ->get();
+                //dd($schedules);
             return view('payment.table.schedule', compact('schedules'));
         }
     }
