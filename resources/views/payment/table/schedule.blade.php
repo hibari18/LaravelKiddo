@@ -15,7 +15,8 @@
                             <td hidden>{{ $sched->tblFeeId}}</td>
                             <td>{{ $sched->tblFeeName}}</td>
                             <td>{{ $sched->tblSchemeType}}</td>
-                            <td>{{ $sched->tblSchemeNoOfPayment}}</td>
+                            <td>{{ $sched->tblSchedDetailCtr}}</td>
+                            <td>{{ $sched->tblSchemeDetailDueDate}}</td>
                             <td>{{ $sched->tblSchemeDetailAmount}}</td>
                              <td>
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne">Set Due Date</button>

@@ -20,13 +20,14 @@ class FeesController extends Controller
     public function index()
     {
         $fees = [];
+        $fees_select = Fees::where('tblFeeFlag', 1)->get();
         $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
         $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
         $feedetails = FeeDetails::where('tblFeeDetailFlag', 1)->get();
         $levels = Level::where('tblLevelFlag', 1)->get();
         $amount = FeeAmount::where('tblFeeAmountFlag', 1)->get();
 
-        return view('payment.index', compact('fees','schemetypes','schedules','feedetails','levels','amount'));
+        return view('payment.index', compact('fees', 'fees_select','schemetypes','schedules','feedetails','levels','amount'));
     }
 
     /**

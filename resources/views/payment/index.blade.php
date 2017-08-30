@@ -37,14 +37,22 @@
  
 
  <script>
+ $(document).ready(function(){
     $('input:radio[name="typefee"]').change(function() {
-        if ($(this).val()=='diff') {
+       var checked = $('input[name="typefee"]:checked').val();
+        if (checked == 'diff') {
+            $('#selSchedLvl').val(-1);
             $('#selSchedLvl').attr('disabled', false);
         } 
-        else if ($(this).val()=='mass') {
+        else if (checked == 'mass') {
             $('#selSchedLvl').attr('disabled', true);
+            var xmlhttp =  new XMLHttpRequest();
+            xmlhttp.open("GET","schedule?mass=true",false);
+            xmlhttp.send(null);
+            document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
         }
     });
+ })
   </script>
 
 
@@ -63,10 +71,11 @@
 
       function changeSchedSchemeLvl()
       {
-        document.getElementById("selSchedFee").disabled = false;
-        var xmlhttp =  new XMLHttpRequest();
-        xmlhttp.open("GET","fees/"+document.getElementById("selSchedLvl").value,false);
-        xmlhttp.send(null);
+        //document.getElementById("selSchedFee").disabled = false;
+            var xmlhttp =  new XMLHttpRequest();
+            xmlhttp.open("GET","schedule?level="+$('#selSchedLvl').val(),false);
+            xmlhttp.send(null);
+            document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
       }
 
       function changeFee()
