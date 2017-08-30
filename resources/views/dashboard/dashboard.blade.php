@@ -28,11 +28,11 @@
             <div class="box-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-green">Lunch</div>
-                <div class="external-event bg-yellow">Go home</div>
-                <div class="external-event bg-aqua">Do homework</div>
-                <div class="external-event bg-light-blue">Work on UI design</div>
-                <div class="external-event bg-red">Sleep tight</div>
+                <div class="external-event bg-green">Admission Starts</div>
+                <div class="external-event bg-yellow">Admission Ends</div>
+                <div class="external-event bg-aqua">Enrollment Starts</div>
+                <div class="external-event bg-light-blue">Enrollment Ends</div>
+                <div class="external-event bg-red">Start of class</div>
                 <div class="checkbox">
                   <label for="drop-remove">
                     <input type="checkbox" id="drop-remove">

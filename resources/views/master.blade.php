@@ -31,8 +31,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignReq.css') }}">
     <!-- fullCalendar 2.2.5-->
-    <link rel="stylesheet" href="{{ asset('css/fullcalendar.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/fullcalendar.print.css') }}" media="print">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fullcalendar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fullcalendar.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fullcalendar.print.css') }}" media="print">
 
     <!-- Maintenance validDesign -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignDivision.css') }}">

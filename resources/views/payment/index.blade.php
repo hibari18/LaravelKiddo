@@ -285,11 +285,6 @@
           fields: {
             txtAddFeeCode: {
               validators: {
-                stringLength: {
-                  min: 5,
-                  max: 20,
-                  message: 'Please enter at least 5 chracters'
-                },
                 regexp: {
                   regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
                   message: 'The first character must be an alphabet or does not allow special character'
@@ -301,11 +296,6 @@
             },
             txtAddFeeName: {
               validators: {
-                stringLength: {
-                  min: 5,
-                  max: 20,
-                  message: 'Please enter at least 5 chracters'
-                },
                 regexp: {
                   regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
                   message: 'The first character must be an alphabet or does not allow special character'
@@ -316,6 +306,13 @@
               }
             },
             selAddFeeStatus: {
+              validators: {
+                notEmpty: {
+                  message: 'Status is required.'
+                },
+              }
+            },
+            selAddFeeType: {
               validators: {
                 notEmpty: {
                   message: 'Status is required.'
