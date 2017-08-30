@@ -14,14 +14,30 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $schedules = Schedule::where('tblSchemeDetailFlag', 1)->get();
-        $fees = Fees::where('tblFeeFlag', 1)->get();
-        $schemetypes = SchemeType::where('tblSchemeFlag', 1)->get();
-         
-        return view('payment.index', compact('fees','schemetypes','schedules'));
+        if($request->has('mass')){
 
+            $schedules = 
+                Schedule::leftjoin('tblscheme', 'tblSchemeDetail.tblSchemeDetail_tblScheme', '=', 'tblScheme.tblSchemeId')
+                ->leftjoin('tblFee', 'tblSchemeDetail.tblSchemeDetail_tblFee', '=', 'tblFee.tblFeeId')
+                ->where('tblFee.tblFeeFlag', 1)
+                ->where('tblFee.tblFeeType', 'MASS FEE')
+                ->get();
+            return view('payment.table.schedule', compact('schedules'));
+        } else {
+            $schedules = 
+                \DB::table('tblSchemeDetail')
+                ->select('*')
+                ->leftjoin('tblscheme', 'tblSchemeDetail.tblSchemeDetail_tblScheme', '=', 'tblScheme.tblSchemeId')
+                ->where('tblSchemeDetail.tblSchemeDetail_tblLevel',$request->level)
+                ->leftjoin('tblFee', 'tblSchemeDetail.tblSchemeDetail_tblFee', '=', 'tblFee.tblFeeId')
+                ->where('tblFee.tblFeeFlag', 1)
+                ->where('tblFee.tblFeeType', 'DIFFERENT PER LEVEL')
+                ->get();
+                //dd($schedules);
+            return view('payment.table.schedule', compact('schedules'));
+        }
     }
 
     /**
@@ -51,9 +67,9 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        
     }
 
     /**

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Schedule;
 use App\Fees;
+use App\Level;
 use App\SchemeType;
 
 class SchemeTypeController extends Controller
@@ -56,6 +58,30 @@ class SchemeTypeController extends Controller
             'tblSchemeType' => strtoupper(trim($request->txtAddScheme)),
             'tblSchemeNoOfPayment' => trim($request->txtAddSchemeNo),
             ]);
+
+        for($i=1; $i<=$schemetype->tblSchemeNoOfPayment; $i++){
+            $levels = Level::where('tblLevelFlag', 1)->get();
+            
+            if($schemetype->fees->tblFeeType == 'DIFFERENT PER LEVEL'){
+                foreach($levels as $level){
+                    Schedule::updateOrCreate([
+                        'tblSchemeDetail_tblLevel' => $level->tblLevelId,
+                        'tblSchedDetailCtr' => $i,
+                        'tblSchemeDetail_tblFee' =>$schemetype->tblScheme_tblFeeId,
+                    ], [
+                        'tblSchemeDetail_tblScheme' => $schemetype->tblSchemeId
+                    ]);
+                }
+            }else{
+                Schedule::updateOrCreate([
+                    'tblSchedDetailCtr' => $i,
+                    'tblSchemeDetail_tblFee' =>$schemetype->tblScheme_tblFeeId,
+                ], [
+                    'tblSchemeDetail_tblScheme' => $schemetype->tblSchemeId
+                ]);
+            }
+        }
+
         $message = $schemetype ? 2 : 1;
         
         return redirect()->route('fees.index')->with('message', $message);

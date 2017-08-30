@@ -18,7 +18,7 @@
                           <div class="container" style="margin-top: 2%">
                             <label class="col-sm-1">Level: </label>
                             <select class="form-control" style="width: 30%; margin-bottom: 1%;" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()">
-                              <option>--Select Here--</option>
+                              <option value="-1">--Select Here--</option>
                               @foreach($levels as $level)
                               <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
                               @endforeach

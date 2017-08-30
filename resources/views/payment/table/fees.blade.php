@@ -14,13 +14,13 @@
   <tbody>
   @foreach($fees as $fee)
   <tr>
-    <td hidden>{{ $fee->tblFeeId}}</td>
+    <td hidden>{{ $fee->fees->tblFeeId}}</td>
     <td hidden>{{ $fee->tblFeeAmount_tblLevelId}}</td> 
-    <td>{{ $fee->tblFeeCode}}</td>
-    <td>{{ $fee->tblFeeName}}</td>
+    <td>{{ $fee->fees->tblFeeCode}}</td>
+    <td>{{ $fee->fees->tblFeeName}}</td>
      <td>{{ $fee->tblFeeAmountAmount}}</td>
-    <td>{{ $fee->tblFeeStatus}}</td>
-    <td>{{ $fee->tblFeeType}}</td>
+    <td>{{ $fee->fees->tblFeeStatus}}</td>
+    <td>{{ $fee->fees->tblFeeType}}</td>
      <td>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>

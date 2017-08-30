@@ -12,7 +12,6 @@ class FeeAmount extends Model
 	protected $table = 'tblfeeamount'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
-	public $incrementing = false; 
 
 
 	public function level(){

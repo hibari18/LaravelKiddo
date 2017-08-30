@@ -22,7 +22,7 @@
                                       <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
                                           <option selected="selected" disabled value="">--Select Fee--</option>
-                                            @foreach($fees as $fee)
+                                            @foreach($fees_select as $fee)
                                             <option value="{{ $fee->tblFeeId}}">{{ $fee->tblFeeName}}</option>
                                             @endforeach
                                         </select>
