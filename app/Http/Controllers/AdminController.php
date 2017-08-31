@@ -31,10 +31,16 @@ class AdminController extends Controller
     }
 
 
-    public function adminaccount()
+    public function accountlist()
     {	
 
-    	return view('account.adminaccount');
+    	return view('account.accountlist');
+    }
+
+    public function adminaccount()
+    {   
+
+        return view('account.adminaccount');
     }
 
     public function advisorylist()

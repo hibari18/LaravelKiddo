@@ -92,7 +92,15 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $schedules = Schedule::findOrFail($request->txtDetId);
+
+        $message = $schedules->update([
+            'tblSchemeDetailDueDate' => trim($request->txtDetDueDate),
+            'tblSchemeDetailAmount' => trim($request->txtDetAmount),
+            
+        ]) ? 4 : 3;
+
+        return redirect()->route('payment.index')->with('message', $message);
     }
 
     /**

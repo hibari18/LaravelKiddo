@@ -19,8 +19,8 @@
                             <td>{{ $sched->tblSchemeDetailDueDate}}</td>
                             <td>{{ $sched->tblSchemeDetailAmount}}</td>
                              <td>
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne">Set Due Date</button>
-                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne">Reset</button>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalFive">Set Due Date</button>
+                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalFive">Reset</button>
                              </td>
                           </tr>
                           @endforeach

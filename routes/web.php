@@ -10,6 +10,7 @@ Route::get('readmail', 'AdminController@readmail');
 
 Route::get('sectioning', 'AdminController@sectioning');
 
+Route::get('accountlist', 'AdminController@accountlist');
 Route::get('adminaccount', 'AdminController@adminaccount');
 
 Route::get('advisorylist', 'AdminController@advisorylist');

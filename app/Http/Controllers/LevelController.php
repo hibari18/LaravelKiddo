@@ -127,7 +127,7 @@ class LevelController extends Controller
             return redirect()->route('curriculum.index')->with('message', 7);
             }
         */
-        if($level->curriculum_details->where('tblCurriculumFlag','0')->count() > 0){
+        if($level->curriculum_details->where('tblDetailsFlag','0')->count() > 0){
             return redirect()->route('curriculum.index')->with('message', 7);
         }
         $message = $level->update(['tblLevelFlag' => 0]) ? 6 : 5;

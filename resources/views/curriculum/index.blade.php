@@ -153,13 +153,11 @@ function run(){
     var f1=document.getElementById('txtUpdLvlId');
     var f2=document.getElementById('txtUpdLvl');
     var f3=document.getElementById('selUpdLvlDiv');
-    var f4=document.getElementById('selUpdLvlAct');
-    var f5=document.getElementById('txtDelLvlId');
+    var f4=document.getElementById('txtDelLvlId');
     f1.value=cells[0].innerHTML;
     f2.value=cells[1].innerHTML;
     f3.value=cells[2].innerHTML;
-    f4.value=cells[3].innerHTML;
-    f5.value=cells[0].innerHTML;
+    f4.value=cells[0].innerHTML;
   };
 }})();
   (function(){
@@ -183,13 +181,11 @@ function run(){
     var f1=document.getElementById('txtUpdSubjId');
     var f2=document.getElementById('txtUpdSubjId2');
     var f3=document.getElementById('txtUpdSubj');
-    var f4=document.getElementById('selUpdSubjAct');
-    var f5=document.getElementById('txtDelSubjId');
+    var f4=document.getElementById('txtDelSubjId');
     f1.value=cells[0].innerHTML;
     f2.value=cells[0].innerHTML;
     f3.value=cells[1].innerHTML;
-    f4.value=cells[2].innerHTML;
-    f5.value=cells[0].innerHTML;
+    f4.value=cells[0].innerHTML;
   };
 }})();
 

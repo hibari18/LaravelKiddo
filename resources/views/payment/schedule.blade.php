@@ -29,75 +29,44 @@
 
                           <div class="btn-group" style="margin-bottom: 3%"></div>
 
-                          <div class="modal fade" id="updateModalOne" role="dialog">
-                            <div class="modal-dialog modal-lg">
+                          <div class="modal fade" id="updateModalFive" role="dialog">
+                            <div class="modal-dialog">
                               <!-- Modal content-->
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h3 class="modal-title" style="font-style: bold">Update Schedule</h3>
                                 </div>
 
-                                <form method="post" action="">
+                                <form method="post" role="form" method="POST" action="{{ route('schedule.update','id') }}">
+                                {{ method_field('PUT') }}
+                                {{ csrf_field() }}
                                   <div class="modal-body">
                                     <input type="hidden" class="form-control" name="txtDetId" id="txtDetId"/>
                                     <div class="form-group" style="margin-top: 5%">
-                                      <label class="col-sm-4" style="text-align: right">Scheme No.</label>
+                                      <label class="col-sm-4" style="text-align: right">No.</label>
                                       <div class="col-sm-4">
                                         <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo">
                                       </div>
                                     </div>
 
-                                    <div class="form-group"  style="margin-top: 15%">
-                                        <input class="col-lg-2" type="checkbox" style="font-size: 20px; font-weight: bold">Once
-                                        <div class="form-group" style="margin-top: 3%">
-                                          <label class="col-sm-4" style="text-align: right">Due Date</label>
-                                          <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="txtDetNo" id="txtDetNo">
-                                          </div>
-                                        </div><br>
-                                        <div class="form-group" style="margin-top: 3%">
-                                        <label class="col-sm-4" for="textinput" style="text-align: right">Amount on Due Date</label>
-                                        <div class="col-sm-4">
-                                          <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount">
-                                        </div>
-                                        </div>
+                               <div class="form-group" style="margin-top: 15%;">
+                                  <label class="col-sm-4 control-label" style="text-align: right">Due Date</label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class = "input-group" style="width:100%;">
+                                      <input type="date" class="form-control" name="txtDetDueDate" id="txtDetDueDate" style="text-transform:uppercase ;">
                                     </div>
+                                  </div>
+                                </div>
 
-                                    <div class="form-group"  style="margin-top: 10%">
-                                        <input class="col-lg-2" type="checkbox" style="font-size: 20px; font-weight: bold">Upon Enrollment
-                                        <div class="form-group" style="margin-top: 3%">
-                                        <label class="col-sm-4" for="textinput" style="text-align: right">Amount on Due Date</label>
-                                        <div class="col-sm-4">
-                                          <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount">
-                                        </div>
-                                        </div>
+                                <div class="form-group" style="margin-top: 25%;">
+                                  <label class="col-sm-4 control-label" style="text-align: right">Amount</label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class = "input-group" style="width:100%;">
+                                      <input type="number" class="form-control" name="txtDetAmount" id="txtDetAmount" style="text-transform:uppercase ;">
                                     </div>
+                                  </div>
+                                </div>
 
-                                    <div class="form-group"  style="margin-top: 10%">
-                                        <input class="col-lg-2" type="checkbox" style="font-size: 20px; font-weight: bold">Every<input class="col-lg-1 inline-block" type="text" class="form-control" name="txtDetAmount" id="txtDetAmount" style="float: right; margin-right: 70%">
-                                        <div class="form-group" style="margin-top: 3%">
-                                        
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">January<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">February<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">March<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">April<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">May<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">June<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">July<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">August<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">September<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">October<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">November<br>
-                                            <input class="col-sm-4" type="checkbox" name="vehicle" value="Bike">December<br>
-                                          
-                                        </div>
-                                        <div class="form-group" style="margin-top: 3%">
-                                        <label class="col-sm-4" for="textinput" style="text-align: right">Amount on Due Date</label>
-                                        <div class="col-sm-4">
-                                          <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount">
-                                        </div>
-                                        </div>
-                                    </div>
                                     
                                 </div> <!-- modal body uodate scheme -->
 
@@ -110,7 +79,7 @@
                             </div>
                           </div>
 
-                          <div class="modal fade" id="deleteModalThree" role="dialog">
+                          <div class="modal fade" id="deleteModalFive" role="dialog">
                             <div class="modal-dialog">
                               <!-- Modal content-->
                               <div class="modal-content">

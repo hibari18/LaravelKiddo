@@ -54,8 +54,6 @@ class FeeDetailsController extends Controller
             $j = $i;
             $j++;
             $val = $_POST['txtName'][$i];
-            $detId= FeeDetails::orderBy('tblFeeDetailId', 'desc')->pluck('tblFeeDetailId')->first();
-            $detId++;
             
             $detId = FeeDetails::create([
                 'tblFeeDetailId' => $detId,
