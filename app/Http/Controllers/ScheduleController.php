@@ -100,7 +100,7 @@ class ScheduleController extends Controller
             
         ]) ? 4 : 3;
 
-        return redirect()->route('payment.index')->with('message', $message);
+        return redirect()->route('fees.index')->with('message', $message);
     }
 
     /**

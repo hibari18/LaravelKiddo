@@ -226,7 +226,7 @@
             var f3=document.getElementById('txtDetDueDate');
             var f4=document.getElementById('txtDetAmount');
             var f5=document.getElementById('txtDetDelId');
-            f1.value=cells[0].innerHTML;
+            f1.value=cells[1].innerHTML;
             f2.value=cells[3].innerHTML;
             f3.value=cells[4].innerHTML;
             f4.value=cells[5].innerHTML;
