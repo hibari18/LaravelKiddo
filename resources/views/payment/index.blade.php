@@ -228,8 +228,8 @@
             var f5=document.getElementById('txtDetDelId');
             f1.value=cells[0].innerHTML;
             f2.value=cells[3].innerHTML;
-            f3.value=cells[2].innerHTML;
-            f4.value=cells[4].innerHTML;
+            f3.value=cells[4].innerHTML;
+            f4.value=cells[5].innerHTML;
             f5.value=cells[0].innerHTML;
           };
       }})();
@@ -255,7 +255,7 @@
                 <ul class="nav nav-tabs" id="myTab">
                   <li class="active"><a href="#tab_1" data-toggle="tab">Fees</a></li>
                   <li><a href="#tab_2" data-toggle="tab">Payment Scheme Type</a></li>
-                  <li><a href="#tab_3" data-toggle="tab">Payment Schedule</a></li>
+                  <li><a href="#tab_3" data-toggle="tab">Schedule and Amount</a></li>
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane fade in active" id="tab_1">

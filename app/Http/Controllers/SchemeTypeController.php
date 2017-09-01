@@ -58,17 +58,19 @@ class SchemeTypeController extends Controller
             'tblSchemeType' => strtoupper(trim($request->txtAddScheme)),
             'tblSchemeNoOfPayment' => trim($request->txtAddSchemeNo),
             ]);
-
+        Schedule::where('tblSchedDetailCtr', 1)
+            ->where('tblSchemeDetail_tblFee', $schemetype->tblScheme_tblFeeId)
+            ->where('tblSchemeDetail_tblScheme', NULL)
+            ->update(['tblSchemeDetail_tblScheme' => $schemetype->tblSchemeId]);
         for($i=1; $i<=$schemetype->tblSchemeNoOfPayment; $i++){
             $levels = Level::where('tblLevelFlag', 1)->get();
             
             if($schemetype->fees->tblFeeType == 'DIFFERENT PER LEVEL'){
                 foreach($levels as $level){
-                    Schedule::updateOrCreate([
+                    Schedule::firstOrCreate([
                         'tblSchemeDetail_tblLevel' => $level->tblLevelId,
                         'tblSchedDetailCtr' => $i,
                         'tblSchemeDetail_tblFee' =>$schemetype->tblScheme_tblFeeId,
-                    ], [
                         'tblSchemeDetail_tblScheme' => $schemetype->tblSchemeId
                     ]);
                 }
