@@ -230,7 +230,7 @@
             f2.value=cells[3].innerHTML;
             f3.value=cells[4].innerHTML;
             f4.value=cells[5].innerHTML;
-            f5.value=cells[0].innerHTML;
+            f5.value=cells[1].innerHTML;
           };
       }})();
 

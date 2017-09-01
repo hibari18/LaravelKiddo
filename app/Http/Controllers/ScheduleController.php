@@ -109,8 +109,16 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $schedules = Schedule::findOrFail($request->txtDetDelId);
+        
+        $message = $schedules->update([
+            'tblSchemeDetailDueDate' => null,
+            'tblSchemeDetailAmount' => null,
+            
+        ]) ? 4 : 3;
+
+        return redirect()->route('fees.index')->with('message', $message);
     }
 }

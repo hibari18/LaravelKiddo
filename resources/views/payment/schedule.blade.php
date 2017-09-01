@@ -87,10 +87,12 @@
                                   <h3 class="modal-title" style="font-style: bold">Reset</h3>
                                 </div>
 
-                                <form method="post" action="deleteSchemeDetail.php">
+                                <form method="post" action="{{ route('schedule.destroy', 'id') }}">
+                                  {{  csrf_field() }}
+                                  {{ method_field('DELETE') }}
                                   <div class="modal-body">
                                   <input type="hidden" class="form-control" name="txtDetDelId" id="txtDetDelId">
-                                    <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
+                                    <div class="box-body table-responsive no-padding" style="margin-top: 2%">
                                       <h3 align="center"> Are you sure you want to reset?</h3>
                                     </div>
                                   </div>
