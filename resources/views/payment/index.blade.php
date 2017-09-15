@@ -34,7 +34,7 @@
       echo "<script> swal('Scheme already exists!', ' ', 'error'); </script>";
     }
   ?>
- 
+
 
  <script>
  $(document).ready(function(){
@@ -43,7 +43,7 @@
         if (checked == 'diff') {
             $('#selSchedLvl').val(-1);
             $('#selSchedLvl').attr('disabled', false);
-        } 
+        }
         else if (checked == 'mass') {
             $('#selSchedLvl').attr('disabled', true);
             var xmlhttp =  new XMLHttpRequest();
@@ -291,6 +291,11 @@
           fields: {
             txtAddFeeCode: {
               validators: {
+                stringLength: {
+                  min: 3,
+                  max: 20,
+                  message: 'Please enter at least 3 characters'
+                },
                 regexp: {
                   regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
                   message: 'The first character must be an alphabet or does not allow special character'
@@ -303,7 +308,7 @@
             txtAddFeeName: {
               validators: {
                 regexp: {
-                  regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s]+$/,
+                  regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
                   message: 'The first character must be an alphabet or does not allow special character'
                 },
                 notEmpty: {
@@ -386,6 +391,13 @@
                 },
               }
             },
+            selUpdFeeType:{
+              validators:{
+                notEmpty:{
+                  message: 'Type of Fee is required'
+                }
+              }
+            }
           }
           })
         .on('success.form.bv', function (e) {
@@ -433,17 +445,12 @@
                   message: 'The first character must be an alphabet or does not allow special character'
                 },
                 notEmpty: {
-                  message: 'Fee Code is required'
+                  message: 'Scheme Name is required'
                 }
               }
             },
             txtAddSchemeNo:{
               validators:{
-                stringLength:{
-                  min:1,
-                  maxx: 20,
-                  message: 'Please enter at least 1 number'
-                },
                 regexp:{
                   regexp:/^[0-9]+$/,
                   message:'Invalid input. You can only input number/s'
@@ -467,6 +474,55 @@
           .on('hide.bs.modal', function () {
             $('#addScheme').bootstrapValidator('resetForm', true);
           });
+
+          $('#UpdScheme').bootstrapValidator({
+            feedbackIcons: {
+              valid: 'glyphicon glyphicon-ok',
+              invalid: 'glyphicon glyphicon-remove',
+              validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+              txtUpdScheme: {
+                validators: {
+                  stringLength: {
+                    min: 5,
+                    max: 20,
+                    message: 'Please enter at least 5 chracters'
+                  },
+                  regexp: {
+                    regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-'\s\/]+$/,
+                    message: 'The first character must be an alphabet or does not allow special character'
+                  },
+                  notEmpty: {
+                    message: 'Scheme Name is required'
+                  }
+                }
+              },
+              txtUpdSchemeNo:{
+                validators:{
+                  regexp:{
+                    regexp:/^[0-9]+$/,
+                    message:'Invalid input. You can only input number/s'
+                  },
+                  notEmpty:{
+                    message: 'No. of payments is required'
+                  }
+                }
+              },
+            }
+            })
+          .on('success.form.bv', function (e) {
+            // Prevent form submission
+          //e.preventDefault();
+          });
+
+          $('#updateModalTwo')
+            .on('shown.bs.modal', function () {
+               $('#UpdScheme').find().focus();
+            })
+            .on('hide.bs.modal', function () {
+              $('#UpdScheme').bootstrapValidator('resetForm', true);
+            });
     });
     </script>
 

@@ -1,7 +1,0 @@
- #success_message{ display: none;}
-
-#UpdDivision .inputGroupContainer .form-control-feedback,
-#UpdDivision .selectContainer .form-control-feedback {
-    top: 0;
-    right: -30px;
-}

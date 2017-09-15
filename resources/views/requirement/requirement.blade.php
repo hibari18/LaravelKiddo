@@ -49,7 +49,7 @@
                                       <div class="input-group-addon">
                                         <i class="fa fa-align-justify" aria-hidden="true"></i>
                                       </div>
-                                      <textarea type="text" style="text-transform: uppercase;" class="form-control" name="txtAddReqDesc" id="txtAddReqDesc"></textarea>
+                                      <textarea type="text" rows="5" style="text-transform: uppercase;" class="form-control" name="txtAddReqDesc" id="txtAddReqDesc"></textarea>
                                     </div>
                                   </div>
                                  </div>

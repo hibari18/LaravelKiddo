@@ -1,0 +1,101 @@
+#success_message{ display: none;}
+
+textarea {
+  resize: vertical;
+  height: auto;
+}
+
+/* Division */
+#UpdDivision .inputGroupContainer .form-control-feedback,
+#UpdDivision .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+/* ~Level Tab*/
+#addLevel .inputGroupContainer .form-control-feedback,
+#addLevel .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdLevel .inputGroupContainer .form-control-feedback,
+#UpdLevel .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+/* ~Subject Tab*/
+#addSubject .inputGroupContainer .form-control-feedback,
+#addSubject .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdSubject .inputGroupContainer .form-control-feedback,
+#UpdSubject .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+/* ~Details*/
+#addCurrDetails .inputGroupContainer .form-control-feedback,
+#addCurrDetails .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdCurrDetails .inputGroupContainer .form-control-feedback,
+#UpdCurrDetails .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+
+/* Section */
+#addSection .inputGroupContainer .form-control-feedback,
+#addSection .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#updSection .inputGroupContainer .form-control-feedback,
+#updSection .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+/* Requirement */
+#addReq .inputGroupContainer .form-control-feedback,
+#addReq .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+#UpdReq .inputGroupContainer .form-control-feedback,
+#UpdReq .selectContainer .form-control-feedback {
+    top: 0;
+    right: -30px;
+}
+
+/* Payment */
+#addFee .inputGroupContainer .form-control-feedback,
+#addFee .selectContainer .form-control-feedback {
+ top: 0;
+ right: -30px;
+}
+
+#UpdFee .inputGroupContainer .form-control-feedback,
+#UpdFee .selectContainer .form-control-feedback {
+ top: 0;
+ right: -30px;
+}
+/* ~Scheme Type Tab*/
+#addScheme .inputGroupContainer .form-control-feedback,
+#addScheme .selectContainer .form-control-feedback {
+ top: 0;
+ right: -30px;
+}
+
+#UpdScheme .inputGroupContainer .form-control-feedback,
+#UpdScheme .selectContainer .form-control-feedback {
+ top: 0;
+ right: -30px;
+}
