@@ -131,12 +131,14 @@
             var f2=document.getElementById('txtUpdFeeCode');
             var f3=document.getElementById('txtUpdFee');
             var f4=document.getElementById('selUpdFeeStatus');
-            var f5=document.getElementById('txtDelFee');
+            var f5=document.getElementById('selUpdFeeType');
+            var f6=document.getElementById('txtDelFee');
             f1.value=cells[0].innerHTML;
             f2.value=cells[2].innerHTML;
             f3.value=cells[3].innerHTML;
             f4.value=cells[5].innerHTML;
-            f5.value=cells[0].innerHTML;
+            f5.value=cells[6].innerHTML;
+            f6.value=cells[0].innerHTML;
           };
       }})();
 

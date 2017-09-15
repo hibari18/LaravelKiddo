@@ -60,7 +60,7 @@ class FeesController extends Controller
         $fees = Fees::create([
             'tblFeeCode' => strtoupper(trim($request->txtAddFeeCode)),
             'tblFeeName' => strtoupper(trim($request->txtAddFeeName)),            
-            'tblFeeStatus' => trim($request->selAddFeeStatus),
+            'tblFeeMandatory' => trim($request->selAddFeeStatus),
             'tblFeeType' => trim($request->selAddFeeType),
         ]);
         
@@ -129,7 +129,7 @@ class FeesController extends Controller
         $message = $fees->update([
             'tblFeeCode' => strtoupper(trim($request->txtUpdFeeCode)),
             'tblFeeName' => strtoupper(trim($request->txtUpdFee)),
-            'tblFeeStatus' => trim($request->selUpdFeeStatus),
+            'tblFeeMandatory' => trim($request->selUpdFeeStatus),
             'tblFeeType' => trim($request->selUpdFeeType),
 
         ]) ? 4 : 3;

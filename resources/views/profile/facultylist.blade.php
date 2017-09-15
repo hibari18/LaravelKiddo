@@ -46,10 +46,10 @@
                 <tbody>
                 @foreach($facprofile as $faculty)
                 <tr>
-                  <td>{{ $requirement->tblFacultyId }}</td>
-                  <td>{{ $requirement->name }}</td>
+                  <td>{{ $faculty->tblFacultyId }}</td>
+                  <td>{{ $faculty->name }}</td>
                   <td><form method="post" action="facultyprofile">
-                  <input type="hidden" name="txtFacultyId" id="txtFacultyId" value="{{ $requirement->tblFacultyId }}"/>
+                  <input type="hidden" name="txtFacultyId" id="txtFacultyId" value="{{ $faculty->tblFacultyId }}"/>
                   <button type="submit" class="btn btn-success" name="btnFclty" id="btnFclty"><i class="fa fa-edit"></i>Edit Profile</button><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></form></td>
                 </tr>
                 @endforeach

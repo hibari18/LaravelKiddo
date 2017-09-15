@@ -21,4 +21,8 @@ class Student extends Model
 	public function studentdw(){
 		return $this->hasMany('App\Student', 'tblStudDismiss_tblStudentId', 'tblStudentId');
 	}
+
+	public function student(){
+		return $this->hasMany('App\Student', 'tblStudent_tblLevelId', 'tblStudentId');
+	}
 }

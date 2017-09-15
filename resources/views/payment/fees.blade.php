@@ -49,8 +49,8 @@
                                       <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selAddFeeStatus" id="selAddFeeStatus">
                                           <option selected="selected" disabled="disabled" value="">--Select Status--</option>
-                                          <option value="MANDATORY">MANDATORY</option>
-                                          <option value="OPTIONAL">OPTIONAL</option>
+                                          <option value="Y">MANDATORY</option>
+                                          <option value="N">OPTIONAL</option>
                                         </select>
                                       </div>
                                 </div>
@@ -108,8 +108,8 @@
                                       <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selUpdFeeStatus" id="selUpdFeeStatus">
                                           <option selected="selected" disabled="disabled">--Select Status--</option>
-                                          <option value="MANDATORY">MANDATORY</option>
-                                          <option value="OPTIONAL">OPTIONAL</option>
+                                          <option value="Y">MANDATORY</option>
+                                          <option value="N">OPTIONAL</option>
                                         </select>
                                       </div>
                                 </div>
@@ -118,7 +118,7 @@
                                     <label class="col-sm-4" style="text-align: right">Type</label>
                                       <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selUpdFeeType" id="selUpdFeeType">
-                                          <option selected="selected" disabled="disabled" value="">--Select Type--</option>
+                                          <option selected="selected" disabled="disabled">--Select Type--</option>
                                           <option value="DIFFERENT PER LEVEL">DIFFERENT PER LEVEL</option>
                                           <option value="MASS FEE">MASS FEE</option>
                                         </select>
