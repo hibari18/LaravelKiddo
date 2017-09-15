@@ -165,7 +165,8 @@ class EnrollmentController extends Controller
      */
     public function show($id)
     {
-        $enname = Student::where('tblStudent_tblLevelId', $id)->get();
+        $enname = 
+        DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentType='APPLICANT' and s.tblStudent_tblLevelId='${id}'"));
 
         return view('enrollment.table.studlist', compact('enname'));
     }
