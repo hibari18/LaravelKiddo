@@ -26,8 +26,8 @@ class EnrollmentController extends Controller
         $scheme = SchemeType::where('tblSchemeFlag', 1)->get();
         $studschemes = StudScheme::where('tblStudSchemeFlag', 1)->get();
         $fees = Fees::where('tblFeeFlag', 1)->get();
-
-        $enname = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentType='APPLICANT'"));
+        $enname = [];
+        // $enname = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentType='APPLICANT'"));
         // $enname2 = DB::select(DB::raw("select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1"));
         $man = DB::select(DB::raw("select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1"));
         $opt = DB::select(DB::raw("select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1"));
@@ -165,9 +165,9 @@ class EnrollmentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::where('tblStudent_tblLevelId', $id)->first();
+        $enname = Student::where('tblStudent_tblLevelId', $id)->get();
 
-        return view('enrollment.table.studlist', compact('student'));
+        return view('enrollment.table.studlist', compact('enname'));
     }
 
     /**
