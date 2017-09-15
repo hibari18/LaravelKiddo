@@ -67,8 +67,8 @@
 
                                               <select class="form-control" style="width: 100%;" name="selAddFeeStatus" id="selAddFeeStatus">
                                                 <option selected="selected" disabled="disabled" value="">--Select Status--</option>
-                                                <option value="MANDATORY">MANDATORY</option>
-                                                <option value="OPTIONAL">OPTIONAL</option>
+                                                <option value="Y">MANDATORY</option>
+                                                <option value="N">OPTIONAL</option>
                                               </select>
                                             </div>
                                           </div>
