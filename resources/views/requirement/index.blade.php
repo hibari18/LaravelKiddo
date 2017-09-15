@@ -96,11 +96,11 @@
                validators: {
                  stringLength: {
                    min: 5,
-                   max: 100,
+                   max: 255,
                    message: 'You must input atleast 5 characters'
                  },
                  regexp: {
-                   regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-\s]+$/,
+                   regexp: /^[a-zA-Z][0-9a-zA-Z_][\w-\.\,'\s]+$/,
                    message: 'The first character must be an alphabet or does not allow special character'
                  },
                  notEmpty: {

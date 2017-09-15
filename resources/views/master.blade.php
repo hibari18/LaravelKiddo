@@ -12,7 +12,7 @@
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="{{ asset('css/bootstrapcss/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
@@ -36,14 +36,15 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/fullcalendar.print.css') }}" media="print">
 
     <!-- Maintenance validDesign -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignDivision.css') }}">
+    <!--<link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignDivision.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignLevel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSubject.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignDetails.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSection.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignReq.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignFee.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSchemeType.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignSchemeType.css') }}"> -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesign.css') }}">
 
     <!-- Transaction validDesign -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/css/validDesignStepTwo.css') }}">
@@ -64,6 +65,9 @@
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <!-- Bootstrap validator -->
     <script src="{{ asset('js/bootstrapValidator.min.js') }}"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">

@@ -5,97 +5,129 @@
                          <div class="btn-group" style="margin-bottom: 3%; margin-top: 1%">
                           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalTwo"><i class="fa fa-plus"></i>Add</button>
                         </div>
-                        <!-- Modal starts here-->
-                        <div class="modal fade" id="addModalTwo" role="dialog">
+
+                        <!-- Add Modal -->
+                        <div class="modal fade" id="addModalTwo" role="dialog" tabindex="-1" aria-labelledby="addModalTwo" aria-hidden="true">
                           <div class="modal-dialog">
+
                             <!-- Modal content-->
                             <div class="modal-content">
-                              <div class="modal-header">
-                                <h3 class="modal-title" style="font-style: bold">Add Payment Scheme</h3>
-                              </div>
 
-                              <form method="post" data-toggle="validator" autocomplete="off" role="form" action="{{ route('schemetype.store') }}" name="addScheme" id="addScheme">
-                              {{ csrf_field() }}
-                                <div class="modal-body">
-                                  <div class="form-group" style="margin-top: 5%">
-                                    <label class="col-sm-4" style="text-align: right">Fee</label>
-                                      <div class="col-sm-7 selectContainer">
-                                        <select class="form-control" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
-                                          <option selected="selected" disabled value="">--Select Fee--</option>
-                                            @foreach($fees_select as $fee)
-                                            <option value="{{ $fee->tblFeeId}}">{{ $fee->tblFeeName}}</option>
-                                            @endforeach
-                                        </select>
+                              <form autocomplete="off" id="addScheme" role="form" method="POST" action="{{ route('schemetype.store') }}" data-toggle="validator" class="form-horizontal">
+                                {{ csrf_field() }}
+                                <div class="modal-dialog">
+                                    <div class="modal-content col-sm-12">
+                                      <div class="modal-header">
+                                        <h4 class="modal-title" id="addModalOne"> ADD PAYMENT SCHEME </h4>
                                       </div>
-                                  </div>
 
-                                  <div class="form-group"  style="margin-top: 15%">
-                                    <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Scheme Name</label>
-                                    <div class="col-sm-7 selectContainer">
-                                      <input type="text" class="form-control" name="txtAddScheme" id="txtAddScheme" style="text-transform:uppercase;">
+                                      <div class="form-group" style="margin-top:7%">
+                                        <label class="col-sm-4 control-label"> Fee </label>
+                                        <div class="col-sm-6 selectContainer">
+                                          <div class="input-group">
+                                            <div class="input-group-addon">
+                                              <i class="fa fa-files-o" aria-hidden="true"></i>
+                                            </div>
+
+                                            <select class="form-control" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
+                                              <option selected="selected" disabled value="">--Select Fee--</option>
+                                              @foreach($fees_select as $fee)
+                                              <option value="{{ $fee->tblFeeId}}">{{ $fee->tblFeeName}}</option>
+                                              @endforeach
+                                            </select>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                        <div class="form-group">
+                                          <b><label class="col-sm-4 control-label"> Scheme Name </label></b>
+                                          <div class="col-sm-6 selectContainer">
+                                            <div class="input-group" style="width:100%;">
+                                              <input type="text" class="form-control" name="txtAddScheme" id="txtAddScheme" style="text-transform:uppercase;">
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <b><label class="col-sm-4 control-label"> No. of Payments </label></b>
+                                          <div class="col-sm-6 selectContainer">
+                                            <div class="input-group" style="width:100%;">
+                                              <input class="rem" type="number" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="modal-footer" style="margin-top:7%">
+                                          <button type="submit" class="btn btn-info">Save</button>
+                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-
-                                  <div class="form-group" style="margin-top: 25%">
-                                    <label class="col-sm-4" style="text-align: right">No. of Payments</label>
-                                    <div class="col-sm-7 selectContainer">
-                                      <input class="rem" type="number" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="modal-footer" style="margin-top: 10%">
-                                  <button type="submit" class="btn btn-info">Save</button>
-                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                          </div> <!-- modal content add scheme -->
-                        </div> <!-- modal dialog add scheme -->
-                      </div> <!-- modal fade add scheme -->
-
-                      <div class="modal fade" id="updateModalTwo" role="dialog">
-                        <div class="modal-dialog">
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h3 class="modal-title" style="font-style: bold">Update Payment Scheme</h3>
+                              </form>
                             </div>
+                          </div>
+                        </div>
 
-                            <form method="post" action="{{ route('schemetype.update','id') }}" data-toggle="validation" autocomplete="off" role="form">
-                            {{ method_field('PUT') }}
-                             {{ csrf_field() }}
-                              <div class="modal-body">
-                                <input type="text" name="txtUpdSchemeId" id="txtUpdSchemeId" hidden/>
-                                <div class="form-group"  style="margin-top: 5%">
-                                  <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Fee</label>
-                                  <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="txtUpdFeeName" id="txtUpdFeeName" disabled>
-                                  </div>
+                        <!-- Update Modal -->
+                        <div class="modal fade" id="updateModalTwo" role="dialog">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <form autocomplete="off" id = "UpdScheme" name="UpdScheme" role="form" method="POST" action="{{ route('schemetype.update','id') }}" data-toggle="validation" class="form-horizontal">
+                                {{ method_field('PUT') }}
+                                {{ csrf_field() }}
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="updateModalTwo"> UPDATE PAYMENT SCHEME </h4>
                                 </div>
 
-                                <div class="form-group"  style="margin-top: 15%">
-                                  <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Scheme Name</label>
-                                  <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="txtUpdScheme" id="txtUpdScheme" style="text-transform: uppercase;">
-                                  </div>
-                                </div>
+                                <div class="modal-body">
 
-                                <div class="form-group" style="margin-top: 25%">
-                                  <label class="col-sm-4" style="text-align: right">No. of Payments</label>
-                                  <div class="col-sm-7">
-                                    <input class="rem" type="number" min="1" max="31" name="txtUpdSchemeNo" id="txtUpdSchemeNo">
+                                  <div class="form-group" style="display: none;">
+                                    <label class="col-sm-4 control-label">Update Scheme ID</label>
+                                    <div class="col-sm-6">
+                                      <div class = "input-group">
+                                        <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                        <input type="text" name="txtUpdSchemeId" id="txtUpdSchemeId" readonly=""/>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
 
-                              <div class="modal-footer" style="margin-top: 10%">
-                                <button type="submit" class="btn btn-info" name="btnUpdScheme" id="btnUpdScheme">Save</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                              </div>
-                            </form>
-                          </div> <!-- modal content update scheme -->
-                        </div> <!-- modal dialog update scheme -->
-                      </div>  <!-- modal fade update scheme -->
+                                  <div class="form-group" style="margin-top: 7%;">
+                                    <label class="col-sm-4 control-label"> Fee </label>
+                                    <div class="col-sm-6 selectContainer">
+                                      <div class = "input-group" style="width:100%;">
+                                        <input type="text" class="form-control" name="txtUpdFeeName" id="txtUpdFeeName" disabled>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col-sm-4 control-label"> Scheme Name </label>
+                                    <div class="col-sm-6 selectContainer">
+                                      <div class = "input-group" style="width:100%;">
+                                        <input type="text" class="form-control" name="txtUpdScheme" id="txtUpdScheme" style="text-transform: uppercase;">
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col-sm-4 control-label"> No. of Payments </label>
+                                    <div class="col-sm-6 selectContainer">
+                                      <div class = "input-group" style="width:100%;">
+                                        <input class="rem" type="number" min="1" max="31" name="txtUpdSchemeNo" id="txtUpdSchemeNo">
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="modal-footer" style="margin-top: 7%">
+                                    <button type="submit" class="btn btn-info" name="btnUpdScheme" id="btnUpdScheme">Save</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                  </div>
+
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
 
                       <div class="modal fade" id="deleteModalTwo" role="dialog">
                         <div class="modal-dialog">
