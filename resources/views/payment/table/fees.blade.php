@@ -19,7 +19,7 @@
     <td>{{ $fee->fees->tblFeeCode}}</td>
     <td>{{ $fee->fees->tblFeeName}}</td>
      <td>{{ $fee->tblFeeAmountAmount}}</td>
-    <td>{{ $fee->fees->tblFeeMandatory}}</td>
+    <td>{{ $fee->fees->status}}</td>
     <td>{{ $fee->fees->tblFeeType}}</td>
      <td>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>

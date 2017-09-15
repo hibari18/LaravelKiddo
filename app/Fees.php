@@ -15,6 +15,9 @@ class Fees extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 
+	public function getStatusAttribute(){
+		return $this->tblFeeMandatory == 'Y' ? 'MAN' : 'OPT';
+	}
 
 	public function level(){
 		return $this->belongsTo('App\Level', 'tblCurriculumDetail_tblLevelId', 'tblLevelId');
