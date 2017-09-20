@@ -1,14 +1,6 @@
 @extends('master')
 
 @section('content')
-if(isset($_POST['btnProceed']))
-        {
-          $studid = $_POST['txtStudentId'];
-          $clear=$_POST['chkClear'];
-          $session=$_POST['selSession'];
-          $optfees=$_POST['optionalfees'];
-
-        }
 <script>
   function showLevel()
     {
@@ -67,18 +59,18 @@ if(isset($_POST['btnProceed']))
                         <div class="box">
                         <div class="box-header"></div>
                         <form role="form" method="POST" action="{{ route('enrollment.store') }}">
-          				{{ csrf_field() }}>
+          				      {{ csrf_field() }}
                             <div class="box-body">
                             <input type="text" name="txtStudId" id="txtStudId" value="{{ $studid }}"/>
                             <input type="text" name="txtClear" id="txtClear" value="{{ $clear }}"/>
                             <input type="text" name="txtSession" id="txtSession" value="{{ $session }}"/>
-                            @foreach($enname2 as $en) 
+                            @foreach($enname2 as $en2) 
                              <hr> 
                                 <div class="form-group" style="margin-top: 0%">
                                 <h2>Payment Schemes</h2>
                                 <small>These are the fees availed. Please choose payment scheme.</small>
-                                <h4 style="margin-top: 5%"><input type="hidden" name="txtId" id="txtId" value="<?php echo $studid ?>" />Student Id: <?php echo $studid ?></h4>
-                             <h4>Student Name: <?php echo $row['name'] ?></h4>
+                                <h4 style="margin-top: 5%"><input type="hidden" name="txtId" id="txtId" value="{{ $studid }}" />Student Id: {{ $studid }}</h4>
+                             <h4>Student Name: {{ $en2->name }}</h4>
                                  <div class="col-md-12" style="margin-top: 6%">
                                     <table id="datatable2" class="table table-bordered table-striped">
                                       <thead>
@@ -90,30 +82,21 @@ if(isset($_POST['btnProceed']))
                                         </tr>
                                       </thead>
                                       <tbody id="tb">
-                                      <?php 
-                                      $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1 group by tblFeeId";
-                                      $result=mysqli_query($con, $query);
-                                      while($row=mysqli_fetch_array($result)):
-                                      ?>
+                                      @foreach($man as $m)
                                         <tr>
-                                          <td hidden><input type="hidden" name="txtFeeId1[]" id="txtFeeId1" value="<?php echo $row['tblFeeId'] ?>" /><?php echo $row['tblFeeId'] ?></td>
-                                          <td><?php echo $row['tblFeeCode'] ?></td>
-                                          <td><?php echo $row['tblFeeName'] ?></td>
+                                          <td hidden><input type="hidden" name="txtFeeId1[]" id="txtFeeId1" value="{{ $m->tblFeeId }}" />{{ $m->tblFeeId }}</td>
+                                          <td>{{ $m->tblFeeCode }}</td>
+                                          <td>{{ $m->tblFeeName }}</td>
                                           <td>
                                           <select class="form-control" style="width: 50%;" name="selSchemeMand[]" id="selSchemeMand" >
                                             <option selected="selected" disabled>--CHOOSE SCHEME--</option>
-                                          <?php 
-                                          $feeid=$row['tblFeeId'];
-                                          $query1="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
-                                          $result1=mysqli_query($con, $query1);
-                                          while($row1=mysqli_fetch_array($result1)){
-                                          ?>
-                                            <option value="<?php echo $row1['tblSchemeId'] ?>"><?php echo $row1['tblSchemeType'] ?></option>
-                                          <?php } ?>
+                                          @foreach($query1 as $q1)
+                                            <option value="{{ $q1->tblSchemeId }}">{{ $q1->tblSchemeType }}</option>
+                                          @endforeach
                                           </select>
                                           </td>
                                         </tr>
-                                      <?php endwhile; ?>  
+                                      @endforeach  
                                       <?php
                                       foreach ($optfees as $val) {
                                         $query="select * from tblfee where tblFeeId='$val' and tblFeeMandatory='N' and tblFeeFlag=1 group by tblFeeId";
@@ -126,17 +109,12 @@ if(isset($_POST['btnProceed']))
                                       <td><?php echo $row['tblFeeName'] ?></td>
                                       <td><select class="form-control" style="width: 50%;" name="selSchemeOpt[]" id="selSchemeOpt">
                                       <option selected="selected" disabled>--CHOOSE SCHEME--</option>
-                                      <?php 
-                                          $feeid=$row['tblFeeId'];
-                                          $query1="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
-                                          $result1=mysqli_query($con, $query1);
-                                          while($row1=mysqli_fetch_array($result1)){
-                                          ?>
-                                          <option value="<?php echo $row1['tblSchemeId'] ?>"><?php echo $row1['tblSchemeType'] ?></option>
-                                          <?php } ?>
+                                          @foreach($query1 as $q1)
+                                            <option value="{{ $q1->tblSchemeId }}">{{ $q1->tblSchemeType }}</option>
+                                          @endforeach
                                       </select></td>
                                       </tr>
-                                      <?php } ?>
+                                     @endforeach
                                       </tbody>
                                     </table>
                                   </div> <!-- col-md-12 tab_2

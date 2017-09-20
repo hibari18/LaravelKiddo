@@ -52,6 +52,8 @@ Route::resource('facultyprofile', 'FacultyProfileController');
 Route::resource('dismisswithdraw', 'DismissWithdrawController');
 
 Route::resource('enrollment', 'EnrollmentController');
+Route::get('feesavailed/{id}', 'EnrollmentController@proceed');
+
 
 
 

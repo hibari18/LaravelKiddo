@@ -83,7 +83,8 @@
                                 <div class="modal-header">
                                   <h3 class="modal-title" style="font-style: bold">Enroll Student</h3>
                                 </div>
-                                <form method="post" action="enrollscheme"/>
+                                <form method="post" action="{{ route('enrollment.proceed') }}"/>
+                                {{ csrf_field() }}
                                   <input type="hidden" name="txtStudentId" id="txtStudentId"/>
                                 <div class="form-group" style="margin-top: 5%">
                                     <input class="col-sm-2" type="checkbox" name="chkClear" id="chkClear" value="Y">Clearance
