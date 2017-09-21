@@ -18,5 +18,9 @@ class SchemeType extends Model
 	public function fees(){
 		return $this->belongsTo('App\Fees', 'tblScheme_tblFeeId', 'tblFeeId');
 	}
-
+	
+	public function scopeActive($query)
+    {
+        return $query->where('tblSchemeFlag', 1);
+    }
 }

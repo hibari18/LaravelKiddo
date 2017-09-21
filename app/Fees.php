@@ -29,4 +29,10 @@ class Fees extends Model
 	public function feeamount(){
 		return $this->belongsTo('App\FeeAmount', 'tblFeeAmount_tblFeeId', 'tblFeeAmountId');
 	}
+
+	public function schemes(){
+		return $this->hasMany('App\SchemeType', 'tblScheme_tblFeeId', 'tblFeeId');
+	}
+
+	
 }
