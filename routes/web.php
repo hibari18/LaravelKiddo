@@ -1,5 +1,6 @@
 <?php
 
+Route::get('/', 'AdminController@dashboard');
 Route::get('dashboard', 'AdminController@dashboard');
 
 Route::get('message', 'AdminController@message');

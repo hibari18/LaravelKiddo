@@ -56,105 +56,83 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-            $studid = $request->txtStudId;
-            $clear=$request->txtClear;
-            $session=$request->txtSession;
-            $schemem=$request->selSchemeMand;
-            $schemeo=$request->selSchemeOpt;
-            $feeId=$request->txtFeeId2;
-            $feeId1=$request->txtFeeId1;
+        $studid = $request->txtStudId;
+        $clear = $request->txtClear;
+        $session = $request->txtSession;
+        $schemem = $request->selSchemeMand;
+        $schemeo = $request->selSchemeOpt;
+        $feeId  = $request->txtFeeId2;
+        $feeId1 = $request->txtFeeId1;
 
-            $syid=SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1);
+        $syid   =   SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
 
-            $enrollid = Enrollment::orderBy('tblStudEnrollId','desc')->pluck('tblStudEnrollId')->first();
-            $enrollid++;
-            $enrollid = Enrollment::create([
-                        'tblStudEnrollId' => $enrollid,
-                        'tblStudEnrollPreferedSession' => $session,
-                        'tblStudEnrollClearance' => $clear,
-                        'tblStudEnroll_tblStudentId' => $studid,
+        $enrollid = Enrollment::create([
+            'tblStudEnrollPreferedSession' => $session,
+            'tblStudEnrollClearance' => $clear,
+            'tblStudEnroll_tblStudentId' => $studid,
+        ]);
 
-                ]);
-
-            $length1=count($schemem);
-            foreach($feeId1 as $val1)
+        $length1=count($schemem);
+        foreach($feeId1 as $val1)
+        {
+            for($i=0; $i<$length1; $i++)
             {
-                for($i=0; $i<$length1; $i++)
+                $scheme1=$schemem[$i];
+                $result= SchemeType::where('tblScheme_tblFeeId', $val1)->where('tblSchemeId', $scheme1)->where('tblSchemeFlag', 1)->get();
+                if(count($result) > 0)
                 {
-                    $scheme1=$schemem[$i];
-                    $result= SchemeType::where('tblScheme_tblFeeId', $val1)->where('tblSchemeId', $scheme1)->where('tblSchemeFlag', 1)->get();
-                    if(count($result) > 0)
-                    {
+                    $studschemeid = StudScheme::create([
+                        'tblStudScheme_tblSchemeId' => $scheme1,
+                        'tblStudScheme_tblFeeId' => $val1,
+                        'tblStudScheme_tblStudentId' => $studid,
+                        'tblStudScheme_tblSchoolYrId' => $syid,
+                    ]);
 
-                        $studschemeid = StudScheme::orderBy('tblStudSchemeId', 'desc')->pluck('tblStudSchemeId')->first();
-                        $studschemeid++;
-                        $studschemeid = StudScheme::create([
-                                        'tblStudSchemeId' => $studschemeid,
-                                        'tblStudScheme_tblSchemeId' => $scheme1,
-                                        'tblStudScheme_tblFeeId' => $val1,
-                                        'tblStudScheme_tblStudentId' => $studid,
-                                        'tblStudScheme_tblSchoolYrId' => $syid,
-
-                            ]);
-
-                    }
-                    else if(count($result) == 0)
-                    {
-
-                        $studschemeid = StudScheme::orderBy('tblStudSchemeId','desc')->pluck('tblStudSchemeId')->first();
-                        $studschemeid++;
-                        $studschemeid = StudScheme::create([
-                                        'tblStudSchemeId' => $studschemeid,
-                                        'tblStudScheme_tblFeeId' => $val1,
-                                        'tblStudScheme_tblStudentId' => $studid,
-                                        'tblStudScheme_tblSchoolYrId' => $syid,
-
-                            ]);
-
-                    }
                 }
-            }//foreach feeId(mandatory)
-            $length=count($schemeo);
-            foreach($feeId as $val2)
+                else if(count($result) == 0)
+                {
+                    $studschemeid = StudScheme::create([
+                        'tblStudScheme_tblFeeId' => $val1,
+                        'tblStudScheme_tblStudentId' => $studid,
+                        'tblStudScheme_tblSchoolYrId' => $syid,
+                    ]);
+
+                }
+            }
+        }//foreach feeId(mandatory)
+        $length=count($schemeo);
+        foreach($feeId as $val2)
+        {
+            for($i=0; $i<$length; $i++)
             {
-                for($i=0; $i<$length; $i++)
+                $scheme=$schemeo[$i];
+                $result = SchemeType::where('tblScheme_tblFeeId', $val2)->where('tblSchemeId', $scheme)->where('tblSchemeFlag', 1);
+                if(count($result) > 0)
                 {
-                    $scheme=$schemeo[$i];
-                    $result = SchemeType::where('tblScheme_tblFeeId', $val2)->where('tblSchemeId', $scheme)->where('tblSchemeFlag', 1);
-                    if(count($result) > 0)
-                    {
-
-                        $studschemeid = StudScheme::orderBy('tblStudSchemeId', 'desc')->pluck('tblStudSchemeId')->first();
-                        $studschemeid++;
-                        $studschemeid = StudScheme::create([
-                                        'tblStudSchemeId' => $studschemeid,
-                                        'tblStudScheme_tblSchemeId' => $scheme,
-                                        'tblStudScheme_tblFeeId' => $val2,
-                                        'tblStudScheme_tblStudentId' => $studid,
-                                        'tblStudScheme_tblSchoolYrId' => $syid,
-
-                            ]);
-
-                    }
-                    else if(count($result) == 0)
-                    {
-
-                        $studschemeid = StudScheme::orderBy('tblStudSchemeId', 'desc')->pluck('tblStudSchemeId')->first();
-                        $studschemeid++;
-                        $studschemeid = StudScheme::create([
-                                        'tblStudSchemeId' => $studschemeid,
-                                        'tblStudScheme_tblFeeId' => $val2,
-                                        'tblStudScheme_tblStudentId' => $studid,
-                                        'tblStudScheme_tblSchoolYrId' => $syid,
-
-                            ]);
-
-                    }
+                    $studschemeid = StudScheme::create([
+                        'tblStudScheme_tblSchemeId' => $scheme,
+                        'tblStudScheme_tblFeeId' => $val2,
+                        'tblStudScheme_tblStudentId' => $studid,
+                        'tblStudScheme_tblSchoolYrId' => $syid,
+                    ]);
                 }
-            }//foreach feeId(optional)
-            Student::where('tblStudentId', $studid)->where( 'tblStudentFlag', 1)->update(['tblStudentType'=> 'OFFICIAL']);
-            
+                else if(count($result) == 0)
+                {
+                    $studschemeid = StudScheme::orderBy('tblStudSchemeId', 'desc')->pluck('tblStudSchemeId')->first();
+                    $studschemeid++;
+                    $studschemeid = StudScheme::create([
+                        'tblStudSchemeId' => $studschemeid,
+                        'tblStudScheme_tblFeeId' => $val2,
+                        'tblStudScheme_tblStudentId' => $studid,
+                        'tblStudScheme_tblSchoolYrId' => $syid,
+                    ]);
 
+                }
+            }
+        }//foreach feeId(optional)
+        Student::where('tblStudentId', $studid)->where( 'tblStudentFlag', 1)->update(['tblStudentType'=> 'OFFICIAL']);
+        
+        return 'Hi Gwyn';
     }
 
     /**
