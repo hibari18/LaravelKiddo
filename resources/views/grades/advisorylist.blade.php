@@ -36,6 +36,7 @@
                                   <td>{{ $sect->tblSectionId}}</td>
                                   <td>{{ $sect->tblSectionName}}</td>
                                   <td><a href = "studentlist"><form method="post" action="studentlist">
+                                  {{ csrf_field() }}
                                   <input type="hidden" name="txtSectId" id="txtSectId" value="{{ $sect->tblSectionId}}"/>
                                   <button type="submit" class="btn btn-success" name="btnSect" id="btnSect"><i class="fa fa-edit"></i>View Section List</button></form></a></td>
                                 </tr>

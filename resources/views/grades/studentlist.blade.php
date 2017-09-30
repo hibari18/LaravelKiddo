@@ -9,9 +9,9 @@
                   <div class="box-header with-border"></div>
                     <div class="box-body">
                       <div class="box-header with-border">
-                      @foreach($sects as $sect)
-                        <h2 class="box-title" style="font-size:20px;">{{ $sect->tblSectionName}}</h2>
-                        @endforeach
+                      
+                        <h2 class="box-title" style="font-size:20px;">{{ $sects->tblSectionName}}</h2>
+                       
                           <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
                         </div>
 
@@ -19,7 +19,7 @@
                       <div class="tab-pane active" id="tab_1">
                         <div class="box">
                         <div class="box-header"></div>
-                        <form method="post" action="{{ route('grades.studlist') }}">
+                        <form method="post" action="">
                           {{ csrf_field() }}
                           <div class="box-body">
                             <table id="datatable" name="datatable" class="table table-bordered table-striped">
@@ -36,7 +36,7 @@
                                 <tbody>
                                 @foreach($stud as $st)
                                 <tr>
-                                  <input type="hidden" name="txtSectId" value="{{ $st->$sectid }}"/>
+                                  <input type="hidden" name="txtSectId" value="{{ $st->sectid }}"/>
                                   <td><input type="hidden" name="txtStudId[]" value="{{ $st->tblStudentId }}"/>{{ $st->tblStudentId }}</td>
                                   <td>{{ $st->name }}</td>
                                   <td> <input type="text" name="txtGrade[]" id="txtGrade"/></td>
