@@ -39,9 +39,11 @@
                                   <input type="hidden" name="txtSectId" value="{{ $st->sectid }}"/>
                                   <td><input type="hidden" name="txtStudId[]" value="{{ $st->tblStudentId }}"/>{{ $st->tblStudentId }}</td>
                                   <td>{{ $st->name }}</td>
-                                  @foreach($subjname as $sn) 
-                                    <td> <input type="text" name="txtGrade[]" id="txtGrade"/></td>
-                                  @endforeach
+                                    @foreach($subjname as $sn) 
+                                      <td>
+                                        <input type="number" name="{{ "txtGrade[$st->tblStudentId-$sn->tblSubjectId]" }}" id="txtGrade" value="{{ array_key_exists("$st->tblStudentId-$sn->tblSubjectId", $grades) ? $grades["$st->tblStudentId-$sn->tblSubjectId"] : null }}" min="0" max="100" step="0.01">
+                                      </td>
+                                    @endforeach
                                 </tr>
                                   @endforeach
                                 </tbody>
@@ -54,7 +56,7 @@
                         </div>
                           </div>
                           <!-- /.box-body -->
-                          </form>
+                        </form>
                         </div>
                         <!-- /.box -->
                       </div>

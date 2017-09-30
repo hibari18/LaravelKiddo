@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Section;
 use App\Grades;
+use App\Subject;
 use DB;
 
 class GradesController extends Controller
@@ -41,33 +42,25 @@ class GradesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $subj=array();
         $stud=$request->txtStudId;
         $sectid=$request->txtSectId;
         $grd=$request->txtGrade;
 
-        $slist = DB::select(DB::raw("select * from tbllevel join tblsection on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId join tblcurriculumdetail on tblcurriculumdetail.tblCurriculumDetail_tblLevelId=tbllevel.tblLevelId join tblsubject on tblsubject.tblSubjectId=tblcurriculumdetail.tblCurriculumDetail_tblSubjectId where tblsubject.tblSubjectFlag=1 and tblsection.tblSectionId='$sectid' group by tblsubject.tblSubjectId"));
+        // $slist = DB::select(DB::raw("select * from tbllevel join tblsection on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId join tblcurriculumdetail on tblcurriculumdetail.tblCurriculumDetail_tblLevelId=tbllevel.tblLevelId join tblsubject on tblsubject.tblSubjectId=tblcurriculumdetail.tblCurriculumDetail_tblSubjectId where tblsubject.tblSubjectFlag=1 and tblsection.tblSectionId='$sectid' group by tblsubject.tblSubjectId"));
 
-        $subj = array_column($slist, 'tblSubjectId');
+        // $subj = array_column($slist, 'tblSubjectId');
 
-        $i=0;
-        foreach($stud as $value)
-        {
-            $studLength=count($subj);
-            for($x=0; $x<$studLength; $x++)
-            {
-                $gradeid= Grades::orderBy('tblGradeId', 'desc')->pluck('tblGradeId')->first();
-                
-                $slist = Grades::updateOrCreate([
-                    // 'tblGradeId'=> $gradeid,
-                    'tblGrade_tblStudentId'=> $value,
-                    'tblGrade_tblSubjectId'=> $subj[$x],
+        foreach($request->txtGrade as $key => $grade){
+            $item = explode('-', $key);
+            if($grade != null){
+                Grades::updateOrCreate([
+                    'tblGrade_tblStudentId'=> $item[0],
+                    'tblGrade_tblSubjectId'=> $item[1],
                 ],[
-                    'tblGradeGrade'=> $grd[$i],
+                    'tblGradeGrade'=> $grade,
                 ]);
-               
-                // echo $value.": ".$subj[$x]." = ".$grd[$i].'<br/>';
-                $i++;
             }
         }
 
@@ -101,8 +94,16 @@ class GradesController extends Controller
 
         $stud = DB::select(DB::raw("select distinct tblstudent.tblStudentId, concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name, tblsection.tblSectionId as sectid from tblsectionstud join tblstudent on tblstudent.tblStudentId=tblsectionstud.tblSectStud_tblStudentId join tblstudentinfo on tblstudentinfo.tblStudInfo_tblStudentId=tblstudent.tblStudentId join tblsection on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId join tblschoolyear on tblschoolyear.tblSchoolYrId=tblsectionstud.tblSectStud_tblSchoolYrId where tblsection.tblSectionId='$sectid' and tblschoolyear.tblSchoolYrActive='ACTIVE'"));
 
-        // dd($subjname, $stud);
-        return view('grades.studentlist', compact('sectid', 'sects','subjname','stud'));
+        //$grades = collect();
+        foreach($stud as $student){
+            foreach($subjname as $subject){
+                $grade = Grades::where('tblGrade_tblStudentId', $student->tblStudentId)->where('tblGrade_tblSubjectId', $subject->tblSubjectId)->orderBy('tblGradeId', 'desc')->pluck('tblGradeGrade')->first();
+                
+                $grades["$student->tblStudentId-$subject->tblSubjectId"] = $grade;
+            }
+        }
+         
+        return view('grades.studentlist', compact('sectid', 'sects','subjname','stud', 'grades'));
 
     }
 
