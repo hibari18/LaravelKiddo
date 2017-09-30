@@ -2,14 +2,15 @@
 
 @section('content')
 <script>
-  // function showLevel()
-  //   {
-  //     var xmlhttp =  new XMLHttpRequest();
-  //     xmlhttp.open("GET","showTblStudent.php?selLevel="+document.getElementById("selLevel").value,false);
-  //     xmlhttp.send(null);
+  function disable() {
+    if 
+    document.getElementById("chkClear").disabled = true;
+    }
 
-  //     document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
-  //   }
+    function undisable() {
+        document.getElementById("myCheck").disabled = false;
+    }
+
     function showLevel()
       {
         var lvl = document.getElementById("selLevel").value;

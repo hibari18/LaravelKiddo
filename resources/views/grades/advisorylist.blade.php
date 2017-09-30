@@ -23,16 +23,23 @@
                               <table id="datatable" name="datatable" class="table table-bordered table-striped">
                               <thead>
                                 <tr>
+                                  <th></th>
                                   <th>Section Name</th>
                                   <th>Action</th>
+
                                 </tr>
                                 </thead>
 
                                 <tbody>
+                                @foreach($sections as $sect)
                                 <tr>
-                                  <td>Obedient</td>
-                                  <td><a href="studentlist" class="btn btn-info">View Section List</a></td>
+                                  <td>{{ $sect->tblSectionId}}</td>
+                                  <td>{{ $sect->tblSectionName}}</td>
+                                  <td><a href = "studentlist"><form method="post" action="studentlist">
+                                  <input type="hidden" name="txtSectId" id="txtSectId" value="{{ $sect->tblSectionId}}"/>
+                                  <button type="submit" class="btn btn-success" name="btnSect" id="btnSect"><i class="fa fa-edit"></i>View Section List</button></form></a></td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                                 </table>
                             </div>

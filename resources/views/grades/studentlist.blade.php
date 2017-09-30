@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
- <!-- Main content -->
+  <!-- Main content -->
         <section class="content" style="margin-top: 3%">
           <div class="row">
               <div class="col-md-12">
@@ -9,7 +9,9 @@
                   <div class="box-header with-border"></div>
                     <div class="box-body">
                       <div class="box-header with-border">
-                        <h2 class="box-title" style="font-size:20px;">Obedient</h2>
+                      @foreach($sects as $sect)
+                        <h2 class="box-title" style="font-size:20px;">{{ $sect->tblSectionName}}</h2>
+                        @endforeach
                           <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
                         </div>
 
@@ -17,40 +19,40 @@
                       <div class="tab-pane active" id="tab_1">
                         <div class="box">
                         <div class="box-header"></div>
-                        <div class="container">
-                      <label class="col-sm-1">Subject: </label>
-                      <select class="form-control" style="width: 30%; margin-bottom: 1%">
-                        <option>--Select Here--</option>
-                        <option>ENGLISH</option>
-                        <option>FILIPINO</option>
-                      </select>
-                </div>
+                        <form method="post" action="{{ route('grades.studlist') }}">
+                          {{ csrf_field() }}
                           <div class="box-body">
                             <table id="datatable" name="datatable" class="table table-bordered table-striped">
                               <thead>
                                 <tr>
-                                  <th>Student ID</th>
+                                  <th>Student Id</th>
                                   <th>Student Name</th>
-                                  <th>Grade</th>
+                                    @foreach($subjname as $sn) 
+                                  <th>{{ $sn->tblSubjectDesc }}</th>
+                                    @endforeach
                                 </tr>
                                 </thead>
 
                                 <tbody>
+                                @foreach($stud as $st)
                                 <tr>
-                                  <td>12345</td>
-                                  <td>Last, First</td>
-                                  <td>95</td>
+                                  <input type="hidden" name="txtSectId" value="{{ $st->$sectid }}"/>
+                                  <td><input type="hidden" name="txtStudId[]" value="{{ $st->tblStudentId }}"/>{{ $st->tblStudentId }}</td>
+                                  <td>{{ $st->name }}</td>
+                                  <td> <input type="text" name="txtGrade[]" id="txtGrade"/></td>
                                 </tr>
+                                  @endforeach
                                 </tbody>
                                 </table>
 
 
                         <div class="btn-group" style="float: right; margin-top: 3%">
-                          <button type="button" class="btn btn-info"><i class="fa fa-plus"></i>Save Grades</button>
-                          <button type="button" class="btn btn-danger"><i class="fa fa-plus"></i>Reset</button>
+                          <button type="submit" class="btn btn-info">Save Grades</button>
+                          <button type="button" class="btn btn-danger"></i>Reset</button>
                         </div>
                           </div>
                           <!-- /.box-body -->
+                          </form>
                         </div>
                         <!-- /.box -->
                       </div>
