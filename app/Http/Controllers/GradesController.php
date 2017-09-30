@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Section;
+use App\Grades;
 use DB;
 
 class GradesController extends Controller
@@ -41,39 +42,36 @@ class GradesController extends Controller
     public function store(Request $request)
     {
         $subj=array();
-        $stud=$_POST['txtStudId'];
-        $sectid=$_POST['txtSectId'];
-        $grd=$_POST['txtGrade'];
+        $stud=$request->txtStudId;
+        $sectid=$request->txtSectId;
+        $grd=$request->txtGrade;
 
         $slist = DB::select(DB::raw("select * from tbllevel join tblsection on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId join tblcurriculumdetail on tblcurriculumdetail.tblCurriculumDetail_tblLevelId=tbllevel.tblLevelId join tblsubject on tblsubject.tblSubjectId=tblcurriculumdetail.tblCurriculumDetail_tblSubjectId where tblsubject.tblSubjectFlag=1 and tblsection.tblSectionId='$sectid' group by tblsubject.tblSubjectId"));
 
-        while($row=mysqli_fetch_array($slist))
-        {
-            $subjId=$row['tblSubjectId'];
-            array_push($subj, $subjId);
-        }
+        $subj = array_column($slist, 'tblSubjectId');
+
         $i=0;
         foreach($stud as $value)
         {
             $studLength=count($subj);
             for($x=0; $x<$studLength; $x++)
             {
-                $query1= Grade::orderBy('tblGradeId', 'desc')->pluck('tblGradeId')->first();
+                $gradeid= Grades::orderBy('tblGradeId', 'desc')->pluck('tblGradeId')->first();
                 
-                $slist = Grade::create([
-                    'tblGradeId'=> $gradeid,
-                    'tblGradeGrade'=> $grd[$i],
+                $slist = Grades::updateOrCreate([
+                    // 'tblGradeId'=> $gradeid,
                     'tblGrade_tblStudentId'=> $value,
                     'tblGrade_tblSubjectId'=> $subj[$x],
-
+                ],[
+                    'tblGradeGrade'=> $grd[$i],
                 ]);
                
-                return $value.": ".$subj[$x]." = ".$grd[$i].'<br/>';
+                // echo $value.": ".$subj[$x]." = ".$grd[$i].'<br/>';
                 $i++;
             }
         }
 
-        return view('grades.index',compact('subj','stud','grd','slist'));
+        return redirect()->route('advisorylist.index')->with(['message'=>1]);
     }
 
     /**
@@ -96,7 +94,6 @@ class GradesController extends Controller
 
     public function studlist(Request $request)
     {
-        
         $sectid= $request->txtSectId;
         $sects = Section::select('tblSectionName')->where('tblSectionId', $sectid)->first();
 

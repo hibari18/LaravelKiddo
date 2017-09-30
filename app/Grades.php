@@ -10,8 +10,8 @@ class Grades extends Model
  
   	protected $guarded = []; 
 	 
-	protected $primaryKey = 'tblgrade'; 
-	protected $table = 'tblGradeId'; 
+	protected $table = 'tblgrade'; 
+	protected $primaryKey= 'tblGradeId'; 
 	// protected $softDelete = true; 
 	public $timestamps = false;
 }
