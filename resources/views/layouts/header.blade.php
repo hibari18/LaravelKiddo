@@ -1,6 +1,6 @@
 <header class="main-header">
         <!-- Logo -->
-        <a href="dashboard.php" class="logo">
+        <a href="dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><image src="{{ asset('images/School Logo/logo.ico') }}" style="width: 50px; padding: 3px"></span>
           <!-- logo for regular state and mobile devices -->
@@ -45,7 +45,7 @@
                   </li>
                 </ul>
               </li>
-               
+
             </ul>
           </div>
         </nav>
