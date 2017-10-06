@@ -117,7 +117,7 @@
                           </ul>
                         </div>
 
-<form method="post" action="{{ route('admission.store') }}" data-toggle="validator" role="form" name="admission" id="admission">
+<form method="POST" action="{{ route('admission.store') }}" data-toggle="validator" role="form" name="admission" id="admission" autocomplete="off">
 {{ csrf_field() }}
   <div class="tab-content">
 
@@ -189,14 +189,14 @@
                   <a class="btn btn-app bg-blue" href="enrollment" name="btnProceed" id="btnProceed" style="width: 47%">
                     <i class="fa fa-arrow-circle-right"></i> Proceed Enrollment</a>
                 </div>
-                
-                  
+
+
                 </div>
               </div>
       </div>
     </div>
   </div>
-             
+
 
             </div> <!-- tab pane step4 -->
             <div class="clearfix"></div>
@@ -211,7 +211,7 @@
       </div><!-- /.row -->
     </section><!-- /.content -->
 
-    <!-- Division Validatins -->
+    <!-- Division Validatins->
     <script type="text/javascript">
      $(document).ready(function() {
       $('#admission').bootstrapValidator({
@@ -384,6 +384,6 @@
           }
         })
       });
-    </script>
+    </script>-->
 
 @endsection
