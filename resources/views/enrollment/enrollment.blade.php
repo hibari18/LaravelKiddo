@@ -2,15 +2,6 @@
 
 @section('content')
 <script>
-  function disable() {
-    if 
-    document.getElementById("chkClear").disabled = true;
-    }
-
-    function undisable() {
-        document.getElementById("myCheck").disabled = false;
-    }
-
     function showLevel()
       {
         var lvl = document.getElementById("selLevel").value;
@@ -94,7 +85,7 @@
                                 <div class="form-group" style="margin-top: 5%">
                                   <label class="col-sm-2" style="text-align: right">Session</label>
                                     <div class="col-sm-7">
-                                    <select class="form-control choose" style="width: 100%;" name="selSession" id="selSession" >
+                                    <select class="form-control" style="width: 100%;" name="selSession" id="selSession" >
                                       <option selected="selected" disabled>--CHOOSE SESSION--</option>
                                       <option value="MORNING">MORNING</option>
                                       <option value="AFTERNOON">AFTERNOON</option>

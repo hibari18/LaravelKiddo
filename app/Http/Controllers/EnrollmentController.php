@@ -100,13 +100,14 @@ class EnrollmentController extends Controller
                 }
             }
         }//foreach feeId(mandatory)
+
         $length=count($schemeo);
         foreach($feeId as $val2)
         {
             for($i=0; $i<$length; $i++)
             {
                 $scheme=$schemeo[$i];
-                $result = SchemeType::where('tblScheme_tblFeeId', $val2)->where('tblSchemeId', $scheme)->where('tblSchemeFlag', 1);
+                $result = SchemeType::where('tblScheme_tblFeeId', $val2)->where('tblSchemeId', $scheme)->where('tblSchemeFlag', 1)->get();
                 if(count($result) > 0)
                 {
                     $studschemeid = StudScheme::create([
@@ -130,6 +131,7 @@ class EnrollmentController extends Controller
                 }
             }
         }//foreach feeId(optional)
+        
         Student::where('tblStudentId', $studid)->where( 'tblStudentFlag', 1)->update(['tblStudentType'=> 'OFFICIAL']);
         
         return 'Hi Gwyn';

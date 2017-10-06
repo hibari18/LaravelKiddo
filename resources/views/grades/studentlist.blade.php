@@ -19,10 +19,51 @@
                       <div class="tab-pane active" id="tab_1">
                         <div class="box">
                         <div class="box-header"></div>
+                        <h3 style="margin-top: 1%; margin-bottom: 5%; margin-left: 2%">1st Grading</h3>
+                            
                         <form method="post" action="{{ route('advisorylist.store') }}">
                           {{ csrf_field() }}
                           <div class="box-body">
                             <table id="datatable" name="datatable" class="table table-bordered table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Student Id</th>
+                                  <th>Student Name</th>
+                                    @foreach($subjname as $sn) 
+                                  <th>{{ $sn->tblSubjectDesc }}</th>
+                                    @endforeach
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($stud as $st)
+                                <tr>
+                                  <input type="hidden" name="txtSectId" value="{{ $st->sectid }}"/>
+                                  <td><input type="hidden" name="txtStudId[]" value="{{ $st->tblStudentId }}"/>{{ $st->tblStudentId }}</td>
+                                  <td>{{ $st->name }}</td>
+                                    @foreach($subjname as $sn) 
+                                      <td>
+                                        <input type="number" name="{{ "txtGrade[$st->tblStudentId-$sn->tblSubjectId]" }}" id="txtGrade" value="{{ array_key_exists("$st->tblStudentId-$sn->tblSubjectId", $grades) ? $grades["$st->tblStudentId-$sn->tblSubjectId"] : null }}" min="0" max="100" step="0.01">
+                                      </td>
+                                    @endforeach
+                                </tr>
+                                  @endforeach
+                                </tbody>
+                                </table>
+
+
+                        <div class="btn-group" style="float: right; margin-top: 3%">
+                          <button type="submit" class="btn btn-info">Save Grades</button>
+                          <button type="button" class="btn btn-danger"></i>Reset</button>
+                        </div>
+
+                        <hr style="margin-top: 5%">
+                        <h3 style="margin-top: 1%; margin-bottom: 5%; margin-left: 2%">2nd Grading</h3>
+                            
+                        <form method="post" action="{{ route('advisorylist.store') }}">
+                          {{ csrf_field() }}
+                          <div class="box-body">
+                            <table id="datatable2" name="datatable" class="table table-bordered table-striped">
                               <thead>
                                 <tr>
                                   <th>Student Id</th>

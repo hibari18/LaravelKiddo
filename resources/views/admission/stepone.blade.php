@@ -18,7 +18,7 @@
       <div class="form-group" style="margin-top: 3%">
         <label style="width: 35%">Admission for:</label>
         <div>
-          <select class="form-control choose" style="width: 35%;" name="selLevel" id="selLevel">
+          <select class="form-control" style="width: 35%;" name="selLevel" id="selLevel">
                   <option selected="selected" disabled>--Choose Level--</option>
                   @foreach($levels as $level)
                   <option value="{{ $level->tblLevelId}}">{{ $level->tblLevelName}}</option>
