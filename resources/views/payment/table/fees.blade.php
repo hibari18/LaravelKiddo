@@ -18,7 +18,7 @@
     <td hidden>{{ $fee->tblFeeAmount_tblLevelId}}</td> 
     <td>{{ $fee->fees->tblFeeCode}}</td>
     <td>{{ $fee->fees->tblFeeName}}</td>
-     <td>{{ $fee->tblFeeAmountAmount}}</td>
+     <td>{{ $fee->fees->total_amount($fee->tblFeeAmount_tblLevelId) }}</td>
     <td>{{ $fee->fees->status}}</td>
     <td>{{ $fee->fees->tblFeeType}}</td>
      <td>

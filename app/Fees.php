@@ -19,6 +19,13 @@ class Fees extends Model
 		return $this->tblFeeMandatory == 'Y' ? 'MAN' : 'OPT';
 	}
 
+	public function total_amount($level = null){
+		if($this->tblFeeType == "MASS FEE")
+			return $this->schemedetails()->sum('tblSchemeDetailAmount');
+		
+		return $this->schemedetails()->where('tblSchemeDetail_tblLevel', $level)->sum('tblSchemeDetailAmount');
+	}
+
 	public function level(){
 		return $this->belongsTo('App\Level', 'tblCurriculumDetail_tblLevelId', 'tblLevelId');
 	}
@@ -34,5 +41,7 @@ class Fees extends Model
 		return $this->hasMany('App\SchemeType', 'tblScheme_tblFeeId', 'tblFeeId');
 	}
 
-	
+	public function schemedetails(){
+		return $this->hasMany('App\Schedule', 'tblSchemeDetail_tblFee', 'tblFeeId');
+	}
 }
