@@ -134,7 +134,7 @@
 
 
             <div class="tab-pane col-sm-12" role="tabpanel" id="step2">
-              <center><b><h2 style="margin-bottom: 3%; margin-left: 3%">Student Information</h2></b></center>
+              <center><b><h2 style="margin-bottom: 3%; margin-left: 3%">Student Profile</h2></b></center>
                     <div class="container">
                       <hr>
                         @include('admission.steptwo')
@@ -148,8 +148,8 @@
             </div> <!-- tab pane step2-->
 
 
-            <div class="tab-pane" role="tabpanel" id="step3">
-              <h2 style="margin-bottom: 3%; margin-left: 3%">Family Information</h2>
+            <div class="tab-pane col-sm-12" role="tabpanel" id="step3">
+              <center><b><h2 style="margin-bottom: 3%; margin-left: 3%">Family Profile</h2></b></center>
 
                   <div class="container">
                     @include('admission.stepthree')
@@ -166,7 +166,8 @@
 
 
 
-            <div class="tab-pane" role="tabpanel" id="step4">
+            <div class="tab-pane col-sm-12" role="tabpanel" id="step4">
+              <center><b><h2 style="margin-bottom: 3%; margin-left: 3%">Health Histoy</h2></b></center>
 
                   @include('admission.stepfour')
               <button type="button" class="btn btn-info" data-toggle="modal" style="margin-top: 10%; float: right; margin-left: 2%"  data-target="#ProceedOrSave">Save Applicant</button>
@@ -211,11 +212,57 @@
       </div><!-- /.row -->
     </section><!-- /.content -->
 
-    <!-- Division Validatins->
+  <!--  <script>
+$(document).ready(function() {
+    $('#admission')
+        .formValidation({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                txtStudFname: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The title is required'
+                        }
+                    }
+                },
+                txtStudMname: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The abstract is required'
+                        },
+                    }
+                },
+                sessionType: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The session type is required'
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.field.fv', function(e, data) {
+
+            var $parent = data.element.parents('.form-group');
+
+            // Remove the has-success class
+            $parent.removeClass('has-success');
+
+            // Hide the success icon
+            data.element.data('fv.icon').hide();
+        });
+});
+</script> -->
+
+    <!--Division Validatins-->
     <script type="text/javascript">
      $(document).ready(function() {
       $('#admission').bootstrapValidator({
-        feedbackIcons: {
+        icons: {
           valid: 'glyphicon glyphicon-ok',
           invalid: 'glyphicon glyphicon-remove',
           validating: 'glyphicon glyphicon-refresh'
@@ -384,6 +431,6 @@
           }
         })
       });
-    </script>-->
+    </script>
 
 @endsection

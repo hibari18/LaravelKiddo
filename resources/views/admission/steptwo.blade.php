@@ -2,7 +2,7 @@
 <div class="row">
       <!-- edit form column -->
       <div class="col-sm-12 personal-info">
-        <center><h3>Personal info</h3></center>
+        <center><h3>Personal Information</h3></center>
 
           <div class="form-group" style="margin-bottom:7%;">
             <div class="form-group">
@@ -159,9 +159,9 @@
 
           <div class="form-group" style="margin-bottom:65%;">
             <center><label class="col-lg-3 control-label">Student's Photo</label></center>
-            <div class="col-lg-8" style="width:60%;">
+            <div class="col-lg-8" style="width:60%; height:100%">
               <div class="input-group">
-                <input type="file" class="form-control">
+                <input type="file" class="form-control" accept="image/*">
               </div>
             </div>
           </div>

@@ -57,4 +57,3 @@ Route::post('feesavailed/', 'EnrollmentController@proceed')->name('enrollment.pr
 
 Route::resource('advisorylist', 'GradesController');
 Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.studlist');
-

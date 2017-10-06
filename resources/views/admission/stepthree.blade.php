@@ -7,16 +7,16 @@
         <div class="text-center">
           <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
           <h6>Upload a different photo...</h6>
-          
-          <input type="file" class="form-control">
+
+          <input type="file" class="form-control" accept="image/*">
         </div>
       </div>
-      
+
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <h3>Father's info</h3>
-        
-        
+        <h3>Father's Information</h3>
+
+
           <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">First name:</label>
             <div class="col-lg-8">
@@ -113,12 +113,12 @@
               <input class="form-control" type="text" name="txtFatherComNum" id="txtFatherComNum">
             </div>
           </div>
-       
+
       </div>
   </div>
 </div>
 
- 
+
  <div class="container">
     <hr>
   <div class="row">
@@ -127,16 +127,16 @@
         <div class="text-center">
           <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
           <h6>Upload a different photo...</h6>
-          
+
           <input type="file" class="form-control">
         </div>
       </div>
-      
+
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <h3>Mother's info</h3>
-        
-        
+        <h3>Mother's Information</h3>
+
+
           <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">First name:</label>
             <div class="col-lg-8">
@@ -233,7 +233,7 @@
               <input class="form-control" type="text" name="txtMotherComNum" id="txtMotherComNum">
             </div>
           </div>
-       
+
       </div>
   </div>
 </div>
@@ -241,10 +241,10 @@
 <div class="container">
     <hr>
   <div class="row">
-      
+
 <!-- edit form column -->
 <div class="col-md-6 personal-info">
-     
+
  <div class="form-group" style="margin-bottom:10%;">
       <label class="col-lg-4 control-label left">Parent Status:</label>
       <div class="col-lg-8">
@@ -288,11 +288,11 @@
                 <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Parents Separated/Divorced"/>Parents Separated/Divorced
               </label>
             </div>
-           
+
     </div><!-- col-lg-8  -->
   </div><!-- form group -->
 </div><!-- col-md-6 -->
-      
+
 
 <div class="col-md-4 personal-info">
 
@@ -328,13 +328,13 @@
                     <label>
                       <input type="checkbox" class="flat-red" name="chkLivesWith[]" id="chkLivesWith" value="Relative/s"/>Relative/s
                     </label>
-                  </div>      
-            
+                  </div>
+
       </div><!-- col-lg-8 -->
   </div><!-- form group -->
 </div><!-- col-md-6 -->
-        
-          
+
+
   </div><!-- row -->
 </div><!-- container -->
 
@@ -348,22 +348,22 @@
                <a href="#"><span class="btn btn-info" id="siblingbutton" style="float: right" onclick="addSibling();" >ADD</span></a>
         </div>
         <div class="form-group" id="sibling">
-          
+
             <label class="col-lg-4 control-label left">Name:</label>
             <div class="col-lg-9" style="margin-bottom: 2%">
               <input class="form-control" type="text" name="txtSiblName[]" id="txtSiblName">
             </div>
-            
+
             <label class="col-lg-4 control-label left">Age:</label>
             <div class="col-lg-9" style="margin-bottom: 2%">
               <input class="form-control" type="text" name="txtSiblAge[]" id="txtSiblAge">
             </div>
-            
+
             <label class="col-lg-4 control-label left">Grade/Level:</label>
             <div class="col-lg-9" style="margin-bottom: 2%">
               <input class="form-control" type="text" name="txtSiblGrd[]" id="txtSiblGrd">
             </div>
-            
+
             <label class="col-lg-4 control-label left">School:</label>
             <div class="col-lg-9" style="margin-bottom: 2%">
               <input class="form-control" type="text" name="txtSiblSchool[]" id="txtSiblSchool">
@@ -382,24 +382,24 @@
         <div class= "right" style="margin-bottom: 5%">
                <a href="#"><span class="btn btn-info" id="relativebutton" style="float: right" onclick="addRelative();" >ADD</span></a>
         </div>
-       
+
           <div class="form-group" id="relative">
             <label class="col-lg-4 control-label left">Name:</label>
             <div class="col-lg-9" style="margin-bottom: 2%">
               <input class="form-control" type="text" name="txtRelName[]" id="txtRelName">
             </div>
-          
+
             <label class="col-lg-4 control-label left">Age:</label>
             <div class="col-lg-9" style="margin-bottom: 2%">
               <input class="form-control" type="number" name="txtRelAge[]" id="txtRelAge">
             </div>
-         
+
             <label class="col-lg-4 control-label left">Relation:</label>
             <div class="col-lg-9" style="margin-bottom: 2%">
               <input class="form-control" type="text" name="txtRelRelation[]" id="txtRelRelation">
             </div>
           </div>
-         
+
       </div>
   </div>
 </div>
