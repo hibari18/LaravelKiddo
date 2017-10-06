@@ -61,17 +61,25 @@
                                 <form role="form" method="POST" action="{{ route('enrollment.store') }}">
                                     {{ csrf_field() }}
                                     <div class="box-body">
-                                        <input type="text" name="txtStudId" id="txtStudId" value="{{ $studid }}" />
-                                        <input type="text" name="txtClear" id="txtClear" value="{{ $clear }}" />
-                                        <input type="text" name="txtSession" id="txtSession" value="{{ $session }}" /> 
+                                        <input type="hidden" name="txtStudId" id="txtStudId" value="{{ $studid }}" />
+                                        <input type="hidden" name="txtClear" id="txtClear" value="{{ $clear }}" />
+                                        <input type="hidden" name="txtSession" id="txtSession" value="{{ $session }}" /> 
+                                        <div class="col-md-3" style="float: right">
+                                    <div class="text-center">
+                                      <img src="{{ asset('images/User/user.png') }}" class="avatar img-circle" alt="avatar" style="height: 50%; width: 50%">
+                                      <h6>Upload a different photo...</h6>
+                                      
+                                      <input type="file" class="form-control">
+                                    </div>
+                                  </div>
                                         @foreach($enname2 as $en2)
+                                        <h4 style="text-transform:uppercase ;"><input type="hidden" name="txtId" id="txtId" value="{{ $studid }}" />Student Id: {{ $studid }}</h4>
+                                        <h4 style="text-transform:uppercase ;">Student Name: {{ $en2->name }}</h4>
+                                
                                         <hr>
-                                        <div class="form-group" style="margin-top: 0%">
-                                            <h2>Payment Schemes</h2>
+                                        <div class="form-group" style="margin-top: 10%">
+                                            <h5 style="margin-top: 5%; font-weight: bold">Payment Schemes</h5>
                                             <small>These are the fees availed. Please choose payment scheme.</small>
-                                            <h4 style="margin-top: 5%"><input type="hidden" name="txtId" id="txtId" value="{{ $studid }}" />Student
-                                                Id: {{ $studid }}</h4>
-                                            <h4>Student Name: {{ $en2->name }}</h4>
                                             <div class="col-md-12" style="margin-top: 6%">
                                                 <table id="datatable2" class="table table-bordered table-striped">
                                                     <thead>

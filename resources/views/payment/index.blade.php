@@ -136,8 +136,8 @@
             f1.value=cells[0].innerHTML;
             f2.value=cells[2].innerHTML;
             f3.value=cells[3].innerHTML;
-            f4.value=cells[5].innerHTML;
-            f5.value=cells[6].innerHTML;
+            f4.value=cells[4].innerHTML;
+            f5.value=cells[5].innerHTML;
             f6.value=cells[0].innerHTML;
           };
       }})();
@@ -171,40 +171,6 @@
             f5.value=cells[0].innerHTML;
           };
       }})();
-
-      // (function(){
-      //   if(window.addEventListener){
-      //     window.addEventListener('load',run,false);
-      //   }else if(window.attachEvent){
-      //     window.attachEvent('onload',run);
-      //   }
-      //   function run(){
-      //     var t=document.getElementById('datatable4');
-      //     t.onclick=function(event){
-      //       event=event || window.event;
-      //       var target=event.target||event.srcElement;
-      //       while (target&&target.nodeName!='TR'){
-      //         target=target.parentElement;
-      //       }
-      //       var cells=target.cells;
-
-      //       if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
-      //       var f1=document.getElementById('txtUpdDetLvl');
-      //       var f2=document.getElementById('txtUpdDetName');
-      //       var f3=document.getElementById('txtUpdDetAmnt');
-      //       var f4=document.getElementById('txtUpdDetLvlId');
-      //       var f5=document.getElementById('txtTempDetName');
-      //       var f6=document.getElementById('txtDelFeeDet');
-      //       var f7=document.getElementById('txtDelAmnt');
-      //       f1.value=cells[1].innerHTML;
-      //       f2.value=cells[2].innerHTML;
-      //       f3.value=cells[3].innerHTML;
-      //       f4.value=cells[0].innerHTML;
-      //       f5.value=cells[2].innerHTML;
-      //       f6.value=cells[2].innerHTML;
-      //       f7.value=cells[3].innerHTML;
-      //     };
-      // }})();
 
       (function(){
         if(window.addEventListener){

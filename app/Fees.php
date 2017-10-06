@@ -16,7 +16,7 @@ class Fees extends Model
 	public $timestamps = false;
 
 	public function getStatusAttribute(){
-		return $this->tblFeeMandatory == 'Y' ? 'MAN' : 'OPT';
+		return $this->tblFeeMandatory == 'Y' ? 'MANDATORY' : 'OPTIONAL';
 	}
 
 	public function level(){

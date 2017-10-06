@@ -44,7 +44,7 @@ class CurriculumDetailsController extends Controller
     public function store(Request $request)
     {
         
-        $duplicate = CurriculumDetail::where('tblCurriculumDetail_tblLevelId', $request->selAddDetLvl)->first();
+        $duplicate = CurriculumDetail::where('tblCurriculumDetail_tblLevelId', $request->selAddDetLvl)->where('tblCurriculumDetail_tblSubjectId', $request->selAddDetSubj)->first();
         if($duplicate){
             if($duplicate->tblDetailsFlag==1)
                 return redirect()->route('division.index')->with('message', 1);
