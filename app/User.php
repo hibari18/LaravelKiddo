@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $guarded = []; 
      
     protected $primaryKey = 'tblUserId'; 
     protected $table = 'tbluser'; 
@@ -25,12 +24,8 @@ class User extends Authenticatable
         'name', 'email', 'password',
         'tblUserName',
     ];
+    protected $guarded = ['tblUser_tblRoleId']; 
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
