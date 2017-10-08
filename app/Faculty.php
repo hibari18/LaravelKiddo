@@ -13,4 +13,8 @@ class Faculty extends Model
 	// protected $softDelete = true; 
 	public $timestamps = false;
 	public $incrementing = false;
+
+	public function getNameAttribute(){
+		return $this->tblFacultyFname.' '.$this->tblFacultyMname.' '.$this->tblFacultyLname;
+	}
 }

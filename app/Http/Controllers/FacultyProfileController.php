@@ -41,8 +41,8 @@ class FacultyProfileController extends Controller
     {
         if(isset($_POST['btnAdd']))
         {
-            $fname = str_replace([' '],'', $request->txtFname);
-            $lname = str_replace([' '],'', $request->txtLname);
+            $fname = preg_replace('/\s+/u', '',  $request->txtFname);
+            $lname = preg_replace('/\s+/u', '',  $request->txtLname);
             $mname=  $request->txtMname;
             $bday=   $request->txtBday;
             $bplace=  $request->txtBplace;
