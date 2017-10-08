@@ -61,7 +61,7 @@ class FacultyProfileController extends Controller
             }
             else
             {
-                $id = Faculty::groupBy('tblFacultyId', 'desc')->pluck('tblFacultyId')->first();
+                $id = Faculty::orderBy('tblFacultyId', 'desc')->pluck('tblFacultyId')->first();
                 $id +=1;
                 $lId=(string) strlen($id);
                 if($lId==1)
