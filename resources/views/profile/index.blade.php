@@ -35,7 +35,7 @@ function run(){
     }
     
     if($message == 2) {
-      echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
+      echo "<script> swal('Faculty added!', ' ', 'success'); </script>";
     }
     
     if($message == 3) {

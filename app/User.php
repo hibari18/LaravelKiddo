@@ -7,6 +7,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    protected $guarded = []; 
+     
+    protected $primaryKey = 'tblUserId'; 
+    protected $table = 'tbluser'; 
+    // protected $softDelete = true; 
+    public $timestamps = false;
+
     use Notifiable;
 
     /**
