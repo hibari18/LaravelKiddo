@@ -139,7 +139,21 @@ class FacultyProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+          $id= $request->txtFacultyId;
+          $faculty = Faculty::where('tblFacultyId', '$id')->where('tblFacultyFlag', 1)->first();
+          $fname= $faculty->tblFacultyFname;
+          $lname= $faculty->tblFacultyLname;
+          $mname= $faculty->tblFacultyMname;
+          $bday= $faculty->tblFacultyBday;
+          $bplace= $faculty->tblFacultyBplace;
+          $gender= $faculty->tblFacultyGender;
+          $add= $faculty->tblFacultyAddress;
+          $no= $faculty->tblFacultyContact;
+          $email= $faculty->tblFacultyEmail;
+          $position= $faculty->tblFacultyPosition;
+
+          return redirect()->route('profile.index');
+
     }
 
     /**
@@ -151,7 +165,39 @@ class FacultyProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      if(isset($_POST['btnUpd']))
+        {
+            $id= $request->txtId;
+            $fname= $request->txtFname;
+            $lname= $request->txtLname;
+            $mname= $request->txtMname;
+            $bday= $request->txtBday;
+            $bplace= $request->txtBplace;
+            $gender= $request->optradio;
+            $add= $request->txtAdd;
+            $no= $request->txtNo;
+            $email= $request->txtEmail;
+            $position= $request->selPosition;
+
+            $facultyupdate = Faculty::where('tblFacultyId', $id)->update([
+                        'tblFacultyFname' => $fname,
+                        'tblFacultyLname' => $lname,
+                        'tblFacultyMname' => $mname,
+                        'tblFacultyGender' => $gender,
+                        'tblFacultyEmail' => $email,
+                        'tblFacultyFlag' => 1,
+                        'tblFacultyPosition' => $position,
+                        'tblFacultyContact' => $no,
+                        'tblFacultyAddress' => $add,
+                        'tblFacultyBday' => $bday,
+                        'tblFacultyBplace' => $bplace,
+                        'tblFaculty_tblUserId' => $userId,
+
+                ]);
+
+        }
+        $message = 4;
+        return redirect()->route('profile.index')->with('message', $message);
     }
 
     /**

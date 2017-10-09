@@ -7,6 +7,8 @@ use App\Student;
 use App\Faculty;
 use App\PersonalInfo;
 use DB;
+use App\FamilyInfo;
+use App\HealthInfo;
 
 class StudentProfileController extends Controller
 {
@@ -22,8 +24,11 @@ class StudentProfileController extends Controller
 
         $name = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1"));
         //var_dump($name);
+        $pinfo = PersonalInfo::where('tblStudInfoFlag', 1)->get();
+        $finfo = FamilyInfo::where('tblParentFlag', 1)->get();
+        $hinfo = HealthInfo::where('tblStudHealthFlag', 1)->get();
         
-         return view('profile.index', compact('studprofile','facprofile', 'name'));
+        return view('profile.index', compact('studprofile','facprofile', 'name', 'pinfo', '$finfo','hinfo'));
 
     }
 
@@ -45,7 +50,22 @@ class StudentProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+      // if(isset($_POST['btnStud']))
+      // {
+      //   $id = $_POST['txtStudId'];
+      //   $query="select s.tblStudentFname, s.tblStudentLname, s.tblStudentMname, si.tblStudInfoBday, si.tblStudInfoBplace, si.tblStudInfoAddress, si.tblStudInfoGender from tblstudent s, tblstudentinfo si where s.tblStudentId = '$id' and s.tblStudentId = si.tblStudInfo_tblStudentId and s.tblStudentFlag = 1";
+      //   $result = mysqli_query($con, $query);
+      //   $row = mysqli_fetch_array($result);
+      //   $fname = $row['tblStudentFname'];
+      //   $lname = $row['tblStudentLname'];
+      //   $mname = $row['tblStudentMname'];
+      //   $bday = $row['tblStudInfoBday'];
+      //   $bplace = $row['tblStudInfoBplace'];
+      //   $add = $row['tblStudInfoAddress'];
+      //   $gender = $row['tblStudInfoGender'];
+      //   $arrStud = array($fname, $lname, $mname, $bday, $bplace, $gender, $add);
+        
     }
 
     /**
