@@ -178,7 +178,7 @@ class FacultyProfileController extends Controller
                         'tblFacultyAddress' => $add,
                         'tblFacultyBday' => $bday,
                         'tblFacultyBplace' => $bplace,
-                        'tblFaculty_tblUserId' => $userId,
+                        // 'tblFaculty_tblUserId' => $userId,
 
                 ]);
 

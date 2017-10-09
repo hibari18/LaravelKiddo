@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
- <script>
+<script>
     (function(){
   if(window.addEventListener){
     window.addEventListener('load',run,false);
@@ -24,11 +24,11 @@ function run(){
   };
 }})();
   </script>
-</head>
-<body class="hold-transition skin-green-light sidebar-mini">
-
+  
 <?php
-    $message = isset($_GET['message'])?intval($_GET['message']):0;
+
+  if(session('message')){
+    $message = session('message');
     
     if($message == 1) {
       echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
@@ -43,7 +43,7 @@ function run(){
     }
     
     if($message == 4) {
-      echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+      echo "<script> swal('Updated successfully!', ' ', 'success'); </script>";
     }
     
     if($message == 5) {
@@ -51,9 +51,11 @@ function run(){
     }
     
     if($message == 6) {
-      echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+      echo "<script> swal('Deleted successfully!', ' ', 'success'); </script>";
     }
-  ?>
+  }
+  
+?>
   <!-- Main content -->
     <section class="content" style="margin-top: 3%">
     <div class="row">
@@ -98,6 +100,4 @@ function run(){
       <!-- row -->  
     </section>
     <!-- /.content -->
-    </body>
-
 @endsection
