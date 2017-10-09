@@ -137,10 +137,10 @@ class FacultyProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
           $id= $request->txtFacultyId;
-          $faculty = Faculty::where('tblFacultyId', '$id')->where('tblFacultyFlag', 1)->first();
+          $faculty = Faculty::where('tblFacultyId', $id)->where('tblFacultyFlag', 1)->first();
           $fname= $faculty->tblFacultyFname;
           $lname= $faculty->tblFacultyLname;
           $mname= $faculty->tblFacultyMname;
@@ -152,8 +152,7 @@ class FacultyProfileController extends Controller
           $email= $faculty->tblFacultyEmail;
           $position= $faculty->tblFacultyPosition;
 
-          return redirect()->route('profile.index');
-
+          return view('profile.facultyedit', compact('id','fname', 'lname', 'mname', 'bday', 'bplace', 'gender', 'add', 'no', 'email', 'position'));
     }
 
     /**
