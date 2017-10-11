@@ -15,6 +15,10 @@ class PersonalInfo extends Model
 	public $incrementing = false;
 
 	public function student(){
-		return $this->hasMany('App\Student', 'tblstudent_tblStudInfoId', 'tblStudInfoId');
+		return $this->hasOne('App\Student', 'tblStudentId', 'tblStudInfo_tblStudentId');
+	}
+
+	public function getNameAttribute(){
+		return $this->tblStudInfoLname. ', '. $this->tblStudInfoFname. ' '. $this->tblStudInfoMname;
 	}
 }
