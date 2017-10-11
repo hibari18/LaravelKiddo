@@ -28,13 +28,18 @@ function run(){
 
 <section class="content"  style="margin-top: 4%">
           <div class="row">
-            <div class="col-md-12">
-              <div class="box box-default">
-                <div class="box-header with-border">
-                  <h2 class="box-title" style="font-size:20px;">Sectioning</h2>
-                </div>
-                  <div class="box-body">
-                    <div class="nav-tabs-custom">
+        <div class="col-md-12">
+          <div class="box box-default">
+            <div class="box-header with-border">
+            </div>
+            <!-- /.box-header -->
+        <div class="box-body">
+
+        <div class="nav-tabs-custom">
+       <div class="box-header with-border">
+                    <h2 class="box-title" style="font-size:20px;">Sectioning</h2>
+                      <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
+                  </div>
                         <ul class="nav nav-tabs" id="myTab">
                           <li class="active"><a href="#tab_1" data-toggle="tab">By Section</a></li>
                           <li><a href="#tab_2" data-toggle="tab">By Students</a></li>

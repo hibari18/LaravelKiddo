@@ -10,6 +10,9 @@ use App\Level;
 use App\StudScheme;
 use App\SchoolYear;
 use App\Fees;
+use App\Account;
+use App\FeeAmount;
+use App\Schedule;
 use DB;
 
 class EnrollmentController extends Controller
@@ -131,10 +134,64 @@ class EnrollmentController extends Controller
                 }
             }
         }//foreach feeId(optional)
-        
+
+            $stscheme = StudScheme::where('tblStudScheme_tblStudentId', $studid)->where('tblStudScheme_tblSchoolYrId', $syid)->where('tblStudSchemeFlag', 1)->get();
+            
+              foreach ($stscheme as $row) {
+                $studscheme=$row->tblStudSchemeId;
+                $schemeId=$row->tblStudScheme_tblSchemeId;
+                $studfeeid=$row->tblStudScheme_tblFeeId;
+                if($schemeId != null)
+                {
+                    $schemedetail = Schedule::where('tblSchemeDetail_tblScheme', $schemeId)->where('tblSchemeDetail_tblLevel', $lvlid)->where('tblSchemeDetailFlag', 1)->get();
+                    foreach($scdetail as $row3)
+                    {
+                        $duedate=$row3->tblSchemeDetailDueDate;
+                        $payment=$row3->tblSchemeDetailAmount;
+                        $paymentnum=$row3->tblSchemeDetailName;
+                        $acc = Account::orderBy('tblAccId', 'desc')->pluck('tblAccId')->first();
+                        $accountid= $acc->tblAccId;
+                        $accountid ++; 
+                        $acc = Account::create([
+                                'tblAccId' => $accountid,
+                                'tblAcc_tblStudentId' => $studid,
+                                'tblAcc_tblStudSchemeId' => $studscheme,
+                                'tblAccCredit' => $payment,
+                                'tblAccDueDate' => $duedate,
+                                'tblAccPaymentNum' => $paymentnum,
+                                'tblAccRunningBal' => $payment,
+
+                        ]);
+                    }
+
+                    
+                }
+
+                else if(empty($schemeId))
+                {
+                    $famount = FeeAmount::where('tblFeeAmount_tblFeeId', $studfeeid)->where('tblFeeAmountFlag', 1)->where('tblFeeAmount_tblLevelId', $lvlid)->get();
+                    $feeamnt=$famount->tblFeeAmountAmount;
+                    $accnt = Account::orderBy('tblAccId', 'desc')->pluck('tblAccId')->first();
+                    $id = $accnt->tblAccId;
+                    $id ++;
+                    $accnt = Account::create([
+                                'tblAccId' => $id,
+                                'tblAcc_tblStudentId' => $studid,
+                                'tblAcc_tblStudSchemeId' => $studscheme,
+                                'tblAccCredit' => $feeamnt,
+                                'tblAccPaymentNum' => 1,
+                                'tblAccRunningBal' => $feeamnt,
+
+                        ]);
+                    $query3="insert into tblaccount(tblAccId, tblAcc_tblStudentId, tblAcc_tblStudSchemeId, tblAccCredit, tblAccPaymentNum, tblAccRunningBal) values ('$id', '$studid', '$studscheme', '$feeamnt', 1, '$feeamnt')";
+
+                }
+            }
+                  
         Student::where('tblStudentId', $studid)->where( 'tblStudentFlag', 1)->update(['tblStudentType'=> 'OFFICIAL']);
         
-        return 'Hi Gwyn';
+        
+        return view('enrollment.collection');
     }
 
     /**
@@ -171,6 +228,12 @@ class EnrollmentController extends Controller
 
         return view('enrollment.enrollscheme', compact('studid','clear', 'session','optfees', 'enname2', 'query1', 'query2', 'man', 'opt'));
     }
+
+    public function collect(Request $request)
+    {
+          //
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
