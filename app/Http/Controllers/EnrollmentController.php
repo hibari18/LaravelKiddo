@@ -59,6 +59,7 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $studid = $request->txtStudId;
         $clear = $request->txtClear;
         $session = $request->txtSession;
@@ -93,18 +94,16 @@ class EnrollmentController extends Controller
                             'tblStudScheme_tblStudentId' => $studid,
                             'tblStudScheme_tblSchoolYrId' => $syid,
                         ]);
-
-                        echo 'if ';
                     }
-                    else if(count($result) == 0)
-                    {
-                        $studschemeid = StudScheme::create([
-                            'tblStudScheme_tblFeeId' => $feeId,
-                            'tblStudScheme_tblStudentId' => $studid,
-                            'tblStudScheme_tblSchoolYrId' => $syid,
-                        ]);
+                }
+                if($length1 == 0)
+                {
+                    $studschemeid = StudScheme::create([
+                        'tblStudScheme_tblFeeId' => $feeId,
+                        'tblStudScheme_tblStudentId' => $studid,
+                        'tblStudScheme_tblSchoolYrId' => $syid,
+                    ]);
 
-                    }
                 }
             }//foreach feeId(mandatory)
             
@@ -125,15 +124,15 @@ class EnrollmentController extends Controller
                             'tblStudScheme_tblSchoolYrId' => $syid,
                         ]);
                     }
-                    else if(count($result) == 0)
-                    {
-                        $studschemeid = StudScheme::create([
-                            'tblStudScheme_tblFeeId' => $feeId,
-                            'tblStudScheme_tblStudentId' => $studid,
-                            'tblStudScheme_tblSchoolYrId' => $syid,
-                        ]);
+                }
 
-                    }
+                if($length == 0)
+                {
+                    $studschemeid = StudScheme::create([
+                        'tblStudScheme_tblFeeId' => $feeId,
+                        'tblStudScheme_tblStudentId' => $studid,
+                        'tblStudScheme_tblSchoolYrId' => $syid,
+                    ]);
                 }
             }//foreach feeId(optional)
 
