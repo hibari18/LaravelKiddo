@@ -124,7 +124,6 @@ class EnrollmentController extends Controller
                             'tblStudScheme_tblStudentId' => $studid,
                             'tblStudScheme_tblSchoolYrId' => $syid,
                         ]);
-                        echo 'if';
                     }
                     else if(count($result) == 0)
                     {
