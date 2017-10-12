@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Section;
 use App\Grades;
 use App\Subject;
+use App\Grading;
 use DB;
 
 class GradesController extends Controller
@@ -19,8 +20,9 @@ class GradesController extends Controller
     {
         $sections = Section::where('tblSectionFlag', 1)->get();
         $slist = [];
+        $gradings = Grading::where('tblGradingFlag', 1)->get();
 
-        return view('grades.advisorylist', compact('sections','slist'));
+        return view('grades.advisorylist', compact('sections','slist', 'gradings'));
         
     }
 
@@ -93,6 +95,8 @@ class GradesController extends Controller
         $subjname = DB::select(DB::raw("select * from tbllevel join tblsection on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId join tblcurriculumdetail on tblcurriculumdetail.tblCurriculumDetail_tblLevelId=tbllevel.tblLevelId join tblsubject on tblsubject.tblSubjectId=tblcurriculumdetail.tblCurriculumDetail_tblSubjectId where tblsubject.tblSubjectFlag=1 and tblsection.tblSectionId='$sectid' group by tblsubject.tblSubjectId"));
 
         $stud = DB::select(DB::raw("select distinct tblstudent.tblStudentId, concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name, tblsection.tblSectionId as sectid from tblsectionstud join tblstudent on tblstudent.tblStudentId=tblsectionstud.tblSectStud_tblStudentId join tblstudentinfo on tblstudentinfo.tblStudInfo_tblStudentId=tblstudent.tblStudentId join tblsection on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId join tblschoolyear on tblschoolyear.tblSchoolYrId=tblsectionstud.tblSectStud_tblSchoolYrId where tblsection.tblSectionId='$sectid' and tblschoolyear.tblSchoolYrActive='ACTIVE'"));
+        $gradings = Grading::where('tblGradingFlag', 1)->get();
+
 
         //$grades = collect();
         foreach($stud as $student){
@@ -103,7 +107,7 @@ class GradesController extends Controller
             }
         }
          
-        return view('grades.studentlist', compact('sectid', 'sects','subjname','stud', 'grades'));
+        return view('grades.studentlist', compact('sectid', 'sects','subjname','stud', 'grades', 'gradings'));
 
     }
 
