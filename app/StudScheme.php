@@ -18,10 +18,10 @@ class StudScheme extends Model
 	}
 
 	public function fee(){
-		return $this->belongsTo('App\Fees', 'tblStudScheme_tblFeeId', 'tblFeeId')->where('tblFeeFlag', 1);
+		return $this->belongsTo('App\Fees', 'tblStudScheme_tblFeeId', 'tblFeeId');
 	}
 
 	public function accounts(){
-		return $this->hasMany('App\Account', 'tblAcc_tblStudSchemeId', 'tblStudSchemeId')->where('tblAccFlag', 1);
+		return $this->hasMany('App\Account', 'tblAcc_tblStudSchemeId', 'tblStudSchemeId');
 	}
 }
