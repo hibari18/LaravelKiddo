@@ -62,10 +62,10 @@ class EnrollmentController extends Controller
         $studid = $request->txtStudId;
         $clear = $request->txtClear;
         $session = $request->txtSession;
-        $schemem = $request->selSchemeMand;
+        $schemem = $request->selSchemeMand ?: [];
         $schemeo = $request->selSchemeOpt ?: [];
-        $feeId  = $request->txtFeeId2 ?: [];
-        $feeId1 = $request->txtFeeId1;
+        $optional_fees  = $request->txtFeeId2 ?: [];
+        $mandatory_fees = $request->txtFeeId1 ?: [];
 
         try{
             \DB::beginTransaction();
@@ -79,26 +79,27 @@ class EnrollmentController extends Controller
             ]);
 
             $length1=count($schemem);
-            foreach($feeId1 as $val1)
+            foreach($mandatory_fees as $feeId)
             {
                 for($i=0; $i<$length1; $i++)
                 {
                     $scheme1=$schemem[$i];
-                    $result= SchemeType::where('tblScheme_tblFeeId', $val1)->where('tblSchemeId', $scheme1)->where('tblSchemeFlag', 1)->get();
+                    $result= SchemeType::where('tblScheme_tblFeeId', $feeId)->where('tblSchemeId', $scheme1)->where('tblSchemeFlag', 1)->get();
                     if(count($result) > 0)
                     {
                         $studschemeid = StudScheme::create([
                             'tblStudScheme_tblSchemeId' => $scheme1,
-                            'tblStudScheme_tblFeeId' => $val1,
+                            'tblStudScheme_tblFeeId' => $feeId,
                             'tblStudScheme_tblStudentId' => $studid,
                             'tblStudScheme_tblSchoolYrId' => $syid,
                         ]);
 
+                        echo 'if ';
                     }
                     else if(count($result) == 0)
                     {
                         $studschemeid = StudScheme::create([
-                            'tblStudScheme_tblFeeId' => $val1,
+                            'tblStudScheme_tblFeeId' => $feeId,
                             'tblStudScheme_tblStudentId' => $studid,
                             'tblStudScheme_tblSchoolYrId' => $syid,
                         ]);
@@ -106,30 +107,29 @@ class EnrollmentController extends Controller
                     }
                 }
             }//foreach feeId(mandatory)
+            
 
             $length=count($schemeo);
-            foreach($feeId as $val2)
+            foreach($optional_fees as $feeId)
             {
                 for($i=0; $i<$length; $i++)
                 {
                     $scheme=$schemeo[$i];
-                    $result = SchemeType::where('tblScheme_tblFeeId', $val2)->where('tblSchemeId', $scheme)->where('tblSchemeFlag', 1)->get();
+                    $result = SchemeType::where('tblScheme_tblFeeId', $feeId)->where('tblSchemeId', $scheme)->where('tblSchemeFlag', 1)->get();
                     if(count($result) > 0)
                     {
                         $studschemeid = StudScheme::create([
                             'tblStudScheme_tblSchemeId' => $scheme,
-                            'tblStudScheme_tblFeeId' => $val2,
+                            'tblStudScheme_tblFeeId' => $feeId,
                             'tblStudScheme_tblStudentId' => $studid,
                             'tblStudScheme_tblSchoolYrId' => $syid,
                         ]);
+                        echo 'if';
                     }
                     else if(count($result) == 0)
                     {
-                        $studschemeid = StudScheme::orderBy('tblStudSchemeId', 'desc')->pluck('tblStudSchemeId')->first();
-                        $studschemeid++;
                         $studschemeid = StudScheme::create([
-                            'tblStudSchemeId' => $studschemeid,
-                            'tblStudScheme_tblFeeId' => $val2,
+                            'tblStudScheme_tblFeeId' => $feeId,
                             'tblStudScheme_tblStudentId' => $studid,
                             'tblStudScheme_tblSchoolYrId' => $syid,
                         ]);
@@ -152,8 +152,7 @@ class EnrollmentController extends Controller
                             {
                                 $duedate=$row3->tblSchemeDetailDueDate;
                                 $payment=$row3->tblSchemeDetailAmount;
-                                $paymentnum=$row3->tblSchemeDetailName;
-                                
+                                $paymentnum=$row3->tblSchedDetailCtr;
                                 $acc = Account::create([
                                         'tblAcc_tblStudentId' => $studid,
                                         'tblAcc_tblStudSchemeId' => $studscheme,
@@ -164,8 +163,6 @@ class EnrollmentController extends Controller
 
                                 ]);
                             }
-
-                            
                         }
 
                         else if(empty($schemeId))
@@ -182,8 +179,9 @@ class EnrollmentController extends Controller
                                     'tblAccRunningBal' => $feeamnt,
                                 ]);
                             }
-
+                            
                         }
+                        
                     }
                         
             $student = Student::where('tblStudentId', $studid)->where('tblStudentFlag', 1)->first();
