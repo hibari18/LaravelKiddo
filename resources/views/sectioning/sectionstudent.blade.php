@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('master')
+@section('content')
 <script>
     (function(){
   if(window.addEventListener){
@@ -68,22 +68,14 @@ function run(){
                                     </tr>
                                   </thead>
                                   <tbody>
-                                  <?php
-                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId from tblstudent s, tblstudentinfo si where si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudent_tblLevelId='$lvlid' and s.tblStudentFlag=1";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                      $sectid=$row['tblStudent_tblSectionId'];
-                                      $query1="select * from tblsection where tblSectionFlag=1 and tblSectionId='$sectid'";
-                                      $result1=mysqli_query($con, $query1);
-                                      $row1=mysqli_fetch_array($result1);
-                                  ?>
+                                    @foreach($studd as $s)                                  
                                     <tr>
-                                      <td><?php echo $row['tblStudentId'] ?></td>
-                                      <td><?php echo $row['studname'] ?></td>
-                                      <td><?php echo $row1['tblSectionName'] ?></td>
+                                      <td>{{ $s->tblStudentId}}</td>
+                                      <td>{{ $s->studname}}</td>
+                                      <td>{{ $s->section->tblSectionName}}</td>
                                       <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlSectionStudent">Section Student</button></td>
                                     </tr>
-                                  <?php endwhile; ?>
+                                  @endforeach
                                   </tbody>
                                 </table>
                               </div> <!-- col-md-12 -->
@@ -108,27 +100,27 @@ function run(){
         <div class="form-group" style="margin-top: 5%">
                 <label class="col-sm-4" style="text-align: right">Student Id</label>
                 <div class="col-sm-7 selectContainer">
-                 <input type="text" name="txtStudId" id="txtStudId" disabled />
+                 <input type="text" name="txtStudId" id="txtStudId" disabled style="width: 70%;"/>
                 </div>
         </div> 
-        <div class="form-group" style="margin-top: 15%">
+        <div class="form-group" style="margin-top: 6%">
                 <label class="col-sm-4" style="text-align: right">Student Name</label>
                 <div class="col-sm-7 selectContainer">
-                <input type="text" name="txtStudName" id="txtStudName" disabled />
+                <input type="text" name="txtStudName" id="txtStudName" disabled style="width: 70%;" />
                 </div>
         </div> 
-        <div class="form-group" style="margin-top: 25%">
+        <div class="form-group" style="margin-top: 7%">
                 <label class="col-sm-4" style="text-align: right">Section</label>
                 <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" name="selSection" id="selSection" style="width: 100%;">
-                <option disabled>--Select Section--</option>
-                @foreach($section as $sect)
-                <option value="{{ $sect->tblSectionName }}">{{ $sect->tblSectionName }}</option>
-              	@endforeach
+                <select class="form-control" name="selSection" id="selSection" style="width: 70%;">
+                    <option selected disabled>--Select Section--</option>
+                    @foreach($section as $sect)
+                    <option value="{{ $sect->tblSectionId }}">{{ $sect->tblSectionName }}</option>
+                  	@endforeach
                 </select>
                 </div>       
         </div>
-            <div class="modal-footer" style="margin-top: 35%">
+            <div class="modal-footer" style="margin-top: 8%">
             <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>

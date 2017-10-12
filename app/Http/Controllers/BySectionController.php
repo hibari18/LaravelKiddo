@@ -109,15 +109,10 @@ class BySectionController extends Controller
 
         $section = Section::where('tblSection_tblLevelId', $lvlid)->where('tblSectionFlag', 1)->get();
 
-        $studid=$_POST['txtStudId'];
-        $sectname=$_POST['selSection'];
-        $sect = Section::where('tblSectionName', $sectname)->where('tblSectionFlag', 1)->get();
-        $sectid=$sect->tblSectionId;
-        $lvlid=$sect->tblSection_tblLevelId;
-        $student = Student::where('tblStudentId', $studid)->where('tblStudentFlag', 1)
-        ->update(['tblStudent_tblSectionId'=>$sectid]);
+        $studd = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId from tblstudent s, tblstudentinfo si where si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudent_tblLevelId='$lvlid' and s.tblStudentFlag=1"));
+        
 
-        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'student'));
+        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd'));
     }
 
     /**
@@ -129,7 +124,15 @@ class BySectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $studid=$_POST['txtStudId'];
+        $sectname=$_POST['selSection'];
+        $sect = Section::where('tblSectionName', $sectname)->where('tblSectionFlag', 1)->get();
+        $sectid=$sect->tblSectionId;
+        $lvlid=$sect->tblSection_tblLevelId;
+        $student = Student::where('tblStudentId', $studid)->where('tblStudentFlag', 1)
+        ->update(['tblStudent_tblSectionId'=>$sectid]);
+
+        return view('sectioning.sectionstudent', compact('student', 'sect', 'studid'));
     }
 
     /**

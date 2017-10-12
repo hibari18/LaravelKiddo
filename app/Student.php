@@ -29,4 +29,8 @@ class Student extends Model
 	public function schemes(){
 		return $this->hasMany('App\StudScheme', 'tblStudScheme_tblStudentId', 'tblStudentId')->where('tblStudSchemeFlag', 1);
 	}
+
+	public function section(){
+		return $this->belongsTo('App\Section', 'tblStudent_tblSectionId', 'tblSectionId');
+	}
 }
