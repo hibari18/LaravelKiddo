@@ -63,8 +63,8 @@ class EnrollmentController extends Controller
         $clear = $request->txtClear;
         $session = $request->txtSession;
         $schemem = $request->selSchemeMand;
-        $schemeo = $request->selSchemeOpt;
-        $feeId  = $request->txtFeeId2;
+        $schemeo = $request->selSchemeOpt ?: [];
+        $feeId  = $request->txtFeeId2 ?: [];
         $feeId1 = $request->txtFeeId1;
 
         try{
@@ -215,9 +215,7 @@ class EnrollmentController extends Controller
         return view('enrollment.table.studlist', compact('enname'));
     }
 
-    public function proceed(Request $request)
-
-    {
+    public function proceed(Request $request){
         if(isset($_POST['btnProceed']))
         {
           $studid = $request->txtStudentId;
@@ -232,7 +230,7 @@ class EnrollmentController extends Controller
         $query2 = []; //DB::select(DB::raw("select * from tblfee where tblFeeId='$val' and tblFeeMandatory='N' and tblFeeFlag=1 group by tblFeeId"));
         
         $man = Fees::where('tblFeeMandatory','Y')->where('tblFeeFlag','1')->get();
-        $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
+        $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->whereIn('tblFeeId', $request->optionalfees ?: [])->get();
 
         return view('enrollment.enrollscheme', compact('studid','clear', 'session','optfees', 'enname2', 'query1', 'query2', 'man', 'opt'));
     }
