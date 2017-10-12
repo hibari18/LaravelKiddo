@@ -15,7 +15,7 @@ class Student extends Model
 	public $incrementing = false;
 
 	public function studentinfo(){
-		return $this->hasMany('App\PersonalInfo', 'tblstudentinfo_tblStudentId', 'tblStudentId');
+		return $this->hasMany('App\PersonalInfo', 'tblStudInfo_tblStudentId', 'tblStudentId');
 	}
 
 	public function studentdw(){
@@ -24,5 +24,9 @@ class Student extends Model
 
 	public function student(){
 		return $this->hasMany('App\Student', 'tblStudent_tblLevelId', 'tblStudentId');
+	}
+
+	public function schemes(){
+		return $this->hasMany('App\StudScheme', 'tblStudScheme_tblStudentId', 'tblStudentId')->where('tblStudSchemeFlag', 1);
 	}
 }
