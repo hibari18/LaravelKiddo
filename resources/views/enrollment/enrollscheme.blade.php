@@ -67,9 +67,6 @@
                                         <div class="col-md-3" style="float: right">
                                     <div class="text-center">
                                       <img src="{{ asset('images/User/user.png') }}" class="avatar img-circle" alt="avatar" style="height: 50%; width: 50%">
-                                      <h6>Upload a different photo...</h6>
-                                      
-                                      <input type="file" class="form-control">
                                     </div>
                                   </div>
                                         @foreach($enname2 as $en2)

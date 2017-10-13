@@ -60,4 +60,8 @@ Route::resource('advisorylist', 'GradesController');
 Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.studlist');
 
 Route::resource('billing', 'BillingController');
+Route::post('collection/', 'BillingController@bills')->name('billing.bills');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

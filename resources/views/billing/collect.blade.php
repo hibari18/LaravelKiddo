@@ -1,8 +1,6 @@
 @extends('master')
+
 @section('content')
-<?php
-  $total=0;
-?>
  <!-- Main content -->
         <section class="content"  style="margin-top: 4%">
           <div class="row">
@@ -24,20 +22,18 @@
                           
                           <div class="container">
   <div class="row">
-
         <div class="col-sm-11">
             <h4 style="text-transform:uppercase ; font-weight: bold">Student Name: {{ $student->studentinfo[0]->name }}</h4>
         </div>
         <div class="col-sm-10">
-            
-            <div class="row" style="margin-top: 4%">
+            <h4>Preview:</h4>
+            <div class="row">
                 <div class="col-xs-12">
                 <form action="trytry.php" method="post">
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
                                 <tr>
-                                    <th hidden>Account Id</th>
                                     <th>Due Date</th>
                                     <th>OR No.</th>
                                     <th>PR No.</th>
@@ -48,31 +44,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                    $totalamountdue=0;
-                                    $totalamountpaid=0;
-                                ?>
-                            @foreach($student->schemes as $scheme)
-                                @foreach($scheme->accounts->where('tblAccPaymentNum', 1)->where('tblAcc_tblStudentId', $student->tblStudentId) as $account)
-                                    <tr>
-                                        <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="{{ $account->tblAccId }}"/>
-                                        <td>{{ $account->tblAccDueDate }}</td>
-                                        <td><input type="text" name="txtOR[]" id="txtOR" placeholder="OR#" style="width:55px" /></td>
-                                        <td><input type="text" name="txtPR[]" id="txtPR" placeholder="PR#" style="width:55px" /></td>
-                                        <td>{{ $scheme->fee->tblFeeCode }}</td>
-                                        <td>{{ $scheme->fee->tblFeeName }}</td>
-                                        <td>{{ $account->tblAccCredit }}</td>
-                                        <td>{{ $account->tblAccCredit }}</td>
-                                    </tr>
-                                <?php
-                                    $totalamountdue += $account->tblAccCredit;
-                                    $totalamountpaid += $account->tblAccCredit;
-                                ?>
-                                @endforeach
-                            @endforeach
+                            <?php
+                              foreach($acc as $accId)
+                              {
+                                $query="select * from tblaccount where tblAccId='$accId' and tblAccFlag=1";
+                                $result=mysqli_query($con, $query);
+                                $row=mysqli_fetch_array($result);
+                                $studschemeid=$row['tblAcc_tblStudSchemeId'];
+                                $query1="select * from tblstudscheme s, tblfee f where f.tblFeeId=s.tblStudScheme_tblFeeId and s.tblStudSchemeId='$studschemeid' and s.tblStudSchemeFlag=1 and f.tblFeeFlag=1";
+                                $result1=mysqli_query($con, $query1);
+                                $row1=mysqli_fetch_array($result1);
+                            ?>
+                              <tr>
+                              <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="<?php echo $row['tblAccId'] ?>"/>
+                              <td><?php echo $row['tblAccDueDate'] ?></td>
+                              <td><input type="text" name="txtOR[]" id="txtOR" placeholder="OR#" style="width:55px" /></td>
+                              <td><input type="text" name="txtPR[]" id="txtPR" placeholder="PR#" style="width:55px" /></td>
+                              <td><?php echo $row1['tblFeeCode'] ?></td>
+                              <td><?php echo $row1['tblFeeName'] ?></td>
+                              <td><?php echo $row['tblAccCredit'] ?></td>
+                              <td><?php echo $row['tblAccCredit'] ?></td>
+                            </tr>
+                            <?php } ?>
                             </tbody> <!-- preview content goes here-->
                         </table>
-                    </div>
+                    </div>  
                     <button type="submit" class="btn btn-success btn-block" style="width: 35%; float: right; margin-top: 5%">SAVE</button>
                     </form>                          
                 </div>
@@ -97,13 +93,13 @@
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Due</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled value="<?php echo $totalamountdue ?>">
+                            <input type="number" class="form-control" id="amount" name="amount" disabled>
                         </div>
                     </div> 
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Paid</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $totalamountpaid ?>">
+                            <input type="number" class="form-control" id="amount" name="amount">
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,7 +111,7 @@
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
+                            <input type="date" class="form-control" id="date" name="date" disabled>
                         </div>
                     </div>   
                     <div class="form-group">
@@ -128,6 +124,7 @@
                 </div>
             </div>            
         </div> <!-- / panel preview -->
+        
   </div>
 </div>
                           

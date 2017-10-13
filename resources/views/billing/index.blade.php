@@ -5,7 +5,7 @@
       {
         var lvl = document.getElementById("selLevel").value;
         var xmlhttp =  new XMLHttpRequest();
-        xmlhttp.open("GET","/"+document.getElementById("selLevel").value,false);
+        xmlhttp.open("GET","billing/"+document.getElementById("selLevel").value,false);
         xmlhttp.send(null);
 
         document.getElementById("datatable1").innerHTML=xmlhttp.responseText;

@@ -7,6 +7,7 @@ use App\BySection;
 use App\Level;
 use App\Student;
 use App\Section;
+USE App\SchoolYear;
 use DB;
 
 class BySectionController extends Controller
@@ -48,9 +49,8 @@ class BySectionController extends Controller
         
         $sectid=$_POST['txtFillSectionId'];
 
-        $sy = SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->get();
-        $syid=$sy->tblSchoolYrId;
-
+        $syid = SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
+       
         $cnt = DB::select(DB::raw("select count(tblSectStudId) as count from tblsectionstud where tblSectStud_tblSectionId='$sectid' and tblSectStudFlag=1"));
         $sectcnt=$cnt->count;
         $arrStud=array();
@@ -102,7 +102,7 @@ class BySectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $lvlid=$_GET['txtlvl'];
         $lvl = Level::where('tblLevelId', $lvlid)->where('tblLevelFlag', 1)->get();
@@ -111,8 +111,9 @@ class BySectionController extends Controller
 
         $studd = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId from tblstudent s, tblstudentinfo si where si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudent_tblLevelId='$lvlid' and s.tblStudentFlag=1"));
         
-
-        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd'));
+        //$sectid=$studd->tblStudent_tblSectionId;
+        $sect= Section::where('tblSectionFlag', 1)->where('tblSectionId', $request->tblStudent_tblSectionId)->get();
+        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd', 'sect'));
     }
 
     /**
@@ -124,8 +125,9 @@ class BySectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $studid=$_POST['txtStudId'];
-        $sectname=$_POST['selSection'];
+
+        $studid= $request->txtStudId;
+        $sectname=$request->selSection;
         $sect = Section::where('tblSectionName', $sectname)->where('tblSectionFlag', 1)->get();
         $sectid=$sect->tblSectionId;
         $lvlid=$sect->tblSection_tblLevelId;
