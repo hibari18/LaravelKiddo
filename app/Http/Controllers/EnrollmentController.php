@@ -166,13 +166,14 @@ class EnrollmentController extends Controller
                         else if(empty($schemeId))
                         {
                             $famount = FeeAmount::where('tblFeeAmount_tblFeeId', $studfeeid)->where('tblFeeAmountFlag', 1)->where('tblFeeAmount_tblLevelId', $lvlid)->first();
-                            
+                            $sched = Schedule::where('tblSchemedetail_tblfee', $studfeeid)->first();
                             if($famount !== null){
-                                $feeamnt = $famount->tblFeeAmountAmount;
+                                $feeamnt = $sched->tblSchemeDetailAmount;
                                 $accnt = Account::create([
                                     'tblAcc_tblStudentId' => $studid,
                                     'tblAcc_tblStudSchemeId' => $studscheme,
                                     'tblAccCredit' => $feeamnt,
+                                    'tblAccDueDate' => $sched->tblSchemeDetailDueDate,
                                     'tblAccPaymentNum' => 1,
                                     'tblAccRunningBal' => $feeamnt,
                                 ]);
