@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Schedule;
 use App\Fees;
 use App\SchemeType;
+use App\FeeAmount;
 
 class ScheduleController extends Controller
 {

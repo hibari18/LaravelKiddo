@@ -48,17 +48,6 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <?php
-                                    $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId=5 and a.tblAccPaid!='PAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                      $feeId=$row['tblStudScheme_tblFeeId'];
-                                      $query1="select * from tblfee where tblFeeId='$feeId'";
-                                      $result1=mysqli_query($con, $query1);
-                                      $row1=mysqli_fetch_array($result1);
-                                      $fee=$row1['tblFeeCode'];
-                                      $feename=$row1['tblFeeName'];
-                                  ?>
                                   @foreach($account as $acc)
                                     <tr>
                                       <td><input type="checkbox" name="chkbills[]" id="chkbills" value="{{ $acc->tblAccId }}"/></td>

@@ -51,13 +51,13 @@ class BySectionController extends Controller
 
         $syid = SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
        
-        $cnt = DB::select(DB::raw("select count(tblSectStudId) as count from tblsectionstud where tblSectStud_tblSectionId='$sectid' and tblSectStudFlag=1"));
-        $sectcnt=$cnt->count;
+        $cnt= DB::table('tblsectionstud')->select(DB::raw('count(tblsectstudid) as scount'))->where('tblSectStud_tblSectionId', $sectid)->where('tblsectstudflag',1)->first();
+        $sectcnt=$cnt->scount;
         $arrStud=array();
 
         if($sectcnt < 15)
         {
-            $limit = DB::select(DB::raw("select s.tblStudentId,  concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1 order by rand() limit 15"));
+            $limit = DB::table('tblstudent as s')->join('tblstudentinfo as si','s.tblStudentId','=','si.tblStudInfo_tblStudentId')->select(DB::raw('s.tblStudentId, concat(si.tblStudInfoLname, si.tblStudInfoFname, si.tblStudInfoMname) as name'))->where('s.tblStudentType','OFFICIAL')->where('s.tblStudentFlag',1)->orderByRaw("RAND()")->get();
 
             foreach($limit as $row){
                 $studid=$row->tblStudentId;
@@ -67,21 +67,28 @@ class BySectionController extends Controller
             $x=15-$sectcnt;
             for($y=0; $y<$x; $y++)
             {
+                    
                 $stud=$arrStud[$y];
-                $studsect = BySection::orderBy('tblSectStudId', 'desc')->pluck('tblSectStudId')->first();
-                $sectstudid=$studsect->tblSectStudId;
+                $studsect = BySection::orderBy('tblSectStudId', 'desc')->first();
+                $sectstudid= $studsect->tblSectStudId;
                 $sectstudid++;
+                // dd($studsect);
+
                 $stsect = BySection::create([
                         'tblSectStudId' => $sectstudid,
                         'tblSectStud_tblSectionId' => $sectid,
                         'tblSectStud_tblStudentId' => $stud,
                         'tblSectStud_tblSchoolYrId' => $syid,              
                 ]);
+            
             }//for
+            $message = 2;
+            return redirect()->route('sectioning.bysection')->with('message', $message);
         }//if
         else
         {
-            echo "nay";
+            $message = 1;
+            return redirect()->route('sectioning.bysection')->with('message', $message);
         }
     }
 
