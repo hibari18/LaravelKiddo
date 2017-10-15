@@ -25,7 +25,7 @@ class StudentProfileController extends Controller
         $studprofile = Student::where('tblStudentFlag', 1)->get();
         $facprofile = Faculty::where('tblFacultyFlag', 1)->get();
 
-        $name = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1"));
+        $name = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1 and si.tblStudInfoFlag=1"));
         //var_dump($name);
         
         return view('profile.index', compact('studprofile','facprofile', 'name'));
@@ -90,7 +90,7 @@ class StudentProfileController extends Controller
 
         $siblings = StudSiblings::where('tblStudSib_tblStudId', $request->txtStudId)->get();
 
-        return view('profile.personalinfo', compact('id', 'personalinfo', 'fatherinfo', 'motherinfo', 'liveswith', 'list_of_liveswith','healthinfo', 'parent_status', 'list_of_status', 'siblings'));
+        return view('profile.studentprofile', compact('id', 'personalinfo', 'fatherinfo', 'motherinfo', 'liveswith', 'list_of_liveswith','healthinfo', 'parent_status', 'list_of_status', 'siblings'));
     }
 
     /**

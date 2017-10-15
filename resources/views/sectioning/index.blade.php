@@ -24,7 +24,37 @@ function run(){
   };
 }})();
 </script>
+<?php
 
+  if(session('message')){
+    $message = session('message');
+    
+    if($message == 1) {
+      echo "<script> swal('Failed to fill section!', ' ', 'error'); </script>";
+    }
+    
+    if($message == 2) {
+      echo "<script> swal('Section filled!', ' ', 'success'); </script>";
+    }
+    
+    if($message == 3) {
+      echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+    }
+    
+    if($message == 4) {
+      echo "<script> swal('Updated successfully!', ' ', 'success'); </script>";
+    }
+    
+    if($message == 5) {
+      echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+    }
+    
+    if($message == 6) {
+      echo "<script> swal('Deleted successfully!', ' ', 'success'); </script>";
+    }
+  }
+  
+?>
 
 <section class="content"  style="margin-top: 4%">
           <div class="row">

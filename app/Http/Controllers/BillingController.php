@@ -9,6 +9,7 @@ use App\Student;
 use App\Level;
 use App\Account;
 use App\Fees;
+use App\StudScheme;
 
 
 class BillingController extends Controller
@@ -65,9 +66,22 @@ class BillingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $studid= $request->txtStudId;
+
+        $syid = SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
+        
+        $studd = Student::where('tblStudentId', $request->txtStudId)->where('tblStudentFlag', 1)->get();
+        
+        // $lvlid= $stud->tblStudent_tblLevelId;
+        //$account = DB::select(DB::raw("select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId=5 and a.tblAccPaid!='PAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId"));
+        $account = DB::table('tblaccount as a')->join('tblstudscheme as s','a.tblAcc_tblStudSchemeId','=','s.tblStudSchemeId')->where('a.tblAcc_tblStudentId', $studid)->where('s.tblStudScheme_tblSchoolYrId', 5)->where('a.tblAccPaid', '!=', 'PAID')->groupBy('a.tblAccPaymentNum', 'a.tblAcc_tblStudSchemeId')->get();
+
+        $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
+
+
+        return view('billing.billingmain', compact('syid', 'studd', 'account', 'studid', 'opt'));
     }
 
     /**
@@ -77,6 +91,14 @@ class BillingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function bills (Request $request, $id)
+    {
+        $acc= $request->chkbills;
+
+        return view('billing.collect', compact('acc'));
+
+    }
     public function update(Request $request, $id)
     {
         //

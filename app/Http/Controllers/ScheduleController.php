@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Schedule;
 use App\Fees;
 use App\SchemeType;
+use App\FeeAmount;
 
 class ScheduleController extends Controller
 {
@@ -92,13 +93,23 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $schedules = Schedule::findOrFail($request->txtDetId);
+        $schedule = Schedule::findOrFail($request->txtDetId);
 
-        $message = $schedules->update([
+        $message = $schedule->update([
             'tblSchemeDetailDueDate' => trim($request->txtDetDueDate),
             'tblSchemeDetailAmount' => trim($request->txtDetAmount),
             
         ]) ? 4 : 3;
+
+        // update fee amount
+        $fee = Fees::findOrFail($schedule->tblSchemeDetail_tblFee);
+        FeeAmount::updateOrCreate([
+            'tblFeeAmount_tblLevelId'   => $schedule->tblSchemeDetail_tblLevel,
+            'tblFeeAmount_tblFeeId'     => $schedule->tblSchemeDetail_tblFee,
+        ],[
+            'tblFeeAmountAmount'        => $fee->total_amount($schedule->tblSchemeDetail_tblLevel),
+        ]);
+
 
         return redirect()->route('fees.index')->with('message', $message);
     }

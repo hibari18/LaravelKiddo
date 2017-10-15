@@ -36,6 +36,7 @@
                                     @foreach($subjname as $sn) 
                                   <th>{{ $sn->tblSubjectDesc }}</th>
                                     @endforeach
+                                    <th>General Average</th>
                                 </tr>
                                 </thead>
 
@@ -50,6 +51,7 @@
                                         <input type="number" name="{{ "txtGrade[$st->tblStudentId-$sn->tblSubjectId]" }}" id="txtGrade" value="{{ array_key_exists("$st->tblStudentId-$sn->tblSubjectId", $grades) ? $grades["$st->tblStudentId-$sn->tblSubjectId"] : null }}" min="0" max="100" step="0.01">
                                       </td>
                                     @endforeach
+                                  <td></td>
                                 </tr>
                                   @endforeach
                                 </tbody>
