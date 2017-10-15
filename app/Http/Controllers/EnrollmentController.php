@@ -232,11 +232,6 @@ class EnrollmentController extends Controller
         return view('enrollment.enrollscheme', compact('studid','clear', 'session','optfees', 'enname2', 'query1', 'query2', 'man', 'opt'));
     }
 
-    public function collect(Request $request)
-    {
-          //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

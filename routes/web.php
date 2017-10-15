@@ -54,7 +54,6 @@ Route::resource('dismisswithdraw', 'DismissWithdrawController');
 
 Route::resource('enrollment', 'EnrollmentController');
 Route::post('feesavailed/', 'EnrollmentController@proceed')->name('enrollment.proceed');
-Route::post('collect/', 'EnrollmentController@collect')->name('enrollment.collect');
 
 Route::resource('advisorylist', 'GradesController');
 Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.studlist');

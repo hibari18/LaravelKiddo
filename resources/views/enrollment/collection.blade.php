@@ -32,7 +32,8 @@
             
             <div class="row" style="margin-top: 4%">
                 <div class="col-xs-12">
-                <form action="trytry.php" method="post">
+                <form role="form" method="POST" action="{{ route('enrollment.store') }}">
+                                    {{ csrf_field() }}
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
@@ -73,25 +74,14 @@
                             </tbody> <!-- preview content goes here-->
                         </table>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block" style="width: 35%; float: right; margin-top: 5%">SAVE</button>
-                    </form>                          
+                                              
                 </div>
             </div>
-            <div class="row text-right">
-                <div class="col-xs-12">
-                    <h4>Total: <strong><span class="preview-total"></span></strong></h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <hr style="border:2px dashed #dddddd;">
-                    <button type="button" class="btn btn-success btn-block" style="width: 35%; float: right; margin-top: 5%">Save</button>
-                </div>                
-            </div>
+            
         </div>
         <!-- panel preview -->
-        <div class="col-sm-6" style="margin-top: 5%; margin-left: 40%">
-            <h4>Add payment:</h4>
+        <div class="col-sm-6" style="margin-top: 5%; margin-left: 35%">
+            <h4>Summary:</h4>
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
                     <div class="form-group">
@@ -118,17 +108,16 @@
                             <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
                         </div>
                     </div>   
-                    <div class="form-group">
-                        <div class="col-sm-12 text-right">
-                            <button type="button" class="btn btn-info preview-add-button">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
+                    
+                    
+
                 </div>
             </div>            
         </div> <!-- / panel preview -->
+        
   </div>
+  <button type="submit" class="btn btn-success btn-block" style="width: 20%; margin-left: 65% ; margin-top: 5%; margin-bottom: 5%">SAVE</button>
+        </form>
 </div>
                           
 

@@ -92,7 +92,7 @@ function run(){
         <div class="modal-header">
           <h3 class="modal-title" style="font-style: bold">Section Student</h3>
         </div>
-        <form autocomplete="off" method="post" data-toggle="validator" role="form" action="{{ route('sectioning.edit','id') }}" class="form-horizontal">
+        <form autocomplete="off" method="post" data-toggle="validator" role="form" action="{{ route('sectioning.update','id') }}" class="form-horizontal">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
         <div class="modal-body">
@@ -114,8 +114,8 @@ function run(){
                 <div class="col-sm-7 selectContainer">
                 <select class="form-control" name="selSection" id="selSection" style="width: 70%;">
                     <option selected disabled>--Select Section--</option>
-                    @foreach($section as $sect)
-                    <option value="{{ $sect->tblSectionId }}">{{ $sect->tblSectionName }}</option>
+                    @foreach($section as $sec)
+                    <option value="{{ $sec->tblSectionId }}">{{ $sec->tblSectionName }}</option>
                   	@endforeach
                 </select>
                 </div>       
