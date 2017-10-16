@@ -43,14 +43,8 @@
                                       <th>Due Date</th>
                                       <th>Fee Code</th>
                                       <th>Details</th>
-                                      <th>TIN#</th>
                                       <th>Credit</th>
-                                      <th>OR#</th>
-                                      <th>PR#</th>
-                                      <th>Payment Date</th>
-                                      <th>Payment</th>
                                       <th>Running Balance</th>
-                                      <th>Remarks</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -60,14 +54,8 @@
                                       <td>{{ $acc->tblAccDueDate}}</td>
                                       <td>{{ $acc->studscheme->fee->tblFeeCode}}</td>
                                       <td>{{ $acc->studscheme->fee->tblFeeName}}</td>
-                                      <td>{{ $acc->tblAccTN}}</td>
                                       <td>{{ $acc->tblAccCredit}}</td>
-                                      <td>{{ $acc->tblAccOR}}</td>
-                                      <td>{{ $acc->tblAccPR}}</td>
-                                      <td>{{ $acc->tblAccPaymentDate}}</td>
-                                      <td>{{ $acc->tblAccPayment}}</td>
                                       <td>{{ $acc->tblAccRunningBal}}</td>
-                                      <td>{{ $acc->tblAccRemark}}</td>
                                     </tr>
                                 @endforeach
                                   </tbody>
