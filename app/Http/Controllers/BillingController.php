@@ -72,23 +72,18 @@ class BillingController extends Controller
 
         $syid = SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
         
-        $studd = Student::where('tblStudentId', $request->txtStudId)->where('tblStudentFlag', 1)->get();
-        
-        $account = DB::table('tblaccount as a')->join('tblstudscheme as s','a.tblAcc_tblStudSchemeId','=','s.tblStudSchemeId')->where('a.tblAcc_tblStudentId', $studid)->where('s.tblStudScheme_tblSchoolYrId', 5)->where('a.tblAccPaid', '!=', 'PAID')->groupBy('a.tblAccPaymentNum', 'a.tblAcc_tblStudSchemeId')->get();
-        //dd($account);
-        
-            $feeId= $account->tblStudScheme_tblFeeId;
-            $fees = Fees::where('tblFeeId', $feeId)->first();
-            dd($fees);
-                foreach ($fees as $f) {
-                    $fee= $f->tblFeeCode;
-                    $feename= $f->tblFeeName;
-                }
+        $student = Student::where('tblStudentId', $request->txtStudId)->where('tblStudentFlag', 1)->first();
+        $accounts = $student->accounts()
+            ->where('tblAccPaid', '!=', 'PAID')
+            ->whereHas('studscheme.scheme', function ($query) use ($syid) {
+                $query->where('tblStudScheme_tblSchoolYrId', $syid);
+            })
+            ->groupBy('tblAccPaymentNum', 'tblAcc_tblStudSchemeId')
+            ->get();
 
-        $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
+        $optionalFees = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
 
-
-        return view('billing.billingmain', compact('syid', 'studd', 'account', 'studid', 'opt', 'fee', 'feename'));
+        return view('billing.billingmain', compact('syid', 'student', 'accounts', 'studid', 'optionalFees'));
     }
 
     /**

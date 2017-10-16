@@ -43,25 +43,32 @@
                                       <th>Due Date</th>
                                       <th>Fee Code</th>
                                       <th>Details</th>
+                                      <th>TIN#</th>
                                       <th>Credit</th>
+                                      <th>OR#</th>
+                                      <th>PR#</th>
+                                      <th>Payment Date</th>
+                                      <th>Payment</th>
+                                      <th>Running Balance</th>
                                       <th>Remarks</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                  
-                                  
-
-                                  @foreach($account as $acc)
+                                  @foreach($accounts as $acc)
                                     <tr>
-                                      
                                       <td><input type="checkbox" name="chkbills[]" id="chkbills" value="{{ $acc->tblAccId }}"/></td>
                                       <td>{{ $acc->tblAccDueDate}}</td>
-                                      <td>{{ $acc->fee}}</td>
-                                      <td>{{ $acc->feename}}</td>
+                                      <td>{{ $acc->studscheme->fee->tblFeeCode}}</td>
+                                      <td>{{ $acc->studscheme->fee->tblFeeName}}</td>
+                                      <td>{{ $acc->tblAccTN}}</td>
                                       <td>{{ $acc->tblAccCredit}}</td>
+                                      <td>{{ $acc->tblAccOR}}</td>
+                                      <td>{{ $acc->tblAccPR}}</td>
+                                      <td>{{ $acc->tblAccPaymentDate}}</td>
+                                      <td>{{ $acc->tblAccPayment}}</td>
+                                      <td>{{ $acc->tblAccRunningBal}}</td>
                                       <td>{{ $acc->tblAccRemark}}</td>
                                     </tr>
-                                  
                                 @endforeach
                                   </tbody>
                                 </table>
@@ -88,7 +95,7 @@
                 <div class="col-sm-7 selectContainer">
                  <select class="form-control" name="selAddFee" id="selAddFee" style="width: 100%;" onclick="changeScheme()">
                   <option selected disabled>--Select Fee--</option>
-                  @foreach($opt as $o)
+                  @foreach($optionalFees as $o)
                   <option value="{{ $o->tblFeeId }}">{{ $o->tblFeeName }}</option>
                   @endforeach
                 </select>
