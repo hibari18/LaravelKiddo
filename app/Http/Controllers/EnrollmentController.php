@@ -188,6 +188,7 @@ class EnrollmentController extends Controller
     }
 
     public function proceed(Request $request){
+        
         if(isset($_POST['btnProceed']))
         {
           $studid = $request->txtStudentId;
@@ -204,7 +205,33 @@ class EnrollmentController extends Controller
         $man = Fees::where('tblFeeMandatory','Y')->where('tblFeeFlag','1')->get();
         $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->whereIn('tblFeeId', $request->optionalfees ?: [])->get();
 
-        return view('enrollment.enrollscheme', compact('studid','clear', 'session','optfees', 'enname2', 'query1', 'query2', 'man', 'opt'));
+
+        $or=$_POST['txtOR'];
+        $id=$_POST['txtAccId'];
+        $pr=$_POST['txtPR'];
+        $i=0;
+        foreach($id as $x)
+        {
+            $y=$or[$i];
+            $z=$pr[$i];
+            $datenow=date('Y-m-d');
+            $acc = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->get();
+            
+            $payment=$acc->tblAccCredit;
+            $accountupdate = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->update([
+                                'tblAccOR' => $y,
+                                'tblAccPR' => $z,
+                                'tblAccPayment' => $payment,
+                                'tblAccRunningBal' => null,
+                                'tblAccPaid' => 'PAID',
+                                'tblAccPaymentDate' => $datenow,
+
+            ]);
+            $i++;
+        }
+
+        $message = 2;
+        return redirect()->route('enrollment.index')->with('message', $message);
     }
 
     /**

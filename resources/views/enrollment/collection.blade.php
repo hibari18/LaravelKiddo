@@ -32,7 +32,7 @@
             
             <div class="row" style="margin-top: 4%">
                 <div class="col-xs-12">
-                <form role="form" method="POST" action="{{ route('enrollment.store') }}">
+                <form role="form" method="POST" action="{{ route('enrollment.proceed') }}">
                 {{ csrf_field() }}
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
