@@ -55,19 +55,16 @@ Route::resource('dismisswithdraw', 'DismissWithdrawController');
 Route::resource('enrollment', 'EnrollmentController');
 Route::post('feesavailed/', 'EnrollmentController@proceed')->name('enrollment.proceed');
 
-<<<<<<< Updated upstream
 Route::resource('advisorylist', 'GradesController');
 Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.studlist');
 
 Route::resource('billing', 'BillingController');
 Route::post('collection/', 'BillingController@bills')->name('billing.bills');
 
-<<<<<<< HEAD
-=======
-Route::get('getPDF','PDFController@getPDF');
->>>>>>> Stashed changes
-=======
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
->>>>>>> master
+
+Route::get('getPDF','PDFController@getPDF');
+
+

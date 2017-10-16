@@ -38,11 +38,7 @@ function run(){
                 <div class="box-body">
                   <div class="box-header with-border">
                     <h2 class="box-title" style="font-size:20px;">Section Student</h2>
-                   
-                    <div>
-                    	 @foreach($lvl as $l)
-                    	<h3 class="box-title" style="font-size:20px; margin-top: 3%">{{ $l->tblLevelName }}</h3></div>
-                    	@endforeach
+                    <div><h3 class="box-title" style="font-size:20px;"><?php echo $lvlname ?></h3></div>
                     <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
                   </div>
 
@@ -68,13 +64,15 @@ function run(){
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    @foreach($studd as $s)                                  
+                                    @foreach($studd as $ss)   
+                                      @foreach($ss->section->where('tblSectionFlag', 1)->where('tblSectionId', $studd->tblStudent_tblSectionId) as sect)                               
                                     <tr>
-                                      <td>{{ $s->tblStudentId}}</td>
-                                      <td>{{ $s->studname}}</td>
-                                      <td>{{ $s->section->tblSectionName}}</td>
+                                      <td>{{ $ss->tblStudentId }}</td>
+                                      <td>{{ $ss->studname }}</td>
+                                      <td>{{ $sect->tblSectionName }}</td>
                                       <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlSectionStudent">Section Student</button></td>
                                     </tr>
+                                    @endforeach
                                   @endforeach
                                   </tbody>
                                 </table>
