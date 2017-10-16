@@ -112,7 +112,30 @@
             </div>            
         </div> <!-- / panel preview -->     
   </div>
-  <button type="submit" class="btn btn-success btn-block" style="width: 20%; margin-left: 65% ; margin-top: 5%; margin-bottom: 5%">SAVE</button>
+
+  <button type="button" class="btn btn-info btn-block" data-toggle="modal" style="width: 20%; margin-left: 65% ; margin-top: 5%; margin-bottom: 5%" data-target="#ProceedOrSave">SAVE</button>
+
+  <div class="modal fade" id="ProceedOrSave" role="dialog" tabindex="-1" aria-labelledby="ProceedOrSave" aria-hidden="true">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-dialog">
+              <div class="modal-content col-sm-12">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="addModalFour"> ENROLLMENT </h4>
+                </div>
+                 <div style="margin-top: 20%; margin-bottom: 20%; margin-left: 2%">
+                  <button type="submit" class="btn btn-app bg-green" name="btnEnrollStudent" id="btnEnrollStudent" style="width: 47%"><i class="fa fa-save"></i> Enroll Student</button>
+                  <a class="btn btn-app bg-blue" href="enrollment" name="btnCreateUA" id="btnCreateUA" style="width: 47%">
+                    <i class="fa fa-arrow-circle-right"></i> Create User Account</a>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
   </form>
 </div>
                           

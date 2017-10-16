@@ -48,16 +48,21 @@
                                     </tr>
                                   </thead>
                                   <tbody>
+                                  
+                                  
+
                                   @foreach($account as $acc)
                                     <tr>
+                                      
                                       <td><input type="checkbox" name="chkbills[]" id="chkbills" value="{{ $acc->tblAccId }}"/></td>
                                       <td>{{ $acc->tblAccDueDate}}</td>
-                                      <td>{{ $acc->fee->tblFeeCode}}</td>
-                                      <td>{{ $acc->fee->tblFeeName}}</td>
+                                      <td>{{ $acc->fee}}</td>
+                                      <td>{{ $acc->feename}}</td>
                                       <td>{{ $acc->tblAccCredit}}</td>
                                       <td>{{ $acc->tblAccRemark}}</td>
                                     </tr>
-                                  @endforeach
+                                  
+                                @endforeach
                                   </tbody>
                                 </table>
                               </div> <!-- col-md-12 -->
