@@ -80,7 +80,6 @@ class EnrollmentController extends Controller
                 'tblStudEnroll_tblStudentId' => $studid,
             ]);
 
-            $length1=count($schemem);
             foreach($mandatory_fees as $feeId)
             {
                 $scheme = array_key_exists($feeId, $schemem)?$schemem[$feeId]:null;
@@ -93,7 +92,6 @@ class EnrollmentController extends Controller
             }//foreach feeId(mandatory)
             
 
-            $length=count($schemeo);
             foreach($optional_fees as $feeId)
             {
                 $scheme = array_key_exists($feeId, $schemeo)?$schemeo[$feeId]:null;
@@ -114,12 +112,19 @@ class EnrollmentController extends Controller
                     $studfeeid=$row->tblStudScheme_tblFeeId;
                     if($schemeId != null)
                     {
-                        $schemedetail = Schedule::where('tblSchemeDetail_tblScheme', $schemeId)->where('tblSchemeDetail_tblLevel', $lvlid)->where('tblSchemeDetailFlag', 1)->get();
-                        foreach($schemedetail as $row3)
+                        $scheme = SchemeType::findOrFail($schemeId);
+                        // MASS OR LEVEL
+                        if($scheme->fees->tblFeeType !== "MASS FEE"){
+                            $schemedetail = Schedule::where('tblSchemeDetail_tblScheme', $schemeId)->where('tblSchemeDetail_tblLevel', $lvlid)->where('tblSchemeDetailFlag', 1)->get();
+                        } else {
+                            $schemedetail = Schedule::where('tblSchemeDetail_tblScheme', $schemeId)->where('tblSchemeDetailFlag', 1)->get();
+                        }
+
+                        foreach($schemedetail as $sched)
                         {
-                            $duedate=$row3->tblSchemeDetailDueDate;
-                            $payment=$row3->tblSchemeDetailAmount;
-                            $paymentnum=$row3->tblSchedDetailCtr;
+                            $duedate=$sched->tblSchemeDetailDueDate;
+                            $payment=$sched->tblSchemeDetailAmount;
+                            $paymentnum=$sched->tblSchedDetailCtr;
                             $acc = Account::create([
                                     'tblAcc_tblStudentId' => $studid,
                                     'tblAcc_tblStudSchemeId' => $studscheme,
