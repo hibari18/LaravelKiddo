@@ -60,11 +60,8 @@ Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.stu
 
 Route::resource('billing', 'BillingController');
 Route::post('collection/', 'BillingController@bills')->name('billing.bills');
+Route::get('getPDF','PDFController@getPDF');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('getPDF','PDFController@getPDF');
-
-
