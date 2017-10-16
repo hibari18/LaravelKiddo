@@ -92,9 +92,7 @@ class BySectionController extends Controller
 
                         }//if
 
-                }//for
-
-                
+                }//for       
 
             $message = 2;
             return redirect()->route('sectioning.index')->with('message', $message);
@@ -125,19 +123,24 @@ class BySectionController extends Controller
      */
     public function edit(Request $request, $id)
     {
+
         $lvlid=$_GET['txtlvl'];
-        $lvl = Level::where('tblLevelId', $lvlid)->where('tblLevelFlag', 1)->get();
+        $lvl = DB::table('tbllevel')->where('tblLevelId', $lvlid)->where('tblLevelFlag', 1)->first();
+        $lvlname = $lvl->tblLevelName;
+        
+        
+        $studd = DB::table('tblstudent as s')
+                ->leftjoin('tblstudentinfo as si','s.tblStudentId','=','si.tblStudInfo_tblStudentId')
+                ->select(DB::raw('s.tblStudentId, concat(si.tblStudInfoLname, si.tblStudInfoFname, si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId'))
+                ->where('s.tblStudentType','OFFICIAL')
+                ->where('s.tblStudentFlag', 1)
+                ->where('s.tblStudent_tblLevelId', $lvlid)
+                ->get(); 
+            //dd($studd);
 
         $section = Section::where('tblSection_tblLevelId', $lvlid)->where('tblSectionFlag', 1)->get();
-
-        //$studd = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId from tblstudent s, tblstudentinfo si where si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudent_tblLevelId='$lvlid' and s.tblStudentFlag=1"));
-        
-        $studd = DB::table('tblstudent as s')->join('tblstudentinfo as si','s.tblStudentId','=','si.tblStudInfo_tblStudentId')->select(DB::raw('s.tblStudentId, concat(si.tblStudInfoLname, si.tblStudInfoFname, si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId'))->where('s.tblStudentType','OFFICIAL')->where('s.tblStudentFlag', 1)->where('s.tblStudent_tblLevelId', $lvlid)->get();
-        
-        //$sectid=$studd->tblStudent_tblSectionId;
-        $sect= Section::where('tblSectionFlag', 1)->where('tblSectionId', $request->tblStudent_tblSectionId)->get();
-        
-        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd', 'sect'));
+        //dd($section);
+        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd', 'lvlname'));
     }
 
     /**

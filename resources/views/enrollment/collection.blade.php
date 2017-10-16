@@ -33,7 +33,7 @@
             <div class="row" style="margin-top: 4%">
                 <div class="col-xs-12">
                 <form role="form" method="POST" action="{{ route('enrollment.store') }}">
-                                    {{ csrf_field() }}
+                {{ csrf_field() }}
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
@@ -108,16 +108,12 @@
                             <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
                         </div>
                     </div>   
-                    
-                    
-
                 </div>
             </div>            
-        </div> <!-- / panel preview -->
-        
+        </div> <!-- / panel preview -->     
   </div>
   <button type="submit" class="btn btn-success btn-block" style="width: 20%; margin-left: 65% ; margin-top: 5%; margin-bottom: 5%">SAVE</button>
-        </form>
+  </form>
 </div>
                           
 
