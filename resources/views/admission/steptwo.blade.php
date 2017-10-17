@@ -5,7 +5,6 @@
         <center><h3>Personal Information</h3></center>
 
           <div class="form-group" style="margin-bottom:7%;">
-            <div class="form-group">
               <center><label class="col-lg-3 control-label"> First Name: </label></center>
               <div class="col-lg-8">
                 <div class="input-group" style="width:60%;">
@@ -15,7 +14,6 @@
                   <input type="text" class="form-control" name="txtStudFname" placeholder="Student's First Name" >
                 </div>
               </div>
-            </div>
           </div>
 
           <div class="form-group" style="margin-bottom:12%;">

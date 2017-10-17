@@ -46,7 +46,32 @@ class BillingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $or=$_POST['txtOR'];
+        $id=$_POST['txtAccId'];
+        $pr=$_POST['txtPR'];
+        $i=0;
+        foreach($id as $x)
+        {
+            $y=$or[$i];
+            $z=$pr[$i];
+            $datenow=date('Y-m-d');
+            $acc = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->first();
+            
+            $payment=$acc->tblAccCredit;
+            $accountupdate = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->update([
+                                'tblAccOR' => $y,
+                                'tblAccPR' => $z,
+                                'tblAccPayment' => $payment,
+                                'tblAccRunningBal' => null,
+                                'tblAccPaid' => 'PAID',
+                                'tblAccPaymentDate' => $datenow,
+
+            ]);
+            $i++;
+        }
+
+        $message = 4;
+        return redirect()->route('billing.index')->with('message', $message);
     }
 
     /**

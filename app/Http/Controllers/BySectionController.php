@@ -20,10 +20,21 @@ class BySectionController extends Controller
     public function index()
     {
         $bysections = BySection::where('tblSectStudFlag', 1)->get();
-        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
         $levels = Level::where('tblLevelFlag', 1)->get();
+        $tbl1 = DB::table('tblsection')->select(DB::raw("tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap, tblfaculty.tblFacultyId, concat(tblfaculty.tblFacultyLname, ' ', tblfaculty.tblFacultyFname, ' ', tblfaculty.tblFacultyMname) as facultyname"))
+            ->join('tbllevel','tblsection.tblSection_tblLevelId','=','tbllevel.tblLevelId')
+            ->join('tbldivision','tbllevel.tblLevel_tblDivisionId','=','tbldivision.tblDivisionId')
+            ->leftjoin('tblsectionstud','tblsection.tblSectionId','=','tblsectionstud.tblSectStud_tblSectionId')
+            ->leftjoin('tblfaculty','tblfaculty.tblFacultyId','=','tblsection.tblSection_tblFacultyId')
+            ->where('tblsection.tblSectionFlag', 1)
+            ->groupBy('tblsection.tblSectionId')->get();
 
-        return view('sectioning.index', compact('bysection', 'levels', 'sect'));
+         $fopt = DB::table('tblFaculty')->select(DB::raw("tblFacultyId, concat(tblFacultyLname, ' ', tblFacultyFname, ' ', tblFacultyMname) as facultyname"))->where('tblFacultyFlag',1)->get();
+
+            
+        $tbl2 = DB::table('tbllevel')->where('tblLevelFlag',1)->get();
+
+        return view('sectioning.index', compact('bysection', 'tbl1', 'fopt', 'tbl2', 'levels'));
     }
 
     /**
@@ -44,9 +55,7 @@ class BySectionController extends Controller
      */
     public function store(Request $request)
     {
-        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
-        $facultyid= $s->tblSection_tblFacultyId;
-        $faculty = DB::select(DB::raw("select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$facultyid' and tblFacultyFlag=1")); 
+         
         
         $sectid=$_POST['txtFillSectionId'];
 
@@ -166,6 +175,15 @@ class BySectionController extends Controller
         return view('sectioning.sectionstudent', compact('student', 'sect', 'studid'));
     }
 
+    public function assign(Request $request, $id)
+    {
+        $sectid=$_POST['txtSectionId'];
+        $facultyid=$_POST['selFaculty'];
+
+        $fac = Faculty::where('tblSectionId', $sectid)->where('tblSectionFlag', 1)->update(['tblSection_tblFacultyId', $request->$facultyid])->first();
+
+        return view('sectioning.sectionstudent', compact('fac'));
+    }
     /**
      * Remove the specified resource from storage.
      *

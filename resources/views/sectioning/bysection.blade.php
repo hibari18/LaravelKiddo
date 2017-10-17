@@ -1,7 +1,35 @@
 <style type="text/css">
   small { display: block }
 </style>
-
+<script>
+        (function(){
+  if(window.addEventListener){
+    window.addEventListener('load',run,false);
+  }else if(window.attachEvent){
+    window.attachEvent('onload',run);
+  }
+function run(){
+  var t=document.getElementById('datatable1');
+  t.onclick=function(event){
+    event=event || window.event;
+    var target=event.target||event.srcElement;
+    while (target&&target.nodeName!='TR'){
+      target=target.parentElement;
+    }
+    var cells=target.cells;
+    
+    if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
+    var f1=document.getElementById('txtFillSectionId');
+    var f2=document.getElementById('txtSectionId');
+    var f3=document.getElementById('txtSlot');
+    var f4=document.getElementById('selFaculty');
+    f1.value=cells[0].innerHTML;
+    f2.value=cells[0].innerHTML;
+    f3.value=cells[5].innerHTML;
+    f4.value=cells[7].innerHTML;
+  };
+}})();
+    </script>
 <div class="box">
                              
                              
@@ -24,33 +52,22 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                     <?php
-                                      $query="select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId";
-                                      $result=mysqli_query($con, $query);
-                                      while($row=mysqli_fetch_array($result)):
-                                        $facultyid=$row['tblSection_tblFacultyId'];
-                                        $count=$row['sectCount'];
-                                        $max=$row['tblSectionMaxCap'];
-                                        $slot=$max - $count;
-                                      ?>
+                                      @foreach($tbl1 as $tbl1)
                                         <tr>
-                                          <tr>
-                                          <td hidden>{{ $s->tblSectionId }}</td>
-                                          <td>{{ $s->tblSectionName }}</td>
-                                          <td>{{ $s->tblDivisionName }}</td>
-                                          <td>{{ $s->tblLevelName }}</td>
-                                          <td>{{ $s->tblSectionSession }}</td>
-                                          <td hidden>{{ $slot }}</td>
-                                          <td>{{ $s->sectCount }}</td>
-                                           @foreach($faculty as $fac)
-                                          <td hidden>{{ $fac->tblFacultyId }}</td>
-                                          <td>{{ $fac->facultyname }}</td>>
+                                          <td hidden>{{$tbl1->tblSectionId}}</td>
+                                          <td>{{$tbl1->tblSectionName}}</td>
+                                          <td>{{$tbl1->tblDivisionName}}</td>
+                                          <td>{{$tbl1->tblLevelName}}</td>
+                                          <td>{{$tbl1->tblSectionSession}}</td>
+                                          <td hidden>{{ $tbl1->tblSectionMaxCap - $tbl1->sectCount }}</td>
+                                          <td>{{$tbl1->sectCount}}</td>
+                                          <td hidden>{{$tbl1->tblFacultyId}}</td>
+                                          <td>{{$tbl1->facultyname}}</td>
                                           <td style="width: 25%"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlFillSection">Fill Section</button>
-                                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button>
-                                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button></td>
+                                          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#mdlViewStud">View Students</button>
+                                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button></td>
                                         </tr>
                                         @endforeach
-                                      @endforeach
                                       </tbody>
                                     </table>
                                   </div>
@@ -97,7 +114,8 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Assign Faculty</h3>
         </div>
-        <form action="assignFaculty.php" method="post">
+        <form action="{{ route('sectioning.assign')}}" method="post">
+          {{ csrf_field() }}
         <div class="modal-body">
         <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
           <div><input type="hidden" name="txtSectionId" id="txtSectionId"/></div>
@@ -105,19 +123,12 @@
                 <label class="col-sm-4" style="text-align: right">Faculty-In-Charge:</label>
                 <div class="col-sm-7 selectContainer">
                 <select class="form-control" style="width: 100%;" name="selFaculty" id="selFaculty">
-                <option selected disabled>--Select Faculty-in-charge--</option>
-                <?php
-                $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblFaculty where tblFacultyFlag=1";
-                $result=mysqli_query($con, $query);
-                while($row=mysqli_fetch_array($result)):
-                  $facultyid=$row['tblFacultyId'];
-                  $query1="select * from tblsection where tblSection_tblFacultyId='$facultyid' and tblSectionFlag=1";
-                  $result1 = $con->query($query1);
-                  if($result1->num_rows == 0)
-                  {
-                ?>
-                <option value="<?php echo $row['tblFacultyId'] ?>"><?php echo $row['facultyname'] ?></option>
-                <?php }; endwhile; ?>
+                 <option selected disabled>--Select Faculty-in-charge--</option> 
+
+                @foreach($fopt as $fopt)
+                <option value="{{$fopt->tblFacultyId}}">{{$fopt->facultyname}}</option>
+                @endforeach
+                </select>
                 </select>
                 </div>
         </div>

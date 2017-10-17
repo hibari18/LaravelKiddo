@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', 'AdminController@dashboard');
-Route::get('dashboard', 'AdminController@dashboard');
+Route::resource('dashboard', 'DashboardController');
 
 Route::get('message', 'AdminController@message');
 
@@ -43,6 +43,8 @@ Route::resource('feedetails', 'FeeDetailsController');
 Route::resource('admission', 'CheckRequirementController');
 
 Route::resource('sectioning', 'BySectionController');
+Route::post('assignfaculty/', 'BySectionController@assign')->name('sectioning.assign');
+
 
 Route::resource('profile', 'StudentProfileController');
 
@@ -54,7 +56,7 @@ Route::resource('dismisswithdraw', 'DismissWithdrawController');
 
 Route::resource('enrollment', 'EnrollmentController');
 Route::post('feesavailed/', 'EnrollmentController@proceed')->name('enrollment.proceed');
-Route::post('collect/', 'EnrollmentController@collect')->name('enrollment.collect');
+Route::post('collectfees/', 'EnrollmentController@collect')->name('enrollment.collect');
 
 
 Route::resource('advisorylist', 'GradesController');
@@ -62,6 +64,7 @@ Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.stu
 
 Route::resource('billing', 'BillingController');
 Route::post('collection/', 'BillingController@bills')->name('billing.bills');
+Route::get('getPDF','PDFController@getPDF');
 
 Route::resource('listofstudent', 'PDFController');
 Route::get('getPDF','PDFController@edit');
@@ -71,3 +74,13 @@ Route::get('applicantquery/{id}','QueryController@show');
 Route::get('parentquery','QueryController@parent');
 Route::get('facultyquery','QueryController@faculty');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('compose', 'EmailController');
+//Route::get('compose','SendMailController@compose');
+//Route::post('sendmail','SendMailController@sendmail');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('Pasok','LogInController@getLogInForm')->name('Pasok');
+Route::post('postLogInForm','LogInController@postLogInForm');

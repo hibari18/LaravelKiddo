@@ -103,7 +103,9 @@ class GradesController extends Controller
             foreach($subjname as $subject){
                 $grade = Grades::where('tblGrade_tblStudentId', $student->tblStudentId)->where('tblGrade_tblSubjectId', $subject->tblSubjectId)->orderBy('tblGradeId', 'desc')->pluck('tblGradeGrade')->first();
                 
-                $grades["$student->tblStudentId-$subject->tblSubjectId"] = $grade;
+                $grades["$student->tblStudentId-$subject->tblSubjectId"] = $grade;   
+                //$average = array_sum($grades) / count($grades); 
+
             }
         }
          
