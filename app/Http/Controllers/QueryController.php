@@ -29,7 +29,14 @@ class QueryController extends Controller
 
     public function faculty(){
     	$faculty = DB::select(DB::raw("select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyFlag=1"));
-    	
+
     	return view('query.queryfaculty', compact('faculty'));
+    }
+
+    public function section(){
+    	$division = DB::select(DB::raw("select * from tbldivision where tblDivisionFlag=1"));
+      $level = DB::select(DB::raw("select * from tbllevel where tblLevelFlag=1"));
+
+    	return view('query.queryfaculty', compact('division', 'level'));
     }
 }

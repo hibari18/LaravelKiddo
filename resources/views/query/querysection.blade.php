@@ -10,10 +10,10 @@
             <div class="box-header with-border">
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  
+
                 </div>
               </div>
-              
+
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -24,26 +24,18 @@
                 <label>Division</label>
                 <select class="form-control select2" style="width: 50%;" name="addDivSelect" id="addDivSelect" onchange ="changeLevel()">
                   <option selected="selected" disabled>--Select Division--</option>
-                  <?php
-                    $query="select * from tbldivision where tblDivisionFlag=1";
-                    $result=mysqli_query($con, $query);
-                    while($row=mysqli_fetch_array($result)):
-                  ?>
-                  <option value="<?php echo $row['tblDivisionId'] ?>"><?php echo $row['tblDivisionName'] ?></option>
-                <?php endwhile; ?>
+                @foreach($division as $div)
+                  <option value="{{ $div->tblDivisionId }}">{{ $div->tblDivisionName }}</option>
+                @endforeach
                 </select>
               </div>
               <div class="form-group">
                 <label>Level</label>
                 <select class="form-control select2" style="width: 50%;" disabled name="selLevel" id="selLevel" onchange="changeTblSect()">
                   <option selected="selected" disbaled>--Select Level--</option>
-                  <?php
-                    $query="select * from tbllevel where tblLevelFlag=1";
-                    $result=mysqli_query($con, $query);
-                    while($row=mysqli_fetch_array($result)):
-                  ?>
-                  <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName'] ?></option>
-                  <?php endwhile; ?>
+                  @foreach($level as $lev)
+                  <option value="{{ $lev->tblLevelId }}">{{ $lev->tblLevelName }}</option>
+                  @endforeach
                 </select>
               </div>
               </div>
@@ -61,10 +53,10 @@
                 <tbody>
                   </tbody>
               </table>
-            </div>    
+            </div>
             </div>
 
-            
+
             </form>
           </div>
           <!-- /.
