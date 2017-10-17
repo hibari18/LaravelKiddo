@@ -85,15 +85,15 @@ class FacultyProfileController extends Controller
             $realid = sprintf($format,$zero,$id);
             
             // User     
-                $userId = User::orderBy('tblUserId', 'desc')->pluck('tblUserId')->first();
-                $userId ++;
-                $fullname= $fname.$lname;
-                $user = User::create([
-                        'tblUserId' => $userId,
-                        'tblUserName' => $fullname,
-                        'tblUserFlag' => 1,
+                // $userId = User::orderBy('tblUserId', 'desc')->pluck('tblUserId')->first();
+                // $userId ++;
+                // $fullname= $fname.$lname;
+                // $user = User::create([
+                //         'tblUserId' => $userId,
+                //         'tblUserName' => $fullname,
+                //         'tblUserFlag' => 1,
 
-                ]);
+                // ]);
             // User end
                 
                 $facultycreate = Faculty::create([

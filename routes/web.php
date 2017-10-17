@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', 'AdminController@dashboard');
-Route::get('dashboard', 'AdminController@dashboard');
+Route::resource('dashboard', 'DashboardController');
 
 Route::get('message', 'AdminController@message');
 
@@ -54,6 +54,7 @@ Route::resource('dismisswithdraw', 'DismissWithdrawController');
 
 Route::resource('enrollment', 'EnrollmentController');
 Route::post('feesavailed/', 'EnrollmentController@proceed')->name('enrollment.proceed');
+Route::post('collectfees/', 'EnrollmentController@collect')->name('enrollment.collect');
 
 Route::resource('advisorylist', 'GradesController');
 Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.studlist');
