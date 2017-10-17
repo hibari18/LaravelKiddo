@@ -20,7 +20,7 @@
                         <div class="box">
                         <div class="box-header"></div>
                         
-                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%" value="1">1st Grading</h3>
+                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%">1st Grading</h3>
 
                         <hr style="margin-top: 3%">
                             
@@ -63,7 +63,7 @@
                         </div>
 
 
-                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%" value="2">2nd Grading</h3>
+                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%">2nd Grading</h3>
 
                         <hr style="margin-top: 3%">
                             
@@ -107,7 +107,7 @@
 
 
 
-                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%" value="3">3rd Grading</h3>
+                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%">3rd Grading</h3>
 
                         <hr style="margin-top: 3%">
                             
@@ -151,7 +151,7 @@
 
 
 
-                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%" value="4">4th Grading</h3>
+                        <h3 style="margin-top: 8%; margin-bottom: 5%; margin-left: 2%">4th Grading</h3>
 
                         <hr style="margin-top: 3%">
                             

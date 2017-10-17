@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('content')
+<?php
+  $total=0;
+?>
  <!-- Main content -->
         <section class="content"  style="margin-top: 4%">
           <div class="row">
@@ -26,10 +29,11 @@
             <h4 style="text-transform:uppercase ; font-weight: bold">Student Name: {{ $student->studentinfo[0]->name }}</h4>
         </div>
         <div class="col-sm-10">
-            <h4>Preview:</h4>
-            <div class="row">
+            
+            <div class="row" style="margin-top: 4%">
                 <div class="col-xs-12">
-                <form action="trytry.php" method="post">
+                <form role="form" method="POST" action="{{ route('billing.store') }}">
+                {{ csrf_field() }}
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
@@ -44,6 +48,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $totalamountdue=0;
+                                    $totalamountpaid=0;
+                                ?>
                               @foreach($accounts as $account)
                               <tr>
                                 <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="{{ $account->tblAccId }}"/>
@@ -56,65 +64,41 @@
                                 <td>{{ $account->tblAccCredit }}</td>
                             </tr>
                             @endforeach
+                            <?php
+                                    $totalamountdue += $account->tblAccCredit;
+                                    $totalamountpaid += $account->tblAccCredit;
+                            ?>
                             </tbody> <!-- preview content goes here-->
                         </table>
-                    </div>  
-                    <button type="submit" class="btn btn-success btn-block" style="width: 35%; float: right; margin-top: 5%">SAVE</button>
-                    </form>                          
-                </div>
-            </div>
-            <div class="row text-right">
-                <div class="col-xs-12">
-                    <h4>Total: <strong><span class="preview-total"></span></strong></h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <hr style="border:2px dashed #dddddd;">
-                    <button type="button" class="btn btn-success btn-block" style="width: 35%; float: right; margin-top: 5%">Save</button>
-                </div>                
-            </div>
-        </div>
+                    </div> 
         <!-- panel preview -->
-        <div class="col-sm-6" style="margin-top: 5%; margin-left: 40%">
-            <h4>Add payment:</h4>
+        <div class="col-sm-6" style="margin-top: 5%; margin-left: 57%">
+            <h4>Summary:</h4>
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Due</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled>
+                            <input type="number" class="form-control" id="amount" name="amount" disabled value="<?php echo $totalamountdue ?>">
                         </div>
                     </div> 
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Paid</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled>
+                            <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $totalamountpaid ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="date" name="date" disabled>
+                            <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
                         </div>
                     </div>   
-                    <div class="form-group">
-                        <div class="col-sm-12 text-right">
-                            <button type="button" class="btn btn-info preview-add-button">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>            
-        </div> <!-- / panel preview -->
-        
+        </div> <!-- / panel preview -->  
+        <button type="submit" class="btn btn-app bg-green" name="btnpay" id="btnpay" style="width: 20%; margin-left: 85% ; margin-top: 5%; margin-bottom: 5%">SAVE</button>
+    </form>
   </div>
 </div>
                           

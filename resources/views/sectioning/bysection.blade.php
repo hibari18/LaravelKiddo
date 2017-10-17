@@ -97,7 +97,8 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Assign Faculty</h3>
         </div>
-        <form action="assignFaculty.php" method="post">
+        <form action="{{ route('sectioning.assign')}}" method="post">
+          {{ csrf_field }}
         <div class="modal-body">
         <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
           <div><input type="hidden" name="txtSectionId" id="txtSectionId"/></div>

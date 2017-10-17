@@ -166,6 +166,15 @@ class BySectionController extends Controller
         return view('sectioning.sectionstudent', compact('student', 'sect', 'studid'));
     }
 
+    public function assign(Request $request, $id)
+    {
+        $sectid=$_POST['txtSectionId'];
+        $facultyid=$_POST['selFaculty'];
+
+        $fac = Faculty::where('tblSectionId', $sectid)->where('tblSectionFlag', 1)->update(['tblSection_tblFacultyId', $request->$facultyid])->first();
+
+        return view('sectioning.sectionstudent', compact('fac')) 
+    }
     /**
      * Remove the specified resource from storage.
      *
