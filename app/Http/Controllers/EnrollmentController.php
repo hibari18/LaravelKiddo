@@ -188,7 +188,6 @@ class EnrollmentController extends Controller
     }
 
     public function proceed(Request $request){
-        
         if(isset($_POST['btnProceed']))
         {
           $studid = $request->txtStudentId;
@@ -205,7 +204,18 @@ class EnrollmentController extends Controller
         $man = Fees::where('tblFeeMandatory','Y')->where('tblFeeFlag','1')->get();
         $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->whereIn('tblFeeId', $request->optionalfees ?: [])->get();
 
+        return view('enrollment.enrollscheme', compact('studid','clear', 'session','optfees', 'enname2', 'query1', 'query2', 'man', 'opt'));
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function collect()
+    {
         $or=$_POST['txtOR'];
         $id=$_POST['txtAccId'];
         $pr=$_POST['txtPR'];
@@ -233,13 +243,7 @@ class EnrollmentController extends Controller
         $message = 2;
         return redirect()->route('enrollment.index')->with('message', $message);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         //

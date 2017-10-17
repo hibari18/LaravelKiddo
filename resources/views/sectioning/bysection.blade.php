@@ -12,25 +12,38 @@
                                       <thead>
                                         <tr>
                                           <th hidden></th>
+                                          <th>Section</th>
                                           <th>Division</th>
                                           <th>Level</th>
-                                          <th>Section</th>
                                           <th>Session</th>
+                                          <th hidden>Slots Available</th>
                                           <th>Number of Students</th>
+                                          <th hidden>Teacher Id</th>
+                                          <th>Teacher</th>
                                           <th>Action</th>
                                         </tr>
                                       </thead>
                                       <tbody>
                                       @foreach($sect as $bysection)
                                         <tr>
-                                          <td hidden>{{ $bysection->tblSectionId}}</td>
-                                          <td>{{ $bysection->tblDivisionName}}</td>
-                                          <td>{{ $bysection->tblLevelName}}</td>
-                                          <td>{{ $bysection->tblSectionName}}</td>
-                                          <td>{{ $bysection->tblSectionSession}}</td>
-                                          <td>{{ $bysection->sectCount}}</td>
-                                          <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlFillSection">Fill Section</button>
-                                          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#mdlViewStud">View Students</button></td>
+                                          <tr>
+                                          <td hidden><?php echo $row['tblSectionId'] ?></td>
+                                          <td><?php echo $row['tblSectionName'] ?></td>
+                                          <td><?php echo $row['tblDivisionName'] ?></td>
+                                          <td><?php echo $row['tblLevelName'] ?></td>
+                                          <td><?php echo $row['tblSectionSession'] ?></td>
+                                          <td hidden><?php echo $slot ?></td>
+                                          <td><?php echo $row['sectCount'] ?></td>
+                                          <?php
+                                            $query1="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$facultyid' and tblFacultyFlag=1";
+                                            $result1=mysqli_query($con, $query1);
+                                            $row1=mysqli_fetch_array($result1);
+                                          ?>
+                                          <td hidden><?php echo $row1['tblFacultyId'] ?></td>
+                                          <td><?php echo $row1['facultyname'] ?></td>>
+                                          <td style="width: 25%"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlFillSection">Fill Section</button>
+                                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button>
+                                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button></td>
                                         </tr>
                                       @endforeach
                                       </tbody>

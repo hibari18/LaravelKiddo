@@ -32,7 +32,7 @@
             
             <div class="row" style="margin-top: 4%">
                 <div class="col-xs-12">
-                <form role="form" method="POST" action="{{ route('enrollment.proceed') }}">
+                <form role="form" method="POST" action="{{ route('enrollment.collect') }}">
                 {{ csrf_field() }}
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
@@ -94,12 +94,6 @@
                         <label for="amount" class="col-sm-3 control-label">Total Amount Paid</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $totalamountpaid ?>">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled>
                         </div>
                     </div>
                     <div class="form-group">
