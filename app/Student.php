@@ -15,7 +15,7 @@ class Student extends Model
 	public $incrementing = false;
 
 	public function studentinfo(){
-		return $this->hasMany('App\PersonalInfo', 'tblStudInfo_tblStudentId', 'tblStudentId');
+		return $this->hasMany('App\PersonalInfo', 'tblStudInfo_tblStudentId', 'tblStudentId', 'tblStudInfoFname', 'tblStudInfoLname', 'tblStudInfoMname');
 	}
 
 	public function studentdw(){

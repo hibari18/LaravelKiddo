@@ -55,6 +55,19 @@
                 <li><a href="profile"><i class="fa fa-circle-o"></i>Profile</a></li>
               </ul>
             </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-refresh"></i> <span>Queries</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="applicantquery"><i class="fa fa-circle-o"></i>Applicants</a></li>
+                <li><a href="parentquery"><i class="fa fa-circle-o"></i>Parents</a></li>
+                <li><a href="facultyquery"><i class="fa fa-circle-o"></i>Faculty</a></li>
+              </ul>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
