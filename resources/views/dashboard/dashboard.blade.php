@@ -6,15 +6,15 @@
 
 <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>S.Y. 2017 - 2018</h3>
+              <h3>S.Y. <?php echo date("Y"); ?> - <?php echo date('Y', strtotime('+1 year')); ?></h3>
               <small>(Ongoing)</small>
               <p style="font-size: 24px">Welcome!</p>
             </div>
             <div class="icon">
               <i class="fa fa-calendar-o"></i>
             </div>
-                          <button type="button" class="btn btn-primary" style="margin-left: 1%; margin-bottom: 2%">Start</button>
-                          <button type="button" class="btn btn-danger" style="margin-bottom: 2%">End</button>
+                          <button type="submit" class="btn btn-primary" name="systart" id="systart" style="margin-left: 1%; margin-bottom: 2%">Start</button>
+                          <button type="button" class="btn btn-danger" name="syend" id="syend" style="margin-bottom: 2%">End</button>
                         
           </div>
 

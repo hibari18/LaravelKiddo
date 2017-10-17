@@ -21,6 +21,10 @@ class StudScheme extends Model
 		return $this->belongsTo('App\Fees', 'tblStudScheme_tblFeeId', 'tblFeeId');
 	}
 
+	public function scheme(){
+		return $this->belongsTo('App\SchemeType', 'tblStudScheme_tblSchemeId', 'tblSchemeId');
+	}
+
 	public function accounts(){
 		return $this->hasMany('App\Account', 'tblAcc_tblStudSchemeId', 'tblStudSchemeId');
 	}

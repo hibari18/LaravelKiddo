@@ -38,11 +38,7 @@ function run(){
                 <div class="box-body">
                   <div class="box-header with-border">
                     <h2 class="box-title" style="font-size:20px;">Section Student</h2>
-                   
-                    <div>
-                    	 @foreach($lvl as $l)
-                    	<h3 class="box-title" style="font-size:20px; margin-top: 3%">{{ $l->tblLevelName }}</h3></div>
-                    	@endforeach
+                    <div><h3 class="box-title" style="font-size:20px;"><?php echo $lvlname ?></h3></div>
                     <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
                   </div>
 
@@ -68,13 +64,15 @@ function run(){
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    @foreach($studd as $s)                                  
+                                    @foreach($studd as $ss)   
+                                      @foreach($ss->section->where('tblSectionFlag', 1)->where('tblSectionId', $studd->tblStudent_tblSectionId) as sect)                               
                                     <tr>
-                                      <td>{{ $s->tblStudentId}}</td>
-                                      <td>{{ $s->studname}}</td>
-                                      <td>{{ $s->section->tblSectionName}}</td>
+                                      <td>{{ $ss->tblStudentId }}</td>
+                                      <td>{{ $ss->studname }}</td>
+                                      <td>{{ $sect->tblSectionName }}</td>
                                       <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlSectionStudent">Section Student</button></td>
                                     </tr>
+                                    @endforeach
                                   @endforeach
                                   </tbody>
                                 </table>
@@ -92,7 +90,7 @@ function run(){
         <div class="modal-header">
           <h3 class="modal-title" style="font-style: bold">Section Student</h3>
         </div>
-        <form autocomplete="off" method="post" data-toggle="validator" role="form" action="{{ route('sectioning.edit','id') }}" class="form-horizontal">
+        <form autocomplete="off" method="post" data-toggle="validator" role="form" action="{{ route('sectioning.update','id') }}" class="form-horizontal">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
         <div class="modal-body">
@@ -114,8 +112,8 @@ function run(){
                 <div class="col-sm-7 selectContainer">
                 <select class="form-control" name="selSection" id="selSection" style="width: 70%;">
                     <option selected disabled>--Select Section--</option>
-                    @foreach($section as $sect)
-                    <option value="{{ $sect->tblSectionId }}">{{ $sect->tblSectionName }}</option>
+                    @foreach($section as $sec)
+                    <option value="{{ $sec->tblSectionId }}">{{ $sec->tblSectionName }}</option>
                   	@endforeach
                 </select>
                 </div>       

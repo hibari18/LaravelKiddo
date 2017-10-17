@@ -72,16 +72,18 @@ class BillingController extends Controller
 
         $syid = SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
         
-        $studd = Student::where('tblStudentId', $request->txtStudId)->where('tblStudentFlag', 1)->get();
-        
-        // $lvlid= $stud->tblStudent_tblLevelId;
-        //$account = DB::select(DB::raw("select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId=5 and a.tblAccPaid!='PAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId"));
-        $account = DB::table('tblaccount as a')->join('tblstudscheme as s','a.tblAcc_tblStudSchemeId','=','s.tblStudSchemeId')->where('a.tblAcc_tblStudentId', $studid)->where('s.tblStudScheme_tblSchoolYrId', 5)->where('a.tblAccPaid', '!=', 'PAID')->groupBy('a.tblAccPaymentNum', 'a.tblAcc_tblStudSchemeId')->get();
+        $student = Student::where('tblStudentId', $request->txtStudId)->where('tblStudentFlag', 1)->first();
+        $accounts = $student->accounts()
+            ->leftJoin('tblStudScheme', 'tblAccount.tblAcc_tblStudSchemeId','tblStudScheme.tblStudSchemeId')
+            ->where('tblStudScheme.tblStudScheme_tblSchoolYrId', $syid)
+            ->where('tblAccPaid', '!=', 'PAID')
+            ->groupBy('tblAccPaymentNum', 'tblAcc_tblStudSchemeId')
+            ->get();
 
-        $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
 
+        $optionalFees = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
 
-        return view('billing.billingmain', compact('syid', 'studd', 'account', 'studid', 'opt'));
+        return view('billing.billingmain', compact('syid', 'student', 'accounts', 'studid', 'optionalFees'));
     }
 
     /**
@@ -92,11 +94,11 @@ class BillingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function bills (Request $request, $id)
+    public function bills (Request $request)
     {
-        $acc= $request->chkbills;
-
-        return view('billing.collect', compact('acc'));
+        $accounts = Account::whereIn('tblAccId', $request->chkbills)->where('tblAccFlag', 1)->get();
+        $student = $accounts->first()->student;
+        return view('billing.collect', compact('accounts', 'student'));
 
     }
     public function update(Request $request, $id)

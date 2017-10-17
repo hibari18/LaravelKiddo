@@ -33,7 +33,7 @@
                                 <td style="width:100px;">{{ $n->studentname }}</td>
                                 <td style="width:30px;">
                                   
-                                <form method="get" action="{{ route('listofstudent.getPDF', 'id') }}">
+                                <form method="get" action="{{ route('listofstudent.edit', 'id') }}">
                                     {{ csrf_field() }}
                                 <input type="hidden" name="txtStudId" id="txtStudId" value="{{ $n->tblStudentId }}"/>
                                 <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i>Get PDF</button>

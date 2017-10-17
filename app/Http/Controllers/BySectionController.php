@@ -20,12 +20,10 @@ class BySectionController extends Controller
     public function index()
     {
         $bysections = BySection::where('tblSectStudFlag', 1)->get();
-        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
+        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
         $levels = Level::where('tblLevelFlag', 1)->get();
 
-
-
-        return view('sectioning.index', compact('bysection', 'sect', 'levels'));
+        return view('sectioning.index', compact('bysection', 'levels', 'sect'));
     }
 
     /**
@@ -46,6 +44,9 @@ class BySectionController extends Controller
      */
     public function store(Request $request)
     {
+        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
+        $facultyid= $s->tblSection_tblFacultyId;
+        $faculty = DB::select(DB::raw("select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$facultyid' and tblFacultyFlag=1")); 
         
         $sectid=$_POST['txtFillSectionId'];
 
@@ -63,32 +64,44 @@ class BySectionController extends Controller
                 $studid=$row->tblStudentId;
                 array_push($arrStud, $studid);
             }//foreach
-
-            $x=15-$sectcnt;
-            for($y=0; $y<$x; $y++)
-            {
-                    
-                $stud=$arrStud[$y];
-                $studsect = BySection::orderBy('tblSectStudId', 'desc')->first();
-                $sectstudid= $studsect->tblSectStudId;
-                $sectstudid++;
-                // dd($studsect);
-
-                $stsect = BySection::create([
-                        'tblSectStudId' => $sectstudid,
-                        'tblSectStud_tblSectionId' => $sectid,
-                        'tblSectStud_tblStudentId' => $stud,
-                        'tblSectStud_tblSchoolYrId' => $syid,              
-                ]);
             
-            }//for
+            if (count($arrStud) >= 15){ 
+            $x = 16;  
+            }
+            else
+            {
+               $x = count($arrStud);
+            }//else
+                
+                for($y=0; $y<$x; $y++)
+                {   
+                    $stud = $arrStud[$y]; 
+                    $studsect = DB::table('tblsectionstud')->select(DB::raw('tblSectStudId'))->get();  
+                    //dd($studsect);
+                        if (count($studsect) > 0){
+                            //dd($studsect);  
+                                foreach($studsect as $stdc){
+                                    $sectstudid= $stdc->tblSectStudId;
+                                    $stsect = BySection::create([
+                                        'tblSectStudId' => $sectstudid,
+                                        'tblSectStud_tblSectionId' => $sectid,
+                                        'tblSectStud_tblStudentId' => $stud,
+                                        'tblSectStud_tblSchoolYrId' => $syid,    
+
+                                ]); 
+                                }//foreach
+
+                        }//if
+
+                }//for       
+
             $message = 2;
-            return redirect()->route('sectioning.bysection')->with('message', $message);
+            return redirect()->route('sectioning.index')->with('message', $message);
         }//if
         else
         {
             $message = 1;
-            return redirect()->route('sectioning.bysection')->with('message', $message);
+            return redirect()->route('sectioning.index')->with('message', $message);
         }
     }
 
@@ -111,16 +124,24 @@ class BySectionController extends Controller
      */
     public function edit(Request $request, $id)
     {
+
         $lvlid=$_GET['txtlvl'];
-        $lvl = Level::where('tblLevelId', $lvlid)->where('tblLevelFlag', 1)->get();
+        $lvl = DB::table('tbllevel')->where('tblLevelId', $lvlid)->where('tblLevelFlag', 1)->first();
+        $lvlname = $lvl->tblLevelName;
+        
+        
+        $studd = DB::table('tblstudent as s')
+                ->leftjoin('tblstudentinfo as si','s.tblStudentId','=','si.tblStudInfo_tblStudentId')
+                ->select(DB::raw('s.tblStudentId, concat(si.tblStudInfoLname, si.tblStudInfoFname, si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId'))
+                ->where('s.tblStudentType','OFFICIAL')
+                ->where('s.tblStudentFlag', 1)
+                ->where('s.tblStudent_tblLevelId', $lvlid)
+                ->get(); 
+            //dd($studd);
 
         $section = Section::where('tblSection_tblLevelId', $lvlid)->where('tblSectionFlag', 1)->get();
-
-        $studd = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId from tblstudent s, tblstudentinfo si where si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudent_tblLevelId='$lvlid' and s.tblStudentFlag=1"));
-        
-        //$sectid=$studd->tblStudent_tblSectionId;
-        $sect= Section::where('tblSectionFlag', 1)->where('tblSectionId', $request->tblStudent_tblSectionId)->get();
-        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd', 'sect'));
+        //dd($section);
+        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd', 'lvlname'));
     }
 
     /**
@@ -135,11 +156,12 @@ class BySectionController extends Controller
 
         $studid= $request->txtStudId;
         $sectname=$request->selSection;
+
         $sect = Section::where('tblSectionName', $sectname)->where('tblSectionFlag', 1)->get();
         $sectid=$sect->tblSectionId;
         $lvlid=$sect->tblSection_tblLevelId;
-        $student = Student::where('tblStudentId', $studid)->where('tblStudentFlag', 1)
-        ->update(['tblStudent_tblSectionId'=>$sectid]);
+        $student = Student::where('tblStudentId', $studid)->where('tblStudentFlag', 1)-first();
+        $student->update(['tblStudent_tblSectionId'=>$sectid]);
 
         return view('sectioning.sectionstudent', compact('student', 'sect', 'studid'));
     }

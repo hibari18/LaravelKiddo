@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Student;
-use App\PersonalInfo;
-use DB;
+use App\SchoolYear;
 
-class AccountController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +14,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $student= Student::where('tblStudentFlag', 1)->get();
-        $name = DB::select(DB::raw("select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentType='OFFICIAL'"));
-    return view('pdf.listofstudent', compact('student', 'name'));
-        //
+        $sy = SchoolYear::select('tblSchoolYrYear')->where('tblSchoolYrActive', 'ACTIVE')->first();
+
+        return view('dashboard.dashboard', compact('sy'));
     }
 
     /**
@@ -41,7 +37,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //
     }
 
     /**
@@ -61,12 +57,9 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-
-        $id = Student::where('tblStudentId', $request->txtStudId)->where('tblStudentFlag', 1);
-
-        return view('pdf.getPDF', compact('id'));
+        //
     }
 
     /**

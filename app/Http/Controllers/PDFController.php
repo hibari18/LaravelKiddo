@@ -62,7 +62,8 @@ class PDFController extends Controller
      */
     public function edit(Request $request, $id)
     {
-
+        $pdf= Student::select('tblStudentId', $request->txtStudId)->get();
+        return view('pdf.statementofaccount', compact('pdf'));
         
     }
 
@@ -91,9 +92,8 @@ class PDFController extends Controller
 	
   public function getPDF(Request $request, $id){
     $id= Student::select('tblStudentId', $request->txtStudId)->first();
-		$pdf = \PDF::loadView('pdf.statementofaccount',$id);
+		$pdf = \PDF::view('pdf.statementofaccount',$id);
     
-    return $pdf->stream($id.".pdf");
 
 		
 $_dompdf_show_warnings = true;
@@ -122,7 +122,7 @@ $dompdf->render();
 
 // Output the generated PDF to Browser
 //$dompdf->stream();
-    	$dompdf=PDF::loadView('pdf.statementofaccount', compact('pdf'));
+    	$dompdf=PDF::view('pdf.statementofaccount', compact('pdf'));
     	return $dompdf->stream('test.pdf');
       
     }
@@ -134,6 +134,13 @@ public function setPaper($paper, $orientation = 'landscape'){
           $this->dompdf->setPaper($paper, $orientation);
           return $this;
       }
+
+public function accnt(Request $request, $id)
+    {
+        $pdf= Student::select('tblStudentId', $request->txtStudId)->get();
+        return view('pdf.statementofaccount', compact('pdf'));
+        
+    }
 
 }
 

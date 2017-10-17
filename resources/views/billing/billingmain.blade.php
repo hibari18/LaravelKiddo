@@ -28,7 +28,8 @@
                       <div class="box">
                         <div class="box-header"></div>
                         <div class="box-body">
-                          <form action="collection.php" method="post">
+                          <form action="{{ action('BillingController@bills') }}" method="post">
+                          {{ csrf_field() }}
                             <div class="box-body">
                             <div class="col-md-6">
                               <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Avail fees</button>
@@ -44,20 +45,20 @@
                                       <th>Fee Code</th>
                                       <th>Details</th>
                                       <th>Credit</th>
-                                      <th>Remarks</th>
+                                      <th>Running Balance</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                  @foreach($account as $acc)
+                                  @foreach($accounts as $acc)
                                     <tr>
                                       <td><input type="checkbox" name="chkbills[]" id="chkbills" value="{{ $acc->tblAccId }}"/></td>
                                       <td>{{ $acc->tblAccDueDate}}</td>
-                                      <td>{{ $acc->fee->tblFeeCode}}</td>
-                                      <td>{{ $acc->fee->tblFeeName}}</td>
+                                      <td>{{ $acc->studscheme->fee->tblFeeCode}}</td>
+                                      <td>{{ $acc->studscheme->fee->tblFeeName}}</td>
                                       <td>{{ $acc->tblAccCredit}}</td>
-                                      <td>{{ $acc->tblAccRemark}}</td>
+                                      <td>{{ $acc->tblAccRunningBal}}</td>
                                     </tr>
-                                  @endforeach
+                                @endforeach
                                   </tbody>
                                 </table>
                               </div> <!-- col-md-12 -->
@@ -83,7 +84,7 @@
                 <div class="col-sm-7 selectContainer">
                  <select class="form-control" name="selAddFee" id="selAddFee" style="width: 100%;" onclick="changeScheme()">
                   <option selected disabled>--Select Fee--</option>
-                  @foreach($opt as $o)
+                  @foreach($optionalFees as $o)
                   <option value="{{ $o->tblFeeId }}">{{ $o->tblFeeName }}</option>
                   @endforeach
                 </select>

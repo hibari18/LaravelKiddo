@@ -64,7 +64,7 @@ Route::resource('billing', 'BillingController');
 Route::post('collection/', 'BillingController@bills')->name('billing.bills');
 
 Route::resource('listofstudent', 'PDFController');
-Route::get('getPDF','PDFController@getPDF')->name('listofstudent.getPDF');
+Route::get('getPDF','PDFController@edit');
 
 Route::get('applicantquery','QueryController@index');
 Route::get('applicantquery/{id}','QueryController@show');

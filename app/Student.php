@@ -33,4 +33,8 @@ class Student extends Model
 	public function section(){
 		return $this->belongsTo('App\Section', 'tblStudent_tblSectionId', 'tblSectionId');
 	}
+
+	public function accounts(){
+		return $this->hasMany('App\Account', 'tblAcc_tblStudentId', 'tblStudentId');
+	}
 }

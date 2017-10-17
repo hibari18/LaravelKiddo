@@ -32,7 +32,8 @@
             
             <div class="row" style="margin-top: 4%">
                 <div class="col-xs-12">
-                <form action="trytry.php" method="post">
+                <form role="form" method="POST" action="{{ route('enrollment.collect') }}">
+                {{ csrf_field() }}
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
@@ -73,25 +74,14 @@
                             </tbody> <!-- preview content goes here-->
                         </table>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block" style="width: 35%; float: right; margin-top: 5%">SAVE</button>
-                    </form>                          
+                                              
                 </div>
             </div>
-            <div class="row text-right">
-                <div class="col-xs-12">
-                    <h4>Total: <strong><span class="preview-total"></span></strong></h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <hr style="border:2px dashed #dddddd;">
-                    <button type="button" class="btn btn-success btn-block" style="width: 35%; float: right; margin-top: 5%">Save</button>
-                </div>                
-            </div>
+            
         </div>
         <!-- panel preview -->
-        <div class="col-sm-6" style="margin-top: 5%; margin-left: 40%">
-            <h4>Add payment:</h4>
+        <div class="col-sm-6" style="margin-top: 5%; margin-left: 35%">
+            <h4>Summary:</h4>
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
                     <div class="form-group">
@@ -107,28 +97,40 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
                         </div>
                     </div>   
-                    <div class="form-group">
-                        <div class="col-sm-12 text-right">
-                            <button type="button" class="btn btn-info preview-add-button">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>            
-        </div> <!-- / panel preview -->
+        </div> <!-- / panel preview -->     
   </div>
+
+  <button type="button" class="btn btn-info btn-block" data-toggle="modal" style="width: 20%; margin-left: 65% ; margin-top: 5%; margin-bottom: 5%" data-target="#ProceedOrSave">SAVE</button>
+
+  <div class="modal fade" id="ProceedOrSave" role="dialog" tabindex="-1" aria-labelledby="ProceedOrSave" aria-hidden="true">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-dialog">
+              <div class="modal-content col-sm-12">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="addModalFour"> ENROLLMENT </h4>
+                </div>
+                 <div style="margin-top: 20%; margin-bottom: 20%; margin-left: 2%">
+                  <button type="submit" class="btn btn-app bg-green" name="btnEnrollStudent" id="btnEnrollStudent" style="width: 47%"><i class="fa fa-save"></i> Enroll Student</button>
+                  <a class="btn btn-app bg-blue" href="enrollment" name="btnCreateUA" id="btnCreateUA" style="width: 47%">
+                    <i class="fa fa-arrow-circle-right"></i> Create User Account</a>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+  </form>
 </div>
                           
 
