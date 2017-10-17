@@ -74,12 +74,12 @@ class BillingController extends Controller
         
         $student = Student::where('tblStudentId', $request->txtStudId)->where('tblStudentFlag', 1)->first();
         $accounts = $student->accounts()
+            ->leftJoin('tblStudScheme', 'tblAccount.tblAcc_tblStudSchemeId','tblStudScheme.tblStudSchemeId')
+            ->where('tblStudScheme.tblStudScheme_tblSchoolYrId', $syid)
             ->where('tblAccPaid', '!=', 'PAID')
-            ->whereHas('studscheme.scheme', function ($query) use ($syid) {
-                $query->where('tblStudScheme_tblSchoolYrId', $syid);
-            })
             ->groupBy('tblAccPaymentNum', 'tblAcc_tblStudSchemeId')
             ->get();
+
 
         $optionalFees = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
 
