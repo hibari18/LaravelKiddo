@@ -57,3 +57,13 @@ Route::post('feesavailed/', 'EnrollmentController@proceed')->name('enrollment.pr
 
 Route::resource('advisorylist', 'GradesController');
 Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.studlist');
+
+Route::resource('compose', 'EmailController');
+//Route::get('compose','SendMailController@compose');
+//Route::post('sendmail','SendMailController@sendmail');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('Pasok','LogInController@getLogInForm')->name('Pasok');
+Route::post('postLogInForm','LogInController@postLogInForm');

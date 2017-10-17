@@ -212,57 +212,11 @@
       </div><!-- /.row -->
     </section><!-- /.content -->
 
-  <!--  <script>
-$(document).ready(function() {
-    $('#admission')
-        .formValidation({
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                txtStudFname: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The title is required'
-                        }
-                    }
-                },
-                txtStudMname: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The abstract is required'
-                        },
-                    }
-                },
-                sessionType: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The session type is required'
-                        }
-                    }
-                }
-            }
-        })
-        .on('success.field.fv', function(e, data) {
-
-            var $parent = data.element.parents('.form-group');
-
-            // Remove the has-success class
-            $parent.removeClass('has-success');
-
-            // Hide the success icon
-            data.element.data('fv.icon').hide();
-        });
-});
-</script> -->
-
     <!--Division Validatins-->
     <script type="text/javascript">
      $(document).ready(function() {
       $('#admission').bootstrapValidator({
-        icons: {
+        feedbackIcons: {
           valid: 'glyphicon glyphicon-ok',
           invalid: 'glyphicon glyphicon-remove',
           validating: 'glyphicon glyphicon-refresh'
@@ -430,6 +384,18 @@ $(document).ready(function() {
           },
           }
         })
+        .on('success.field.bv', function(e, data) {
+            // If the field is empty
+            if (data.element.val() === '') {
+                var $parent = data.element.parents('.form-group');
+
+                // Remove the has-success class
+                $parent.removeClass('has-success');
+
+                // Hide the success icon
+                $parent.find('.form-control-feedback[data-bv-icon-for="' + data.field + '"]').hide();
+            }
+        });
       });
     </script>
 
