@@ -28,7 +28,7 @@ $dompdf = new Dompdf($options);
 
 // instantiate and use the dompdf class
 $dompdf = new Dompdf();
-$dompdf->loadHtml("pdf.classlist");
+$dompdf->loadHtml("pdf.monthlycollection");
 
 
 // (Optional) Setup the paper size and orientation
@@ -39,7 +39,7 @@ $dompdf->render();
 
 // Output the generated PDF to Browser
 //$dompdf->stream();
-    	$dompdf=PDF::loadView('pdf.classlist');
+    	$dompdf=PDF::loadView('pdf.monthlycollection');
     	return $dompdf->stream('test.pdf');
     }
 
