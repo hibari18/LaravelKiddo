@@ -94,11 +94,11 @@ class BillingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function bills (Request $request, $id)
+    public function bills (Request $request)
     {
-        $acc= $request->chkbills;
-
-        return view('billing.collect', compact('acc'));
+        $accounts = Account::whereIn('tblAccId', $request->chkbills)->where('tblAccFlag', 1)->get();
+        $student = $accounts->first()->student;
+        return view('billing.collect', compact('accounts', 'student'));
 
     }
     public function update(Request $request, $id)

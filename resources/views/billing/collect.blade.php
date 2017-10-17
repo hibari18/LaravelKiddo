@@ -44,28 +44,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php
-                              foreach($acc as $accId)
-                              {
-                                $query="select * from tblaccount where tblAccId='$accId' and tblAccFlag=1";
-                                $result=mysqli_query($con, $query);
-                                $row=mysqli_fetch_array($result);
-                                $studschemeid=$row['tblAcc_tblStudSchemeId'];
-                                $query1="select * from tblstudscheme s, tblfee f where f.tblFeeId=s.tblStudScheme_tblFeeId and s.tblStudSchemeId='$studschemeid' and s.tblStudSchemeFlag=1 and f.tblFeeFlag=1";
-                                $result1=mysqli_query($con, $query1);
-                                $row1=mysqli_fetch_array($result1);
-                            ?>
+                              @foreach($accounts as $account)
                               <tr>
-                              <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="<?php echo $row['tblAccId'] ?>"/>
-                              <td><?php echo $row['tblAccDueDate'] ?></td>
-                              <td><input type="text" name="txtOR[]" id="txtOR" placeholder="OR#" style="width:55px" /></td>
-                              <td><input type="text" name="txtPR[]" id="txtPR" placeholder="PR#" style="width:55px" /></td>
-                              <td><?php echo $row1['tblFeeCode'] ?></td>
-                              <td><?php echo $row1['tblFeeName'] ?></td>
-                              <td><?php echo $row['tblAccCredit'] ?></td>
-                              <td><?php echo $row['tblAccCredit'] ?></td>
+                                <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="{{ $account->tblAccId }}"/>
+                                <td>{{ $account->tblAccDueDate }}</td>
+                                <td><input type="text" name="txtOR[]" id="txtOR" placeholder="OR#" value="{{ $account->tblAccOR }}" style="width:55px" /></td>
+                                <td><input type="text" name="txtPR[]" id="txtPR" placeholder="PR#" value="{{ $account->tblAccPR }}" style="width:55px" /></td>
+                                <td>{{ $account->studscheme->fee->tblFeeCode }}</td>
+                                <td>{{ $account->studscheme->fee->tblFeeName }}</td>
+                                <td>{{ $account->tblAccCredit }}</td>
+                                <td>{{ $account->tblAccCredit }}</td>
                             </tr>
-                            <?php } ?>
+                            @endforeach
                             </tbody> <!-- preview content goes here-->
                         </table>
                     </div>  

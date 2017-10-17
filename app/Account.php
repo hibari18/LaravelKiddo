@@ -14,7 +14,7 @@ class Account extends Model
 	public $timestamps = false;
 
 	public function student(){
-		return $this->belongsTo('App\Student', 'tblstudent_tblStudInfoId', 'tblStudentId');
+		return $this->belongsTo('App\Student', 'tblAcc_tblStudentId', 'tblStudentId');
 	}
 
 	public function studscheme(){
