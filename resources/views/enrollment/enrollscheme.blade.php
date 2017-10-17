@@ -67,9 +67,6 @@
                                         <div class="col-md-3" style="float: right">
                                     <div class="text-center">
                                       <img src="{{ asset('images/User/user.png') }}" class="avatar img-circle" alt="avatar" style="height: 50%; width: 50%">
-                                      <h6>Upload a different photo...</h6>
-                                      
-                                      <input type="file" class="form-control">
                                     </div>
                                   </div>
                                         @foreach($enname2 as $en2)
@@ -93,7 +90,7 @@
                                                     <tbody id="tb">
                                                         @foreach($man as $m)
                                                         <tr>
-                                                            <td hidden><input type="hidden" name="txtFeeId1[]" id="txtFeeId1" value="{{ $m->tblFeeId }}"
+                                                            <td hidden><input type="hidden" name="txtFeeIdM[]" id="txtFeeId1" value="{{ $m->tblFeeId }}"
                                                                 />{{ $m->tblFeeId }}
                                                             </td>
                                                             <td>{{ $m->tblFeeCode }}</td>
@@ -102,7 +99,7 @@
                                                                 @if(count($m->schemes()->active()->get()) < 1)
                                                                 <p>No Scheme Available</p>
                                                                 @else
-                                                                    <select class="form-control" style="width: 50%;" name="selSchemeMand[]" id="selSchemeMand">
+                                                                    <select class="form-control" style="width: 50%;" name="selSchemeMand[{{ $m->tblFeeId }}]" id="selSchemeMand">
                                                                         <option selected="selected" disabled>--CHOOSE SCHEME--</option>
                                                                         @foreach($m->schemes as $scheme)
                                                                         <option value="{{ $scheme->tblSchemeId }}">{{ $scheme->tblSchemeType }}</option>
@@ -115,7 +112,7 @@
                                                         @foreach($opt as $o)
                                                         <tr>
                                                             <td hidden>
-                                                                <input type="hidden" name="txtFeeId2[]" id="txtFeeId2" value="{{ $o->tblFeeId }}" />
+                                                                <input type="hidden" name="txtFeeIdO[]" id="txtFeeId2" value="{{ $o->tblFeeId }}" />
                                                                 {{ $o->tblFeeId }}
                                                             </td>
                                                             <td>{{ $o->tblFeeCode }}</td>
@@ -124,7 +121,7 @@
                                                                 @if(count($o->schemes()->active()->get()) < 1)
                                                                 <p>No Scheme Available</p>
                                                                 @else
-                                                                <select class="form-control" style="width: 50%;" name="selSchemeOpt[]" id="selSchemeOpt">
+                                                                <select class="form-control" style="width: 50%;" name="selSchemeOpt[{{ $o->tblFeeId }}]" id="selSchemeOpt">
                                                                     <option selected="selected" disabled>--CHOOSE SCHEME--</option>
                                                                     @foreach($o->schemes as $scheme)
                                                                     <option value="{{ $scheme->tblSchemeId }}">{{ $scheme->tblSchemeType }}</option>

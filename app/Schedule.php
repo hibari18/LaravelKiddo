@@ -19,4 +19,9 @@ class Schedule extends Model
 		return $this->belongsTo('App\SchemeType', 'tblSchemeDetail_tblScheme', 'tblSchemeId');
 	}
 	
+	public function fee(){
+		return $this->belongsTo('App\Fees', 'tblSchemeDetail_tblFee', 'tblFeeId');
+	}
+	
+
 }

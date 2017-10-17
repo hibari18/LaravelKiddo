@@ -44,4 +44,16 @@ class Fees extends Model
 	public function schemedetails(){
 		return $this->hasMany('App\Schedule', 'tblSchemeDetail_tblFee', 'tblFeeId');
 	}
+
+	public function student(){
+		return $this->belongsTo('App\Student', 'tblstudent_tblStudInfoId', 'tblStudentId');
+	}
+
+	public function fee(){
+		return $this->belongsTo('App\Fees', 'tblStudScheme_tblFeeId', 'tblFeeId');
+	}
+
+	public function accounts(){
+		return $this->hasMany('App\Account', 'tblAcc_tblStudSchemeId', 'tblStudSchemeId');
+	}
 }

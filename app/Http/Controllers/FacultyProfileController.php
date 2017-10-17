@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Faculty;
+use DB;
+use App\User;
 
 class FacultyProfileController extends Controller
 {
@@ -39,26 +41,27 @@ class FacultyProfileController extends Controller
     {
         if(isset($_POST['btnAdd']))
         {
-            $fname=$_POST['txtFname'];
-            $lname=$_POST['txtLname'];
-            $mname=$_POST['txtMname'];
-            $bday=$_POST['txtBday'];
-            $bplace=$_POST['txtBplace'];
-            $gender=$_POST['optradio'];
-            $add=$_POST['txtAdd'];
-            $no=$_POST['txtNo'];
-            $email=$_POST['txtEmail'];
-            $position=$_POST['selPosition'];
+            $fname = preg_replace('/\s+/u', '',  $request->txtFname);
+            $lname = preg_replace('/\s+/u', '',  $request->txtLname);
+            $mname=  $request->txtMname;
+            $bday=   $request->txtBday;
+            $bplace=  $request->txtBplace;
+            $gender=  $request->optradio;
+            $add=  $request->txtAdd;
+            $no=  $request->txtNo;
+            $email=  $request->txtEmail;
+            $position=  $request->selPosition;
 
-            $fac = Faculty::where('tblFacultyFlag', 1)->pluck('tblFacultyId')->all();
-            if($fac->num_rows == 0)
+            
+            $faculty = DB::select(DB::raw("select * from tblfaculty;"));
+            if(empty($faculty))
             {   
                 $zero = (string) "0000";
                 $id=(string)"1";
             }
             else
             {
-                $id = Faculty::groupBy('tblFacultyId', 'desc')->pluck('tblFacultyId')->first();
+                $id = Faculty::orderBy('tblFacultyId', 'desc')->pluck('tblFacultyId')->first();
                 $id +=1;
                 $lId=(string) strlen($id);
                 if($lId==1)
@@ -81,46 +84,40 @@ class FacultyProfileController extends Controller
             $format='%s%d';
             $realid = sprintf($format,$zero,$id);
             
-            // User
-                $posName= Faculty::select('tblFacultyPosName')->where('tblFacultyPosId', $position)->first();
-                $roleid= Role::select('tblRoleId')->where('tblRoleName', $posname)->first();
+            // User     
+                // $userId = User::orderBy('tblUserId', 'desc')->pluck('tblUserId')->first();
+                // $userId ++;
+                // $fullname= $fname.$lname;
+                // $user = User::create([
+                //         'tblUserId' => $userId,
+                //         'tblUserName' => $fullname,
+                //         'tblUserFlag' => 1,
 
-                $query = "select * from tbluser order by tblUserId desc limit 0, 1";
-                $result = mysqli_query($con, $query);
-                $row = mysqli_fetch_assoc($result);
-                $userId = $row['tblUserId'];
-                $userId ++;
-                $fullname=$fname.$lname;
-                $query="insert into tbluser(tblUserId, tblUserName, tblUser_tblRoleId, tblUserFlag) values ('$userId', '$fullname', '$roleid', 1)";
-                $result=mysqli_query($con, $query);
+                // ]);
             // User end
+                
+                $facultycreate = Faculty::create([
+                        'tblFacultyId' => $realid,
+                        'tblFacultyFname' => $fname,
+                        'tblFacultyLname' => $lname,
+                        'tblFacultyMname' => $mname,
+                        'tblFacultyGender' => $gender,
+                        'tblFacultyEmail' => $email,
+                        'tblFacultyFlag' => 1,
+                        'tblFacultyPosition' => $position,
+                        'tblFacultyContact' => $no,
+                        'tblFacultyAddress' => $add,
+                        'tblFacultyBday' => $bday,
+                        'tblFacultyBplace' => $bplace,
+                        'tblFaculty_tblUserId' => $userId,
 
-            $query="insert into tblfaculty(tblFacultyId, tblFacultyFname, tblFacultyLname, tblFacultyMname, tblFacultyGender, tblFacultyEmail, tblFacultyFlag, tblFaculty_tblFacultyPositionId, tblFacultyContact, tblFacultyAddress, tblFacultyBday, tblFacultyBplace, tblFaculty_tblUserId) values ('$realid', '$fname', '$lname', '$mname', '$gender', '$email', 1, '$position', '$no', '$add', '$bday', '$bplace', '$userId')";
-            if (!$query = mysqli_query($con, $query)) {
-                exit(mysqli_error($con));
-            }else{
-                header('location:faculty-add.php');
-            }
-        }
-
-
-        $facprofile = Faculty::create([
-            
-            //'tblFacultyId' => $studentid,
-            'tblFacultyFname' => trim($request->txtFname),
-            'tblFacultyLname' => trim($request->txtLname),
-            'tblFacultyMname' => trim($request->txtMname),
-            'tblFacultyBplace' => trim($request->txtBplace),
-            'tblFacultyBday' => trim($request->txtBday),
-            'tblFacultyGender' => trim($request->optradio),
-            'tblFacultyAddress' => trim($request->txtAdd),
-            //'tblFaculty_tblUserId' => trim($request->txtStudNat),
-            'tblFacultyContact' => trim($request->txtNo),
-            'tblFacultyEmail' => trim($request->txtEmail),
-            'tblFacultyPosition' => trim($request->selPosition),
-            
+                ]);
         
-        ]);
+        $message = 2;
+        return redirect()->route('profile.index')->with('message', $message);
+
+           
+        }
     }
 
     /**
@@ -140,9 +137,10 @@ class FacultyProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $faculty = Faculty::where('tblFacultyId', $request->txtFacultyId)->where('tblFacultyFlag', 1)->first();
+        return view('profile.facultyedit', compact('faculty'));
     }
 
     /**
@@ -154,7 +152,39 @@ class FacultyProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      if(isset($_POST['btnUpd']))
+        {
+            $id= $request->txtId;
+            $fname= $request->txtFname;
+            $lname= $request->txtLname;
+            $mname= $request->txtMname;
+            $bday= $request->txtBday;
+            $bplace= $request->txtBplace;
+            $gender= $request->optradio;
+            $add= $request->txtAdd;
+            $no= $request->txtNo;
+            $email= $request->txtEmail;
+            $position= $request->selPosition;
+
+            $facultyupdate = Faculty::where('tblFacultyId', $id)->update([
+                        'tblFacultyFname' => $fname,
+                        'tblFacultyLname' => $lname,
+                        'tblFacultyMname' => $mname,
+                        'tblFacultyGender' => $gender,
+                        'tblFacultyEmail' => $email,
+                        'tblFacultyFlag' => 1,
+                        'tblFacultyPosition' => $position,
+                        'tblFacultyContact' => $no,
+                        'tblFacultyAddress' => $add,
+                        'tblFacultyBday' => $bday,
+                        'tblFacultyBplace' => $bplace,
+                        // 'tblFaculty_tblUserId' => $userId,
+
+                ]);
+
+        }
+        $message = 4;
+        return redirect()->route('profile.index')->with('message', $message);
     }
 
     /**

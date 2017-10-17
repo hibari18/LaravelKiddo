@@ -225,10 +225,10 @@ class CheckRequirementController extends Controller
         
              $siblingid = StudSiblings::create([   
 
-                'tblStudSibName' => strtoupper(trim($request->$sname)),
+                'tblStudSibName' => trim($sname),
                 'tblStudSibAge' => trim($sage),
                 'tblStudSibGrade' => trim($sgrd),
-                'tblStudSibSchool' => strtoupper(trim($sschool)),
+                'tblStudSibSchool' => trim($sschool),
                 'tblStudSib_tblStudId' => $studentid,
                 ]);
             }
@@ -254,9 +254,9 @@ class CheckRequirementController extends Controller
             $relativeid = StudRelative::create([   
 
                 'tblStudRelId' => $relativeid,
-                'tblStudRelName' => strtoupper(trim($rname)),
+                'tblStudRelName' => trim($rname),
                 'tblStudRelAge' => $rage,
-                'tblStudRelRelation' => strtoupper(trim($rrelation)),
+                'tblStudRelRelation' => trim($rrelation),
                 'tblStudRel_tblStudentId' => $studentid,
              ]);
             }

@@ -85,9 +85,9 @@
               <div class="col-sm-7">
                 <select class="form-control" style="width: 100%;" name="selPosition" id="selPosition">
                   <option selected="selected" disabled>--Select position--</option>
-                  <option value="">Head Teacher</option>
-                  <option value="">Teacher</option>
-                  <option value="">Registrar</option>
+                  <option value="Head Teacher">Head Teacher</option>
+                  <option value="Teacher">Teacher</option>
+                  <option value="Registrar">Registrar</option>
                 </select>
               </div>
         </div>

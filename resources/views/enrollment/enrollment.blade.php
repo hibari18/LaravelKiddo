@@ -1,6 +1,33 @@
 @extends('master')
 
 @section('content')
+<?php
+    $message = session('message');
+
+    if($message == 1) {
+      echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 2) {
+      echo "<script> swal('Enrolled succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 3) {
+      echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 4) {
+      echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 5) {
+      echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 6) {
+      echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+    }
+  ?>
 <script>
     function showLevel()
       {

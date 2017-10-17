@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BySection;
-// use App\ByStudent;
+use App\Level;
+use App\Student;
+use App\Section;
+USE App\SchoolYear;
+use DB;
 
 class BySectionController extends Controller
 {
@@ -16,9 +20,10 @@ class BySectionController extends Controller
     public function index()
     {
         $bysections = BySection::where('tblSectStudFlag', 1)->get();
-        $bystudents = BySection::where('tblSectStudFlag', 1)->get();
+        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
+        $levels = Level::where('tblLevelFlag', 1)->get();
 
-        return view('sectioning.index', compact('bysection', 'bystudent'));
+        return view('sectioning.index', compact('bysection', 'levels', 'sect'));
     }
 
     /**
@@ -39,7 +44,65 @@ class BySectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
+        $facultyid= $s->tblSection_tblFacultyId;
+        $faculty = DB::select(DB::raw("select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$facultyid' and tblFacultyFlag=1")); 
+        
+        $sectid=$_POST['txtFillSectionId'];
+
+        $syid = SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
+       
+        $cnt= DB::table('tblsectionstud')->select(DB::raw('count(tblsectstudid) as scount'))->where('tblSectStud_tblSectionId', $sectid)->where('tblsectstudflag',1)->first();
+        $sectcnt=$cnt->scount;
+        $arrStud=array();
+
+        if($sectcnt < 15)
+        {
+            $limit = DB::table('tblstudent as s')->join('tblstudentinfo as si','s.tblStudentId','=','si.tblStudInfo_tblStudentId')->select(DB::raw('s.tblStudentId, concat(si.tblStudInfoLname, si.tblStudInfoFname, si.tblStudInfoMname) as name'))->where('s.tblStudentType','OFFICIAL')->where('s.tblStudentFlag',1)->orderByRaw("RAND()")->get();
+
+            foreach($limit as $row){
+                $studid=$row->tblStudentId;
+                array_push($arrStud, $studid);
+            }//foreach
+            
+            if (count($arrStud) >= 15){ 
+            $x = 16;  
+            }
+            else
+            {
+               $x = count($arrStud);
+            }//else
+                
+                for($y=0; $y<$x; $y++)
+                {   
+                    $stud = $arrStud[$y]; 
+                    $studsect = DB::table('tblsectionstud')->select(DB::raw('tblSectStudId'))->get();  
+                    //dd($studsect);
+                        if (count($studsect) > 0){
+                            //dd($studsect);  
+                                foreach($studsect as $stdc){
+                                    $sectstudid= $stdc->tblSectStudId;
+                                    $stsect = BySection::create([
+                                        'tblSectStudId' => $sectstudid,
+                                        'tblSectStud_tblSectionId' => $sectid,
+                                        'tblSectStud_tblStudentId' => $stud,
+                                        'tblSectStud_tblSchoolYrId' => $syid,    
+
+                                ]); 
+                                }//foreach
+
+                        }//if
+
+                }//for       
+
+            $message = 2;
+            return redirect()->route('sectioning.index')->with('message', $message);
+        }//if
+        else
+        {
+            $message = 1;
+            return redirect()->route('sectioning.index')->with('message', $message);
+        }
     }
 
     /**
@@ -59,9 +122,26 @@ class BySectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+
+        $lvlid=$_GET['txtlvl'];
+        $lvl = DB::table('tbllevel')->where('tblLevelId', $lvlid)->where('tblLevelFlag', 1)->first();
+        $lvlname = $lvl->tblLevelName;
+        
+        
+        $studd = DB::table('tblstudent as s')
+                ->leftjoin('tblstudentinfo as si','s.tblStudentId','=','si.tblStudInfo_tblStudentId')
+                ->select(DB::raw('s.tblStudentId, concat(si.tblStudInfoLname, si.tblStudInfoFname, si.tblStudInfoMname) as studname, s.tblStudent_tblSectionId'))
+                ->where('s.tblStudentType','OFFICIAL')
+                ->where('s.tblStudentFlag', 1)
+                ->where('s.tblStudent_tblLevelId', $lvlid)
+                ->get(); 
+            //dd($studd);
+
+        $section = Section::where('tblSection_tblLevelId', $lvlid)->where('tblSectionFlag', 1)->get();
+        //dd($section);
+        return view('sectioning.sectionstudent', compact('lvlid', 'lvl', 'section', 'studd', 'lvlname'));
     }
 
     /**
@@ -73,9 +153,28 @@ class BySectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $studid= $request->txtStudId;
+        $sectname=$request->selSection;
+
+        $sect = Section::where('tblSectionName', $sectname)->where('tblSectionFlag', 1)->get();
+        $sectid=$sect->tblSectionId;
+        $lvlid=$sect->tblSection_tblLevelId;
+        $student = Student::where('tblStudentId', $studid)->where('tblStudentFlag', 1)-first();
+        $student->update(['tblStudent_tblSectionId'=>$sectid]);
+
+        return view('sectioning.sectionstudent', compact('student', 'sect', 'studid'));
     }
 
+    public function assign(Request $request, $id)
+    {
+        $sectid=$_POST['txtSectionId'];
+        $facultyid=$_POST['selFaculty'];
+
+        $fac = Faculty::where('tblSectionId', $sectid)->where('tblSectionFlag', 1)->update(['tblSection_tblFacultyId', $request->$facultyid])->first();
+
+        return view('sectioning.sectionstudent', compact('fac')) 
+    }
     /**
      * Remove the specified resource from storage.
      *

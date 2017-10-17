@@ -10,6 +10,9 @@ use App\Level;
 use App\StudScheme;
 use App\SchoolYear;
 use App\Fees;
+use App\Account;
+use App\FeeAmount;
+use App\Schedule;
 use DB;
 
 class EnrollmentController extends Controller
@@ -56,85 +59,119 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+        
         $studid = $request->txtStudId;
         $clear = $request->txtClear;
         $session = $request->txtSession;
-        $schemem = $request->selSchemeMand;
-        $schemeo = $request->selSchemeOpt;
-        $feeId  = $request->txtFeeId2;
-        $feeId1 = $request->txtFeeId1;
+        $schemem = $request->selSchemeMand ?: [];
+        $schemeo = $request->selSchemeOpt ?: [];
+        $optional_fees  = $request->txtFeeIdO ?: [];
+        $mandatory_fees = $request->txtFeeIdM ?: [];
 
-        $syid   =   SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
+        try{
+            \DB::beginTransaction();
 
-        $enrollid = Enrollment::create([
-            'tblStudEnrollPreferedSession' => $session,
-            'tblStudEnrollClearance' => $clear,
-            'tblStudEnroll_tblStudentId' => $studid,
-        ]);
+            $syid   =   SchoolYear::select('tblSchoolYrId')->where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
+            
+            $enrollid = Enrollment::create([
+                'tblStudEnrollPreferedSession' => $session,
+                'tblStudEnrollClearance' => $clear,
+                'tblStudEnroll_tblStudentId' => $studid,
+            ]);
 
-        $length1=count($schemem);
-        foreach($feeId1 as $val1)
-        {
-            for($i=0; $i<$length1; $i++)
+            foreach($mandatory_fees as $feeId)
             {
-                $scheme1=$schemem[$i];
-                $result= SchemeType::where('tblScheme_tblFeeId', $val1)->where('tblSchemeId', $scheme1)->where('tblSchemeFlag', 1)->get();
-                if(count($result) > 0)
-                {
-                    $studschemeid = StudScheme::create([
-                        'tblStudScheme_tblSchemeId' => $scheme1,
-                        'tblStudScheme_tblFeeId' => $val1,
-                        'tblStudScheme_tblStudentId' => $studid,
-                        'tblStudScheme_tblSchoolYrId' => $syid,
-                    ]);
+                $scheme = array_key_exists($feeId, $schemem)?$schemem[$feeId]:null;
+                $studschemeid = StudScheme::create([
+                    'tblStudScheme_tblSchemeId' => $scheme, 
+                    'tblStudScheme_tblFeeId' => $feeId,
+                    'tblStudScheme_tblStudentId' => $studid,
+                    'tblStudScheme_tblSchoolYrId' => $syid,
+                ]);
+            }//foreach feeId(mandatory)
+            
 
-                }
-                else if(count($result) == 0)
-                {
-                    $studschemeid = StudScheme::create([
-                        'tblStudScheme_tblFeeId' => $val1,
-                        'tblStudScheme_tblStudentId' => $studid,
-                        'tblStudScheme_tblSchoolYrId' => $syid,
-                    ]);
-
-                }
-            }
-        }//foreach feeId(mandatory)
-
-        $length=count($schemeo);
-        foreach($feeId as $val2)
-        {
-            for($i=0; $i<$length; $i++)
+            foreach($optional_fees as $feeId)
             {
-                $scheme=$schemeo[$i];
-                $result = SchemeType::where('tblScheme_tblFeeId', $val2)->where('tblSchemeId', $scheme)->where('tblSchemeFlag', 1)->get();
-                if(count($result) > 0)
-                {
-                    $studschemeid = StudScheme::create([
-                        'tblStudScheme_tblSchemeId' => $scheme,
-                        'tblStudScheme_tblFeeId' => $val2,
-                        'tblStudScheme_tblStudentId' => $studid,
-                        'tblStudScheme_tblSchoolYrId' => $syid,
-                    ]);
-                }
-                else if(count($result) == 0)
-                {
-                    $studschemeid = StudScheme::orderBy('tblStudSchemeId', 'desc')->pluck('tblStudSchemeId')->first();
-                    $studschemeid++;
-                    $studschemeid = StudScheme::create([
-                        'tblStudSchemeId' => $studschemeid,
-                        'tblStudScheme_tblFeeId' => $val2,
-                        'tblStudScheme_tblStudentId' => $studid,
-                        'tblStudScheme_tblSchoolYrId' => $syid,
-                    ]);
+                $scheme = array_key_exists($feeId, $schemeo)?$schemeo[$feeId]:null;
+                $studschemeid = StudScheme::create([
+                    'tblStudScheme_tblSchemeId' => $scheme, 
+                    'tblStudScheme_tblFeeId' => $feeId,
+                    'tblStudScheme_tblStudentId' => $studid,
+                    'tblStudScheme_tblSchoolYrId' => $syid,
+                ]);
+            }//foreach feeId(optional)
+            //dd($studid);
+            $stscheme = StudScheme::where('tblStudScheme_tblStudentId', $studid)->where('tblStudScheme_tblSchoolYrId', $syid)->where('tblStudSchemeFlag', 1)->get();
+            $student = Student::findOrFail($studid);
+            $lvlid = $student->tblStudent_tblLevelId;
+                foreach ($stscheme as $row) {
+                    $studscheme=$row->tblStudSchemeId;
+                    $schemeId=$row->tblStudScheme_tblSchemeId;
+                    $studfeeid=$row->tblStudScheme_tblFeeId;
+                    if($schemeId != null)
+                    {
+                        $scheme = SchemeType::findOrFail($schemeId);
+                        // MASS OR LEVEL
+                        if($scheme->fees->tblFeeType !== "MASS FEE"){
+                            $schemedetail = Schedule::where('tblSchemeDetail_tblScheme', $schemeId)->where('tblSchemeDetail_tblLevel', $lvlid)->where('tblSchemeDetailFlag', 1)->get();
+                        } else {
+                            $schemedetail = Schedule::where('tblSchemeDetail_tblScheme', $schemeId)->where('tblSchemeDetailFlag', 1)->get();
+                        }
 
+                        foreach($schemedetail as $sched)
+                        {
+                            $duedate=$sched->tblSchemeDetailDueDate;
+                            $payment=$sched->tblSchemeDetailAmount;
+                            $paymentnum=$sched->tblSchedDetailCtr;
+                            $acc = Account::create([
+                                    'tblAcc_tblStudentId' => $studid,
+                                    'tblAcc_tblStudSchemeId' => $studscheme,
+                                    'tblAccCredit' => $payment,
+                                    'tblAccDueDate' => $duedate,
+                                    'tblAccPaymentNum' => $paymentnum,
+                                    'tblAccRunningBal' => $payment,
+
+                            ]);
+                        }
+                    }
+
+                    else if(empty($schemeId))
+                    {
+                        $famount = FeeAmount::where('tblFeeAmount_tblFeeId', $studfeeid)->where('tblFeeAmountFlag', 1)->where('tblFeeAmount_tblLevelId', $lvlid)->first();
+                        $sched = Schedule::where('tblSchemedetail_tblfee', $studfeeid)->first();
+                        if($famount !== null){
+                            $feeamnt = $sched->tblSchemeDetailAmount;
+                            $accnt = Account::create([
+                                'tblAcc_tblStudentId' => $studid,
+                                'tblAcc_tblStudSchemeId' => $studscheme,
+                                'tblAccCredit' => $feeamnt,
+                                'tblAccDueDate' => $sched->tblSchemeDetailDueDate,
+                                'tblAccPaymentNum' => 1,
+                                'tblAccRunningBal' => $feeamnt,
+                            ]);
+                        }
+                        
+                    }
+                    
                 }
-            }
-        }//foreach feeId(optional)
+                    
+            \DB::commit();
+                        
+            $student = Student::where('tblStudentId', $studid)->where('tblStudentFlag', 1)->first();
+            $student->update(['tblStudentType'=> 'OFFICIAL']);
+            
+            $lvlid= $student->tblStudent_tblLevelId;
+            $syid = Schoolyear::where('tblSchoolYrActive', 'ACTIVE')->where('tblSchoolYearFlag', 1)->first()->tblSchoolYrId;
+                
+            return view('enrollment.collection', compact('student', 'lvlid', 'syid'));
+
+        } catch(QueryException $e){
+            \DB::rollback();
+        }
         
-        Student::where('tblStudentId', $studid)->where( 'tblStudentFlag', 1)->update(['tblStudentType'=> 'OFFICIAL']);
-        
-        return 'Hi Gwyn';
+        return;
     }
 
     /**
@@ -150,9 +187,7 @@ class EnrollmentController extends Controller
         return view('enrollment.table.studlist', compact('enname'));
     }
 
-    public function proceed(Request $request)
-
-    {
+    public function proceed(Request $request){
         if(isset($_POST['btnProceed']))
         {
           $studid = $request->txtStudentId;
@@ -167,16 +202,48 @@ class EnrollmentController extends Controller
         $query2 = []; //DB::select(DB::raw("select * from tblfee where tblFeeId='$val' and tblFeeMandatory='N' and tblFeeFlag=1 group by tblFeeId"));
         
         $man = Fees::where('tblFeeMandatory','Y')->where('tblFeeFlag','1')->get();
-        $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->get();
+        $opt = Fees::where('tblFeeMandatory','N')->where('tblFeeFlag','1')->whereIn('tblFeeId', $request->optionalfees ?: [])->get();
 
         return view('enrollment.enrollscheme', compact('studid','clear', 'session','optfees', 'enname2', 'query1', 'query2', 'man', 'opt'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function collect()
+    {
+        $or=$_POST['txtOR'];
+        $id=$_POST['txtAccId'];
+        $pr=$_POST['txtPR'];
+        $i=0;
+        foreach($id as $x)
+        {
+            $y=$or[$i];
+            $z=$pr[$i];
+            $datenow=date('Y-m-d');
+            $acc = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->first();
+            
+            $payment=$acc->tblAccCredit;
+            $accountupdate = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->update([
+                                'tblAccOR' => $y,
+                                'tblAccPR' => $z,
+                                'tblAccPayment' => $payment,
+                                'tblAccRunningBal' => null,
+                                'tblAccPaid' => 'PAID',
+                                'tblAccPaymentDate' => $datenow,
+
+            ]);
+            $i++;
+        }
+
+        $message = 2;
+        return redirect()->route('enrollment.index')->with('message', $message);
+    }
+
     public function edit($id)
     {
         //

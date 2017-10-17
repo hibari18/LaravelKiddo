@@ -21,9 +21,13 @@
                   <td>{{ $n->tblStudentId }}</td>
                   <td>{{ $n->name }}</td>
                   <td>{{ $n->tblStudentType }}</td>
-                  <td><a href = "studentprofile"><form method="post" action="studentprofile">
-                  <input type="hidden" name="txtStudId" id="txtStudId" value="{{ $n->tblStudentId }}"/>
-                  <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Edit Profile</button></form></a></td>
+                  <td> 
+                    <form method="get" action="{{ route('studentprofile.edit', 'id') }}"> 
+                      {{ csrf_field() }} 
+                      <input type="hidden" name="txtStudId" id="txtStudId" value="{{ $n->tblStudentId }}"/> 
+                      <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Edit Profile</button>
+                    </form> 
+                  </td> 
                 </tr>
                 @endforeach
                 </tbody>

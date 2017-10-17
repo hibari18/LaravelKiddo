@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'base64:3DfQ5uSuiGZq9Rb/Z/qhEDMe+UW0eeC+0cGp4WL0Wp8='),
 
     'cipher' => 'AES-256-CBC',
 
@@ -177,6 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+         /*
+         * Generate Data into PDF
+         */
+         Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -225,6 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

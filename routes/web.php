@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', 'AdminController@dashboard');
-Route::get('dashboard', 'AdminController@dashboard');
+Route::resource('dashboard', 'DashboardController');
 
 Route::get('message', 'AdminController@message');
 
@@ -54,9 +54,18 @@ Route::resource('dismisswithdraw', 'DismissWithdrawController');
 
 Route::resource('enrollment', 'EnrollmentController');
 Route::post('feesavailed/', 'EnrollmentController@proceed')->name('enrollment.proceed');
+Route::post('collectfees/', 'EnrollmentController@collect')->name('enrollment.collect');
 
 Route::resource('advisorylist', 'GradesController');
 Route::post('studentlist/', 'GradesController@studlist')->name('advisorylist.studlist');
+
+Route::resource('billing', 'BillingController');
+Route::post('collection/', 'BillingController@bills')->name('billing.bills');
+Route::get('getPDF','PDFController@getPDF');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('compose', 'EmailController');
 //Route::get('compose','SendMailController@compose');
