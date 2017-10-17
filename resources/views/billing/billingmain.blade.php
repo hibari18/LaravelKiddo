@@ -28,7 +28,8 @@
                       <div class="box">
                         <div class="box-header"></div>
                         <div class="box-body">
-                          <form action="collection.php" method="post">
+                          <form action="{{ action('BillingController@bills') }}" method="post">
+                          {{ csrf_field() }}
                             <div class="box-body">
                             <div class="col-md-6">
                               <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Avail fees</button>
