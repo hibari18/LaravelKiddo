@@ -43,6 +43,8 @@ Route::resource('feedetails', 'FeeDetailsController');
 Route::resource('admission', 'CheckRequirementController');
 
 Route::resource('sectioning', 'BySectionController');
+Route::post('assignfaculty/', 'BySectionController@assign')->name('sectioning.assign');
+
 
 Route::resource('profile', 'StudentProfileController');
 
