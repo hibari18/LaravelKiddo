@@ -21,8 +21,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
         'tblUserName',
+        'tblUserPassword'
     ];
     protected $guarded = ['tblUser_tblRoleId']; 
 

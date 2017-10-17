@@ -23,9 +23,7 @@ class BySectionController extends Controller
         $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
         $levels = Level::where('tblLevelFlag', 1)->get();
 
-
-
-        return view('sectioning.index', compact('bysection', 'sect', 'levels'));
+        return view('sectioning.index', compact('bysection', 'levels', 'sect'));
     }
 
     /**
@@ -46,6 +44,9 @@ class BySectionController extends Controller
      */
     public function store(Request $request)
     {
+        $sect = DB::select(DB::raw("select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId"));
+        $facultyid= $s->tblSection_tblFacultyId;
+        $faculty = DB::select(DB::raw("select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$facultyid' and tblFacultyFlag=1")); 
         
         $sectid=$_POST['txtFillSectionId'];
 

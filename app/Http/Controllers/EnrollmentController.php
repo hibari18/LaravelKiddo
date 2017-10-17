@@ -225,7 +225,7 @@ class EnrollmentController extends Controller
             $y=$or[$i];
             $z=$pr[$i];
             $datenow=date('Y-m-d');
-            $acc = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->get();
+            $acc = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->first();
             
             $payment=$acc->tblAccCredit;
             $accountupdate = Account::where('tblAccId', $x)->where('tblAccFlag', 1)->update([
@@ -243,7 +243,7 @@ class EnrollmentController extends Controller
         $message = 2;
         return redirect()->route('enrollment.index')->with('message', $message);
     }
-    
+
     public function edit($id)
     {
         //

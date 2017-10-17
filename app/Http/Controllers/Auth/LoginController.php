@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/message';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -35,5 +35,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function authenticate()
+    {
+        if (Auth::attempt(['tblUserName' => $username, 'tblUserPassword' => $password])) {
+            // Authentication passed...
+            return redirect()->intended('dashboard');
+        }
     }
 }
